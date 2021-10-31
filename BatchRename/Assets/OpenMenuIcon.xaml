@@ -1,0 +1,27 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Viewbox
+        x:Key="OpenMenuIcon"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Stretch="Uniform">
+        <Canvas Name="svg31">
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0" />
+            </Canvas.RenderTransform>
+            <Canvas.Resources />
+            <!--  Unknown tag: sodipodi:namedview  -->
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path29"
+                Fill="#FFEAB308">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M7.5 8.75V5C7.5 4.66848 7.6317 4.35054 7.86612 4.11612C8.10054 3.8817 8.41848 3.75 8.75 3.75H16.7675L19.2675 6.25H26.25C26.5815 6.25 26.8995 6.3817 27.1339 6.61612C27.3683 6.85054 27.5 7.16848 27.5 7.5V20C27.5 20.3315 27.3683 20.6495 27.1339 20.8839C26.8995 21.1183 26.5815 21.25 26.25 21.25H22.5V25C22.5 25.3315 22.3683 25.6495 22.1339 25.8839C21.8995 26.1183 21.5815 26.25 21.25 26.25H3.75C3.41848 26.25 3.10054 26.1183 2.86612 25.8839C2.6317 25.6495 2.5 25.3315 2.5 25V10C2.5 9.66848 2.6317 9.35054 2.86612 9.11612C3.10054 8.8817 3.41848 8.75 3.75 8.75H7.5ZM7.5 11.25H5V23.75H20V21.25H7.5V11.25Z"
+                        FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
+</ResourceDictionary>

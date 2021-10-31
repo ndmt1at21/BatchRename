@@ -1,0 +1,32 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <FontFamily x:Key="PoppinsBlack">/Fonts/Poppins-Black.ttf#Poppins</FontFamily>
+    <FontFamily x:Key="PoppinsBold">/Fonts/Poppins-Bold.ttf#Poppins</FontFamily>
+    <FontFamily x:Key="PoppinsMedium">/Fonts/Poppins-Medium.ttf#Poppins</FontFamily>
+    <FontFamily x:Key="PoppinsRegular">/Fonts/Poppins-Regular.ttf#Poppins</FontFamily>
+    <FontFamily x:Key="PoppinsItalic">/Fonts/Poppins-Italic.ttf#Poppins</FontFamily>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+    </Style>
+
+    <Style x:Key="H1" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="36" />
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsBold}" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryColor}" />
+    </Style>
+
+    <Style x:Key="H2" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsBold}" />
+        <Setter Property="Foreground" Value="{StaticResource TextSecondaryColor}" />
+    </Style>
+</ResourceDictionary>
