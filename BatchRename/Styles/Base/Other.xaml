@@ -8,9 +8,22 @@
                     <Rectangle
                         Margin="2"
                         StrokeThickness="2"
-                        Stroke="{StaticResource VisualFocusBorderColor}" />
+                        Stroke="{StaticResource VisualFocusBorderColor}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Thickness x:Key="PaddingSmall">5,5,5,5</Thickness>
+    <Thickness x:Key="PaddingMedium">10,10,10,10</Thickness>
+
+    <Thickness x:Key="PaddingLeftSmall">5,0,0,0</Thickness>
+    <Thickness x:Key="PaddingLeftMedium">10,0,0,0</Thickness>
+    <Thickness x:Key="PaddingLeftLarge">25,0,0,0</Thickness>
+
+    <Thickness x:Key="PaddingXSmall">5,0,5,0</Thickness>
+    <Thickness x:Key="PaddingXMedium">10,0,10,0</Thickness>
+    <Thickness x:Key="PaddingXLarge">25,0,20,0</Thickness>
+
+    <Thickness x:Key="PaddingYSmall">0,5,0,5</Thickness>
 </ResourceDictionary>

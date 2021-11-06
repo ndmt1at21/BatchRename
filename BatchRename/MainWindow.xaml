@@ -7,11 +7,9 @@
     xmlns:local="clr-namespace:BatchRename"
     mc:Ignorable="d"
     Title="MainWindow"
-    Height="720"
-    Width="1280"
+    Height="620"
+    Width="1180"
     WindowStyle="None"
-    ResizeMode="CanResize">
-    <WindowChrome.WindowChrome>
-        <WindowChrome />
-    </WindowChrome.WindowChrome>
+    ResizeMode="CanResize"
+    Style="{StaticResource CustomTitleBar}">
 </Window>

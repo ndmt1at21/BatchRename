@@ -7,5 +7,6 @@
         <ResourceDictionary Source="./Base/Other.xaml" />
         <ResourceDictionary Source="./Button.xaml" />
         <ResourceDictionary Source="./Effect.xaml" />
+        <ResourceDictionary Source="./Window.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

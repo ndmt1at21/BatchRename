@@ -7,8 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="./Styles/Styles.xaml" />
-                <ResourceDictionary Source="./Assets/Icons.xaml" />
+                <ResourceDictionary Source="./Styles/Index.xaml"/>
+                <ResourceDictionary Source="./Assets/Index.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
