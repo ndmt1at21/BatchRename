@@ -10,9 +10,9 @@ namespace PluginContract
             return JsonConvert.SerializeObject(this);
         }
 
-        static public T DeserializeParameter<T>(String serializeParams) where T : RuleParameter
+        static public RuleParameter DeserializeParameter(String serializeParams)
         {
-            return (T)JsonConvert.DeserializeObject(serializeParams);
+            return (RuleParameter)JsonConvert.DeserializeObject(serializeParams);
         }
     }
 }

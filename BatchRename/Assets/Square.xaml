@@ -3,11 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Viewbox
-        x:Key="AddActionIcon"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        x:Key="SquareIcon"
         Stretch="Uniform">
         <Canvas
-            Name="svg35"
+            Name="svg329"
             Width="18"
             Height="18">
             <Canvas.RenderTransform>
@@ -17,11 +16,14 @@
             <!--  Unknown tag: sodipodi:namedview  -->
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Name="path33"
-                Fill="#ffffff">
+                Name="path327"
+                Stroke="#FF3F3F46"
+                StrokeLineJoin="Round"
+                StrokeStartLineCap="Round"
+                StrokeEndLineCap="Round">
                 <Path.Data>
                     <PathGeometry
-                        Figures="M8.25 8.25V3.75H9.75V8.25H14.25V9.75H9.75V14.25H8.25V9.75H3.75V8.25H8.25Z"
+                        Figures="M14.625 2.8125H3.375C3.06434 2.8125 2.8125 3.06434 2.8125 3.375V14.625C2.8125 14.9357 3.06434 15.1875 3.375 15.1875H14.625C14.9357 15.1875 15.1875 14.9357 15.1875 14.625V3.375C15.1875 3.06434 14.9357 2.8125 14.625 2.8125Z"
                         FillRule="NonZero" />
                 </Path.Data>
             </Path>

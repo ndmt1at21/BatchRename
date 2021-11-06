@@ -10,6 +10,10 @@
         Color="#EF4444" />
 
     <SolidColorBrush
+        x:Key="BackgroundColor"
+        Color="#F5F5F4" />
+
+    <SolidColorBrush
         x:Key="TextPrimaryColor"
         Color="#292524" />
 

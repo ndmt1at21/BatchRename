@@ -9,11 +9,9 @@
     Title="MainWindow"
     Height="720"
     Width="1280"
+    WindowStyle="None"
     ResizeMode="CanResize">
-    <Grid>
-        <ContentControl
-            Content="{StaticResource MenuNewIcon}"
-            Width="90"
-            Height="90" />
-    </Grid>
+    <WindowChrome.WindowChrome>
+        <WindowChrome />
+    </WindowChrome.WindowChrome>
 </Window>

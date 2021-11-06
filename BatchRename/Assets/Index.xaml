@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <!--  Window Icon  -->
+        <ResourceDictionary Source="./AppLogo.xaml" />
+
+        <!--  Window Icon  -->
+        <ResourceDictionary Source="./Square.xaml" />
+        <ResourceDictionary Source="./DoubleSquare.xaml" />
+        <ResourceDictionary Source="./Minus.xaml" />
+        <ResourceDictionary Source="./X.xaml" />
+
+        <!--  Menu Icon  -->
+        <ResourceDictionary Source="./New.xaml" />
+        <ResourceDictionary Source="./Open.xaml" />
+        <ResourceDictionary Source="./Save.xaml" />
+        <ResourceDictionary Source="./Convert.xaml" />
+
+        <ResourceDictionary Source="./DownArrow.xaml" />
+        <ResourceDictionary Source="./UpArrow.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

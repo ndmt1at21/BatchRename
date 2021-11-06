@@ -1,0 +1,66 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Viewbox
+        x:Key="DoubleSquareIcon"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Stretch="Uniform">
+        <Canvas
+            Name="svg31"
+            Width="18"
+            Height="18">
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0" />
+            </Canvas.RenderTransform>
+            <Canvas.Resources />
+            <!--  Unknown tag: sodipodi:namedview  -->
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path23"
+                Stroke="#FF3F3F46"
+                StrokeLineJoin="Round"
+                StrokeStartLineCap="Round"
+                StrokeEndLineCap="Round">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M12.6603 4.43628H2.23559C1.94772 4.43628 1.71436 4.66964 1.71436 4.95751V15.3822C1.71436 15.6701 1.94772 15.9035 2.23559 15.9035H12.6603C12.9482 15.9035 13.1815 15.6701 13.1815 15.3822V4.95751C13.1815 4.66964 12.9482 4.43628 12.6603 4.43628Z"
+                        FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path25"
+                Fill="#FF3F3F46">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M4.50781 2.66406C4.50781 2.65233 4.51732 2.64282 4.52905 2.64282H14.9538C14.9655 2.64282 14.975 2.65233 14.975 2.66406V13.0888C14.975 13.1005 14.9655 13.11 14.9538 13.11H13.3727V14.11H14.9538C15.5178 14.11 15.975 13.6528 15.975 13.0888V2.66406C15.975 2.10004 15.5178 1.64282 14.9538 1.64282H4.52905C3.96504 1.64282 3.50781 2.10004 3.50781 2.66406V4.62738H4.50781V2.66406Z"
+                        FillRule="EvenOdd" />
+                </Path.Data>
+            </Path>
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path27"
+                Stroke="#FF3F3F46"
+                StrokeLineJoin="Round"
+                StrokeStartLineCap="Round"
+                StrokeEndLineCap="Round">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M12.6603 4.43628H2.23559C1.94772 4.43628 1.71436 4.66964 1.71436 4.95751V15.3822C1.71436 15.6701 1.94772 15.9035 2.23559 15.9035H12.6603C12.9482 15.9035 13.1815 15.6701 13.1815 15.3822V4.95751C13.1815 4.66964 12.9482 4.43628 12.6603 4.43628Z"
+                        FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path29"
+                Fill="#FF3F3F46">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M4.50781 2.66406C4.50781 2.65233 4.51732 2.64282 4.52905 2.64282H14.9538C14.9655 2.64282 14.975 2.65233 14.975 2.66406V13.0888C14.975 13.1005 14.9655 13.11 14.9538 13.11H13.3727V14.11H14.9538C15.5178 14.11 15.975 13.6528 15.975 13.0888V2.66406C15.975 2.10004 15.5178 1.64282 14.9538 1.64282H4.52905C3.96504 1.64282 3.50781 2.10004 3.50781 2.66406V4.62738H4.50781V2.66406Z"
+                        FillRule="EvenOdd" />
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </Viewbox>
+</ResourceDictionary>

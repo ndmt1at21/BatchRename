@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Viewbox
-        x:Key="UpActionIcon"
+        x:Key="OpenIcon"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         Stretch="Uniform">
         <Canvas
-            Name="svg163"
-            Width="18"
-            Height="18">
+            Name="svg19"
+            Width="25"
+            Height="24">
             <Canvas.RenderTransform>
                 <TranslateTransform X="0" Y="0" />
             </Canvas.RenderTransform>
@@ -17,11 +17,11 @@
             <!--  Unknown tag: sodipodi:namedview  -->
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Name="path161"
-                Fill="#FF3F3F46">
+                Name="path17"
+                Fill="#FFEAB308">
                 <Path.Data>
                     <PathGeometry
-                        Figures="M9.75 5.871V15H8.25V5.871L4.227 9.894L3.1665 8.8335L9 3L14.8335 8.8335L13.773 9.894L9.75 5.871Z"
+                        Figures="M5 5.75V2C5 1.66848 5.1317 1.35054 5.36612 1.11612C5.60054 0.881696 5.91848 0.75 6.25 0.75H14.2675L16.7675 3.25H23.75C24.0815 3.25 24.3995 3.3817 24.6339 3.61612C24.8683 3.85054 25 4.16848 25 4.5V17C25 17.3315 24.8683 17.6495 24.6339 17.8839C24.3995 18.1183 24.0815 18.25 23.75 18.25H20V22C20 22.3315 19.8683 22.6495 19.6339 22.8839C19.3995 23.1183 19.0815 23.25 18.75 23.25H1.25C0.918479 23.25 0.600537 23.1183 0.366116 22.8839C0.131696 22.6495 0 22.3315 0 22V7C0 6.66848 0.131696 6.35054 0.366116 6.11612C0.600537 5.8817 0.918479 5.75 1.25 5.75H5ZM5 8.25H2.5V20.75H17.5V18.25H5V8.25Z"
                         FillRule="NonZero" />
                 </Path.Data>
             </Path>

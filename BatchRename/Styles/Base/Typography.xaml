@@ -18,6 +18,11 @@
         <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
     </Style>
 
+    <Style TargetType="Label">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+    </Style>
+
     <Style x:Key="H1" TargetType="TextBlock">
         <Setter Property="FontSize" Value="36" />
         <Setter Property="FontFamily" Value="{StaticResource PoppinsBold}" />
@@ -26,6 +31,12 @@
 
     <Style x:Key="H2" TargetType="TextBlock">
         <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsBold}" />
+        <Setter Property="Foreground" Value="{StaticResource TextSecondaryColor}" />
+    </Style>
+
+    <Style x:Key="H3" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18" />
         <Setter Property="FontFamily" Value="{StaticResource PoppinsBold}" />
         <Setter Property="Foreground" Value="{StaticResource TextSecondaryColor}" />
     </Style>

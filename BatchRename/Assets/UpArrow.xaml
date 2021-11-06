@@ -3,25 +3,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Viewbox
-        x:Key="SaveMenuItem"
+        x:Key="UpArrowIcon"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         Stretch="Uniform">
         <Canvas
-            Name="svg131"
-            Width="30"
-            Height="30">
+            Name="svg163"
+            Width="18"
+            Height="18">
             <Canvas.RenderTransform>
                 <TranslateTransform X="0" Y="0" />
             </Canvas.RenderTransform>
             <Canvas.Resources />
-
+            <!--  Unknown tag: sodipodi:namedview  -->
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Name="path129"
-                Fill="#FF3B82F6">
+                Name="path161"
+                Fill="#FF3F3F46">
                 <Path.Data>
                     <PathGeometry
-                        Figures="M7.5 5V10H22.5V5H25.0087C25.6937 5 26.25 5.55625 26.25 6.24125V26.2587C26.2497 26.5878 26.1188 26.9034 25.8861 27.1361C25.6534 27.3688 25.3378 27.4997 25.0087 27.5H4.99125C4.66215 27.4997 4.34663 27.3688 4.11392 27.1361C3.88121 26.9034 3.75033 26.5878 3.75 26.2587V6.24125C3.75 5.55625 4.30625 5 4.99125 5H7.5ZM10 2.5H20V7.5H10V2.5Z"
+                        Figures="M9.75 5.871V15H8.25V5.871L4.227 9.894L3.1665 8.8335L9 3L14.8335 8.8335L13.773 9.894L9.75 5.871Z"
                         FillRule="NonZero" />
                 </Path.Data>
             </Path>
