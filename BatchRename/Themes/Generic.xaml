@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/CustomControl/BRButton.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/CustomControl/BRWindow.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/CustomControl/BRButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/CustomControl/BRWindow.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

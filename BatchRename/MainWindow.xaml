@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:BatchRename"
     xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     mc:Ignorable="d"
-    Title="MainWindow"
     Height="620"
     Width="1180">
     <Grid>

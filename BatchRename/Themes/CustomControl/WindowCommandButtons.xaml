@@ -1,0 +1,80 @@
+﻿<UserControl
+    x:Class="BatchRename.Themes.CustomControl.WindowCommandButtons"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="windowCommandButton" TargetType="ct:BRButton">
+            <Setter Property="HoverBackground" Value="#E5E7EB"/>
+            <Setter Property="ActiveBackground" Value=" #D1D5DB"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="{Binding Height, RelativeSource={RelativeSource AncestorType=StackPanel}}"/>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Orientation="Horizontal"
+        Height="40">
+
+        <ct:BRButton
+            Style="{DynamicResource windowCommandButton}"
+            Click="MinBtn_Click">
+            <ContentControl
+                Height="{DynamicResource WindowCommandIconHeight}"
+                Content="{DynamicResource MinusIcon}"/>
+        </ct:BRButton>
+
+        <ct:BRButton
+            Style="{DynamicResource windowCommandButton}"
+            Click="MaxBtn_Click">
+            <ContentControl Height="{DynamicResource WindowCommandIconHeight}">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="Content" Value="{DynamicResource SquareIcon}"/>
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType={x:Type ct:BRWindow}}}"
+                                Value="Maximized">
+                                <Setter Property="Content" Value="{DynamicResource DoubleSquareIcon}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </ct:BRButton>
+
+        <ct:BRButton
+            Style="{DynamicResource windowCommandButton}"
+            HoverBackground="{DynamicResource AlertColor}"
+            ActiveBackground="{DynamicResource AlertColorDark}"
+            Click="CloseBtn_Click">
+
+            <ContentControl Height="{DynamicResource WindowCommandIconHeight}">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="Content" Value="{DynamicResource XIcon}"/>
+
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}"
+                                Value="True">
+                                <Setter Property="Content" Value="{DynamicResource XLightIcon}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </ct:BRButton>
+    </StackPanel>
+</UserControl>
