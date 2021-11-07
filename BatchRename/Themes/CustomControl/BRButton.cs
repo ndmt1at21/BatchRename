@@ -2,21 +2,21 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace BatchRename.CustomControl
+namespace BatchRename.Themes.CustomControl
 {
-    public class CustomButton : Button
+    public class BRButton : Button
     {
         public static readonly DependencyProperty CornerRadiusProperty =
-           DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Button));
+           DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(System.Windows.Controls.Button));
 
         public static readonly DependencyProperty HoverBackgroundProperty =
-           DependencyProperty.Register("HoverBackground", typeof(SolidColorBrush), typeof(Button));
+           DependencyProperty.Register("HoverBackground", typeof(SolidColorBrush), typeof(System.Windows.Controls.Button));
 
         public static readonly DependencyProperty ActiveBackgroundProperty =
-           DependencyProperty.Register("ActiveBackground", typeof(SolidColorBrush), typeof(Button));
+           DependencyProperty.Register("ActiveBackground", typeof(SolidColorBrush), typeof(System.Windows.Controls.Button));
 
         public static readonly DependencyProperty DisableBackgroundProperty =
-          DependencyProperty.Register("DisableBackground", typeof(SolidColorBrush), typeof(Button));
+          DependencyProperty.Register("DisableBackground", typeof(SolidColorBrush), typeof(System.Windows.Controls.Button));
 
         public CornerRadius CornerRadius
         {
@@ -42,9 +42,9 @@ namespace BatchRename.CustomControl
             set => SetValue(DisableBackgroundProperty, value);
         }
 
-        static CustomButton()
+        static BRButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CustomButton), new FrameworkPropertyMetadata(typeof(CustomButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(BRButton), new FrameworkPropertyMetadata(typeof(BRButton)));
         }
     }
 }

@@ -1,15 +1,16 @@
-﻿<Window
+﻿<ct:BRWindow
     x:Class="BatchRename.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:BatchRename"
+    xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     mc:Ignorable="d"
     Title="MainWindow"
     Height="620"
-    Width="1180"
-    WindowStyle="None"
-    ResizeMode="CanResize"
-    Style="{StaticResource CustomTitleBar}">
-</Window>
+    Width="1180">
+    <Grid>
+        <TextBlock>AHJGSHG</TextBlock>
+    </Grid>
+</ct:BRWindow>

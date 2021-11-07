@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
     <Viewbox
-        x:Key="SquareIcon"
+        x:Key="XLightIcon"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         Stretch="Uniform">
         <Canvas
-            Name="svg329"
+            Name="svg23"
             Width="18"
             Height="18">
             <Canvas.RenderTransform>
@@ -16,14 +16,27 @@
             <!--  Unknown tag: sodipodi:namedview  -->
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Name="path327"
-                Stroke="#FF3F3F46"
+                Name="path19"
+                Stroke="#ffffff"
                 StrokeLineJoin="Round"
                 StrokeStartLineCap="Round"
                 StrokeEndLineCap="Round">
                 <Path.Data>
                     <PathGeometry
-                        Figures="M14.625 2.8125H3.375C3.06434 2.8125 2.8125 3.06434 2.8125 3.375V14.625C2.8125 14.9357 3.06434 15.1875 3.375 15.1875H14.625C14.9357 15.1875 15.1875 14.9357 15.1875 14.625V3.375C15.1875 3.06434 14.9357 2.8125 14.625 2.8125Z"
+                        Figures="M14.0625 3.9375L3.9375 14.0625"
+                        FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path21"
+                Stroke="#ffffff"
+                StrokeLineJoin="Round"
+                StrokeStartLineCap="Round"
+                StrokeEndLineCap="Round">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M14.0625 14.0625L3.9375 3.9375"
                         FillRule="NonZero" />
                 </Path.Data>
             </Path>

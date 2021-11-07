@@ -1,24 +1,39 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ct="clr-namespace:BatchRename.CustomControl">
-    <Style TargetType="Window" x:Key="CustomTitleBar">
+    xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl">
+
+    <Style TargetType="{x:Type ct:BRWindow}">
+
         <Style.Resources>
-            <Style x:Key="menuButton" TargetType="ct:CustomButton">
-                <Setter Property="HoverBackground" Value="#E5E7EB"/>
-                <Setter Property="ActiveBackground" Value=" #D1D5DB"/>
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="CornerRadius" Value="10"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Padding" Value="10,5,10,5"/>
+            <Style x:Key="menuButton" TargetType="ct:BRButton">
+                <Setter Property="HoverBackground" Value="#E5E7EB" />
+                <Setter Property="ActiveBackground" Value=" #D1D5DB" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="10,2,10,2" />
+            </Style>
+
+            <Style x:Key="windowCommandButton" TargetType="ct:BRButton">
+                <Setter Property="HoverBackground" Value="#E5E7EB" />
+                <Setter Property="ActiveBackground" Value=" #D1D5DB" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Width" Value="50" />
+                <Setter Property="Height" Value="{Binding Height, RelativeSource={RelativeSource AncestorType=StackPanel}}" />
             </Style>
         </Style.Resources>
+
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="50"/>
+                <WindowChrome CaptionHeight="50" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Window">
@@ -30,7 +45,6 @@
                             Padding="{DynamicResource PaddingLeftMedium}"
                             Background="{DynamicResource BackgroundColor}">
                             <Grid>
-
                                 <!--  Logo & Save State  -->
                                 <StackPanel
                                     Orientation="Horizontal"
@@ -38,7 +52,7 @@
 
                                     <ContentControl
                                         Height="40"
-                                        Content="{DynamicResource AppLogoIcon}"/>
+                                        Content="{DynamicResource AppLogoIcon}" />
 
                                     <StackPanel
                                         Margin="2,0,0,0"
@@ -61,107 +75,130 @@
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
 
-                                    <ct:CustomButton Style="{DynamicResource menuButton}">
+                                    <ct:BRButton Style="{DynamicResource menuButton}">
                                         <StackPanel Orientation="Vertical">
                                             <ContentControl
                                                 Content="{DynamicResource NewIcon}"
                                                 HorizontalAlignment="Center"
-                                                Height="25"/>
+                                                Height="25" />
                                             <TextBlock
                                                 HorizontalAlignment="Center"
                                                 Style="{DynamicResource Small}">
                                                 New
                                             </TextBlock>
                                         </StackPanel>
-                                    </ct:CustomButton>
+                                    </ct:BRButton>
 
-                                    <ct:CustomButton
+                                    <ct:BRButton
                                         Style="{DynamicResource menuButton}"
                                         Margin="{DynamicResource PaddingLeftMedium}">
                                         <StackPanel Orientation="Vertical">
                                             <ContentControl
                                                 Content="{DynamicResource OpenIcon}"
                                                 HorizontalAlignment="Center"
-                                                Height="25"/>
+                                                Height="25" />
                                             <TextBlock
                                                 HorizontalAlignment="Center"
                                                 Style="{DynamicResource Small}">
                                                 Open
                                             </TextBlock>
                                         </StackPanel>
-                                    </ct:CustomButton>
+                                    </ct:BRButton>
 
-                                    <ct:CustomButton
+                                    <ct:BRButton
                                         Style="{DynamicResource menuButton}"
                                         Margin="{DynamicResource PaddingLeftMedium}">
                                         <StackPanel Orientation="Vertical">
                                             <ContentControl
                                                 Content="{DynamicResource SaveIcon}"
                                                 HorizontalAlignment="Center"
-                                                Height="25"/>
+                                                Height="25" />
                                             <TextBlock
                                                 HorizontalAlignment="Center"
                                                 Style="{DynamicResource Small}">
                                                 Save
                                             </TextBlock>
                                         </StackPanel>
-                                    </ct:CustomButton>
+                                    </ct:BRButton>
 
-                                    <ct:CustomButton
+                                    <ct:BRButton
                                         Style="{DynamicResource menuButton}"
                                         Margin="{DynamicResource PaddingLeftMedium}">
                                         <StackPanel Orientation="Vertical">
                                             <ContentControl
                                                 Content="{DynamicResource ConvertIcon}"
                                                 HorizontalAlignment="Center"
-                                                Height="25"/>
+                                                Height="25" />
                                             <TextBlock
                                                 HorizontalAlignment="Center"
                                                 Style="{DynamicResource Small}">
                                                 Start
                                             </TextBlock>
                                         </StackPanel>
-                                    </ct:CustomButton>
+                                    </ct:BRButton>
                                 </StackPanel>
 
-                                <!--  Minimize, Close  -->
+                                <!--  Window Button Command  -->
                                 <StackPanel
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Top"
                                     Orientation="Horizontal"
                                     Height="40">
 
-                                    <ct:CustomButton
-                                        Style="{DynamicResource menuButton}"
-                                        Height="40"
-                                        Padding="15,10"
-                                        CornerRadius="0">
-                                        <ContentControl Content="{DynamicResource MinusIcon}"/>
-                                    </ct:CustomButton>
+                                    <ct:BRButton
+                                        x:Name="PART_MinimizeButton"
+                                        Style="{DynamicResource windowCommandButton}">
+                                        <ContentControl
+                                            Height="18"
+                                            Content="{DynamicResource MinusIcon}" />
+                                    </ct:BRButton>
 
-                                    <ct:CustomButton
-                                        x:Name="CloseButton"
-                                        Style="{DynamicResource menuButton}"
-                                        Height="40"
-                                        Padding="15,11"
-                                        CornerRadius="0">
-                                        <ContentControl Content="{DynamicResource SquareIcon}"/>
-                                    </ct:CustomButton>
+                                    <ct:BRButton
+                                        x:Name="PART_MaximizeButton"
+                                        Style="{DynamicResource windowCommandButton}">
+                                        <ContentControl Height="18">
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="Content" Value="{DynamicResource SquareIcon}" />
+                                                    <Style.Triggers>
+                                                        <DataTrigger
+                                                            Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType={x:Type ct:BRWindow}}}"
+                                                            Value="Maximized">
+                                                            <Setter Property="Content" Value="{DynamicResource DoubleSquareIcon}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </ct:BRButton>
 
-                                    <ct:CustomButton
-                                        Style="{DynamicResource menuButton}"
-                                        Height="40"
-                                        Padding="15,10"
-                                        CornerRadius="0"
+                                    <ct:BRButton
+                                        x:Name="PART_CloseButton"
+                                        Style="{DynamicResource windowCommandButton}"
                                         HoverBackground="{DynamicResource AlertColor}"
-                                        ActiveBackground="#DC2626">
+                                        ActiveBackground="{DynamicResource AlertColorDark}">
 
-                                        <ContentControl Content="{DynamicResource XIcon}"/>
-                                    </ct:CustomButton>
+                                        <ContentControl Height="18">
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Setter Property="Content" Value="{DynamicResource XIcon}" />
+
+                                                    <Style.Triggers>
+                                                        <DataTrigger
+                                                            Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                            Value="True">
+                                                            <Setter Property="Content" Value="{DynamicResource XLightIcon}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </ct:BRButton>
                                 </StackPanel>
                             </Grid>
                         </Border>
                         <Border Background="{DynamicResource BackgroundColor}">
+                            <ContentPresenter />
                         </Border>
                     </DockPanel>
                 </ControlTemplate>

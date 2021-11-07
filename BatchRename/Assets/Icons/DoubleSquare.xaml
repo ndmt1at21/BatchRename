@@ -7,7 +7,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         Stretch="Uniform">
         <Canvas
-            Name="svg31"
+            Name="svg35"
             Width="18"
             Height="18">
             <Canvas.RenderTransform>
@@ -17,29 +17,6 @@
             <!--  Unknown tag: sodipodi:namedview  -->
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Name="path23"
-                Stroke="#FF3F3F46"
-                StrokeLineJoin="Round"
-                StrokeStartLineCap="Round"
-                StrokeEndLineCap="Round">
-                <Path.Data>
-                    <PathGeometry
-                        Figures="M12.6603 4.43628H2.23559C1.94772 4.43628 1.71436 4.66964 1.71436 4.95751V15.3822C1.71436 15.6701 1.94772 15.9035 2.23559 15.9035H12.6603C12.9482 15.9035 13.1815 15.6701 13.1815 15.3822V4.95751C13.1815 4.66964 12.9482 4.43628 12.6603 4.43628Z"
-                        FillRule="NonZero" />
-                </Path.Data>
-            </Path>
-            <Path
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Name="path25"
-                Fill="#FF3F3F46">
-                <Path.Data>
-                    <PathGeometry
-                        Figures="M4.50781 2.66406C4.50781 2.65233 4.51732 2.64282 4.52905 2.64282H14.9538C14.9655 2.64282 14.975 2.65233 14.975 2.66406V13.0888C14.975 13.1005 14.9655 13.11 14.9538 13.11H13.3727V14.11H14.9538C15.5178 14.11 15.975 13.6528 15.975 13.0888V2.66406C15.975 2.10004 15.5178 1.64282 14.9538 1.64282H4.52905C3.96504 1.64282 3.50781 2.10004 3.50781 2.66406V4.62738H4.50781V2.66406Z"
-                        FillRule="EvenOdd" />
-                </Path.Data>
-            </Path>
-            <Path
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 Name="path27"
                 Stroke="#FF3F3F46"
                 StrokeLineJoin="Round"
@@ -47,7 +24,7 @@
                 StrokeEndLineCap="Round">
                 <Path.Data>
                     <PathGeometry
-                        Figures="M12.6603 4.43628H2.23559C1.94772 4.43628 1.71436 4.66964 1.71436 4.95751V15.3822C1.71436 15.6701 1.94772 15.9035 2.23559 15.9035H12.6603C12.9482 15.9035 13.1815 15.6701 13.1815 15.3822V4.95751C13.1815 4.66964 12.9482 4.43628 12.6603 4.43628Z"
+                        Figures="M11.4681 5.78882H4.25355C4.05433 5.78882 3.89282 5.95032 3.89282 6.14955V13.3641C3.89282 13.5633 4.05433 13.7248 4.25355 13.7248H11.4681C11.6673 13.7248 11.8288 13.5633 11.8288 13.3641V6.14955C11.8288 5.95032 11.6673 5.78882 11.4681 5.78882Z"
                         FillRule="NonZero" />
                 </Path.Data>
             </Path>
@@ -57,7 +34,30 @@
                 Fill="#FF3F3F46">
                 <Path.Data>
                     <PathGeometry
-                        Figures="M4.50781 2.66406C4.50781 2.65233 4.51732 2.64282 4.52905 2.64282H14.9538C14.9655 2.64282 14.975 2.65233 14.975 2.66406V13.0888C14.975 13.1005 14.9655 13.11 14.9538 13.11H13.3727V14.11H14.9538C15.5178 14.11 15.975 13.6528 15.975 13.0888V2.66406C15.975 2.10004 15.5178 1.64282 14.9538 1.64282H4.52905C3.96504 1.64282 3.50781 2.10004 3.50781 2.66406V4.62738H4.50781V2.66406Z"
+                        Figures="M5.97998 5.92079V4.70142H12.916V11.6374H11.961V12.6374H13.0552C13.5306 12.6374 13.916 12.2521 13.916 11.7767V4.56214C13.916 4.08678 13.5306 3.70142 13.0552 3.70142H5.84071C5.36534 3.70142 4.97998 4.08678 4.97998 4.56214V5.92079H5.97998Z"
+                        FillRule="EvenOdd" />
+                </Path.Data>
+            </Path>
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path31"
+                Stroke="#FF3F3F46"
+                StrokeLineJoin="Round"
+                StrokeStartLineCap="Round"
+                StrokeEndLineCap="Round">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M11.4681 5.7887H4.25355C4.05433 5.7887 3.89282 5.9502 3.89282 6.14942V13.364C3.89282 13.5632 4.05433 13.7247 4.25355 13.7247H11.4681C11.6673 13.7247 11.8288 13.5632 11.8288 13.364V6.14942C11.8288 5.9502 11.6673 5.7887 11.4681 5.7887Z"
+                        FillRule="NonZero" />
+                </Path.Data>
+            </Path>
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path33"
+                Fill="#FF3F3F46">
+                <Path.Data>
+                    <PathGeometry
+                        Figures="M5.97998 5.92079V4.70142H12.916V11.6374H11.961V12.6374H13.0552C13.5306 12.6374 13.916 12.2521 13.916 11.7767V4.56214C13.916 4.08678 13.5306 3.70142 13.0552 3.70142H5.84071C5.36534 3.70142 4.97998 4.08678 4.97998 4.56214V5.92079H5.97998Z"
                         FillRule="EvenOdd" />
                 </Path.Data>
             </Path>

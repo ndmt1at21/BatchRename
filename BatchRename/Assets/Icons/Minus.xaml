@@ -5,25 +5,25 @@
         x:Key="MinusIcon"
         Stretch="Uniform">
         <Canvas
-            Name="svg309"
+            Name="svg35"
             Width="18"
             Height="18">
             <Canvas.RenderTransform>
-                <TranslateTransform X="0" Y="0" />
+                <TranslateTransform X="0" Y="0"/>
             </Canvas.RenderTransform>
-            <Canvas.Resources />
+            <Canvas.Resources/>
             <!--  Unknown tag: sodipodi:namedview  -->
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                Name="path307"
+                Name="path33"
                 Stroke="#FF3F3F46"
                 StrokeLineJoin="Round"
                 StrokeStartLineCap="Round"
                 StrokeEndLineCap="Round">
                 <Path.Data>
                     <PathGeometry
-                        Figures="M2.8125 9H15.1875"
-                        FillRule="NonZero" />
+                        Figures="M4 9H14"
+                        FillRule="NonZero"/>
                 </Path.Data>
             </Path>
         </Canvas>
