@@ -2,7 +2,7 @@
 
 namespace PluginContract
 {
-    public interface IRule
+    public interface IRenameRule
     {
         String Convert(String src, RuleParameter ruleParameter);
 

@@ -7,7 +7,7 @@ namespace PluginContract
         String ID { get; }
         String Name { get; }
 
-        IRule CreateRuleInstance();
+        IRenameRule CreateRuleInstance();
 
         IRuleComponent CreateComponentInstance();
 

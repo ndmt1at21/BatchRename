@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace TabMain
+namespace BatchRename
 {
     static public class Utils
     {
@@ -16,7 +17,7 @@ namespace TabMain
             return files;
         }
 
-        static public Object CreateInstanceFromDllFile(String dllPath, Type targetType, Object[] args = null)
+        static public Object CreateInstanceFromDllFile(String dllPath, Type targetType, Object[] argsForInstance = null)
         {
             Assembly _Assembly = Assembly.LoadFile(dllPath);
             List<Type> types = _Assembly.GetTypes()?.ToList();
@@ -25,9 +26,14 @@ namespace TabMain
             if (type == null)
                 return null;
 
-            return args == null
+            return argsForInstance == null
                 ? Activator.CreateInstance(type)
-                : Activator.CreateInstance(type, args);
+                : Activator.CreateInstance(type, argsForInstance);
+        }
+
+        static public T DeepClone<T>(T obj)
+        {
+            return (T)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj));
         }
     }
 }
