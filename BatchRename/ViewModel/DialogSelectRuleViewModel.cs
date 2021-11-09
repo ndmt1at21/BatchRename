@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BatchRename.Model
+namespace BatchRename.ViewModel
 {
-    class WindowData
+    class DialogSelectRuleViewModel
     {
     }
 }

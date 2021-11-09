@@ -9,7 +9,7 @@
                     <Rectangle
                         Margin="2"
                         StrokeThickness="2"
-                        Stroke="{StaticResource VisualFocusBorderColor}"/>
+                        Stroke="{StaticResource VisualFocusBorderColor}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -30,6 +30,8 @@
     <Thickness x:Key="PaddingYSmall">0,5,0,5</Thickness>
 
     <!--  Top Menu Size  -->
+    <sys:Double x:Key="LogoHeightTitleBar">40</sys:Double>
+
     <sys:Double x:Key="TopMenuIconHeight">
         25
     </sys:Double>

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace BatchRename.Model
 {
-    public class Node
+    public class WindowPosition
     {
-        public string Path { get; set; }
+        public double Left;
+        public double Top;
+        public double Width;
+        public double Height;
     }
 }

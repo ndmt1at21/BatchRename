@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace BatchRename.Themes.CustomControl
 {
@@ -6,16 +8,29 @@ namespace BatchRename.Themes.CustomControl
 
     public partial class TopMenu : UserControl
     {
-        public HandlerConvertClick OnConvertClick;
+        public event RoutedEventHandler OnOpenClick;
+
+        public event RoutedEventHandler OnSaveClick;
+
+        public event RoutedEventHandler OnNewClick;
+
+        public event RoutedEventHandler OnStartClick;
 
         public TopMenu()
         {
             InitializeComponent();
-        }
 
-        public TopMenu(HandlerConvertClick onConvertClick)
-        {
-            OnConvertClick += onConvertClick;
+            if (OnNewClick != null)
+                btnNew.Click += OnNewClick;
+
+            if (OnOpenClick != null)
+                btnOpen.Click += OnOpenClick;
+
+            if (OnSaveClick != null)
+                btnSave.Click += OnSaveClick;
+
+            if (OnStartClick != null)
+                btnStart.Click += OnStartClick;
         }
     }
 }

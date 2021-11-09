@@ -44,7 +44,7 @@
                         <Setter Property="Content" Value="{DynamicResource SquareIcon}"/>
                         <Style.Triggers>
                             <DataTrigger
-                                Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType={x:Type ct:BRWindow}}}"
+                                Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 Value="Maximized">
                                 <Setter Property="Content" Value="{DynamicResource DoubleSquareIcon}"/>
                             </DataTrigger>

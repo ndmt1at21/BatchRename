@@ -1,4 +1,4 @@
-﻿<ct:BRWindow
+﻿<Window
     x:Class="BatchRename.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,8 +7,15 @@
     xmlns:local="clr-namespace:BatchRename"
     xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     mc:Ignorable="d"
-    Height="620"
-    Width="1180">
-    <Grid>
-    </Grid>
-</ct:BRWindow>
+    Height="520"
+    Width="880"
+    WindowStyle="None">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="50" />
+    </WindowChrome.WindowChrome>
+
+    <StackPanel>
+        <ct:TitleBar />
+    </StackPanel>
+</Window>
