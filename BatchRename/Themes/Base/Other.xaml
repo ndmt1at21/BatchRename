@@ -29,6 +29,9 @@
 
     <Thickness x:Key="PaddingYSmall">0,5,0,5</Thickness>
 
+    <!--  Titile Bar Size  -->
+    <sys:Double x:Key="TitleBarHeight">50</sys:Double>
+
     <!--  Top Menu Size  -->
     <sys:Double x:Key="LogoHeightTitleBar">40</sys:Double>
 

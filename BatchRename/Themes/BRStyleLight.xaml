@@ -3,5 +3,6 @@
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Colors.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Typography.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Other.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/WindowStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -11,12 +11,5 @@
     Title="RecentWindow"
     Height="450"
     Width="800"
-    Background="{DynamicResource BackgroundColor}">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="50" />
-    </WindowChrome.WindowChrome>
-
-    <StackPanel>
-        <ct:TitleBar Height="50" />
-    </StackPanel>
+    Style="{DynamicResource MainWindowStyle}">
 </Window>
