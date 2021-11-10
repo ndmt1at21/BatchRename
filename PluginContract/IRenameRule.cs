@@ -6,6 +6,6 @@ namespace PluginContract
     {
         string Convert(string src, IRuleParameter ruleParameter);
 
-        string GetStatement(IRuleParameter ruleParameter);
+        string GetStatement(string src, IRuleParameter ruleParameter);
     }
 }
