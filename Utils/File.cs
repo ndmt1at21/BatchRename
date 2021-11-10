@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Utils
 {
@@ -10,22 +9,32 @@ namespace Utils
         {
             FileInfo file = new FileInfo(currentPath);
 
-            if (file.Exists)
+            if (!file.Exists)
+                throw new FileNotFoundException();
+
+            try
             {
-                try
-                {
-                    var groups = Regex.Match(currentPath, @"^(.+)[\/\\]([^\/]+)$").Groups;
+                string parentFolder = GetDirectoryName(currentPath);
 
-                    if (groups.Count != 3)
-                        throw new NotSupportedException();
+                if (parentFolder == null)
+                    throw new DirectoryNotFoundException();
 
-                    file.MoveTo(@$"{groups[1]}\{newFileName}");
-                }
-                catch
-                {
-                    throw;
-                }
+                file.MoveTo(@$"{parentFolder}\{newFileName}");
             }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public static string GetFileName(string filePath)
+        {
+            return Path.GetFileName(filePath);
+        }
+
+        public static string GetDirectoryName(string filePath)
+        {
+            return Path.GetDirectoryName(filePath);
         }
     }
 }

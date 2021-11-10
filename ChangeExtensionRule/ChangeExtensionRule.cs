@@ -16,9 +16,7 @@ namespace ChangeExtensionRule
             if (parameter == null)
                 return null;
 
-            return src + parameter.NewExtension
-
-            return null;
+            return src + parameter.NewExtension;
         }
 
         public string GetStatement(IRuleParameter ruleParameter)
