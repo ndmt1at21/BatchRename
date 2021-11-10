@@ -1,0 +1,61 @@
+﻿<Window x:Class="BatchRename.View.RuleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BatchRename.View"
+        mc:Ignorable="d"
+        Title="RuleWindow" Height="350" Width="500"
+        WindowStyle="None"        
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    
+    
+    <Border Background="{DynamicResource BackgroundColor}"
+            CornerRadius="10">
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="5,5,5,191" Background="{DynamicResource TextSmallColor}" >
+
+                <RadioButton Content="Insert"
+                             Height="30"
+                             Foreground="White"
+                             FontSize="14"   
+                             Style="{DynamicResource LeftRuleMenuButton}"
+                             />
+
+                <RadioButton Content="Remove"
+                             Height="30"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{DynamicResource LeftRuleMenuButton}"
+                             />
+                <RadioButton Content="Strip"
+                             Height="30"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{DynamicResource LeftRuleMenuButton}"
+                             />
+                <RadioButton Content="Extension"
+                             Height="30"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{DynamicResource LeftRuleMenuButton}"
+                             />
+                <RadioButton Content="Regular Expression"
+                             Height="30"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{DynamicResource LeftRuleMenuButton}"
+                             />
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>
