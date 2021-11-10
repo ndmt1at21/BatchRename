@@ -17,5 +17,84 @@
 
     <StackPanel>
         <ct:TitleBar />
+        <Grid Height="450" Width="840">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="410"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="410"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Canvas Grid.Row="0" Grid.Column="2">
+                <TextBlock Canvas.Top="10" Canvas.Left="20" Text="Files" FontSize="20"></TextBlock>
+            </Canvas>
+            <Grid Width="390" Height="380" Grid.Row="1" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!-- Button -->
+                <TextBlock Grid.Row="0" Text="Action" Margin="10 0 0 0"></TextBlock>
+                <Canvas Grid.Row="1">
+                    <Button Width="100" Canvas.Left="10" Canvas.Top="10">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <TextBlock><Bold>Choose Folder</Bold></TextBlock>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Width="100" Canvas.Left="120" Canvas.Top="10" Background="#3B82F6">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+
+                            <TextBlock ><Bold>Choose Folder</Bold></TextBlock>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Width="70" Canvas.Left="230" Canvas.Top="10">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Content>
+                            <TextBlock Style="{DynamicResource Subtitle}"><Bold>Convert</Bold></TextBlock>
+                        </Button.Content>
+                    </Button>
+                </Canvas>
+                <!-- Button -->
+                <!-- File part -->
+                <ListView Grid.Row="2" Grid.RowSpan="2" Background="Transparent">
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="#" Width="40"></GridViewColumn>
+                            <GridViewColumn Header="File Name" Width="150"></GridViewColumn>
+                            <GridViewColumn Header="New File Name" Width="200"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <!-- File part -->
+                <!-- Border -->
+                <!-- Border -->
+            </Grid>
+
+        </Grid>
     </StackPanel>
 </Window>
