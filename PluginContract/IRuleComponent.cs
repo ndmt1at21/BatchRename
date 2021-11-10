@@ -5,10 +5,10 @@ namespace PluginContract
 {
     public interface IRuleComponent
     {
-        RuleParameter GetRuleParamter();
+        IRuleParameter GetRuleParamter();
 
-        void SetRuleParameter(String serializeRuleParamter);
+        void SetRuleParameter(string serializeRuleParamter);
 
-        void SetRuleParameter(RuleParameter ruleParameter);
+        void SetRuleParameter(IRuleParameter ruleParameter);
     }
 }

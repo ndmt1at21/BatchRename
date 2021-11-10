@@ -4,8 +4,8 @@ namespace PluginContract
 {
     public interface IRenameRule
     {
-        String Convert(String src, RuleParameter ruleParameter);
+        string Convert(string src, IRuleParameter ruleParameter);
 
-        String GetStatement(RuleParameter ruleParameter);
+        string GetStatement(IRuleParameter ruleParameter);
     }
 }
