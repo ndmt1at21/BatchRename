@@ -4,15 +4,15 @@ namespace PluginContract
 {
     public interface IRulePlugin
     {
-        String ID { get; }
-        String Name { get; }
+        string ID { get; }
+        string Name { get; }
 
         IRenameRule CreateRuleInstance();
 
         IRuleComponent CreateComponentInstance();
 
-        IRuleComponent CreateComponentInstance(String serializeRuleParameter);
+        IRuleComponent CreateComponentInstance(string serializeRuleParameter);
 
-        IRuleComponent CreateComponentInstance(RuleParameter ruleParamter);
+        IRuleComponent CreateComponentInstance(IRuleParameter ruleParamter);
     }
 }
