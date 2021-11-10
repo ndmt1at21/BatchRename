@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace BatchRename
 {
-    static public class Utils
+    public static class Utils
     {
-        static public FileInfo[] GetDllFilesFromFolder(String folderPath)
+        public static FileInfo[] GetDllFilesFromFolder(String folderPath)
         {
             DirectoryInfo d = new DirectoryInfo(@folderPath);
             FileInfo[] files = d.GetFiles("*.dll", SearchOption.AllDirectories);
@@ -17,7 +18,7 @@ namespace BatchRename
             return files;
         }
 
-        static public Object CreateInstanceFromDllFile(String dllPath, Type targetType, Object[] argsForInstance = null)
+        public static Object CreateInstanceFromDllFile(String dllPath, Type targetType, Object[] argsForInstance = null)
         {
             Assembly _Assembly = Assembly.LoadFile(dllPath);
             List<Type> types = _Assembly.GetTypes()?.ToList();
@@ -31,9 +32,31 @@ namespace BatchRename
                 : Activator.CreateInstance(type, argsForInstance);
         }
 
-        static public T DeepClone<T>(T obj)
+        public static T DeepClone<T>(T obj)
         {
             return (T)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj));
+        }
+
+        public static void RenameFile(string currentPath, string newFileName)
+        {
+            FileInfo file = new FileInfo(currentPath);
+
+            if (file.Exists)
+            {
+                try
+                {
+                    var groups = Regex.Match(currentPath, @"^(.+)[\/\\]([^\/]+)$").Groups;
+
+                    if (groups.Count != 3)
+                        throw new NotSupportedException();
+
+                    file.MoveTo(@$"{groups[1]}\{newFileName}");
+                }
+                catch
+                {
+                    throw;
+                }
+            }
         }
     }
 }
