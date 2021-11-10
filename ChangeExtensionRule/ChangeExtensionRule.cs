@@ -9,19 +9,24 @@ namespace ChangeExtensionRule
 {
     public class ChangeExtensionRule : IRenameRule
     {
-        public string Convert(string src, IRuleParameter ruleParameter)
+        public string Convert(string fileName, IRuleParameter ruleParameter)
         {
             ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;
 
             if (parameter == null)
                 return null;
 
-            return src + parameter.NewExtension;
+            return fileName + parameter.NewExtension;
         }
 
-        public string GetStatement(IRuleParameter ruleParameter)
+        public string GetStatement(string fileName, IRuleParameter ruleParameter)
         {
-            return null;
+            ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;
+
+            if (parameter == null)
+                return null;
+
+            return $"Change file extension from ${fileName} to ${parameter.NewExtension}";
         }
     }
 }
