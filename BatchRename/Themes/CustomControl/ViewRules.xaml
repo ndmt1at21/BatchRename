@@ -9,13 +9,13 @@
 	<Grid>
 		<StackPanel>
 			<StackPanel Height="80">
-				<TextBlock Text="Actions" Style="{DynamicResource H3}" Foreground="{DynamicResource TextSmallColor}"/>
+				<TextBlock Text="Actions" Style="{DynamicResource Subtitle}" Foreground="{DynamicResource TextSmallColor}"/>
 				<ct:TopRule/>
 			</StackPanel>
 			<StackPanel>
-				<TextBlock Text="All rules" Style="{DynamicResource H3}" Foreground="{DynamicResource TextSmallColor}"/>
+				<TextBlock Text="All rules" Style="{DynamicResource Subtitle}" Foreground="{DynamicResource TextSmallColor}"/>
 				<StackPanel Width="400" HorizontalAlignment="Left">
-					<ListView Height="285">
+					<ListView Height="292">
 						<ListView.Resources>
 							<Style TargetType="GridViewColumnHeader">
 								<Setter Property="Background" Value="Transparent"/>
