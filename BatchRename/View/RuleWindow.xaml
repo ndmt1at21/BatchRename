@@ -17,39 +17,20 @@
             CornerRadius="10">
         <StackPanel Orientation="Vertical">
             <ct:WindowCommandButtons Height="30" />
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Width="160" Background="{DynamicResource TextSmallColor}" Height="362" >
+            
+                <StackPanel Width="497" Background="{DynamicResource BackgroundColor}" Height="362" >
 
-                    <RadioButton Content="Insert"
-                                 Height="30"                             
-                                 FontSize="14"   
-                                 Style="{DynamicResource LeftRuleMenuButton}"
-                                 />
+                    <TabControl Name="Feature" Height="320" >
+                        <TabItem Header="Insert" Width="80" />
+                        <TabItem Header="Remove"   Width="80"/>
+                        <TabItem Header="Strip"  Width="80"/>
+                        <TabItem Header="Extension" Width="80"/>
+                        <TabItem Header="Regular Expression"/>
+                        </TabControl>
+                    
+                </StackPanel>             
 
-                    <RadioButton Content="Remove"
-                                 Height="30"                             
-                                 FontSize="14"
-                                 Style="{DynamicResource LeftRuleMenuButton}"
-                                 />
-                    <RadioButton Content="Strip"
-                                 Height="30"                             
-                                 FontSize="14"
-                                 Style="{DynamicResource LeftRuleMenuButton}" Checked="RadioButton_Checked"
-                                 />
-                    <RadioButton Content="Extension"
-                                 Height="30"                             
-                                 FontSize="14"
-                                 Style="{DynamicResource LeftRuleMenuButton}"
-                                 />
-                    <RadioButton Content="Regular Expression"
-                                 Height="30"                             
-                                 FontSize="14"
-                                 Style="{DynamicResource LeftRuleMenuButton}"
-                                 />
-                </StackPanel>
-                <StackPanel Background="{DynamicResource TextSmallColor}" Width="320" Height="362" Margin="10 0 10 0"/>
-
-            </StackPanel>
+           
         </StackPanel>
     </Border>
 </Window>
