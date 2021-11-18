@@ -6,6 +6,8 @@ namespace PluginContract
     {
         string Convert(string fileName, IRuleParameter ruleParameter);
 
+        string[] Convert(string[] fileName, IRuleParameter ruleParameter);
+
         string GetStatement(string fileName, IRuleParameter ruleParameter);
     }
 }

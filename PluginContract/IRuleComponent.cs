@@ -7,8 +7,6 @@ namespace PluginContract
     {
         IRuleParameter GetRuleParamter();
 
-        void SetRuleParameter(string serializeRuleParamter);
-
         void SetRuleParameter(IRuleParameter ruleParameter);
 
         Control GetView();

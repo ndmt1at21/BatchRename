@@ -10,9 +10,5 @@ namespace PluginContract
         IRenameRule CreateRuleInstance();
 
         IRuleComponent CreateComponentInstance();
-
-        IRuleComponent CreateComponentInstance(string serializeRuleParameter);
-
-        IRuleComponent CreateComponentInstance(IRuleParameter ruleParamter);
     }
 }
