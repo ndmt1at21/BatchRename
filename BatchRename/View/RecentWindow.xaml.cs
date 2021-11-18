@@ -1,6 +1,7 @@
 ﻿using BatchRename.Themes.CustomControl;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,14 @@ using System.Windows.Shapes;
 
 namespace BatchRename.View
 {
-    /// <summary>
-    /// Interaction logic for RecentWindow.xaml
-    /// </summary>
     public partial class RecentWindow : Window
     {
+        BindingList<string> recentProjects = new BindingList<string>() { "aasas", "sjsdsdh" };
         public RecentWindow()
         {
             InitializeComponent();
+
+            lvRecentProject.ItemsSource = recentProjects;
         }
     }
 }

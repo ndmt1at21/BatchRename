@@ -19,6 +19,11 @@ namespace ChangeExtensionRule
             return fileName + parameter.NewExtension;
         }
 
+        public string[] Convert(string[] fileName, IRuleParameter ruleParameter)
+        {
+            return fileName.Select(f => Convert(f, ruleParameter)).ToArray();
+        }
+
         public string GetStatement(string fileName, IRuleParameter ruleParameter)
         {
             ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;

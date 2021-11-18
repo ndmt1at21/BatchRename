@@ -29,11 +29,6 @@ namespace ChangeExtensionRule
             return this;
         }
 
-        public void SetRuleParameter(string serializeRuleParamter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
             ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;

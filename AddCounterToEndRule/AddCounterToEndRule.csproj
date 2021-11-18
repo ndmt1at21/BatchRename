@@ -2,8 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <BaseOutputPath>D:\C#\BatchRename\BatchRename\Plugins\ChangeExtensionRule</BaseOutputPath>
+    <Company></Company>
+    <Authors>ndmt1at21</Authors>
+    <Product>BatchRename</Product>
+    <BaseOutputPath>D:\C#\BatchRename\BatchRename\Plugins\AddCounterToEndRule</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
