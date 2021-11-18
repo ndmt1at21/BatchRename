@@ -28,9 +28,12 @@
                 <ColumnDefinition Width="410"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Canvas Grid.Row="0" Grid.Column="2">
-                <TextBlock Canvas.Top="10" Canvas.Left="20" Text="Files" FontSize="20"></TextBlock>
+				<TextBlock Style="{DynamicResource H1}" Foreground="{DynamicResource TextSmallColor}" Canvas.Top="10" Canvas.Left="20" Text="Files" FontSize="20"></TextBlock>
             </Canvas>
-            <Grid Width="390" Height="380" Grid.Row="1" Grid.Column="2">
+			<Canvas Grid.Row="0" Grid.Column="0">
+				<TextBlock Style="{DynamicResource H1}" Foreground="{DynamicResource TextSmallColor}" Canvas.Top="10" Text="Rules" FontSize="20"/>
+			</Canvas>
+			<Grid Width="390" Height="380" Grid.Row="1" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="40"></RowDefinition>
@@ -76,25 +79,25 @@
                 </Canvas>
                 <!-- Button -->
                 <!-- File part -->
-                <ListView Grid.Row="2" Grid.RowSpan="2" Background="Transparent">
-                    <ListView.Resources>
-                        <Style TargetType="GridViewColumnHeader">
-                            <Setter Property="Background" Value="Transparent" />
-                        </Style>
-                    </ListView.Resources>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="#" Width="40"></GridViewColumn>
-                            <GridViewColumn Header="File Name" Width="150"></GridViewColumn>
-                            <GridViewColumn Header="New File Name" Width="200"></GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <!-- File part -->
+				<ListView Grid.Row="2" Grid.RowSpan="2" Background="Transparent">
+					<ListView.Resources>
+						<Style TargetType="GridViewColumnHeader">
+							<Setter Property="Background" Value="Transparent" />
+						</Style>
+					</ListView.Resources>
+					<ListView.View>
+						<GridView>
+							<GridViewColumn Header="#" Width="40"></GridViewColumn>
+							<GridViewColumn Header="File Name" Width="150"></GridViewColumn>
+							<GridViewColumn Header="New File Name" Width="200"></GridViewColumn>
+						</GridView>
+					</ListView.View>
+				</ListView>
+				<!-- File part -->
                 <!-- Border -->
                 <!-- Border -->
             </Grid>
-
-        </Grid>
+			<ct:ViewRules Grid.Column="0" Grid.Row="1"/>
+		</Grid>
     </StackPanel>
 </Window>

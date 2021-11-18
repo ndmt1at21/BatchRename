@@ -27,11 +27,11 @@ namespace BatchRename.Factory
             if (shared == null)
                 shared = new PluginManager();
 
-            FileInfo[] files = Utils.GetDllFilesFromFolder(path);
+            FileInfo[] files = Utils.Dll.GetDllFilesFromFolder(path);
 
             foreach (FileInfo file in files)
             {
-                IRulePlugin plugin = (IRulePlugin)Utils.CreateInstanceFromDllFile(file.FullName, typeof(IRulePlugin));
+                IRulePlugin plugin = (IRulePlugin)Utils.Dll.CreateInstanceFromDllFile(file.FullName, typeof(IRulePlugin));
 
                 if (plugin == null)
                     continue;
@@ -53,7 +53,7 @@ namespace BatchRename.Factory
             return prototype[id].CreateComponentInstance();
         }
 
-        public IRuleComponent CreateRuleComponent(String id, RuleParameter parameter)
+        public IRuleComponent CreateRuleComponent(String id, IRuleParameter parameter)
         {
             if (prototype[id] == null)
                 return null;
