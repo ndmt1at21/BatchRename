@@ -1,4 +1,5 @@
-﻿using BatchRename.Themes.CustomControl;
+﻿using BatchRename.Lib;
+using BatchRename.Themes.CustomControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,18 @@ namespace BatchRename
         public MainWindow()
         {
             InitializeComponent();
+            loadPlugins();
+        }
+
+        private void loadPlugins()
+        {
+            PluginManager.Load("../../../Plugins");
+
+            PluginManager.Shared.GetPluginIDs().Select(p =>
+            {
+                MessageBox.Show(p);
+                return p;
+            });
         }
     }
 }

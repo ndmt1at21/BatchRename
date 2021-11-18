@@ -2,48 +2,57 @@
     x:Class="BatchRename.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:BatchRename"
     xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
-    mc:Ignorable="d"
-    Height="520"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BatchRename"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="880"
-    WindowStyle="None">
-
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="50" />
-    </WindowChrome.WindowChrome>
+    Height="520"
+    Style="{DynamicResource MainWindowStyle}"
+    mc:Ignorable="d">
 
     <StackPanel>
-        <ct:TitleBar />
-        <Grid Height="450" Width="840">
+        <Grid Width="840" Height="450">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="410"></ColumnDefinition>
-                <ColumnDefinition Width="20"></ColumnDefinition>
-                <ColumnDefinition Width="410"></ColumnDefinition>
+                <ColumnDefinition Width="410" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="410" />
             </Grid.ColumnDefinitions>
             <Canvas Grid.Row="0" Grid.Column="2">
-                <TextBlock Canvas.Top="10" Canvas.Left="20" Text="Files" FontSize="20"></TextBlock>
+                <TextBlock
+                    Canvas.Left="20"
+                    Canvas.Top="10"
+                    FontSize="20"
+                    Text="Files" />
             </Canvas>
-            <Grid Width="390" Height="380" Grid.Row="1" Grid.Column="2">
+            <Grid
+                Grid.Row="1"
+                Grid.Column="2"
+                Width="390"
+                Height="380">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!-- Button -->
-                <TextBlock Grid.Row="0" Text="Action" Margin="10 0 0 0"></TextBlock>
+                <!--  Button  -->
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="10,0,0,0"
+                    Text="Action" />
                 <Canvas Grid.Row="1">
-                    <Button Width="100" Canvas.Left="10" Canvas.Top="10">
+                    <Button
+                        Canvas.Left="10"
+                        Canvas.Top="10"
+                        Width="100">
                         <Button.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="CornerRadius" Value="10" />
                             </Style>
                         </Button.Resources>
                         <Button.Content>
@@ -51,22 +60,29 @@
                         </Button.Content>
                     </Button>
 
-                    <Button Width="100" Canvas.Left="120" Canvas.Top="10" Background="#3B82F6">
+                    <Button
+                        Canvas.Left="120"
+                        Canvas.Top="10"
+                        Width="100"
+                        Background="#3B82F6">
                         <Button.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="CornerRadius" Value="10" />
                             </Style>
                         </Button.Resources>
                         <Button.Content>
 
-                            <TextBlock ><Bold>Choose Folder</Bold></TextBlock>
+                            <TextBlock><Bold>Choose Folder</Bold></TextBlock>
                         </Button.Content>
                     </Button>
 
-                    <Button Width="70" Canvas.Left="230" Canvas.Top="10">
+                    <Button
+                        Canvas.Left="230"
+                        Canvas.Top="10"
+                        Width="70">
                         <Button.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="CornerRadius" Value="10" />
                             </Style>
                         </Button.Resources>
                         <Button.Content>
@@ -74,9 +90,12 @@
                         </Button.Content>
                     </Button>
                 </Canvas>
-                <!-- Button -->
-                <!-- File part -->
-                <ListView Grid.Row="2" Grid.RowSpan="2" Background="Transparent">
+                <!--  Button  -->
+                <!--  File part  -->
+                <ListView
+                    Grid.Row="2"
+                    Grid.RowSpan="2"
+                    Background="Transparent">
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="Transparent" />
@@ -84,15 +103,15 @@
                     </ListView.Resources>
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="#" Width="40"></GridViewColumn>
-                            <GridViewColumn Header="File Name" Width="150"></GridViewColumn>
-                            <GridViewColumn Header="New File Name" Width="200"></GridViewColumn>
+                            <GridViewColumn Width="40" Header="#" />
+                            <GridViewColumn Width="150" Header="File Name" />
+                            <GridViewColumn Width="200" Header="New File Name" />
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <!-- File part -->
-                <!-- Border -->
-                <!-- Border -->
+                <!--  File part  -->
+                <!--  Border  -->
+                <!--  Border  -->
             </Grid>
 
         </Grid>
