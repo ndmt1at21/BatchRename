@@ -9,7 +9,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="./Themes/BRStyleLight.xaml" />
                 <ResourceDictionary Source="./Assets/Icons/Index.xaml" />
-                <ResourceDictionary Source="./Themes/CustomControl/LeftRuleMenuButton.xaml" />
+                <ResourceDictionary Source="./Themes/CustomControl/TabControlStyle.xaml" />
+                <ResourceDictionary Source="./Themes/CustomControl/TabItemStyle.xaml" />              
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
