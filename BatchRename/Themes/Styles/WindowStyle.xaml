@@ -15,10 +15,8 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <DockPanel
-                        LastChildFill="True"
-                        Background="{DynamicResource BackgroundColor}">
+                <ControlTemplate TargetType="Window">
+                    <DockPanel Background="{DynamicResource BackgroundColor}" LastChildFill="True">
 
                         <Border DockPanel.Dock="Top">
                             <ct:TitleBar Height="{DynamicResource TitleBarHeight}" />
