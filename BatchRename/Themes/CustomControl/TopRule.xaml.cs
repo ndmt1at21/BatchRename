@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BatchRename.View
+namespace BatchRename.Themes.CustomControl
 {
-    /// <summary>
-    /// Interaction logic for RuleWindow.xaml
-    /// </summary>
-    public partial class RuleWindow : Window
-    {
-        public RuleWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-    }
+	/// <summary>
+	/// Interaction logic for TopRule.xaml
+	/// </summary>
+	public partial class TopRule : UserControl
+	{
+		public TopRule()
+		{
+			InitializeComponent();
+		}
+	}
 }

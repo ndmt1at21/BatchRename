@@ -12,6 +12,7 @@
 
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
+                                       Foreground="{DynamicResource TextContrastColor}"
                                        Margin="20,0,0,0"/>
 
                         </Grid>

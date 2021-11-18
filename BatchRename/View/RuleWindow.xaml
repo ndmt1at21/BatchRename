@@ -4,58 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BatchRename.View"
+        xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
         mc:Ignorable="d"
         Title="RuleWindow" Height="350" Width="500"
         WindowStyle="None"        
         Background="Transparent"
         AllowsTransparency="True">
 
-    
-    
+
+
     <Border Background="{DynamicResource BackgroundColor}"
             CornerRadius="10">
-        
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="160"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <ct:WindowCommandButtons Height="30" />
+            
+                <StackPanel Width="497" Background="{DynamicResource BackgroundColor}" Height="362" >
 
-            <StackPanel Grid.Row="0" Margin="5,5,5,191" Background="{DynamicResource TextSmallColor}" >
+                    <TabControl Name="Feature" Height="320" >
+                        <TabItem Header="Insert" Width="80" />
+                        <TabItem Header="Remove"   Width="80"/>
+                        <TabItem Header="Strip"  Width="80"/>
+                        <TabItem Header="Extension" Width="80"/>
+                        <TabItem Header="Regular Expression"/>
+                        </TabControl>
+                    
+                </StackPanel>             
 
-                <RadioButton Content="Insert"
-                             Height="30"
-                             Foreground="White"
-                             FontSize="14"   
-                             Style="{DynamicResource LeftRuleMenuButton}"
-                             />
-
-                <RadioButton Content="Remove"
-                             Height="30"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{DynamicResource LeftRuleMenuButton}"
-                             />
-                <RadioButton Content="Strip"
-                             Height="30"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{DynamicResource LeftRuleMenuButton}"
-                             />
-                <RadioButton Content="Extension"
-                             Height="30"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{DynamicResource LeftRuleMenuButton}"
-                             />
-                <RadioButton Content="Regular Expression"
-                             Height="30"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{DynamicResource LeftRuleMenuButton}"
-                             />
-            </StackPanel>
-
-        </Grid>
+           
+        </StackPanel>
     </Border>
 </Window>
