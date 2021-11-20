@@ -1,5 +1,6 @@
 using PluginContract;
 using System;
+using System.Linq;
 
 namespace TrimSpaceRule
 {
@@ -8,6 +9,11 @@ namespace TrimSpaceRule
         public string Convert(string fileName, IRuleParameter ruleParameter)
         {
             return fileName.Trim();
+        }
+
+        public string[] Convert(string[] fileName, IRuleParameter ruleParameter)
+        {
+            return fileName.Select(f => Convert(f, ruleParameter)).ToArray();
         }
 
         public string GetStatement(string fileName, IRuleParameter ruleParameter)

@@ -1,5 +1,6 @@
 using PluginContract;
 using System;
+using System.Linq;
 
 namespace ReplaceCharacter
 {
@@ -13,6 +14,11 @@ namespace ReplaceCharacter
                 return null;
 
             return fileName.Replace(parameter.oldChar,parameter.newChar);
+        }
+
+        public string[] Convert(string[] fileName, IRuleParameter ruleParameter)
+        {
+            return fileName.Select(f => Convert(f, ruleParameter)).ToArray();
         }
 
         public string GetStatement(string fileName, IRuleParameter ruleParameter)
