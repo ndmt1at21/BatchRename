@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrimSpaceRule", "TrimSpaceRule\TrimSpaceRule.csproj", "{8B57C803-B3E5-4AE8-89D5-C6C25765717F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReplaceCharacter", "ReplaceCharacter\ReplaceCharacter.csproj", "{4D750B92-04EC-4966-98FA-30451182E487}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReplaceCharacter", "ReplaceCharacter\ReplaceCharacter.csproj", "{4D750B92-04EC-4966-98FA-30451182E487}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddPrefixRule", "AddPrefixRule\AddPrefixRule.csproj", "{6F541B65-B166-4B03-99A3-2735D3396EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddSuffixRule", "AddSuffixRule\AddSuffixRule.csproj", "{2BBDA8E7-DA04-4B44-B3E3-F7D6F29F952E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{4D750B92-04EC-4966-98FA-30451182E487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D750B92-04EC-4966-98FA-30451182E487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D750B92-04EC-4966-98FA-30451182E487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F541B65-B166-4B03-99A3-2735D3396EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F541B65-B166-4B03-99A3-2735D3396EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F541B65-B166-4B03-99A3-2735D3396EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F541B65-B166-4B03-99A3-2735D3396EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BBDA8E7-DA04-4B44-B3E3-F7D6F29F952E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBDA8E7-DA04-4B44-B3E3-F7D6F29F952E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BBDA8E7-DA04-4B44-B3E3-F7D6F29F952E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BBDA8E7-DA04-4B44-B3E3-F7D6F29F952E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
