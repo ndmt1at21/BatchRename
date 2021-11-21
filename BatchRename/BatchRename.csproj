@@ -50,4 +50,11 @@
 	  <ProjectReference Include="..\PluginContract\PluginContract.csproj" />
 	  <ProjectReference Include="..\Utils\Utils.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Themes\CustomControl\TabItemStyle.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
 </Project>
