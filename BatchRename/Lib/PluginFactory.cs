@@ -53,22 +53,6 @@ namespace BatchRename.Factory
             return prototype[id].CreateComponentInstance();
         }
 
-        public IRuleComponent CreateRuleComponent(String id, IRuleParameter parameter)
-        {
-            if (prototype[id] == null)
-                return null;
-
-            return prototype[id].CreateComponentInstance(parameter);
-        }
-
-        public IRuleComponent CreateRuleComponent(String id, String serializeParamter)
-        {
-            if (prototype[id] == null)
-                return null;
-
-            return prototype[id].CreateComponentInstance(serializeParamter);
-        }
-
         public IRenameRule CreateRule(String id)
         {
             if (prototype[id] == null)
