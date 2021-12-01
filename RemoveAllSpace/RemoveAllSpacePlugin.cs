@@ -13,14 +13,13 @@ namespace RemoveAllSpace
 
 		public string Name => "Remove all sapces";
 
-		public IRuleComponent CreateComponentInstance()
-		{
-			throw new NotImplementedException();
-		}
-
-		public IRenameRule CreateRuleInstance()
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public IRenameRule CreateRuleInstance()
+        {
+            return new RemoveAllSpaceRule();
+        }
+        public IRuleComponent CreateComponentInstance()
+        {
+            return new RemoveAllSpaceComponent();
+        }
+    }
 }

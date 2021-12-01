@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="ReplaceCharacter.ReplaceCharacterComponent"
+﻿<UserControl x:Class="RemoveAllSpace.RemoveAllSpaceComponent"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ReplaceCharacter"
+             xmlns:local="clr-namespace:RemoveAllSpace"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="340">
     <Grid Background="Wheat">
@@ -17,11 +17,7 @@
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text ="H1: Replace Character in File name" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"></TextBlock>
-        <TextBlock Text="Character: " Grid.Column="0" Grid.Row="1"></TextBlock>
-        <TextBox Text="{Binding OldChacter, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Height="30" Margin="0,0,0,30"></TextBox>
-        <TextBlock Text="Replace with: " Grid.Column="0" Grid.Row="2"></TextBlock>
-        <TextBox Text="{Binding OldChacter, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Height="30" Margin="0,0,0,30"></TextBox>
-        
+        <TextBlock Text ="H1: Remove all space in file name" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"></TextBlock>
+       
     </Grid>
 </UserControl>

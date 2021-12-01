@@ -21,29 +21,33 @@ namespace ReplaceCharacter
     /// </summary>
     public partial class ReplaceCharacterComponent : UserControl, IRuleComponent
     {
+        public string oldchar { get; set; }
+        public string newchar { get; set; }
         public ReplaceCharacterComponent()
         {
             InitializeComponent();
         }
 
-        public IRuleParameter GetRuleParamter()
-        {
-            throw new NotImplementedException();
-        }
 
         public Control GetView()
         {
             return this;
         }
 
-        public void SetRuleParameter(string serializeRuleParamter)
+        public IRuleParameter GetRuleParamter()
         {
-            throw new NotImplementedException();
+            return new ReplaceCharacterParameter { oldChar = oldchar, newChar = newchar };
         }
 
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
-            throw new NotImplementedException();
+            ReplaceCharacterParameter parameter = (ReplaceCharacterParameter)ruleParameter;
+
+            if (parameter == null)
+                return;
+
+            oldchar = parameter.oldChar;
+            newchar = parameter.newChar;
         }
     }
 }

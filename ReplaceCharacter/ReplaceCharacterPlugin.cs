@@ -13,24 +13,13 @@ namespace ReplaceCharacter
 
         public string Name => "Replace character rule";
 
-        public IRuleComponent CreateComponentInstance()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRuleComponent CreateComponentInstance(string serializeRuleParameter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRuleComponent CreateComponentInstance(IRuleParameter ruleParamter)
-        {
-            throw new NotImplementedException();
-        }
-
         public IRenameRule CreateRuleInstance()
         {
             return new ReplaceCharacterRule();
+        }
+        public IRuleComponent CreateComponentInstance()
+        {
+            return new ReplaceCharacterComponent();
         }
     }
 }

@@ -13,24 +13,13 @@ namespace TrimSpaceRule
 
         public string Name => "Trim Space Before and After Name";
 
-        public IRuleComponent CreateComponentInstance()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRuleComponent CreateComponentInstance(string serializeRuleParameter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRuleComponent CreateComponentInstance(IRuleParameter ruleParamter)
-        {
-            throw new NotImplementedException();
-        }
-
         public IRenameRule CreateRuleInstance()
         {
-            throw new NotImplementedException();
+            return new TrimSpaceRule();
+        }
+        public IRuleComponent CreateComponentInstance()
+        {
+            return new TrimSpaceComponent();
         }
     }
 }

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Rectangle  RadiusX="12" RadiusY="12"  Stroke="Black" StrokeDashArray="6,6">
+        <Rectangle Name="DragDropPanel" Drop="DragDrop_Function" AllowDrop="True" RadiusX="12" RadiusY="12"  Stroke="Black" StrokeDashArray="6,6">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="../../Assets/img/dropfile.jpg"></ImageBrush>
             </Rectangle.Fill>
