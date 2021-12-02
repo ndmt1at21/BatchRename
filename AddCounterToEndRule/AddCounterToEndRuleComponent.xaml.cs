@@ -16,33 +16,29 @@ using PluginContract;
 
 namespace AddCounterToEndRule
 {
-    /// <summary>
-    /// Interaction logic for UserControl1.xaml
-    /// </summary>
     public partial class AddCounterToEndRuleComponent : UserControl, IRuleComponent
     {
-        public int Start { get; set; }
+        public string Id => "AddCounterToAdd";
+
+        public int StartFrom { get; set; }
         public int Step { get; set; }
-        public int TargetLength { get; set; }
-        public string PadString { get; set; }
-        public bool PadStart { get; set; }
-        public bool PadEnd { get; set; }
+        public int PartCountLength { get; set; }
+        public char PadChar { get; set; }
 
         public AddCounterToEndRuleComponent()
         {
             InitializeComponent();
+            SetRuleParameter(AddCounterToEndConstant.DEFAULT_PARAMETER);
         }
 
         public IRuleParameter GetRuleParamter()
         {
             return new AddCounterToEndParamter
             {
-                Start = Start,
+                PadChar = PadChar,
                 Step = Step,
-                PadEnd = PadEnd,
-                PadStart = PadStart,
-                PadString = PadString,
-                TargetLength = TargetLength
+                StartFrom = StartFrom,
+                PartCountLength = PartCountLength
             };
         }
 
@@ -57,12 +53,10 @@ namespace AddCounterToEndRule
 
             if (rule == null) return;
 
-            Start = rule.Start;
+            PadChar = rule.PadChar;
             Step = rule.Step;
-            PadEnd = rule.PadEnd;
-            PadStart = rule.PadStart;
-            PadString = rule.PadString;
-            TargetLength = rule.TargetLength;
+            StartFrom = rule.StartFrom;
+            PartCountLength = rule.PartCountLength;
         }
     }
 }

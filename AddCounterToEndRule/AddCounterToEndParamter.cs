@@ -9,11 +9,11 @@ namespace AddCounterToEndRule
 {
     public class AddCounterToEndParamter : IRuleParameter
     {
-        public int Start { get; set; }
+        public string Id => "AddCounterToEnd";
+
+        public int StartFrom { get; set; }
         public int Step { get; set; }
-        public int TargetLength { get; set; }
-        public string PadString { get; set; }
-        public bool PadStart { get; set; }
-        public bool PadEnd { get; set; }
+        public int PartCountLength { get; set; }
+        public char PadChar { get; set; }
     }
 }

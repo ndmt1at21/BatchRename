@@ -9,8 +9,7 @@ namespace AddCounterToEndRule
 {
     public class AddCounterToEndPlugin : IRulePlugin
     {
-        public string ID => "AddCounterToEnd";
-
+        public string Id => "AddCounterToEnd";
         public string Name => "Add Counter To End";
 
         public IRuleComponent CreateComponentInstance()
@@ -20,7 +19,7 @@ namespace AddCounterToEndRule
 
         public IRenameRule CreateRuleInstance()
         {
-            return new AddCounterToEndRule();
+            return new AddCounterToEndRenameRule();
         }
     }
 }
