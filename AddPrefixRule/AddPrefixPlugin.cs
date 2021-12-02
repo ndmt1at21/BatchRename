@@ -9,7 +9,7 @@ namespace AddPrefixRule
 {
     public class AddPrefixPlugin : IRulePlugin
     {
-        public string ID { get; } = "AddPrefix";
+        public string Id => "AddPrefix";
 
         public string Name { get; } = "Add Prefix";
 

@@ -10,6 +10,8 @@ namespace AddPrefixRule
 {
     public class AddPrefixParamterConverter : IRuleParamterCoverter
     {
+        public string Id => "AddPrefix";
+
         public IRuleParameter DeserializeParameter(string serializeParams)
         {
             AddPrefixParamter parameter = (AddPrefixParamter)Utils.Object.JsonDeserialize(serializeParams);

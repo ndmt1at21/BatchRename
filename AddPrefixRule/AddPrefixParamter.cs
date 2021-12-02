@@ -9,6 +9,8 @@ namespace AddPrefixRule
 {
     public class AddPrefixParamter : IRuleParameter
     {
+        public string Id => "AddPrefix";
+
         public string Prefix;
     }
 }

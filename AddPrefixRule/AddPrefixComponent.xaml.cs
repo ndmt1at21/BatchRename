@@ -1,5 +1,4 @@
-﻿using PluginContract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PluginContract;
+
 
 namespace AddPrefixRule
 {
@@ -21,6 +22,10 @@ namespace AddPrefixRule
     /// </summary>
     public partial class AddPrefixComponent : UserControl, IRuleComponent
     {
+        public string Id => "AddPrefix";
+
+        public string Prefix { get; set; }
+
         public AddPrefixComponent()
         {
             InitializeComponent();
@@ -28,17 +33,22 @@ namespace AddPrefixRule
 
         public IRuleParameter GetRuleParamter()
         {
-            throw new NotImplementedException();
+            return new AddPrefixParamter { Prefix = Prefix };
         }
 
         public Control GetView()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
-            throw new NotImplementedException();
+            AddPrefixParamter rule = (AddPrefixParamter)ruleParameter;
+
+            if (rule == null)
+                return;
+
+            Prefix = rule.Prefix;
         }
     }
 }
