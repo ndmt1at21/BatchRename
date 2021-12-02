@@ -6,19 +6,26 @@ namespace TrimSpaceRule
 {
     public class TrimSpaceRule : IRenameRule
     {
-        public string Convert(string fileName, IRuleParameter ruleParameter)
+        public string Id => "TrimSpace";
+
+        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
         {
-            return fileName.Trim();
+            return new FileInfor
+            {
+                Dir = file.Dir,
+                Extension = file.Extension,
+                FileName = file.FileName
+            };
         }
 
-        public string[] Convert(string[] fileName, IRuleParameter ruleParameter)
+        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
         {
-            return fileName.Select(f => Convert(f, ruleParameter)).ToArray();
+            return files.Select(f => Convert(f, ruleParameter)).ToArray();
         }
 
-        public string GetStatement(string fileName, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
         {
-            return $"Remove space from at the beginning and the end of `${fileName}`";
+            return $"Remove space from at the beginning and the end of `${file.FileName}`";
         }
     }
 }

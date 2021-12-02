@@ -21,6 +21,8 @@ namespace TrimSpaceRule
     /// </summary>
     public partial class TrimSpaceComponent : UserControl, IRuleComponent
     {
+        public string Id => "TrimSpace";
+
         public TrimSpaceComponent()
         {
             InitializeComponent();
@@ -36,14 +38,9 @@ namespace TrimSpaceRule
             return this;
         }
 
-        public void SetRuleParameter(string serializeRuleParamter)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
-            throw new NotImplementedException();
+            return;
         }
     }
 }

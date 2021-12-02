@@ -9,7 +9,7 @@ namespace TrimSpaceRule
 {
     class TrimSpacePlugin : IRulePlugin
     {
-        public string ID => "TrimSpace";
+        public string Id => "TrimSpace";
 
         public string Name => "Trim Space Before and After Name";
 
@@ -17,6 +17,7 @@ namespace TrimSpaceRule
         {
             return new TrimSpaceRule();
         }
+
         public IRuleComponent CreateComponentInstance()
         {
             return new TrimSpaceComponent();
