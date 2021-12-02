@@ -4,10 +4,10 @@ namespace PluginContract
 {
     public interface IRenameRule : IRuleIdentify
     {
-        string Convert(FileInfor file, IRuleParameter ruleParameter);
+        FileInfor Convert(FileInfor file, IRuleParameter ruleParameter);
 
-        string[] Convert(FileInfor[] files, IRuleParameter ruleParameter);
+        FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter);
 
-        string GetStatement(FileInfor file, IRuleParameter ruleParameter);
+        FileInfor GetStatement(FileInfor file, IRuleParameter ruleParameter);
     }
 }
