@@ -2,9 +2,8 @@
 
 namespace PluginContract
 {
-    public interface IRulePlugin
+    public interface IRulePlugin : IRuleIdentify
     {
-        string ID { get; }
         string Name { get; }
 
         IRenameRule CreateRuleInstance();

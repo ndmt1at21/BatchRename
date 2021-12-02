@@ -3,7 +3,7 @@ using System;
 
 namespace PluginContract
 {
-    public interface IRuleParameter
+    public interface IRuleParameter : IRuleIdentify
     {
     }
 }

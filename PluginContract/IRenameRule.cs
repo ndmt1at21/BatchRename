@@ -2,12 +2,12 @@
 
 namespace PluginContract
 {
-    public interface IRenameRule
+    public interface IRenameRule : IRuleIdentify
     {
-        string Convert(string fileName, IRuleParameter ruleParameter);
+        string Convert(FileInfor file, IRuleParameter ruleParameter);
 
-        string[] Convert(string[] fileName, IRuleParameter ruleParameter);
+        string[] Convert(FileInfor[] files, IRuleParameter ruleParameter);
 
-        string GetStatement(string fileName, IRuleParameter ruleParameter);
+        string GetStatement(FileInfor file, IRuleParameter ruleParameter);
     }
 }

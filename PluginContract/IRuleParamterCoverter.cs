@@ -1,6 +1,6 @@
 ﻿namespace PluginContract
 {
-    public interface IRuleParamterCoverter
+    public interface IRuleParamterCoverter : IRuleIdentify
     {
         public string Serialize(IRuleParameter ruleParamter);
 

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace PluginContract
 {
-    public interface IRuleComponent
+    public interface IRuleComponent : IRuleIdentify
     {
         IRuleParameter GetRuleParamter();
 
