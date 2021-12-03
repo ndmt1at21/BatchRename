@@ -1,15 +1,16 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ct="clr-namespace:CustomControl">
+    xmlns:local="clr-namespace:CustomControl">
 
-    <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type ct:BRInputText}">
+    <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type local:BRInputText}">
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="AllowDrop" Value="True" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -17,29 +18,30 @@
                         <Border
                             x:Name="tbBorder"
                             Margin="{TemplateBinding Margin}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}}"
                             SnapsToDevicePixels="True">
 
-                            <Grid Margin="{TemplateBinding Padding}">
-
+                            <Grid>
                                 <ScrollViewer
                                     x:Name="PART_ContentHost"
-                                    Margin="0"
-                                    Padding="0"
+                                    Margin="-2,0"
+                                    HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Focusable="False"
                                     FontFamily="{TemplateBinding FontFamily}"
                                     Foreground="{TemplateBinding Foreground}"
                                     HorizontalScrollBarVisibility="Hidden"
+                                    SnapsToDevicePixels="True"
                                     VerticalScrollBarVisibility="Hidden" />
 
                                 <TextBlock
                                     x:Name="Placeholder"
-                                    Margin="2,0,0,0"
-                                    HorizontalAlignment="Left"
+                                    Margin="{TemplateBinding Padding}"
                                     VerticalAlignment="Center"
                                     FontSize="{TemplateBinding FontSize}"
                                     FontWeight="{TemplateBinding FontWeight}"
@@ -51,6 +53,8 @@
                         </Border>
 
                         <Border
+                            x:Name="BottomBorder"
+                            Margin="{TemplateBinding Margin}"
                             BorderBrush="{Binding StatusLineColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}}"
                             BorderThickness="0,0,0,2"
                             CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}}" />
@@ -65,11 +69,12 @@
                         </MultiTrigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="tbBorder" Property="Background" Value="{Binding HoverBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ct:BRInputText}}}" />
+                            <Setter TargetName="tbBorder" Property="Background" Value="{Binding HoverBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BRInputText}}}" />
                         </Trigger>
 
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="tbBorder" Property="Background" Value="{Binding FocusedBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ct:BRInputText}}}" />
+                            <Setter TargetName="tbBorder" Property="Background" Value="{Binding FocusedBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BRInputText}}}" />
+                            <Setter TargetName="BottomBorder" Property="BorderBrush" Value="{Binding StatusLineFocusedColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BRInputText}}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

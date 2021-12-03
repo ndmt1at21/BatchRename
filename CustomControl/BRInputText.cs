@@ -29,6 +29,9 @@ namespace CustomControl
         public static readonly DependencyProperty StatusLineColorProperty =
            DependencyProperty.Register("StatusLineColor", typeof(SolidColorBrush), typeof(TextBox));
 
+        public static readonly DependencyProperty StatusLineFocusedColorProperty =
+         DependencyProperty.Register("StatusLineFocusedColor", typeof(SolidColorBrush), typeof(TextBox));
+
         public static readonly DependencyProperty HoverBackgroundProperty =
             DependencyProperty.Register("HoverBackground", typeof(SolidColorBrush), typeof(TextBox));
 
@@ -59,6 +62,12 @@ namespace CustomControl
             set => SetValue(StatusLineColorProperty, value);
         }
 
+        public SolidColorBrush StatusLineFocusedColor
+        {
+            get => (SolidColorBrush)GetValue(StatusLineFocusedColorProperty);
+            set => SetValue(StatusLineFocusedColorProperty, value);
+        }
+
         public SolidColorBrush HoverBackground
         {
             get => (SolidColorBrush)GetValue(HoverBackgroundProperty);
@@ -70,6 +79,7 @@ namespace CustomControl
             get => (SolidColorBrush)GetValue(FocusedBackgroundProperty);
             set => SetValue(FocusedBackgroundProperty, value);
         }
+
         static BRInputText()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BRInputText), new FrameworkPropertyMetadata(typeof(BRInputText)));
