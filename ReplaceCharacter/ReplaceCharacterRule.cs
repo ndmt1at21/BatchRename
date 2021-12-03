@@ -28,7 +28,7 @@ namespace ReplaceCharacter
             return files.Select(f => Convert(f, ruleParameter)).ToArray();
         }
 
-        public string GetStatement(FileInfor fileName, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
         {
             ReplaceCharacterParameter parameter = (ReplaceCharacterParameter)ruleParameter;
 
