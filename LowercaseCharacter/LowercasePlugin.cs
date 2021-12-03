@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace LowercaseCharacter
 {
-	public class LowercasePlugin : IRulePlugin
-	{
-		public string ID => "toLowercase";
+    public class LowercasePlugin : IRulePlugin
+    {
+        public string Id => "ToLowercase";
 
-		public string Name => "All characters to lowercase";
+        public string Name => "All characters to lowercase";
 
-		public IRuleComponent CreateComponentInstance()
-		{
-			throw new NotImplementedException();
-		}
+        public IRuleComponent CreateComponentInstance()
+        {
+            throw new NotImplementedException();
+        }
 
-		public IRenameRule CreateRuleInstance()
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public IRenameRule CreateRuleInstance()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
