@@ -9,29 +9,37 @@ namespace AddSuffixRule
 {
     class AddSuffixRule : IRenameRule
     {
-        public string Convert(string fileName, IRuleParameter ruleParameter)
+        public string Id => "AddSuffix";
+
+
+        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        {
+            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+        }
+
+        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
         {
             AddSuffixParamter parameter = (AddSuffixParamter)ruleParameter;
 
             if (parameter == null)
                 return null;
 
-            return fileName + parameter.Suffix;
+            return new FileInfor
+            {
+                Dir = file.Dir,
+                Extension = file.Extension,
+                FileName = file.FileName + parameter.Suffix
+            };
         }
 
-        public string[] Convert(string[] fileName, IRuleParameter ruleParameter)
-        {
-            return fileName.Select(f => Convert(f, ruleParameter)).ToArray();
-        }
-
-        public string GetStatement(string fileName, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
         {
             AddSuffixParamter parameter = (AddSuffixParamter)ruleParameter;
 
             if (parameter == null)
                 return null;
 
-            return $"Add prefix ${parameter.Suffix} to file name ${fileName}";
+            return $"Add prefix ${parameter.Suffix} to file name ${file.FileName}";
         }
     }
 }

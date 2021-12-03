@@ -9,6 +9,8 @@ namespace AddSuffixRule
 {
     public class AddSuffixParamter : IRuleParameter
     {
+        public string Id => "AddSuffix";
+
         public string Suffix;
     }
 }

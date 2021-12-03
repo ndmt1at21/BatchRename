@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddSuffixRule 
+namespace AddSuffixRule
 {
     class AddSuffixPlugin : IRulePlugin
     {
-        public string ID { get; } = "AddSuffix";
+        public string Id { get; } = "AddSuffix";
 
         public string Name { get; } = "Add Suffix";
 

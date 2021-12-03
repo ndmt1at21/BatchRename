@@ -21,6 +21,8 @@ namespace AddSuffixRule
     /// </summary>
     public partial class AddSuffixComponent : UserControl, IRuleComponent
     {
+        public string Id => "AddSuffix";
+
         public AddSuffixComponent()
         {
             InitializeComponent();

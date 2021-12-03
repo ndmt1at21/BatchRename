@@ -10,6 +10,8 @@ namespace AddSuffixRule
 {
     class AddSuffixParamterConverter : IRuleParamterCoverter
     {
+        public string Id => "AddSuffix";
+
         public IRuleParameter DeserializeParameter(string serializeParams)
         {
             AddSuffixParamter parameter = (AddSuffixParamter)Utils.Object.JsonDeserialize(serializeParams);
