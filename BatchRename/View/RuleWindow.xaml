@@ -18,9 +18,9 @@
         <StackPanel Orientation="Vertical">
             <ct:WindowCommandButtons Height="30" />
             
-                <StackPanel Background="{DynamicResource BackgroundColor}" Height="362" >
+                <StackPanel Background="{DynamicResource BackgroundColor}" >
 
-                <TabControl Style="{DynamicResource TabControlStyle}" TabStripPlacement="Left" Height="320" >
+                <TabControl Style="{DynamicResource TabControlStyle}" TabStripPlacement="Left" >
                     <TabItem Header="Insert" Width="130" Style="{DynamicResource TabItemStyle }"/>
                     <TabItem Header="Remove" Style="{DynamicResource TabItemStyle }" Width="130" />
                     <TabItem Header="Strip" Style="{DynamicResource TabItemStyle }" Width="130"/>
