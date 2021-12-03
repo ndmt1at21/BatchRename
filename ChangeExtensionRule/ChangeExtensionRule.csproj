@@ -1,19 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0-windows10.0.18362.0</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <BaseOutputPath>D:\C#\BatchRename\BatchRename\Plugins\ChangeExtensionRule</BaseOutputPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows7.0</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<BaseOutputPath>D:\C#\BatchRename\BatchRename\Plugins\ChangeExtensionRule</BaseOutputPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.UI.Xaml" Version="2.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CustomControl\CustomControl.csproj" />
-    <ProjectReference Include="..\PluginContract\PluginContract.csproj" />
-    <ProjectReference Include="..\Utils\Utils.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CustomControl\CustomControl.csproj" />
+		<ProjectReference Include="..\PluginContract\PluginContract.csproj" />
+		<ProjectReference Include="..\Utils\Utils.csproj" />
+	</ItemGroup>
 
 </Project>

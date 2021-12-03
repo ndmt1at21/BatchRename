@@ -36,7 +36,7 @@ namespace BatchRename.Factory
                 if (plugin == null)
                     continue;
 
-                prototype.Add(plugin.ID, plugin);
+                prototype.Add(plugin.Id, plugin);
             }
         }
 

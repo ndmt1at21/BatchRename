@@ -23,7 +23,7 @@ namespace RemoveAllSpace
 
         public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
         {
-            return files.Select(f => Convert(f, ruleParameter)).ToArray(); lementedException();
+            return files.Select(f => Convert(f, ruleParameter)).ToArray();
         }
 
         public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
