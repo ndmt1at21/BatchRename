@@ -9,6 +9,8 @@ namespace ChangeExtensionRule
 {
     public class ChangeExtensionParamter : IRuleParameter
     {
+        public string Id => "ChangeExtensionParamter";
+
         public string NewExtension;
     }
 }

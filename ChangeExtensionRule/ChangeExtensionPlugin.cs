@@ -9,7 +9,7 @@ namespace ChangeExtensionRule
 {
     public class ChangeExtensionPlugin : IRulePlugin
     {
-        public string ID { get; } = "ChangeExtension";
+        public string Id => "ChangeExtensionParamter";
 
         public string Name { get; } = "Change Extension";
 

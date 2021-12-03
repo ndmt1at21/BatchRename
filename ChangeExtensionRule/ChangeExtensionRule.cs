@@ -9,29 +9,36 @@ namespace ChangeExtensionRule
 {
     public class ChangeExtensionRule : IRenameRule
     {
-        public string Convert(string fileName, IRuleParameter ruleParameter)
+        public string Id => "ChangeExtensionParamter";
+
+        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
+        {
+            ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;
+
+            if (parameter == null)
+                throw new InvalidCastException("Invalid parameter");
+
+            return new FileInfor
+            {
+                Dir = file.Dir,
+                Extension = parameter.NewExtension,
+                FileName = file.FileName
+            };
+        }
+
+        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        {
+            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+        }
+
+        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
         {
             ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;
 
             if (parameter == null)
                 return null;
 
-            return fileName + parameter.NewExtension;
-        }
-
-        public string[] Convert(string[] fileName, IRuleParameter ruleParameter)
-        {
-            return fileName.Select(f => Convert(f, ruleParameter)).ToArray();
-        }
-
-        public string GetStatement(string fileName, IRuleParameter ruleParameter)
-        {
-            ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;
-
-            if (parameter == null)
-                return null;
-
-            return $"Change file extension from ${fileName} to ${parameter.NewExtension}";
+            return $"Change file extension from ${file.FileName} to ${parameter.NewExtension}";
         }
     }
 }

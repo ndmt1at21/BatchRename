@@ -10,6 +10,8 @@ namespace ChangeExtensionRule
 {
     public class ChangeExtensionParamterConverter : IRuleParamterCoverter
     {
+        public string Id => "ChangeExtensionParamter";
+
         public IRuleParameter DeserializeParameter(string serializeParams)
         {
             ChangeExtensionParamter parameter = (ChangeExtensionParamter)Utils.Object.JsonDeserialize(serializeParams);
