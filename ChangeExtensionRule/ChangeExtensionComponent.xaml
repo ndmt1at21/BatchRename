@@ -2,18 +2,25 @@
     x:Class="ChangeExtensionRule.ChangeExtensionComponent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ct="clr-namespace:CustomControl;assembly=CustomControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ChangeExtensionRule"
-    mc:Ignorable="d"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
-    d:DesignWidth="800">
-    <StackPanel Orientation="Horizontal">
-        <TextBlock>New Extension:</TextBlock>
-        
-        <TextBox
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <StackPanel Background="White">
+        <TextBlock VerticalAlignment="Center">New Extension (without dot):</TextBlock>
+
+        <ct:BRInputText
             Name="tbInputNewExtension"
-            Margin="5,0,0,0"
-            Text="{Binding NewExtension, Mode=TwoWay}" />
+            Margin="0,5,0,0"
+            VerticalAlignment="Center"
+            Placeholder="New Extension"
+            Text="{Binding NewExtention, Mode=OneWay}"
+            TextChanged="tbInputNewExtension_TextChanged" />
+
+        <CheckBox Content="Append to original filename" />
     </StackPanel>
 </UserControl>

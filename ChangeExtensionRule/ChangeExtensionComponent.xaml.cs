@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,22 @@ namespace ChangeExtensionRule
                 return;
 
             NewExtension = parameter.NewExtension;
+        }
+
+        private void tbInputNewExtension_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string oldValue = tbInputNewExtension.Text;
+            int oldIndex = tbInputNewExtension.CaretIndex;
+
+            if (oldValue.Length <= 20)
+                NewExtension = oldValue;
+
+            tbInputNewExtension.Text = oldValue.Length == 0
+                ? string.Empty
+                : NewExtension;
+
+            if (!NewExtension.Equals(oldValue))
+                tbInputNewExtension.CaretIndex = oldIndex - 1;
         }
     }
 }
