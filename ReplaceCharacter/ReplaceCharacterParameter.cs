@@ -9,6 +9,8 @@ namespace ReplaceCharacter
 {
     public class ReplaceCharacterParameter : IRuleParameter
     {
+        public string Id => "ReplaceCharacter";
+
         public string oldChar;
         public string newChar;
     }

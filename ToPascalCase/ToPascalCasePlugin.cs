@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace ToPascalCase
 {
-	public class ToPascalCasePlugin : IRulePlugin
-	{
-		public string ID => "PascalCase";
+    public class ToPascalCasePlugin : IRulePlugin
+    {
+        public string Id => "PascalCase";
 
-		public string Name => "To PascalCase";
+        public string Name => "To PascalCase";
 
-		public IRuleComponent CreateComponentInstance()
-		{
-			throw new NotImplementedException();
-		}
+        public IRuleComponent CreateComponentInstance()
+        {
+            throw new NotImplementedException();
+        }
 
-		public IRenameRule CreateRuleInstance()
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public IRenameRule CreateRuleInstance()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

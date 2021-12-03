@@ -21,8 +21,11 @@ namespace ReplaceCharacter
     /// </summary>
     public partial class ReplaceCharacterComponent : UserControl, IRuleComponent
     {
+        public string Id => "ReplaceCharacter";
+
         public string oldchar { get; set; }
         public string newchar { get; set; }
+
         public ReplaceCharacterComponent()
         {
             InitializeComponent();

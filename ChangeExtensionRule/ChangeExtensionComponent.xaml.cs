@@ -12,6 +12,8 @@ namespace ChangeExtensionRule
 {
     public partial class ChangeExtensionComponent : UserControl, IRuleComponent
     {
+        public string Id => "ChangeExtension";
+
         public string NewExtension { get; set; }
 
         public ChangeExtensionComponent()

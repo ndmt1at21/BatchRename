@@ -9,6 +9,8 @@ namespace ReplaceCharacter
 {
     class ReplaceCharacterParameterConverter : IRuleParamterCoverter
     {
+        public string Id => "ReplaceCharacter";
+
         public IRuleParameter DeserializeParameter(string serializeParams)
         {
             ReplaceCharacterParameter parameter = (ReplaceCharacterParameter)Utils.Object.JsonDeserialize(serializeParams);

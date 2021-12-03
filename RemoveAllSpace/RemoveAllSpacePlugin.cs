@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace RemoveAllSpace
 {
-	public class RemoveAllSpacePlugin : IRulePlugin
-	{
-		public string ID => "RemoveAllSpaces";
+    public class RemoveAllSpacePlugin : IRulePlugin
+    {
+        public string Id => "RemoveAllSpaces";
 
-		public string Name => "Remove all sapces";
+        public string Name => "Remove all sapces";
 
         public IRenameRule CreateRuleInstance()
         {

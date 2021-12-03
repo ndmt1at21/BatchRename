@@ -9,7 +9,7 @@ namespace ReplaceCharacter
 {
     class ReplaceCharacterPlugin : IRulePlugin
     {
-        public string ID => "ReplaceChar";
+        public string Id => "ReplaceCharacter";
 
         public string Name => "Replace character rule";
 

@@ -7,21 +7,28 @@ using System.Threading.Tasks;
 
 namespace RemoveAllSpace
 {
-	public class RemoveAllSpaceRule : IRenameRule
-	{
-		public string Convert(string fileName, IRuleParameter ruleParameter)
-		{
-			return fileName.Replace(" ", "");
-		}
+    public class RemoveAllSpaceRule : IRenameRule
+    {
+        public string Id => "RemoveAllSpaces";
 
-		public string[] Convert(string[] fileName, IRuleParameter ruleParameter)
-		{
-			return fileName.Select(f => Convert(f, ruleParameter)).ToArray();
-		}
+        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
+        {
+            return new FileInfor
+            {
+                Dir = file.Dir,
+                Extension = file.Extension,
+                FileName = file.FileName.Replace(" ", "")
+            };
+        }
 
-		public string GetStatement(string fileName, IRuleParameter ruleParameter)
-		{
-			return $"Remove all sapces in {fileName}";
-		}
-	}
+        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        {
+            return files.Select(f => Convert(f, ruleParameter)).ToArray(); lementedException();
+        }
+
+        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        {
+            return $"Remove all sapces in {file.FileName}";
+        }
+    }
 }

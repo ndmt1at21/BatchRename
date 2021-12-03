@@ -21,6 +21,8 @@ namespace RemoveAllSpace
     /// </summary>
     public partial class RemoveAllSpaceComponent : UserControl, IRuleComponent
     {
+        public string Id => "RemoveAllSpaces";
+
         public RemoveAllSpaceComponent()
         {
             InitializeComponent();
@@ -38,7 +40,7 @@ namespace RemoveAllSpace
 
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
-            
+
         }
     }
 }
