@@ -23,7 +23,7 @@ namespace AddCounterToEndRule
 
         public string Serialize(IRuleParameter ruleParamter)
         {
-            AddCounterToEndParamter parameter = (AddCounterToEndParamter)Utils.Object.JsonDeserialize(serializeParams);
+            AddCounterToEndParamter parameter = (AddCounterToEndParamter)ruleParamter;
 
             if (parameter == null)
                 throw new InvalidCastException("Invalid parameter");

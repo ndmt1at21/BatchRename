@@ -11,7 +11,7 @@ namespace AddCounterToEndRule
         public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
         {
             AddCounterToEndParamter ruleParams = (AddCounterToEndParamter)ruleParameter;
-            return this.convert(file, ruleParams);
+            return convert(file, ruleParams);
         }
 
 
@@ -27,7 +27,7 @@ namespace AddCounterToEndRule
             if (!isParameterValid)
                 return files;
 
-            return files.Select(f => this.convert(f, ruleParams)).ToArray();
+            return files.Select(f => convert(f, ruleParams)).ToArray();
         }
 
         public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
@@ -59,7 +59,7 @@ namespace AddCounterToEndRule
         private bool checkValidAddCounterParameter(AddCounterToEndParamter parameter, int nFiles)
         {
             int startFrom = parameter.StartFrom;
-            int countLength = parameter.PartCountLength;
+            long countLength = parameter.PartCountLength;
             int step = parameter.Step;
 
             if (step == 0)

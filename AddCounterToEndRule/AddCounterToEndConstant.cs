@@ -13,6 +13,7 @@ namespace AddCounterToEndRule
             PartCountLength = 0,
             StartFrom = 0,
             Step = 0,
+            PadChar = '0'
         };
     }
 }
