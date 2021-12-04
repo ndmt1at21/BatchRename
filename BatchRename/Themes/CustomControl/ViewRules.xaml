@@ -8,14 +8,14 @@
              d:DesignHeight="450" d:DesignWidth="800">
 	<Grid>
 		<StackPanel>
-			<StackPanel Height="80">
+			<StackPanel Height="60">
 				<TextBlock Text="Actions" Style="{DynamicResource Subtitle}" Foreground="{DynamicResource TextSmallColor}"/>
-				<ct:TopRule/>
+				<ct:TopRule Height="28"/>
 			</StackPanel>
 			<StackPanel>
 				<TextBlock Text="All rules" Style="{DynamicResource Subtitle}" Foreground="{DynamicResource TextSmallColor}"/>
 				<StackPanel Width="400" HorizontalAlignment="Left">
-					<ListView Height="292">
+					<ListView Height="305">
 						<ListView.Resources>
 							<Style TargetType="GridViewColumnHeader">
 								<Setter Property="Background" Value="Transparent"/>
