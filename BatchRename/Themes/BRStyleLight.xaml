@@ -4,5 +4,6 @@
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Typography.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Other.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/WindowStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/ScrollbarStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

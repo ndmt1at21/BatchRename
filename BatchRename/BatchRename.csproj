@@ -34,12 +34,8 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="Assets\img\dropfile.jpg">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Resource>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Plugins\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,14 +43,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\PluginContract\PluginContract.csproj" />
-	  <ProjectReference Include="..\Utils\Utils.csproj" />
+		<ProjectReference Include="..\BRControl\BRControl.csproj" />
+		<ProjectReference Include="..\PluginContract\PluginContract.csproj" />
+		<ProjectReference Include="..\Utils\Utils.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Themes\CustomControl\TabItemStyle.xaml">
-	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-	    <SubType>Designer</SubType>
-	  </Page>
+		<Page Update="Themes\CustomControl\TabItemStyle.xaml">
+			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+			<SubType>Designer</SubType>
+		</Page>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Plugins\" />
 	</ItemGroup>
 </Project>

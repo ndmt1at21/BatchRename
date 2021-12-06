@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToPascalCase", "ToPascalCas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddCounterToEndRule", "AddCounterToEndRule\AddCounterToEndRule.csproj", "{B2F1396F-17F2-4D68-BD3C-D678BA02D6F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomControl", "CustomControl\CustomControl.csproj", "{0F49DA0B-D1BD-49EF-96EC-8DC76E2810A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BRControl", "BRControl\BRControl.csproj", "{9772719B-F321-4719-8ECD-061006CF6B21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +83,10 @@ Global
 		{B2F1396F-17F2-4D68-BD3C-D678BA02D6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2F1396F-17F2-4D68-BD3C-D678BA02D6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2F1396F-17F2-4D68-BD3C-D678BA02D6F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F49DA0B-D1BD-49EF-96EC-8DC76E2810A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F49DA0B-D1BD-49EF-96EC-8DC76E2810A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F49DA0B-D1BD-49EF-96EC-8DC76E2810A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F49DA0B-D1BD-49EF-96EC-8DC76E2810A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9772719B-F321-4719-8ECD-061006CF6B21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9772719B-F321-4719-8ECD-061006CF6B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9772719B-F321-4719-8ECD-061006CF6B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9772719B-F321-4719-8ECD-061006CF6B21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

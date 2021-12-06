@@ -2,7 +2,7 @@
     x:Class="AddCounterToEndRule.AddCounterToEndRuleComponent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ct="clr-namespace:CustomControl;assembly=CustomControl"
+    xmlns:brc="clr-namespace:BRControl;assembly=BRControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:AddCounterToEndRule"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -29,7 +29,7 @@
                 Start From:
             </TextBlock>
 
-            <ct:BRInputText
+            <brc:BRInputText
                 Name="tbStartNumber"
                 Grid.Column="2"
                 Placeholder="Starting Number"
@@ -48,7 +48,7 @@
                 Step:
             </TextBlock>
 
-            <ct:BRInputText
+            <brc:BRInputText
                 Name="tbStep"
                 Grid.Column="2"
                 Placeholder="Step"
@@ -67,7 +67,7 @@
                 Counter Length:
             </TextBlock>
 
-            <ct:BRInputText
+            <brc:BRInputText
                 Name="tbCounterLength"
                 Grid.Column="2"
                 Placeholder="Counter Length"
@@ -86,7 +86,7 @@
                 Padding Char:
             </TextBlock>
 
-            <ct:BRInputText
+            <brc:BRInputText
                 Name="tbPaddingChar"
                 Grid.Column="2"
                 Placeholder="Margin Char"

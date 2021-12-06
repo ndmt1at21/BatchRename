@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CustomControl
+namespace BRControl
 {
     public class BRCheckbox : CheckBox
     {

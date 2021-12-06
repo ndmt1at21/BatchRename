@@ -1,11 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <BaseOutputPath>D:\C#\BatchRename\BatchRename\Plugins\AddPrefixRule</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BRControl\BRControl.csproj" />
     <ProjectReference Include="..\PluginContract\PluginContract.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>

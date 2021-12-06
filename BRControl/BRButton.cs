@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace CustomControl
+namespace BRControl
 {
     public class BRButton : Button
     {
