@@ -1,36 +1,67 @@
-﻿<Window x:Class="BatchRename.View.RuleWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BatchRename.View"
-        xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
-        mc:Ignorable="d"
-        Title="RuleWindow" Height="350" Width="500"
-        WindowStyle="None"        
-        Background="Transparent"
-        AllowsTransparency="True">
+﻿<Window
+    x:Class="BatchRename.View.RuleWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ct="clr-namespace:CustomControl;assembly=CustomControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BatchRename.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Pick Rule"
+    Width="800"
+    Height="350"
+    MinWidth="800"
+    MinHeight="100"
+    MaxWidth="1400"
+    MaxHeight="1000"
+    Loaded="Window_Loaded"
+    ResizeMode="CanResize"
+    Style="{DynamicResource BaseWindowStyle}"
+    mc:Ignorable="d">
 
+    <Window.Resources>
+        <Style TargetType="{x:Type ct:BRInputText}">
+            <Setter Property="Padding" Value="{DynamicResource PaddingMedium}" />
+            <Setter Property="Background" Value="#F3F4F6" />
+            <Setter Property="HoverBackground" Value="#F9FAFB " />
+            <Setter Property="FocusedBackground" Value="White" />
+            <Setter Property="PlaceholderColor" Value="#9CA3AF" />
+            <Setter Property="StatusLineColor" Value="#9CA3AF" />
+            <Setter Property="StatusLineFocusedColor" Value="#2563EB" />
+            <Setter Property="BorderBrush" Value="#9CA3AF" />
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="FontFamily" Value="{DynamicResource PoppinsRegular}" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
 
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="{DynamicResource PoppinsRegular}" />
+        </Style>
+    </Window.Resources>
 
-    <Border Background="{DynamicResource BackgroundColor}"
-            CornerRadius="10">
-        <StackPanel Orientation="Vertical">
-            <ct:WindowCommandButtons Height="30" />
-            
-                <StackPanel Background="{DynamicResource BackgroundColor}" >
+    <DockPanel Margin="{DynamicResource PaddingXLargeYMedium}" LastChildFill="True">
 
-                <TabControl Style="{DynamicResource TabControlStyle}" TabStripPlacement="Left" >
-                    <TabItem Header="Insert" Width="130" Style="{DynamicResource TabItemStyle }"/>
-                    <TabItem Header="Remove" Style="{DynamicResource TabItemStyle }" Width="130" />
-                    <TabItem Header="Strip" Style="{DynamicResource TabItemStyle }" Width="130"/>
-                    <TabItem Header="Extension" Style="{DynamicResource TabItemStyle }" Width="130"/>
-                    <TabItem Header="Regular Expression" Style="{DynamicResource TabItemStyle }" Width="130"/>
-                </TabControl>
-                    
-                </StackPanel>             
+        <TabControl
+            x:Name="tabControlRule"
+            Padding="{DynamicResource PaddingXLargeYMedium}"
+            Background="{DynamicResource SurfaceColor}"
+            ItemContainerStyle="{DynamicResource TabItemStyle}"
+            Style="{DynamicResource TabControlStyle}"
+            TabStripPlacement="Left">
 
-           
-        </StackPanel>
-    </Border>
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding Content}" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+
+    </DockPanel>
 </Window>
