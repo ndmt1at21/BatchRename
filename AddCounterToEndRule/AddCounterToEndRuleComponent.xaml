@@ -13,89 +13,87 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <Thickness x:Key="RowGap">0,10,0,0</Thickness>
+        <Thickness x:Key="RowGap">0,5,0,5</Thickness>
         <GridLength x:Key="ColGap">10</GridLength>
-        <sys:Double x:Key="LabelFontSize">16</sys:Double>
     </UserControl.Resources>
 
-    <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="{StaticResource ColGap}" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <StackPanel Grid.IsSharedSizeScope="True" SnapsToDevicePixels="True">
+        <Grid Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                <ColumnDefinition Width="{StaticResource ColGap}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+            <TextBlock Margin="{StaticResource RowGap}" VerticalAlignment="Center">
+                Start From:
+            </TextBlock>
 
-        <!--  Labels  -->
-        <TextBlock Margin="{StaticResource RowGap}" VerticalAlignment="Center">
-            Start From:
-        </TextBlock>
+            <ct:BRInputText
+                Name="tbStartNumber"
+                Grid.Column="2"
+                Placeholder="Starting Number"
+                Text="{Binding StartFrom, Mode=OneWay}"
+                TextChanged="tbStartNumber_TextChanged" />
+        </Grid>
 
-        <TextBlock
-            Grid.Row="1"
-            Margin="{StaticResource RowGap}"
-            VerticalAlignment="Center">
-            Step:
-        </TextBlock>
+        <Grid Margin="{StaticResource RowGap}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                <ColumnDefinition Width="{StaticResource ColGap}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <TextBlock
-            Grid.Row="2"
-            Margin="{StaticResource RowGap}"
-            VerticalAlignment="Center">
-            Counter Length:
-        </TextBlock>
+            <TextBlock Grid.Row="1" VerticalAlignment="Center">
+                Step:
+            </TextBlock>
 
-        <TextBlock
-            Grid.Row="3"
-            Margin="{StaticResource RowGap}"
-            VerticalAlignment="Center">
-            Padding Char:
-        </TextBlock>
+            <ct:BRInputText
+                Name="tbStep"
+                Grid.Column="2"
+                Placeholder="Step"
+                Text="{Binding Step, Mode=OneWay}"
+                TextChanged="tbStep_TextChanged" />
+        </Grid>
 
-        <!--  Inputs  -->
-        <ct:BRInputText
-            Name="tbStartNumber"
-            Grid.Column="2"
-            Margin="{StaticResource RowGap}"
-            VerticalAlignment="Center"
-            Placeholder="Starting Number"
-            Text="{Binding StartFrom, Mode=OneWay}"
-            TextChanged="tbStartNumber_TextChanged" />
+        <Grid Margin="{StaticResource RowGap}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                <ColumnDefinition Width="{StaticResource ColGap}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <ct:BRInputText
-            Name="tbStep"
-            Grid.Row="1"
-            Grid.Column="2"
-            Margin="{StaticResource RowGap}"
-            Placeholder="Step"
-            Text="{Binding Step, Mode=OneWay}"
-            TextChanged="tbStep_TextChanged" />
+            <TextBlock Grid.Row="2" VerticalAlignment="Center">
+                Counter Length:
+            </TextBlock>
 
-        <ct:BRInputText
-            Name="tbCounterLength"
-            Grid.Row="2"
-            Grid.Column="2"
-            Margin="{StaticResource RowGap}"
-            Placeholder="Counter Length"
-            Text="{Binding PartCountLength, Mode=OneWay}"
-            TextChanged="tbCounterLength_TextChanged" />
+            <ct:BRInputText
+                Name="tbCounterLength"
+                Grid.Column="2"
+                Placeholder="Counter Length"
+                Text="{Binding PartCountLength, Mode=OneWay}"
+                TextChanged="tbCounterLength_TextChanged" />
+        </Grid>
 
-        <ct:BRInputText
-            Name="tbPaddingChar"
-            Grid.Row="3"
-            Grid.Column="2"
-            Margin="{StaticResource RowGap}"
-            VerticalAlignment="Center"
-            Placeholder="Padding Char"
-            PreviewTextInput="tbPaddingChar_PreviewTextInput"
-            Text="{Binding PadChar, Mode=OneWay}"
-            TextChanged="tbPaddingChar_TextChanged" />
+        <Grid Margin="{StaticResource RowGap}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                <ColumnDefinition Width="{StaticResource ColGap}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-    </Grid>
+            <TextBlock Grid.Row="3" VerticalAlignment="Center">
+                Padding Char:
+            </TextBlock>
+
+            <ct:BRInputText
+                Name="tbPaddingChar"
+                Grid.Column="2"
+                Placeholder="Margin Char"
+                PreviewTextInput="tbPaddingChar_PreviewTextInput"
+                Text="{Binding PadChar, Mode=OneWay}"
+                TextChanged="tbPaddingChar_TextChanged" />
+        </Grid>
+
+    </StackPanel>
 </UserControl>
