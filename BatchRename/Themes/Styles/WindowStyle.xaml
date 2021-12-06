@@ -47,12 +47,17 @@
                     <DockPanel Background="{DynamicResource BackgroundColor}" LastChildFill="True">
 
                         <Grid DockPanel.Dock="Top">
-                            <ContentControl
-                                Height="{DynamicResource LogoHeightSmall}"
-                                Margin="5,2"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Content="{DynamicResource AppLogoIcon}" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <ContentControl
+                                    Height="{DynamicResource LogoHeightSmall}"
+                                    Margin="{DynamicResource PaddingLeftSmall}"
+                                    Content="{DynamicResource AppLogoIcon}" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{TemplateBinding Title}" />
+                            </StackPanel>
 
                             <Border HorizontalAlignment="Right">
                                 <ct:WindowCommandButtons />
