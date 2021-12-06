@@ -49,7 +49,8 @@ namespace BatchRename.Lib
                 if (plugin == null)
                     continue;
 
-                prototype.Add(plugin.Id, plugin);
+                if (!prototype.ContainsKey(plugin.Id))
+                    prototype.Add(plugin.Id, plugin);
             }
         }
 
@@ -91,6 +92,14 @@ namespace BatchRename.Lib
                 return null;
 
             return prototype[id].CreateRuleInstance();
+        }
+
+        public string GetRuleName(string id)
+        {
+            if (prototype[id] == null)
+                return null;
+
+            return prototype[id].Name;
         }
     }
 }
