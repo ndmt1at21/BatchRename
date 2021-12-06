@@ -1,28 +1,25 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Viewbox
-        x:Key="AppLogoIcon"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        x:Key="AppLogoIcon"
+        x:Shared="False"
         Stretch="Uniform">
         <Canvas
             Name="svg147"
             Width="45"
             Height="36">
             <Canvas.RenderTransform>
-                <TranslateTransform X="0" Y="0"/>
+                <TranslateTransform X="0" Y="0" />
             </Canvas.RenderTransform>
-            <Canvas.Resources/>
+            <Canvas.Resources />
             <!--  Unknown tag: sodipodi:namedview  -->
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 Name="path145"
                 Fill="#FF3A00B6">
                 <Path.Data>
-                    <PathGeometry
-                        Figures="M5.625 4.5H39.375C39.8723 4.5 40.3492 4.65804 40.7008 4.93934C41.0525 5.22064 41.25 5.60218 41.25 6V30C41.25 30.3978 41.0525 30.7794 40.7008 31.0607C40.3492 31.342 39.8723 31.5 39.375 31.5H5.625C5.12772 31.5 4.65081 31.342 4.29917 31.0607C3.94754 30.7794 3.75 30.3978 3.75 30V6C3.75 5.60218 3.94754 5.22064 4.29917 4.93934C4.65081 4.65804 5.12772 4.5 5.625 4.5ZM22.5 13.5H15V16.5H31.875L22.5 9V13.5ZM13.125 19.5L22.5 27V22.5H30V19.5H13.125Z"
-                        FillRule="NonZero"/>
+                    <PathGeometry Figures="M5.625 4.5H39.375C39.8723 4.5 40.3492 4.65804 40.7008 4.93934C41.0525 5.22064 41.25 5.60218 41.25 6V30C41.25 30.3978 41.0525 30.7794 40.7008 31.0607C40.3492 31.342 39.8723 31.5 39.375 31.5H5.625C5.12772 31.5 4.65081 31.342 4.29917 31.0607C3.94754 30.7794 3.75 30.3978 3.75 30V6C3.75 5.60218 3.94754 5.22064 4.29917 4.93934C4.65081 4.65804 5.12772 4.5 5.625 4.5ZM22.5 13.5H15V16.5H31.875L22.5 9V13.5ZM13.125 19.5L22.5 27V22.5H30V19.5H13.125Z" FillRule="NonZero" />
                 </Path.Data>
             </Path>
         </Canvas>

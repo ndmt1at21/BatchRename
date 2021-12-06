@@ -1,9 +1,8 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Viewbox
         x:Key="SaveIcon"
+        x:Shared="False"
         Stretch="Uniform">
         <Canvas
             Name="svg137"
@@ -19,9 +18,7 @@
                 Name="path135"
                 Fill="#FF1E40AF">
                 <Path.Data>
-                    <PathGeometry
-                        Figures="M0.5 1.99125C0.502288 1.66297 0.633625 1.34877 0.865641 1.11652C1.09766 0.884272 1.41173 0.752618 1.74 0.75H24.26C24.945 0.75 25.5 1.30625 25.5 1.99125V22.0087C25.4977 22.337 25.3664 22.6512 25.1344 22.8835C24.9023 23.1157 24.5883 23.2474 24.26 23.25H1.74C1.41102 23.2497 1.09562 23.1187 0.863112 22.886C0.630603 22.6533 0.5 22.3377 0.5 22.0087V1.99125ZM13 3.25V20.75H23V3.25H13ZM14.25 5.75H21.75V8.25H14.25V5.75ZM14.25 9.5H21.75V12H14.25V9.5Z"
-                        FillRule="NonZero" />
+                    <PathGeometry Figures="M0.5 1.99125C0.502288 1.66297 0.633625 1.34877 0.865641 1.11652C1.09766 0.884272 1.41173 0.752618 1.74 0.75H24.26C24.945 0.75 25.5 1.30625 25.5 1.99125V22.0087C25.4977 22.337 25.3664 22.6512 25.1344 22.8835C24.9023 23.1157 24.5883 23.2474 24.26 23.25H1.74C1.41102 23.2497 1.09562 23.1187 0.863112 22.886C0.630603 22.6533 0.5 22.3377 0.5 22.0087V1.99125ZM13 3.25V20.75H23V3.25H13ZM14.25 5.75H21.75V8.25H14.25V5.75ZM14.25 9.5H21.75V12H14.25V9.5Z" FillRule="NonZero" />
                 </Path.Data>
             </Path>
         </Canvas>

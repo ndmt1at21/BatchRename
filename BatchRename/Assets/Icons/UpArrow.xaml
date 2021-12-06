@@ -1,10 +1,9 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Viewbox
-        x:Key="UpArrowIcon"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        x:Key="UpArrowIcon"
+        x:Shared="False"
         Stretch="Uniform">
         <Canvas
             Name="svg163"
@@ -20,9 +19,7 @@
                 Name="path161"
                 Fill="#FF3F3F46">
                 <Path.Data>
-                    <PathGeometry
-                        Figures="M9.75 5.871V15H8.25V5.871L4.227 9.894L3.1665 8.8335L9 3L14.8335 8.8335L13.773 9.894L9.75 5.871Z"
-                        FillRule="NonZero" />
+                    <PathGeometry Figures="M9.75 5.871V15H8.25V5.871L4.227 9.894L3.1665 8.8335L9 3L14.8335 8.8335L13.773 9.894L9.75 5.871Z" FillRule="NonZero" />
                 </Path.Data>
             </Path>
         </Canvas>

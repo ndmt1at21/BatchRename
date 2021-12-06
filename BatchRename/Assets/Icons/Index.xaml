@@ -20,7 +20,7 @@
 
         <ResourceDictionary Source="./DownArrow.xaml" />
         <ResourceDictionary Source="./UpArrow.xaml" />
-		<ResourceDictionary Source="./Delete.xaml" />
-		<ResourceDictionary Source="./Plus.xaml" />
-	</ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="./Delete.xaml" />
+        <ResourceDictionary Source="./Plus.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

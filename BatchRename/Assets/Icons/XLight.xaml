@@ -1,9 +1,8 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Viewbox
-        x:Key="XLightIcon"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        x:Key="XLightIcon"
+        x:Shared="False"
         Stretch="Uniform">
         <Canvas
             Name="svg23"
@@ -18,26 +17,22 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 Name="path19"
                 Stroke="#ffffff"
+                StrokeEndLineCap="Round"
                 StrokeLineJoin="Round"
-                StrokeStartLineCap="Round"
-                StrokeEndLineCap="Round">
+                StrokeStartLineCap="Round">
                 <Path.Data>
-                    <PathGeometry
-                        Figures="M14.0625 3.9375L3.9375 14.0625"
-                        FillRule="NonZero" />
+                    <PathGeometry Figures="M14.0625 3.9375L3.9375 14.0625" FillRule="NonZero" />
                 </Path.Data>
             </Path>
             <Path
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 Name="path21"
                 Stroke="#ffffff"
+                StrokeEndLineCap="Round"
                 StrokeLineJoin="Round"
-                StrokeStartLineCap="Round"
-                StrokeEndLineCap="Round">
+                StrokeStartLineCap="Round">
                 <Path.Data>
-                    <PathGeometry
-                        Figures="M14.0625 14.0625L3.9375 3.9375"
-                        FillRule="NonZero" />
+                    <PathGeometry Figures="M14.0625 14.0625L3.9375 3.9375" FillRule="NonZero" />
                 </Path.Data>
             </Path>
         </Canvas>
