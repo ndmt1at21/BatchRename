@@ -21,7 +21,7 @@
             <Grid
                 Name="Container"
                 Grid.Column="1"
-                Effect="{DynamicResource DropShadowLight}">
+                Effect="{DynamicResource DropShadowLight}" DragEnter="Container_DragEnter" DragLeave="Container_DragLeave">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*" />

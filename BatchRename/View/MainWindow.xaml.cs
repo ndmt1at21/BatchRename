@@ -64,5 +64,15 @@ namespace BatchRename
 
             ruleWindow.Show();
         }
+
+        private void Container_DragEnter(object sender, DragEventArgs e)
+        {
+            //TODO: Show drag drop panel
+        }
+
+        private void Container_DragLeave(object sender, DragEventArgs e)
+        {
+            //TODO: Hid drag and drop panel
+        }
     }
 }
