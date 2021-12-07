@@ -31,13 +31,13 @@ namespace BatchRename
 
         private void loadPlugins()
         {
-            //PluginManager.Load("../../../Plugins");
+            PluginManager.Load("../../../Plugins");
 
-            //PluginManager.Shared.GetPluginIDs().Select(p =>
-            //{
-            //    MessageBox.Show(p);
-            //    return p;
-            //});
+            PluginManager.Shared.GetPluginIDs().Select(p =>
+            {
+                MessageBox.Show(p);
+                return p;
+            });
         }
 
         private void btnRuleWindow_Click(object sender, RoutedEventArgs e)
