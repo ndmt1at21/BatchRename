@@ -33,9 +33,9 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <ct:RuleControl Grid.Column="0" />
+                <ct:RuleControl Grid.Column="0" Effect="{DynamicResource DropShadowLight}" />
 
-                <ct:FilesControl Grid.Column="2" />
+                <ct:FilesControl Grid.Column="2" Effect="{DynamicResource DropShadowLight}" />
 
                 <Grid.Style>
                     <Style TargetType="Grid">
@@ -73,14 +73,16 @@
                             Height="{Binding ActualHeight,
                                              ElementName=Window}"
                             MinHeight="200"
-                            MaxHeight="500" />
+                            MaxHeight="500"
+                            Effect="{DynamicResource DropShadowLight}" />
 
                         <ct:FilesControl
                             Height="{Binding ActualHeight,
                                              ElementName=Window}"
                             MinHeight="200"
                             MaxHeight="500"
-                            Margin="0,40,0,0" />
+                            Margin="0,40,0,0"
+                            Effect="{DynamicResource DropShadowLight}" />
                     </StackPanel>
 
                 </ScrollViewer>
