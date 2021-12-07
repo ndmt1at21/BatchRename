@@ -17,7 +17,9 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BRButton}}}"
+                        CornerRadius="{Binding CornerRadius,
+                                               RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                              AncestorType={x:Type local:BRButton}}}"
                         Opacity="{TemplateBinding Opacity}">
 
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />

@@ -7,16 +7,16 @@ namespace BRControl
     public class BRButton : Button
     {
         public static readonly DependencyProperty CornerRadiusProperty =
-           DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(System.Windows.Controls.Button));
+           DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(BRButton));
 
         public static readonly DependencyProperty HoverBackgroundProperty =
-           DependencyProperty.Register("HoverBackground", typeof(SolidColorBrush), typeof(System.Windows.Controls.Button));
+           DependencyProperty.Register("HoverBackground", typeof(SolidColorBrush), typeof(BRButton));
 
         public static readonly DependencyProperty ActiveBackgroundProperty =
-           DependencyProperty.Register("ActiveBackground", typeof(SolidColorBrush), typeof(System.Windows.Controls.Button));
+           DependencyProperty.Register("ActiveBackground", typeof(SolidColorBrush), typeof(BRButton));
 
         public static readonly DependencyProperty DisableBackgroundProperty =
-          DependencyProperty.Register("DisableBackground", typeof(SolidColorBrush), typeof(System.Windows.Controls.Button));
+          DependencyProperty.Register("DisableBackground", typeof(SolidColorBrush), typeof(BRButton));
 
         public CornerRadius CornerRadius
         {
