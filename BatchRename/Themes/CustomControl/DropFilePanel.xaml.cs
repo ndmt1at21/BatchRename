@@ -20,6 +20,9 @@ namespace BatchRename.Themes.CustomControl
     /// </summary>
     public partial class DropFilePanel : UserControl
     {
+        public delegate void DelegateGetFiles(string[] files);
+        public event DelegateGetFiles Handler;
+        public bool DialogResult;
         public DropFilePanel()
         {
             InitializeComponent();
@@ -31,8 +34,16 @@ namespace BatchRename.Themes.CustomControl
             {
                 // Note that you can have more than one file.
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                ///TODO: Handle find here
+
+                Handler(files);
+                DialogResult = true;
             }
+        }
+
+        internal bool ShowDialog()
+        {
+            //TODO: Change to Window control
+            throw new NotImplementedException();
         }
     }
 }
