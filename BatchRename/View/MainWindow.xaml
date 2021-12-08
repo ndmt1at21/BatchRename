@@ -17,107 +17,120 @@
     <Window.Resources>
         <lib:BreakpointConverter x:Key="BreakPointConverter" />
 
-        <ControlTemplate x:Key="WidthNormalTemplate">
-            <Grid
-                Name="Container"
-                Grid.Column="1"
-                Effect="{DynamicResource DropShadowLight}">
+        <Style x:Key="NormalWidthContainerStyle" TargetType="Grid">
+            <Setter Property="Visibility" Value="Visible" />
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition Width="6*" />
-                </Grid.ColumnDefinitions>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=1}" Value="Small">
+                    <Setter Property="Visibility" Value="Hidden" />
+                </DataTrigger>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=2}" Value="Medium">
+                    <Setter Property="Margin" Value="30,10,30,20" />
+                </DataTrigger>
 
-                <ct:RuleControl Grid.Column="0" Effect="{DynamicResource DropShadowLight}" />
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=3}" Value="Normal">
+                    <Setter Property="Margin" Value="40,10,40,25" />
+                </DataTrigger>
 
-                <ct:FilesControl Grid.Column="2" Effect="{DynamicResource DropShadowLight}" />
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=4}" Value="Large">
+                    <Setter Property="Margin" Value="50,10,50,30" />
+                </DataTrigger>
 
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=1}" Value="Small">
-                                <Setter Property="Margin" Value="20,10,20,15" />
-                            </DataTrigger>
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}}" Value="ExtraLarge">
+                    <Setter Property="Margin" Value="70,10,70,35" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
-                            <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=2}" Value="Medium">
-                                <Setter Property="Margin" Value="30,10,30,20" />
-                            </DataTrigger>
+        <Style x:Key="SmallWidthContainerStyle" TargetType="Grid">
+            <Setter Property="Visibility" Value="Collapsed" />
 
-                            <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=3}" Value="Normal">
-                                <Setter Property="Margin" Value="40,10,40,25" />
-                            </DataTrigger>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=1}" Value="Small">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
-                            <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=4}" Value="Large">
-                                <Setter Property="Margin" Value="50,10,50,30" />
-                            </DataTrigger>
+        <DockPanel
+            x:Key="RulePanel"
+            x:Shared="False"
+            LastChildFill="True">
+            <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Rules</TextBlock>
 
-                            <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}}" Value="ExtraLarge">
-                                <Setter Property="Margin" Value="70,10,70,35" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
+            <Grid Margin="{StaticResource PaddingTopSmall}">
+                <!--  Separate: DropShadowEffect performance  -->
+                <Border
+                    Background="{StaticResource SurfaceColor}"
+                    CornerRadius="{StaticResource Radius}"
+                    Effect="{StaticResource DropShadowLight}" />
+
+                <Border Padding="{StaticResource PaddingXLargeYMedium}">
+                    <ct:RuleControl />
+                </Border>
             </Grid>
-        </ControlTemplate>
+        </DockPanel>
 
-        <ControlTemplate x:Key="WidthSmallTemplate">
-            <Grid>
-                <ScrollViewer>
-                    <StackPanel Margin="30,20">
-                        <ct:RuleControl
-                            Height="{Binding ActualHeight,
-                                             ElementName=Window}"
-                            MinHeight="200"
-                            MaxHeight="500"
-                            Effect="{DynamicResource DropShadowLight}" />
+        <DockPanel
+            x:Key="FilePanel"
+            x:Shared="False"
+            LastChildFill="True">
+            <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Files</TextBlock>
 
-                        <ct:FilesControl
-                            Height="{Binding ActualHeight,
-                                             ElementName=Window}"
-                            MinHeight="200"
-                            MaxHeight="500"
-                            Margin="0,40,0,0"
-                            Effect="{DynamicResource DropShadowLight}" />
-                    </StackPanel>
+            <!--  Separate: DropShadowEffect performance  -->
+            <Grid Margin="{StaticResource PaddingTopSmall}">
+                <Border
+                    Background="White"
+                    CornerRadius="{StaticResource Radius}"
+                    Effect="{StaticResource DropShadowLight}" />
 
-                </ScrollViewer>
+                <Border Padding="{DynamicResource PaddingXLargeYMedium}">
+                    <ct:FilesControl />
+                </Border>
             </Grid>
-        </ControlTemplate>
+        </DockPanel>
     </Window.Resources>
 
     <Grid>
-        <ContentControl>
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=1}" Value="Small">
-                            <Setter Property="Template" Value="{StaticResource WidthSmallTemplate}" />
-                        </DataTrigger>
+        <!--  - Normal Width Layout  -->
+        <Grid Style="{StaticResource NormalWidthContainerStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
 
-                        <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=2}" Value="Medium">
-                            <Setter Property="Template" Value="{StaticResource WidthNormalTemplate}" />
-                        </DataTrigger>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                        <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=3}" Value="Normal">
-                            <Setter Property="Template" Value="{StaticResource WidthNormalTemplate}" />
-                        </DataTrigger>
+            <ContentControl Grid.Column="0" Content="{StaticResource RulePanel}" />
+            <ContentControl Grid.Column="2" Content="{StaticResource FilePanel}" />
+        </Grid>
 
-                        <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=4}" Value="Large">
-                            <Setter Property="Template" Value="{StaticResource WidthNormalTemplate}" />
-                        </DataTrigger>
+        <!--  Small Width Layout  -->
+        <Grid Style="{StaticResource SmallWidthContainerStyle}">
+            <ScrollViewer>
+                <StackPanel Margin="30,20">
+                    <ContentControl
+                        Height="{Binding ActualHeight,
+                                         ElementName=Window}"
+                        MinHeight="200"
+                        MaxHeight="500"
+                        Content="{StaticResource RulePanel}" />
 
-                        <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}}" Value="ExtraLarge">
-                            <Setter Property="Template" Value="{StaticResource WidthNormalTemplate}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-        </ContentControl>
+                    <ContentControl
+                        Height="{Binding ActualHeight,
+                                         ElementName=Window}"
+                        MinHeight="200"
+                        MaxHeight="500"
+                        Margin="{StaticResource PaddingTopLarge}"
+                        Content="{StaticResource FilePanel}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
     </Grid>
 
     <!--<Grid Margin="{DynamicResource PaddingXLargeYMedium}" Effect="{DynamicResource DropShadowLight}">
