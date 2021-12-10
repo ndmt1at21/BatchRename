@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BatchRename.Lib;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,14 @@ namespace BatchRename
     /// </summary>
     public partial class App : Application
     {
+        private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            loadPlugins();
+        }
+
+        private void loadPlugins()
+        {
+            PluginManager.Load("../../../../Plugins");
+        }
     }
 }

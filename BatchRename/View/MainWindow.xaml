@@ -112,7 +112,7 @@
 
         <!--  Small Width Layout  -->
         <Grid Style="{StaticResource SmallWidthContainerStyle}">
-            <ScrollViewer>
+            <ScrollViewer Background="Black">
                 <StackPanel Margin="30,20">
                     <ContentControl
                         Height="{Binding ActualHeight,
