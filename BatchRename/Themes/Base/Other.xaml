@@ -74,7 +74,7 @@
         x:Key="DropShadowLight"
         BlurRadius="30"
         Direction="0"
-        Opacity="0.05   "
+        Opacity="0.1"
         ShadowDepth="0" />
 
 </ResourceDictionary>
