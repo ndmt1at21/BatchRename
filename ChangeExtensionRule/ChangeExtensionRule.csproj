@@ -4,6 +4,7 @@
 		<TargetFramework>net5.0-windows7.0</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<BaseOutputPath>D:\C#\BatchRename\BatchRename\Plugins\ChangeExtensionRule</BaseOutputPath>
+		<Platforms>AnyCPU;x86;x64</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>

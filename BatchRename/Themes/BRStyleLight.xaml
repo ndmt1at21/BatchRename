@@ -5,5 +5,8 @@
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Other.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/WindowStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/ScrollbarStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/DataGridStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/BRCheckboxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/ActionButtonStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
