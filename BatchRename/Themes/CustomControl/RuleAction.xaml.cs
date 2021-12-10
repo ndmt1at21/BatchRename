@@ -16,33 +16,40 @@ using System.Windows.Shapes;
 
 namespace BatchRename.Themes.CustomControl
 {
-    /// <summary>
-    /// Interaction logic for RuleAction.xaml
-    /// </summary>
-    public partial class RuleAction : UserControl, INotifyPropertyChanged
+    public partial class RuleAction : UserControl
     {
-        private Window window;
-        public Window Window
-        {
-            get => window;
-            set
-            {
-                window = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Window"));
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event RoutedEventHandler OnDownClick;
+        public event RoutedEventHandler OnUpClick;
+        public event RoutedEventHandler OnAddClick;
+        public event RoutedEventHandler OnRemoveClick;
 
         public RuleAction()
         {
             InitializeComponent();
+        }
 
-            window = Window.GetWindow(this);
-            DataContext = this;
+        private void btnDown_Click(object sender, RoutedEventArgs e)
+        {
+            if (OnDownClick != null)
+                OnDownClick.Invoke(sender, e);
+        }
+
+        private void btnUp_Click(object sender, RoutedEventArgs e)
+        {
+            if (OnUpClick != null)
+                OnUpClick.Invoke(sender, e);
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (OnRemoveClick != null)
+                OnRemoveClick.Invoke(sender, e);
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (OnAddClick != null)
+                OnAddClick.Invoke(sender, e);
         }
     }
 }

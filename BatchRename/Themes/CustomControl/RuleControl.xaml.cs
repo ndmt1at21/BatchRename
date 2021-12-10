@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,25 @@ namespace BatchRename.Themes.CustomControl
     /// </summary>
     public partial class RuleControl : UserControl
     {
+        public BindingList<RuleItem> ItemsSource { get; set; }
+
         public RuleControl()
         {
             InitializeComponent();
+
+            DataContext = this;
+            ItemsSource = new BindingList<RuleItem>();
+
+            ItemsSource.Add(new RuleItem { Id = 1, Name = "jhfhjgf" });
+            ItemsSource.Add(new RuleItem { Id = 2, Name = "aaa" });
+            ItemsSource.Add(new RuleItem { Id = 3, Name = "jhfaaarhjgf" });
+
+            lv.ItemsSource = ItemsSource;
+        }
+
+        private void lv_OnSelectionChanged(IEnumerable<int> selectedIndies)
+        {
+            Debug.WriteLine("fjghfjhfg");
         }
     }
 }

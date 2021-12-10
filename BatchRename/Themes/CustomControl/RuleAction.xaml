@@ -4,77 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:brc="clr-namespace:BRControl;assembly=BRControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:lib="clr-namespace:BatchRename.Lib"
-    xmlns:local="clr-namespace:BatchRename.Themes.CustomControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <lib:BreakpointConverter x:Key="BreakPointConverter" />
-
-        <Style x:Key="BaseActionButton" TargetType="{x:Type brc:BRButton}">
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Margin" Value="0,0,2,0" />
-            <Setter Property="Padding" Value="12,5,12,5" />
-            <Setter Property="CornerRadius" Value="{DynamicResource Radius}" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="ToolTipService.IsEnabled" Value="False" />
-
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource BreakPointConverter}}" Value="Small">
-                    <Setter Property="Padding" Value="10" />
-                    <Setter Property="ToolTipService.IsEnabled" Value="False" />
-                </DataTrigger>
-
-                <DataTrigger Binding="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource BreakPointConverter}}" Value="Medium">
-                    <Setter Property="Padding" Value="10" />
-                    <Setter Property="ToolTipService.IsEnabled" Value="True" />
-                </DataTrigger>
-
-                <DataTrigger Binding="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource BreakPointConverter}}" Value="Normal">
-                    <Setter Property="Padding" Value="10" />
-                    <Setter Property="ToolTipService.IsEnabled" Value="True" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="ButtonIconStyle" TargetType="ContentControl">
-            <Setter Property="Width" Value="25" />
-            <Setter Property="Height" Value="25" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="ButtonLabelStyle" TargetType="TextBlock">
-            <Setter Property="Margin" Value="2,0,0,0" />
-            <Setter Property="Foreground" Value="{DynamicResource TextContrastColor}" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="{DynamicResource PoppinsRegular}" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Visibility" Value="Collapsed" />
-
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource BreakPointConverter}}" Value="ExtraLarge">
-                    <Setter Property="Visibility" Value="Visible" />
-                </DataTrigger>
-
-                <DataTrigger Binding="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource BreakPointConverter}}" Value="Large">
-                    <Setter Property="Visibility" Value="Visible" />
-                </DataTrigger>
-
-                <DataTrigger Binding="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource BreakPointConverter}}" Value="Small">
-                    <Setter Property="Visibility" Value="Visible" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
-
     <StackPanel Orientation="Horizontal">
 
         <brc:BRButton
+            Name="btnAdd"
             ActiveBackground="{DynamicResource PrimaryColorDark}"
             Background="{DynamicResource PrimaryColor}"
+            Click="btnAdd_Click"
             HoverBackground="{DynamicResource PrimaryColorLight}"
             Style="{DynamicResource BaseActionButton}"
             ToolTip="Add">
@@ -88,8 +29,10 @@
         </brc:BRButton>
 
         <brc:BRButton
+            Name="btnRemove"
             ActiveBackground="{DynamicResource AlertColorDark}"
             Background="{DynamicResource AlertColor}"
+            Click="btnRemove_Click"
             HoverBackground="{DynamicResource AlertColorLight}"
             Style="{DynamicResource BaseActionButton}"
             ToolTip="Remove">
@@ -103,8 +46,10 @@
         </brc:BRButton>
 
         <brc:BRButton
+            Name="btnUp"
             ActiveBackground="{DynamicResource GrayColorDark}"
             Background="{DynamicResource GrayColor}"
+            Click="btnUp_Click"
             HoverBackground="{DynamicResource GrayColorLight}"
             Style="{DynamicResource BaseActionButton}"
             ToolTip="Up">
@@ -118,8 +63,10 @@
         </brc:BRButton>
 
         <brc:BRButton
+            Name="btnDown"
             ActiveBackground="{DynamicResource GrayColorDark}"
             Background="{DynamicResource GrayColor}"
+            Click="btnDown_Click"
             HoverBackground="{DynamicResource GrayColorLight}"
             Style="{DynamicResource BaseActionButton}"
             ToolTip="Down">
