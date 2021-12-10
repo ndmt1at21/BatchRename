@@ -3,6 +3,8 @@ using BatchRename.Themes.CustomControl;
 using BatchRename.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -23,15 +25,19 @@ namespace BatchRename
     /// </summary>
     public partial class MainWindow : Window
     {
+        public BindingList<RuleItem> ItemsSource { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             loadPlugins();
+
+
         }
 
         private void loadPlugins()
         {
-            PluginManager.Load("../../../Plugins");
+            PluginManager.Load("../../../../Plugins");
 
             PluginManager.Shared.GetPluginIDs().Select(p =>
             {
@@ -74,5 +80,6 @@ namespace BatchRename
         {
             //TODO: Hid drag and drop panel
         }
+
     }
 }

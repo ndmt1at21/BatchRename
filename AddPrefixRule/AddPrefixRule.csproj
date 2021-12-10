@@ -4,12 +4,12 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <BaseOutputPath>D:\C#\BatchRename\BatchRename\Plugins\AddPrefixRule</BaseOutputPath>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BRControl\BRControl.csproj" />
     <ProjectReference Include="..\PluginContract\PluginContract.csproj" />
-    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 
 </Project>
