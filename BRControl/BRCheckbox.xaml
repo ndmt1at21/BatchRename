@@ -19,12 +19,12 @@
                     <ControlTemplate.Resources>
                         <Storyboard x:Key="StoryboardCheckedTrue">
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.StrokeDashOffset)">
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.12" Value="0" />
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0" />
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                         <Storyboard x:Key="StoryboardCheckedFalse">
                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.StrokeDashOffset)">
-                                <EasingDoubleKeyFrame KeyTime="0:0:0.12" Value="8" />
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.0" Value="8" />
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
@@ -41,12 +41,12 @@
 
                         <Border
                             x:Name="checkBoxBorder"
-                            Width="16"
-                            Height="16"
+                            Width="18"
+                            Height="18"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="2" />
+                            CornerRadius="4" />
 
                         <Grid
                             x:Name="markGrid"
@@ -55,10 +55,10 @@
 
                             <Rectangle
                                 x:Name="indeterminateMark"
-                                Margin="2"
+                                Margin="3"
+                                Fill="White"
                                 Opacity="0"
-                                RadiusX="2"
-                                RadiusY="2" />
+                                Stroke="Transparent" />
 
                             <Path
                                 x:Name="path"
@@ -67,7 +67,9 @@
                                 Data="M 0,2 3,5 8,0"
                                 FlowDirection="LeftToRight"
                                 Stretch="Uniform"
-                                Stroke="{Binding CheckerColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BRCheckbox}}}"
+                                Stroke="{Binding CheckerColor,
+                                                 RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                AncestorType={x:Type local:BRCheckbox}}}"
                                 StrokeDashArray="8,8"
                                 StrokeDashOffset="8"
                                 StrokeThickness="2"
@@ -92,7 +94,7 @@
                             <Setter TargetName="contentPresenter" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" Value="Blue" />
+                            <Setter Property="BorderBrush" Value="{Binding BorderHoverColor, RelativeSource={RelativeSource Mode=Self}}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -119,12 +121,17 @@
                             <Setter Property="Background" Value="{Binding BackgroundChecked, RelativeSource={RelativeSource Mode=Self}}" />
                             <Setter Property="BorderBrush" Value="{Binding BorderCheckedColor, RelativeSource={RelativeSource Mode=Self}}" />
                         </Trigger>
+
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="indeterminateMark" Property="Opacity" Value="1" />
+                            <Setter Property="Background" Value="{Binding BackgroundChecked, RelativeSource={RelativeSource Mode=Self}}" />
+                            <Setter Property="BorderBrush" Value="{Binding BorderCheckedColor, RelativeSource={RelativeSource Mode=Self}}" />
+                        </Trigger>
+
                         <Trigger Property="IsChecked" Value="false">
                             <Setter TargetName="path" Property="Stroke" Value="{Binding CheckerColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:BRCheckbox}}}" />
                         </Trigger>
-                        <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter TargetName="indeterminateMark" Property="Opacity" Value="1" />
-                        </Trigger>
+
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.4" />
                         </Trigger>
