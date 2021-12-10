@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:brc="clr-namespace:BRControl;assembly=BRControl">
+    <Style TargetType="brc:BRCheckbox">
+        <Setter Property="BorderCheckedColor" Value="Transparent" />
+        <Setter Property="BorderHoverColor" Value="{DynamicResource GrayColor}" />
+        <Setter Property="BorderPressedColor" Value="{DynamicResource GrayColorDark}" />
+        <Setter Property="CheckerColor" Value="White" />
+        <Setter Property="BackgroundChecked" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GrayColorLight}" />
+    </Style>
+</ResourceDictionary>
