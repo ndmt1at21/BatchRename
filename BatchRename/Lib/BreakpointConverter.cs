@@ -17,9 +17,6 @@ namespace BatchRename.Lib
 
             if (float.TryParse(value.ToString(), out fValue))
             {
-                Debug.WriteLine(fValue);
-                Debug.WriteLine(parameter);
-
                 if (fValue >= 1920)
                     return "ExtraLarge";
 
