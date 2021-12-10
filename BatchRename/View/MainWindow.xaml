@@ -81,7 +81,7 @@
             <!--  Separate: DropShadowEffect performance  -->
             <Grid Margin="{StaticResource PaddingTopSmall}">
                 <Border
-                    Background="White"
+                    Background="{StaticResource SurfaceColor}"
                     CornerRadius="{StaticResource Radius}"
                     Effect="{StaticResource DropShadowLight}" />
 
@@ -97,7 +97,7 @@
         <Grid Style="{StaticResource NormalWidthContainerStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="15" />
                 <ColumnDefinition Width="6*" />
             </Grid.ColumnDefinitions>
 
@@ -107,6 +107,7 @@
 
             <ContentControl Grid.Column="0" Content="{StaticResource RulePanel}" />
             <ContentControl Grid.Column="2" Content="{StaticResource FilePanel}" />
+
         </Grid>
 
         <!--  Small Width Layout  -->
