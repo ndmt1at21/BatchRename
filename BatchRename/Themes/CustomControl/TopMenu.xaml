@@ -5,12 +5,17 @@
     xmlns:brc="clr-namespace:BRControl;assembly=BRControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
     <UserControl.Resources>
+        <sys:Double x:Key="Gap">10</sys:Double>
+
         <Style x:Key="menuButton" TargetType="{x:Type brc:BRButton}">
+            <Setter Property="Focusable" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource FocusVisual}" />
             <Setter Property="HoverBackground" Value="#E5E7EB" />
             <Setter Property="ActiveBackground" Value=" #D1D5DB" />
             <Setter Property="Background" Value="Transparent" />
@@ -20,6 +25,7 @@
         </Style>
 
         <Style x:Key="menuIcon" TargetType="ContentControl">
+            <Setter Property="Focusable" Value="False" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Height" Value="{DynamicResource TopMenuIconHeight}" />
         </Style>
@@ -28,13 +34,11 @@
     <StackPanel
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
+        Focusable="False"
         Orientation="Horizontal">
 
         <!--  New  -->
-        <brc:BRButton
-            x:Name="btnNew"
-            Margin="0,2,0,0"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton x:Name="btnNew" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource NewIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -43,11 +47,10 @@
             </StackPanel>
         </brc:BRButton>
 
+        <Border Width="{StaticResource Gap}" />
+
         <!--  Open  -->
-        <brc:BRButton
-            x:Name="btnOpen"
-            Margin="5,2,0,0"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton x:Name="btnOpen" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource OpenIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -56,11 +59,10 @@
             </StackPanel>
         </brc:BRButton>
 
+        <Border Width="{StaticResource Gap}" />
+
         <!--  Save  -->
-        <brc:BRButton
-            x:Name="btnSave"
-            Margin="5,2,0,0"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton x:Name="btnSave" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource SaveIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -69,11 +71,10 @@
             </StackPanel>
         </brc:BRButton>
 
+        <Border Width="{StaticResource Gap}" />
+
         <!--  Start Convert  -->
-        <brc:BRButton
-            x:Name="btnStart"
-            Margin="5,2,0,0"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton x:Name="btnStart" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource ConvertIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">

@@ -5,9 +5,14 @@
     xmlns:brc="clr-namespace:BRControl;assembly=BRControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <sys:Double x:Key="Gap">4</sys:Double>
+    </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
 
@@ -28,6 +33,8 @@
             </StackPanel>
         </brc:BRButton>
 
+        <Border Width="{StaticResource Gap}" />
+
         <brc:BRButton
             Name="btnRemove"
             ActiveBackground="{DynamicResource AlertColorDark}"
@@ -45,6 +52,8 @@
             </StackPanel>
         </brc:BRButton>
 
+        <Border Width="{StaticResource Gap}" />
+
         <brc:BRButton
             Name="btnUp"
             ActiveBackground="{DynamicResource GrayColorDark}"
@@ -61,6 +70,8 @@
                 </TextBlock>
             </StackPanel>
         </brc:BRButton>
+
+        <Border Width="{StaticResource Gap}" />
 
         <brc:BRButton
             Name="btnDown"

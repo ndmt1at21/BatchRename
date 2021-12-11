@@ -11,6 +11,7 @@
 
     <UserControl.Resources>
         <Style x:Key="windowCommandButton" TargetType="brc:BRButton">
+            <Setter Property="Focusable" Value="False" />
             <Setter Property="HoverBackground" Value="#E5E7EB" />
             <Setter Property="ActiveBackground" Value=" #D1D5DB" />
             <Setter Property="Background" Value="Transparent" />
@@ -28,11 +29,14 @@
         Orientation="Horizontal">
 
         <brc:BRButton Click="MinBtn_Click" Style="{DynamicResource windowCommandButton}">
-            <ContentControl Height="{DynamicResource WindowCommandIconHeight}" Content="{DynamicResource MinusIcon}" />
+            <ContentControl
+                Height="{DynamicResource WindowCommandIconHeight}"
+                Content="{DynamicResource MinusIcon}"
+                Focusable="False" />
         </brc:BRButton>
 
         <brc:BRButton Click="MaxBtn_Click" Style="{DynamicResource windowCommandButton}">
-            <ContentControl Height="{DynamicResource WindowCommandIconHeight}">
+            <ContentControl Height="{DynamicResource WindowCommandIconHeight}" Focusable="False">
                 <ContentControl.Style>
                     <Style TargetType="ContentControl">
                         <Setter Property="Content" Value="{DynamicResource SquareIcon}" />
@@ -52,7 +56,7 @@
             HoverBackground="{DynamicResource AlertColor}"
             Style="{DynamicResource windowCommandButton}">
 
-            <ContentControl Height="{DynamicResource WindowCommandIconHeight}">
+            <ContentControl Height="{DynamicResource WindowCommandIconHeight}" Focusable="False">
                 <ContentControl.Style>
                     <Style TargetType="ContentControl">
                         <Setter Property="Content" Value="{DynamicResource XIcon}" />

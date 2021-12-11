@@ -29,7 +29,19 @@ namespace BatchRename.Themes.CustomControl
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public partial class RuleListView : UserControl, INotifyPropertyChanged
+    public partial class RuleListView : UserControl
+    {
+        public RuleListView()
+        {
+            InitializeComponent();
+            DataContext = this;
+            ItemsSource = new BindingList<RuleItem>();
+            SelectedIndies = ImmutableList.Create<int>();
+        }
+    }
+
+    // handle select
+    public partial class RuleListView : INotifyPropertyChanged
     {
         public delegate void SelectionChangedEventHandler(IEnumerable<int> selectedIndies);
         public event SelectionChangedEventHandler OnSelectionChanged;
@@ -62,14 +74,6 @@ namespace BatchRename.Themes.CustomControl
                 _selectedIndies = value;
                 OnSelectedModelChanged();
             }
-        }
-
-        public RuleListView()
-        {
-            InitializeComponent();
-            DataContext = this;
-            ItemsSource = new BindingList<RuleItem>();
-            SelectedIndies = ImmutableList.Create<int>();
         }
 
         private void OnSelectedModelChanged()

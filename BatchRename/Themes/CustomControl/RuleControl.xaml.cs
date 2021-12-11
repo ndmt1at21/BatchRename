@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace BatchRename.Themes.CustomControl
 {
-    /// <summary>
-    /// Interaction logic for RuleControl.xaml
-    /// </summary>
     public partial class RuleControl : UserControl
     {
         public BindingList<RuleItem> ItemsSource { get; set; }

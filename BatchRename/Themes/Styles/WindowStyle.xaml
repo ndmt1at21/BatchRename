@@ -18,9 +18,9 @@
                 <ControlTemplate TargetType="Window">
                     <DockPanel Background="{DynamicResource BackgroundColor}" LastChildFill="True">
 
-                        <Border DockPanel.Dock="Top">
+                        <AdornerDecorator DockPanel.Dock="Top">
                             <ct:TitleBar Height="{DynamicResource TitleBarHeight}" />
-                        </Border>
+                        </AdornerDecorator>
 
                         <AdornerDecorator>
                             <ContentPresenter />

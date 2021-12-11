@@ -8,5 +8,6 @@
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/DataGridStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/BRCheckboxStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/ActionButtonStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -20,5 +20,5 @@
     <SolidColorBrush x:Key="TextSmallColor" Color="#71717A" />
     <SolidColorBrush x:Key="TextContrastColor" Color="#FFFFFF" />
 
-    <SolidColorBrush x:Key="VisualFocusBorderColor" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="VisualFocusBorderColor" Color="Black" />
 </ResourceDictionary>
