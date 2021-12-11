@@ -22,9 +22,9 @@
                             <ct:TitleBar Height="{DynamicResource TitleBarHeight}" />
                         </Border>
 
-                        <Border>
+                        <AdornerDecorator>
                             <ContentPresenter />
-                        </Border>
+                        </AdornerDecorator>
                     </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
