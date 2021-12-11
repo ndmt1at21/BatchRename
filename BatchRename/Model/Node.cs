@@ -9,5 +9,9 @@ namespace BatchRename.Model
     public class Node
     {
         public string Path { get; set; }
+        public string Extension { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Name { get; set; }
+        public string Size { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace BatchRename.Store
     // Rule Picked
     public partial class Store
     {
-        public Dictionary<string, RulePickedModel> pickedRules;
+        private Dictionary<string, RulePickedModel> pickedRules;
 
         public Action<RulePickedModel> OnRulePickedCreated;
         public Action<RulePickedModel> OnRulePickedUpdated;
@@ -72,7 +72,7 @@ namespace BatchRename.Store
     // Rule Editing
     public partial class Store
     {
-        public Dictionary<string, RuleEditingModel> editingRules;
+        private Dictionary<string, RuleEditingModel> editingRules;
 
         public Action<RuleEditingModel> OnEditingRuleUpdated;
 
@@ -84,5 +84,10 @@ namespace BatchRename.Store
 
             OnEditingRuleUpdated?.Invoke(ruleModel);
         }
+    }
+
+    public partial class Store
+    {
+        public string Output;
     }
 }

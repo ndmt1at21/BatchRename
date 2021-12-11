@@ -105,8 +105,14 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <ContentControl Grid.Column="0" Content="{StaticResource RulePanel}" />
-            <ContentControl Grid.Column="2" Content="{StaticResource FilePanel}" />
+            <ContentControl
+                Grid.Column="0"
+                Content="{StaticResource RulePanel}"
+                Focusable="False" />
+            <ContentControl
+                Grid.Column="2"
+                Content="{StaticResource FilePanel}"
+                Focusable="False" />
 
         </Grid>
 
