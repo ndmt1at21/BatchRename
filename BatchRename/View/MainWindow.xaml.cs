@@ -1,4 +1,5 @@
 ﻿using BatchRename.Lib;
+using BatchRename.Model;
 using BatchRename.Themes.CustomControl;
 using BatchRename.View;
 using System;
@@ -25,36 +26,14 @@ namespace BatchRename
     /// </summary>
     public partial class MainWindow : Window
     {
-        public BindingList<RuleItem> ItemsSource { get; set; }
+        private PluginManager _pluginManager { get; set; }
+        private Store _store;
 
-        public MainWindow()
+        public MainWindow(PluginManager pluginManager, Store store)
         {
             InitializeComponent();
-        }
-
-        private void btnRuleWindow_Click(object sender, RoutedEventArgs e)
-        {
-            string[] pluginIds = PluginManager.Shared.GetPluginIDs();
-
-            List<RuleComponent> ruleComponents = new List<RuleComponent>();
-
-            foreach (string id in pluginIds)
-            {
-                ruleComponents.Add(
-                    new RuleComponent
-                    {
-                        Id = id,
-                        Name = PluginManager.Shared.GetRuleName(id),
-                        Component = PluginManager.Shared.CreateRuleComponent(id)
-                    });
-                Debug.WriteLine(id);
-            }
-
-
-
-            RuleWindow ruleWindow = new RuleWindow(ruleComponents);
-
-            ruleWindow.Show();
+            _pluginManager = pluginManager;
+            _store = store;
         }
 
         private void Container_DragEnter(object sender, DragEventArgs e)
@@ -67,5 +46,39 @@ namespace BatchRename
             //TODO: Hid drag and drop panel
         }
 
+        private void FilesControl_OnAddFileClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
+
+    // HANDLE RuleControl
+    public partial class MainWindow
+    {
+        private void RuleControl_OnAddClick(object sender, RoutedEventArgs e)
+        {
+            string[] pluginIds = _pluginManager.GetPluginIDs();
+
+            List<RuleComponent> ruleComponents = new List<RuleComponent>();
+
+            foreach (string id in pluginIds)
+            {
+                ruleComponents.Add(
+                    new RuleComponent
+                    {
+                        Id = id,
+                        Name = _pluginManager.GetRuleName(id),
+                        Component = _pluginManager.CreateRuleComponent(id)
+                    });
+            }
+
+            RuleWindow ruleWindow = new RuleWindow(ruleComponents, _store);
+            ruleWindow.ShowDialog();
+        }
+
+        private void RuleControl_OnRemoveClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: Remove
+        }
     }
 }

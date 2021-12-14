@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BatchRename.Model;
 using PluginContract;
 
 namespace BatchRename.View
@@ -25,22 +26,23 @@ namespace BatchRename.View
 
     public partial class RuleWindow : Window
     {
-        public List<RuleComponent> RuleComponents;
+        private List<RuleComponent> _ruleComponents;
+        private BindingList<TabItem> _tabItems = new BindingList<TabItem>();
+        private Store _store;
 
-        private BindingList<TabItem> tabItems = new BindingList<TabItem>();
-
-        public RuleWindow(List<RuleComponent> ruleComponents)
+        public RuleWindow(List<RuleComponent> ruleComponents, Store store)
         {
             InitializeComponent();
 
             if (ruleComponents == null)
                 return;
 
-            RuleComponents = ruleComponents;
+            _ruleComponents = ruleComponents;
+            _store = store;
 
-            foreach (var ruleComponent in RuleComponents)
+            foreach (var ruleComponent in _ruleComponents)
             {
-                tabItems.Add(new TabItem
+                _tabItems.Add(new TabItem
                 {
                     Header = ruleComponent.Name,
                     Content = ruleComponent.Component
@@ -55,7 +57,7 @@ namespace BatchRename.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            tabControlRule.ItemsSource = tabItems;
+            tabControlRule.ItemsSource = _tabItems;
         }
     }
 }
