@@ -13,5 +13,17 @@ namespace BatchRename.Model
         public DateTime CreatedDate { get; set; }
         public string Name { get; set; }
         public string Size { get; set; }
+
+        public Node Clone()
+        {
+            return new Node
+            {
+                CreatedDate = CreatedDate,
+                Name = Name,
+                Size = Size,
+                Extension = Extension,
+                Path = Path
+            };
+        }
     }
 }

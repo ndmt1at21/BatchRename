@@ -11,5 +11,14 @@ namespace BatchRename.Model
     {
         public string RuleId { get; set; }
         public IRuleParameter Paramter { get; set; }
+
+        public RuleEditingModel Clone()
+        {
+            return new RuleEditingModel
+            {
+                RuleId = this.RuleId,
+                Paramter = this.Paramter
+            };
+        }
     }
 }

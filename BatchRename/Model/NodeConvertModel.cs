@@ -9,13 +9,24 @@ namespace BatchRename.Model
     public enum ConvertStatus
     {
         ERROR,
+        PENDING,
         SUCCESS
     }
 
     public class NodeConvertModel
     {
-        public Node node { get; set; }
+        public string Id { get; set; }
+        public bool IsMarked { get; set; }
+        public Node Node { get; set; }
         public ConvertStatus ConvertStatus { get; set; }
-        public string Output { get; set; }
+
+        public NodeConvertModel Clone()
+        {
+            return new NodeConvertModel
+            {
+                ConvertStatus = ConvertStatus,
+                Node = Node.Clone()
+            };
+        }
     }
 }

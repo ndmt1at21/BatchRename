@@ -7,22 +7,20 @@ using PluginContract;
 
 namespace BatchRename.Model
 {
-    public class RulePickedModel
+    public class RulePickedUpdateModel
     {
         public string Id { get; set; }
-        public bool IsMarked { get; set; }
-        public long Position { get; set; }
-        public string RuleId { get; set; }
+        public bool? IsMarked { get; set; }
+        public long? Position { get; set; }
         public IRuleParameter Paramter { get; set; }
 
-        public RulePickedModel Clone()
+        public RulePickedUpdateModel Clone()
         {
-            return new RulePickedModel
+            return new RulePickedUpdateModel()
             {
                 Id = Id,
-                RuleId = RuleId,
-                Position = Position,
                 IsMarked = IsMarked,
+                Position = Position,
                 Paramter = Paramter
             };
         }
