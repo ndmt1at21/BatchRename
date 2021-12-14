@@ -11,32 +11,17 @@ namespace BatchRename.Lib
 {
     public class PluginManager
     {
-        static private Dictionary<string, IRulePlugin> prototype { get; set; } =
+        private Dictionary<string, IRulePlugin> prototype { get; set; } =
             new Dictionary<string, IRulePlugin>();
 
-        private static PluginManager shared;
-
-        public static PluginManager Shared
+        public PluginManager(string path)
         {
-            get
-            {
-                if (shared == null)
-                    shared = new PluginManager();
-                return shared;
-            }
+            prototype = new Dictionary<string, IRulePlugin>();
+            Load(path);
         }
 
-        private PluginManager()
+        private void Load(string path)
         {
-        }
-
-        static public void Load(string path)
-        {
-            prototype.Clear();
-
-            if (shared == null)
-                shared = new PluginManager();
-
             FileInfo[] files = Utils
                 .Dll
                 .GetDllFilesFromFolder(path)

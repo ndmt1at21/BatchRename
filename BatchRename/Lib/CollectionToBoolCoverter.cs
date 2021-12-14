@@ -16,11 +16,8 @@ namespace BatchRename.Lib
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            int id = (int)values[0];
-            
-            ImmutableList<int> collections = (ImmutableList<int>)values[1];
-            collections.Select(c => { Debug.WriteLine("INSHG::" + c); return c; });
-            
+            string id = (string)values[0];
+            ImmutableList<string> collections = (ImmutableList<string>)values[1];
             return collections.IndexOf(id) != -1;
         }
 
