@@ -41,7 +41,21 @@
     </Window.Resources>
 
     <DockPanel Margin="{DynamicResource PaddingXLargeYMedium}" LastChildFill="True">
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button x:Name="OKButton" Click="OKButton_Click" Content="OK" Height="30" Width="50" Grid.Column="1" Style="{DynamicResource ButtonIconStyle}"/>
+            <Button x:Name="CancelButton" Click="CancelButton_Click" Content="Cancel" Height="30" Width="50" Grid.Column="2" Style="{DynamicResource ButtonIconStyle}"/>
+        </Grid>
+        
         <TabControl
             x:Name="tabControlRule"
             Padding="{DynamicResource PaddingXLargeYMedium}"
@@ -61,6 +75,7 @@
                     <ContentControl Content="{Binding Content}" />
                 </DataTemplate>
             </TabControl.ContentTemplate>
+            
         </TabControl>
 
     </DockPanel>
