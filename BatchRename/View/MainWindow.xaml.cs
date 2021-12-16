@@ -76,11 +76,6 @@ namespace BatchRename
             //TODO: Hid drag and drop panel
 
         }
-
-        private void FilesControl_OnAddFileClick(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 
     // HANDLE RuleControl
@@ -182,6 +177,46 @@ namespace BatchRename
         private void TopMenu_OnStartClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Start Convert");
+        }
+    }
+
+    public partial class MainWindow
+    {
+        private void FilesControl_OnAddFileClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            //if (openFileDialog.ShowDialog() == true)
+            //{
+            //    if (_list == null)
+            //    {
+            //        _list = new List<string>(openFileDialog.FileNames);
+            //        nodeList = new List<Node>();
+            //    }
+            //    else
+            //        foreach (var file in openFileDialog.FileNames)
+            //        {
+            //            if (!_list.Contains(file))
+            //                _list.Add(file);
+            //        }
+            //    foreach (var path in openFileDialog.FileNames)
+            //    {
+            //        string extention = Path.GetExtension(path);
+            //        string filename = Path.GetFileName(path);
+            //        DateTime creation = File.GetCreationTime(path);
+            //        string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
+            //        Node node = new Node()
+            //        {
+            //            Path = path,
+            //            Extension = extention,
+            //            Name = Name,
+            //            CreatedDate = creation,
+            //            Size = size
+            //        };
+            //        nodeList.Add(node);
+            //    }
+            //}
+
         }
     }
 }

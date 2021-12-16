@@ -217,69 +217,66 @@ namespace BatchRename.Model
     {
         public List<RecentFileItem> RecentFiles { get; set; }
     }
-    /// <summary>
-    /// Add file + folder
-    /// </summary>
-    public partial class Store
-    {
-        private Dictionary<string, Node> nodeList { get; set; }
+    ///// <summary>
+    ///// Add file + folder
+    ///// </summary>
+    //public partial class Store
+    //{
+    //    private Dictionary<string, NodeConvertModel> ConvertNodes { get; set; }
 
+    //    public Action<Node> OnNodeAdd;
+    //    public Action<IEnumerable<string>> OnNodeDeleted;
 
-        public Action<Node> OnNodeAdd;
-        public Action<IEnumerable<string>> OnNodeDeleted;
+    //    public void AddNewNode(Node node)
+    //    {
+    //        Node newNode = node.Clone();
+    //        string Id = Guid.NewGuid().ToString();
 
-        public void AddNewNode(Node node)
-        {
-            Node newNode = node.Clone();
-            string Id = Guid.NewGuid().ToString();
+    //        nodeList.Add(Id, newNode);
 
-            nodeList.Add(Id, newNode);
+    //        OnNodeAdd?.Invoke(newNode.Clone());
+    //    }
 
-            OnNodeAdd?.Invoke(newNode.Clone());
-        }
+    //    public void AddNewNodes(List<Node> nodes)
+    //    {
+    //        foreach (var node in nodes)
+    //        {
+    //            Node newNode = node.Clone();
+    //            string Id = Guid.NewGuid().ToString();
 
-        public void AddNewNodes(List<Node> nodes)
-        {
-            foreach (var node in nodes)
-            {
-                Node newNode = node.Clone();
-                string Id = Guid.NewGuid().ToString();
+    //            nodeList.Add(Id, newNode);
 
-                nodeList.Add(Id, newNode);
+    //            OnNodeAdd?.Invoke(newNode.Clone());
+    //        }
+    //    }
 
-                OnNodeAdd?.Invoke(newNode.Clone());
-            }
-        }
+    //    public List<Node> GetAllNode()
+    //    {
+    //        return nodeList.Values.ToList();
+    //    }
 
-        public List<Node> GetAllNode()
-        {
-            return nodeList.Values.ToList();
-        }
+    //    public Node GetNode(string id)
+    //    {
+    //        return nodeList[id];
+    //    }
 
-        public Node GetNode(string id)
-        {
-            return nodeList[id];
-        }
+    //    public void DeleteNode(string nodeId)
+    //    {
+    //        nodeList.Remove(nodeId);
+    //        OnNodeDeleted?.Invoke(new List<string>() { nodeId });
+    //    }
 
-        
+    //    public void DeleteNodes(IEnumerable<string> nodeIds)
+    //    {
+    //        List<string> deletedIds = new List<string>();
 
-        public void DeleteNode(string nodeId)
-        {
-            nodeList.Remove(nodeId);
-            OnNodeDeleted?.Invoke(new List<string>() { nodeId });
-        }
+    //        foreach (var nodeId in nodeIds)
+    //        {
+    //            bool result = convertNodes.Remove(nodeId);
+    //            if (result) deletedIds.Add(nodeId);
+    //        }
 
-        public void DeleteNodes(IEnumerable<string> nodeIds)
-        {
-            List<string> deletedIds = new List<string>();
-
-            foreach (var nodeId in nodeIds)
-            {
-                bool result = convertNodes.Remove(nodeId);
-                if (result) deletedIds.Add(nodeId);
-            }
-
-            OnNodeDeleted?.Invoke(deletedIds);
-        }
-    }
+    //        OnNodeDeleted?.Invoke(deletedIds);
+    //    }
+    //}
 }

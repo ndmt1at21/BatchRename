@@ -22,8 +22,9 @@ namespace BatchRename.Themes.CustomControl
     /// </summary>
     public partial class FilesAction : UserControl
     {
-        private static List<string> _list = null;
-        private List<Node> nodeList = null;
+        public event RoutedEventHandler OnAddFileClick;
+        public event RoutedEventHandler OnAddFolderClick;
+
         public FilesAction()
         {
             InitializeComponent();
@@ -31,41 +32,12 @@ namespace BatchRename.Themes.CustomControl
 
         private void AddFile_Click(object sender, RoutedEventArgs e)
         {
-            
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = true;
-            if (openFileDialog.ShowDialog() == true)
-            {
-                if (_list == null)
-                {
-                    _list = new List<string>(openFileDialog.FileNames);
-                    nodeList = new List<Node>();
-                }
-                else
-                    foreach (var file in openFileDialog.FileNames)
-                    {
-                        if (!_list.Contains(file))
-                            _list.Add(file);
-                    }
-                foreach (var path in openFileDialog.FileNames)
-                {
-                    string extention = Path.GetExtension(path);
-                    string filename = Path.GetFileName(path);
-                    DateTime creation = File.GetCreationTime(path);
-                    string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
-                    Node node = new Node()
-                    {
-                        Path = path,
-                        Extension = extention,
-                        Name = Name,
-                        CreatedDate = creation,
-                        Size = size
-                    };
-                    nodeList.Add(node);
-                }
-               
+            OnAddFileClick?.Invoke(sender, e);
+        }
 
-            }
+        private void btnAddFolder_Click(object sender, RoutedEventArgs e)
+        {
+            OnAddFolderClick?.Invoke(sender, e);
         }
     }
 }
