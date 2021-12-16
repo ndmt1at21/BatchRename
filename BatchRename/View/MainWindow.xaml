@@ -11,8 +11,43 @@
     Name="Window"
     Width="880"
     Height="520"
-    Style="{DynamicResource MainWindowStyle}"
     mc:Ignorable="d">
+
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CaptionHeight="50" />
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="MinWidth" Value="400" />
+            <Setter Property="MinHeight" Value="200" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Window">
+                        <DockPanel Background="{DynamicResource BackgroundColor}" LastChildFill="True">
+
+                            <AdornerDecorator DockPanel.Dock="Top">
+                                <ct:TitleBar
+                                    x:Name="TopMenu"
+                                    Height="{DynamicResource TitleBarHeight}"
+                                    OnNewClick="TopMenu_OnNewClick"
+                                    OnOpenClick="TopMenu_OnOpenClick"
+                                    OnSaveClick="TopMenu_OnSaveClick"
+                                    OnStartClick="TopMenu_OnStartClick" />
+                            </AdornerDecorator>
+
+                            <AdornerDecorator>
+                                <ContentPresenter />
+                            </AdornerDecorator>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
 
     <Window.Resources>
         <lib:BreakpointConverter x:Key="BreakPointConverter" />
