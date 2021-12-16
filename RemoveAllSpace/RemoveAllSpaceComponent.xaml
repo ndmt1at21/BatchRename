@@ -4,20 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RemoveAllSpace"
+           
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="340">
-    <Grid Background="Wheat">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock Text ="H1: Remove all space in file name" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"></TextBlock>
-       
-    </Grid>
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Background="White">
+        <TextBlock VerticalAlignment="Center">Remove all space in file name:</TextBlock>
+
+        
+        <CheckBox Content="Append to original filename" />
+    </StackPanel>
 </UserControl>
