@@ -1,4 +1,5 @@
-﻿using BatchRename.Model;
+﻿using BatchRename.Lib;
+using BatchRename.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,23 +11,15 @@ namespace BatchRename.Model
 {
     public partial class Store
     {
+        public Action OnStoreChanged { get; set; }
+
         public Store()
         {
-            pickedRules = new Dictionary<string, RulePickedModel>();
-            editingRules = new Dictionary<string, RuleEditingModel>();
-            convertNodes = new Dictionary<string, NodeConvertModel>();
-            outputPath = null;
-        }
-
-        private static Store _store;
-        public static Store Shared
-        {
-            get
-            {
-                if (_store == null)
-                    _store = new Store();
-                return _store;
-            }
+            RecentFiles = new List<RecentFileItem>();
+            PickedRules = new Dictionary<string, RulePickedModel>();
+            EditingRules = new Dictionary<string, RuleEditingModel>();
+            ConvertNodes = new Dictionary<string, NodeConvertModel>();
+            OutputPath = null;
         }
     }
 
@@ -54,7 +47,7 @@ namespace BatchRename.Model
     // Rule Picked
     public partial class Store
     {
-        private Dictionary<string, RulePickedModel> pickedRules { get; set; }
+        public Dictionary<string, RulePickedModel> PickedRules { get; set; }
 
         public Action<RulePickedModel> OnRulePickedCreated;
         public Action<RulePickedModel> OnRulePickedUpdated;
@@ -62,19 +55,20 @@ namespace BatchRename.Model
 
         public List<RulePickedModel> GetAllPickedRule()
         {
-            return pickedRules.Values.ToList();
+            return PickedRules.Values.ToList();
         }
 
         public void CreatePickedRule(RulePickedModel ruleModel)
         {
             ruleModel.Id = Guid.NewGuid().ToString();
-            pickedRules.Add(ruleModel.Id, ruleModel.Clone());
+            PickedRules.Add(ruleModel.Id, ruleModel.Clone());
             OnRulePickedCreated?.Invoke(ruleModel);
+            OnStoreChanged?.Invoke();
         }
 
         public void UpdatePickedRule(RulePickedUpdateModel ruleUpdateModel)
         {
-            var rule = pickedRules[ruleUpdateModel.Id];
+            var rule = PickedRules[ruleUpdateModel.Id];
 
             if (ruleUpdateModel.IsMarked != null)
                 rule.IsMarked = (bool)ruleUpdateModel.IsMarked;
@@ -86,15 +80,17 @@ namespace BatchRename.Model
                 rule.Position = (long)ruleUpdateModel.Position;
 
             var ruleClone = rule.Clone();
-            pickedRules[ruleUpdateModel.Id] = ruleClone;
+            PickedRules[ruleUpdateModel.Id] = ruleClone;
 
             OnRulePickedUpdated?.Invoke(ruleClone);
+            OnStoreChanged?.Invoke();
         }
 
         public void DeletePickedRule(string pickedRuleId)
         {
-            bool result = pickedRules.Remove(pickedRuleId);
+            bool result = PickedRules.Remove(pickedRuleId);
             if (result) OnRulePickedDeleted?.Invoke(new List<string> { pickedRuleId });
+            OnStoreChanged?.Invoke();
         }
 
         public void DeletePickedRules(IEnumerable<string> pickedRuleIds)
@@ -103,53 +99,55 @@ namespace BatchRename.Model
 
             foreach (var pickedRuleId in pickedRuleIds)
             {
-                bool result = pickedRules.Remove(pickedRuleId);
+                bool result = PickedRules.Remove(pickedRuleId);
                 if (result) deletedIds.Add(pickedRuleId);
             }
 
             OnNodeConvertDeleted?.Invoke(deletedIds);
+            OnStoreChanged?.Invoke();
         }
     }
 
     // Rule Editing
     public partial class Store
     {
-        private Dictionary<string, RuleEditingModel> editingRules { get; set; }
+        public Dictionary<string, RuleEditingModel> EditingRules { get; set; }
 
         public Action<RuleEditingModel> OnEditingRuleCreated;
         public Action<RuleEditingModel> OnEditingRuleUpdated;
 
         public void CreateEditingRule(RuleEditingModel ruleModel)
         {
-            editingRules.Add(ruleModel.RuleId, ruleModel.Clone());
+            EditingRules.Add(ruleModel.RuleId, ruleModel.Clone());
             OnEditingRuleCreated?.Invoke(ruleModel);
+            OnStoreChanged?.Invoke();
         }
 
         public RuleEditingModel GetEditingRule(string ruleId)
         {
-            if (editingRules.ContainsKey(ruleId))
-                return editingRules[ruleId];
+            if (EditingRules.ContainsKey(ruleId))
+                return EditingRules[ruleId];
 
             return null;
         }
 
         public void UpdateEditingRule(RuleEditingModel ruleModel)
         {
-            if (editingRules.ContainsKey(ruleModel.RuleId) == false)
+            if (EditingRules.ContainsKey(ruleModel.RuleId) == false)
                 return;
 
-            editingRules[ruleModel.RuleId] = ruleModel.Clone();
+            EditingRules[ruleModel.RuleId] = ruleModel.Clone();
 
             OnEditingRuleUpdated?.Invoke(ruleModel.Clone());
+            OnStoreChanged?.Invoke();
         }
     }
 
     public partial class Store
     {
-        private Dictionary<string, NodeConvertModel> convertNodes { get; set; }
+        public Dictionary<string, NodeConvertModel> ConvertNodes { get; set; }
 
-        private string outputPath { get; set; }
-        public string OutputPath => outputPath;
+        public string OutputPath { get; set; }
 
         public Action<NodeConvertModel> OnNodeConvertUpdated;
         public Action<NodeConvertModel> OnNodeConvertCreated;
@@ -160,24 +158,25 @@ namespace BatchRename.Model
             NodeConvertModel newNode = nodeConvert.Clone();
             newNode.Id = Guid.NewGuid().ToString();
 
-            convertNodes.Add(newNode.Id, newNode);
+            ConvertNodes.Add(newNode.Id, newNode);
 
             OnNodeConvertCreated?.Invoke(newNode.Clone());
+            OnStoreChanged?.Invoke();
         }
 
         public List<NodeConvertModel> GetAllNodeConverts()
         {
-            return convertNodes.Values.ToList();
+            return ConvertNodes.Values.ToList();
         }
 
         public NodeConvertModel GetNodeConvert(string id)
         {
-            return convertNodes[id];
+            return ConvertNodes[id];
         }
 
         public void UpdateNodeConvert(NodeConvertModel updatedNodeConvert)
         {
-            NodeConvertModel existNode = convertNodes[updatedNodeConvert.Id].Clone();
+            NodeConvertModel existNode = ConvertNodes[updatedNodeConvert.Id].Clone();
 
             if (existNode == null) return;
 
@@ -186,15 +185,17 @@ namespace BatchRename.Model
 
             existNode.ConvertStatus = updatedNodeConvert.ConvertStatus;
 
-            convertNodes[existNode.Id] = existNode;
+            ConvertNodes[existNode.Id] = existNode;
 
             OnNodeConvertCreated?.Invoke(existNode.Clone());
+            OnStoreChanged?.Invoke();
         }
 
         public void DeleteNodeConvert(string nodeConvertId)
         {
-            convertNodes.Remove(nodeConvertId);
+            ConvertNodes.Remove(nodeConvertId);
             OnNodeConvertDeleted?.Invoke(new List<string>() { nodeConvertId });
+            OnStoreChanged?.Invoke();
         }
 
         public void DeleteNodeConverts(IEnumerable<string> nodeConvertIds)
@@ -203,11 +204,17 @@ namespace BatchRename.Model
 
             foreach (var nodeConvertId in nodeConvertIds)
             {
-                bool result = convertNodes.Remove(nodeConvertId);
+                bool result = ConvertNodes.Remove(nodeConvertId);
                 if (result) deletedIds.Add(nodeConvertId);
             }
 
             OnNodeConvertDeleted?.Invoke(deletedIds);
+            OnStoreChanged?.Invoke();
         }
+    }
+
+    public partial class Store
+    {
+        public List<RecentFileItem> RecentFiles { get; set; }
     }
 }
