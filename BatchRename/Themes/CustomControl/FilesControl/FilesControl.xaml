@@ -5,6 +5,7 @@
     xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="Root"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -14,12 +15,20 @@
             Actions
         </TextBlock>
 
-        <ct:FilesAction Margin="{DynamicResource PaddingTopMedium}" />
+        <ct:FilesAction
+            Margin="{DynamicResource PaddingTopMedium}"
+            OnAddFileClick="FilesAction_OnAddFileClick"
+            OnAddFolderClick="FilesAction_OnAddFolderClick" />
 
         <TextBlock Margin="{DynamicResource PaddingTopLarge}" Style="{DynamicResource H3}">
             Files Preview
         </TextBlock>
 
-        <ct:FilesListView Margin="{DynamicResource PaddingTopMedium}" />
+        <ct:FilesListView
+            Margin="{DynamicResource PaddingTopMedium}"
+            ItemsSource="{Binding Path=ItemsSource,
+                                  ElementName=Root}"
+            OnMarkChanged="FilesListView_OnMarkChanged"
+            OnSelectionChanged="FilesListView_OnSelectionChanged" />
     </StackPanel>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,22 @@ namespace BatchRename.Themes.CustomControl
     /// </summary>
     public partial class FilesAction : UserControl
     {
+        public event RoutedEventHandler OnAddFileClick;
+        public event RoutedEventHandler OnAddFolderClick;
+
         public FilesAction()
         {
             InitializeComponent();
+        }
+
+        private void btnAddFiles_Click(object sender, RoutedEventArgs e)
+        {
+            OnAddFileClick?.Invoke(sender, e);
+        }
+
+        private void btnAddFolder_Click(object sender, RoutedEventArgs e)
+        {
+            OnAddFolderClick?.Invoke(sender, e);
         }
     }
 }

@@ -6,6 +6,7 @@
     xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="Root"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -71,25 +72,29 @@
             Actions
         </TextBlock>
 
-        <ct:RuleAction Margin="{DynamicResource PaddingTopMedium}" />
+        <ct:RuleAction
+            Margin="{DynamicResource PaddingTopMedium}"
+            OnAddClick="RuleAction_OnAddClick"
+            OnDownClick="RuleAction_OnDownClick"
+            OnRemoveClick="RuleAction_OnRemoveClick"
+            OnUpClick="RuleAction_OnUpClick" />
 
         <TextBlock Margin="{DynamicResource PaddingTopLarge}" Style="{DynamicResource H3}">
             All Rules
         </TextBlock>
 
         <ct:RuleListView
-            x:Name="lv"
             Margin="{DynamicResource PaddingTopMedium}"
             Background="{StaticResource SurfaceColor}"
-            OnSelectionChanged="lv_OnSelectionChanged" />
+            ItemsSource="{Binding ItemsSource,
+                                  ElementName=Root}"
+            OnMarkChanged="RuleListView_OnMarkChanged"
+            OnSelectionChanged="RuleListView_OnSelectionChanged" />
 
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Name="col1" Width="100" />
             </Grid.ColumnDefinitions>
         </Grid>
-
-
-        <!--<ct:ViewRules Grid.Row="1" Margin="10,0,0,0" />-->
     </StackPanel>
 </UserControl>

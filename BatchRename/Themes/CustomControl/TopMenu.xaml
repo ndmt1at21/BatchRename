@@ -38,7 +38,10 @@
         Orientation="Horizontal">
 
         <!--  New  -->
-        <brc:BRButton x:Name="btnNew" Style="{DynamicResource menuButton}">
+        <brc:BRButton
+            x:Name="btnNew"
+            Click="btnNew_Click"
+            Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource NewIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -50,7 +53,10 @@
         <Border Width="{StaticResource Gap}" />
 
         <!--  Open  -->
-        <brc:BRButton x:Name="btnOpen" Style="{DynamicResource menuButton}">
+        <brc:BRButton
+            x:Name="btnOpen"
+            Click="btnOpen_Click"
+            Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource OpenIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -62,7 +68,10 @@
         <Border Width="{StaticResource Gap}" />
 
         <!--  Save  -->
-        <brc:BRButton x:Name="btnSave" Style="{DynamicResource menuButton}">
+        <brc:BRButton
+            x:Name="btnSave"
+            Click="btnSave_Click"
+            Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource SaveIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -74,7 +83,10 @@
         <Border Width="{StaticResource Gap}" />
 
         <!--  Start Convert  -->
-        <brc:BRButton x:Name="btnStart" Style="{DynamicResource menuButton}">
+        <brc:BRButton
+            x:Name="btnStart"
+            Click="btnStart_Click"
+            Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource ConvertIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">

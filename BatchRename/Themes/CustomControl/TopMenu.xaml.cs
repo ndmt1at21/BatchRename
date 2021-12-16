@@ -9,28 +9,33 @@ namespace BatchRename.Themes.CustomControl
     public partial class TopMenu : UserControl
     {
         public event RoutedEventHandler OnOpenClick;
-
         public event RoutedEventHandler OnSaveClick;
-
         public event RoutedEventHandler OnNewClick;
-
         public event RoutedEventHandler OnStartClick;
 
         public TopMenu()
         {
             InitializeComponent();
+        }
 
-            if (OnNewClick != null)
-                btnNew.Click += OnNewClick;
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            OnNewClick?.Invoke(sender, e);
+        }
 
-            if (OnOpenClick != null)
-                btnOpen.Click += OnOpenClick;
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            OnOpenClick?.Invoke(sender, e);
+        }
 
-            if (OnSaveClick != null)
-                btnSave.Click += OnSaveClick;
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            OnSaveClick?.Invoke(sender, e);
+        }
 
-            if (OnStartClick != null)
-                btnStart.Click += OnStartClick;
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            OnStartClick?.Invoke(sender, e);
         }
     }
 }

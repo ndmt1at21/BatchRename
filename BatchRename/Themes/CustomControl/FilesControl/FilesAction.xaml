@@ -24,6 +24,7 @@
 
         <brc:BRButton
             Name="btnAddFiles"
+            Click="btnAddFiles_Click"
             Style="{StaticResource FileActionButton}"
             ToolTip="Add Files">
             <StackPanel Orientation="Horizontal">
@@ -37,6 +38,7 @@
 
         <brc:BRButton
             Name="btnAddFolder"
+            Click="btnAddFolder_Click"
             Style="{StaticResource FileActionButton}"
             ToolTip="Add Folder">
             <StackPanel Orientation="Horizontal">

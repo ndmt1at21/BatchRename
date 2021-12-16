@@ -30,26 +30,22 @@ namespace BatchRename.Themes.CustomControl
 
         private void btnDown_Click(object sender, RoutedEventArgs e)
         {
-            if (OnDownClick != null)
-                OnDownClick.Invoke(sender, e);
+            OnDownClick?.Invoke(sender, e);
         }
 
         private void btnUp_Click(object sender, RoutedEventArgs e)
         {
-            if (OnUpClick != null)
-                OnUpClick.Invoke(sender, e);
+            OnUpClick?.Invoke(sender, e);
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (OnRemoveClick != null)
-                OnRemoveClick.Invoke(sender, e);
+            OnRemoveClick?.Invoke(sender, e);
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (OnAddClick != null)
-                OnAddClick.Invoke(sender, e);
+            OnAddClick?.Invoke(sender, e);
         }
     }
 }
