@@ -7,10 +7,11 @@
     xmlns:local="clr-namespace:BatchRename.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:BatchRename.ViewModel"
-    Title="RecentWindow"
+    Title="Batch Rename"
     Width="800"
     Height="450"
-    Style="{DynamicResource MainWindowStyle}"
+    Style="{DynamicResource BaseWindowStyle}"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <StackPanel Margin="30,20">

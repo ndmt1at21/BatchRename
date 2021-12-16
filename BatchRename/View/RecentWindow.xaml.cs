@@ -1,4 +1,6 @@
-﻿using BatchRename.Themes.CustomControl;
+﻿using BatchRename.Lib;
+using BatchRename.Model;
+using BatchRename.Themes.CustomControl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,12 +20,20 @@ namespace BatchRename.View
 {
     public partial class RecentWindow : Window
     {
-        BindingList<string> recentProjects = new BindingList<string>() { "aasas", "sjsdsdh" };
-        public RecentWindow()
+        private Store _store { get; set; }
+        private RecentFileService _recentFileService { get; set; }
+
+        public List<RecentFileItem> RecentFileItems { get; set; }
+
+        public RecentWindow(/*Store store, */RecentFileService recentFileService)
         {
             InitializeComponent();
 
-            lvRecentProject.ItemsSource = recentProjects;
+            //_store = store;
+            //_recentFileService = recentFileService;
+            //RecentFileItems = _store.RecentFiles;
+
+            //lvRecentProject.ItemsSource = RecentFileItems;
         }
     }
 }
