@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BatchRename.Model;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,19 +12,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BatchRename.Themes.CustomControl
 {
     /// <summary>
     /// Interaction logic for DropFilePanel.xaml
     /// </summary>
-    public partial class DropFilePanel : UserControl
+    public partial class DropFilePanel : Window
     {
-        public delegate void DelegateGetFiles(string[] files);
-        public event DelegateGetFiles Handler;
-        public bool DialogResult;
+        private static List<string> _list = null;
+        private List<Node> nodeList = null;
         public DropFilePanel()
         {
             InitializeComponent();
@@ -34,16 +33,36 @@ namespace BatchRename.Themes.CustomControl
             {
                 // Note that you can have more than one file.
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                ///TODO: Handle find here
+                ///
+                if (_list == null)
+                {
+                    _list = new List<string>(files);
+                    nodeList = new List<Node>();
+                }
+                else
+                    foreach (var file in files)
+                    {
+                        if (!_list.Contains(file))
+                            _list.Add(file);
+                    }
+                foreach (var path in _list)
+                {
 
-                Handler(files);
-                DialogResult = true;
+                    string extention = Path.GetExtension(path);
+                    string filename = Path.GetFileName(path);
+                    DateTime creation = File.GetCreationTime(path);
+                    string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
+                    Node node = new Node(){
+                        Path = path,
+                        Extension = extention,
+                        Name = Name,
+                        CreatedDate = creation,
+                        Size = size
+                    };
+                    nodeList.Add(node);
+                }
             }
-        }
-
-        internal bool ShowDialog()
-        {
-            //TODO: Change to Window control
-            throw new NotImplementedException();
         }
     }
 }

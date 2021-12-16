@@ -26,7 +26,7 @@
             Name="btnAddFiles"
             Click="btnAddFiles_Click"
             Style="{StaticResource FileActionButton}"
-            ToolTip="Add Files">
+            ToolTip="Add Files" Click="AddFile_Click">
             <StackPanel Orientation="Horizontal">
                 <ContentControl Content="{DynamicResource PlusIcon}" Style="{StaticResource ButtonIconStyle}" />
 

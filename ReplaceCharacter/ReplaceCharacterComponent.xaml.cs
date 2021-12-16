@@ -52,5 +52,37 @@ namespace ReplaceCharacter
             oldchar = parameter.oldChar;
             newchar = parameter.newChar;
         }
+
+        private void tbInputOldChar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string oldCharValue = tbInputOldChar.Text;
+            int oldCharTxtIndex = tbInputOldChar.CaretIndex;
+
+            
+            oldchar = oldCharValue;
+
+            tbInputOldChar.Text = oldCharValue.Length == 0
+                ? string.Empty
+                : oldchar;
+
+            if (!oldchar.Equals(oldCharValue))
+                tbInputOldChar.CaretIndex = oldCharTxtIndex - 1;
+        }
+
+        private void tbInputNewChar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string newCharValue = tbInputNewChar.Text;
+            int oldCharTxtIndex = tbInputNewChar.CaretIndex;
+
+
+            newchar = newCharValue;
+
+            tbInputNewChar.Text = newCharValue.Length == 0
+                ? string.Empty
+                : newchar;
+
+            if (!newchar.Equals(newCharValue))
+                tbInputNewChar.CaretIndex = oldCharTxtIndex - 1;
+        }
     }
 }

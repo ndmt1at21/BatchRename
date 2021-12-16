@@ -14,25 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AddSuffixRule
+namespace CheckingExceptions
 {
     /// <summary>
-    /// Interaction logic for AddSuffixComponent.xaml
+    /// Interaction logic for CheckingExceptionsComponent.xaml
     /// </summary>
-    public partial class AddSuffixComponent : UserControl, IRuleComponent
+    public partial class CheckingExceptionsComponent : UserControl, IRuleComponent
     {
-        public string Id => "AddSuffix";
+        public string Id => "CheckingExceptions";
 
-        public string Suffix { get; set; }
-
-        public AddSuffixComponent()
+        public CheckingExceptionsComponent()
         {
             InitializeComponent();
         }
 
         public IRuleParameter GetRuleParamter()
         {
-            return new AddSuffixParamter { Suffix = Suffix };
+            return null;
         }
 
         public Control GetView()
@@ -42,12 +40,7 @@ namespace AddSuffixRule
 
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
-            AddSuffixParamter rule = (AddSuffixParamter)ruleParameter;
 
-            if (rule == null)
-                return;
-
-            Suffix = rule.Suffix;
         }
     }
 }
