@@ -25,7 +25,7 @@
         <brc:BRButton
             Name="btnAddFiles"
             Style="{StaticResource FileActionButton}"
-            ToolTip="Add Files">
+            ToolTip="Add Files" Click="AddFile_Click">
             <StackPanel Orientation="Horizontal">
                 <ContentControl Content="{DynamicResource PlusIcon}" Style="{StaticResource ButtonIconStyle}" />
 
