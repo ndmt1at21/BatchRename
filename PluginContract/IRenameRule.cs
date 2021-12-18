@@ -10,6 +10,6 @@ namespace PluginContract
 
         FileInfor[] Convert(FileInfor[] files);
 
-        string GetStatement(FileInfor file);
+        string GetStatement();
     }
 }

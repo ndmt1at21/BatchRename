@@ -36,12 +36,12 @@ namespace ChangeExtensionRule
             return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
             if (_parameter == null)
                 return null;
 
-            return $"Change file extension from ${file.FileName} to ${_parameter.NewExtension}";
+            return $"Change file extension to ${_parameter.NewExtension}";
         }
     }
 }

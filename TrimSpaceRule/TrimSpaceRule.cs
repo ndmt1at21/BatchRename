@@ -28,9 +28,9 @@ namespace TrimSpaceRule
             return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
-            return $"Remove space from at the beginning and the end of `${file.FileName}`";
+            return $"Remove space from at the beginning and the end";
         }
     }
 }

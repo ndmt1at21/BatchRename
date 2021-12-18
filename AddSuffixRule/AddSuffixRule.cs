@@ -36,12 +36,12 @@ namespace AddSuffixRule
             };
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
             if (_parameter == null)
                 return null;
 
-            return $"Add prefix ${_parameter.Suffix} to file name ${file.FileName}";
+            return $"Add prefix ${_parameter.Suffix} to file name";
         }
     }
 }

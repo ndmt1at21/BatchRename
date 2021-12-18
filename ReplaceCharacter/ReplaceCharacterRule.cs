@@ -33,12 +33,12 @@ namespace ReplaceCharacter
             return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
             if (_parameter == null)
                 return null;
 
-            return $"Replace ${_parameter.oldChar} in file name `${file.FileName}` to ${_parameter.newChar}";
+            return $"Replace ${_parameter.oldChar} in file name to ${_parameter.newChar}";
         }
     }
 }

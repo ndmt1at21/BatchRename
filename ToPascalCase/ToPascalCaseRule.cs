@@ -35,9 +35,9 @@ namespace ToPascalCase
             return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
-            return $"To PascalCase and remove unicode from {file.FileName}";
+            return $"To PascalCase and remove unicode";
         }
         public string ToPascalCase(string original)
         {

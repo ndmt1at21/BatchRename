@@ -31,9 +31,9 @@ namespace LowercaseCharacter
             return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
-            return $"To lowercase file name {file.FileName}";
+            return $"To lowercase file name";
         }
     }
 }

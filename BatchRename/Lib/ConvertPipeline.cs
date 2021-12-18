@@ -8,46 +8,55 @@ using PluginContract;
 
 namespace BatchRename.Lib
 {
-    public class RuleData
-    {
-        public IRenameRule RenameRule;
-        public IRuleParameter Paramter;
-    }
+    public delegate void ConvertResultHandler(FileInfor file, string errMessage);
 
     public class ConvertPipeline
     {
-        //private IEnumerable<RuleData> _rules { get; set; }
+        private List<IRenameRule> _rules { get; set; }
 
-        //public ConvertPipeline()
-        //{
-        //    _rules = new List<RuleData>();
-        //}
+        public ConvertPipeline()
+        {
+            _rules = new List<IRenameRule>();
+        }
 
-        //public ConvertPipeline(IEnumerable<RuleData> rules)
-        //{
-        //    _rules = rules;
-        //}
+        public ConvertPipeline(List<IRenameRule> rules)
+        {
+            _rules = rules;
+        }
 
-        //public void AddRuleData(RuleData ruleData)
-        //{
-        //    _rules.Append(ruleData);
-        //}
+        public void AddRuleData(IRenameRule rule)
+        {
+            _rules.Add(rule);
+        }
 
-        //public IEnumerable<FileInfor> Convert(IEnumerable<FileInfor> files)
-        //{
-        //    List<FileInfor> results = new List<FileInfor>();
-        //    FileInfor[] cloneFiles = files.ToArray();
+        public void Convert(List<FileInfor> files, ConvertResultHandler OnFileConverted)
+        {
+            FileInfor[] cloneFiles = files.ToArray();
 
-        //    _rules.Select(rule =>
-        //    {
-        //        IRenameRule renameRule = rule.RenameRule;
-        //        IRuleParameter paramter = rule.Paramter;
+            foreach (FileInfor file in cloneFiles)
+            {
+                try
+                {
+                    FileInfor result = ConvertFile(file);
+                    OnFileConverted(result, null);
+                }
+                catch (Exception ex)
+                {
+                    OnFileConverted(null, ex.Message);
+                }
+            }
+        }
 
-        //        cloneFiles = rule.RenameRule.Convert(cloneFiles, rule.Paramter);
-        //        return rule;
-        //    });
+        private FileInfor ConvertFile(FileInfor file)
+        {
+            FileInfor result = file;
 
-        //    return cloneFiles;
-        //}
+            foreach (IRenameRule rule in _rules)
+            {
+                result = rule.Convert(result);
+            }
+
+            return result;
+        }
     }
 }

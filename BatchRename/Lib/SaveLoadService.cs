@@ -24,7 +24,6 @@ namespace BatchRename.Lib
         public Action OnSaved;
         public Func<T> OnBeforeSave;
 
-        public bool HasSaved { get; set; }
         public string Path { get; set; }
 
         private SaveLoadConfig _config { get; set; }
@@ -82,18 +81,13 @@ namespace BatchRename.Lib
             if (data == null)
                 throw new InvalidCastException("Invalid data");
 
-            HasSaved = true;
-
             return data;
         }
 
         public void Save(T data)
         {
             OnSave?.Invoke();
-
             _persister.Save(Path, data);
-
-            HasSaved = true;
             OnSaved?.Invoke();
         }
 

@@ -54,14 +54,12 @@ namespace CheckingExceptions
             };
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
             if (_parameter == null)
                 return null;
 
             return $"Checking exceptions done";
         }
-
-
     }
 }

@@ -36,12 +36,12 @@ namespace AddPrefixRule
             return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
             if (_parameter == null)
                 return null;
 
-            return $"Add prefix ${_parameter.Prefix} to file name ${file.FileName}";
+            return $"Add prefix ${_parameter.Prefix} to file name";
         }
     }
 }

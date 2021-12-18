@@ -31,9 +31,9 @@ namespace RemoveAllSpace
             return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
-            return $"Remove all sapces in {file.FileName}";
+            return $"Remove all sapces in file";
         }
     }
 }

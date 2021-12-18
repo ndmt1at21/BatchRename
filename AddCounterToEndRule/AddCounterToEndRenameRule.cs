@@ -36,12 +36,12 @@ namespace AddCounterToEndRule
             return files.Select(f => convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file)
+        public string GetStatement()
         {
             if (_ruleParameter == null)
                 throw new InvalidCastException("Invalid parameter");
 
-            return $"Add count: {{ Start From: {_ruleParameter.StartFrom}, Step: {_ruleParameter.Step} }} to end of file ${file.FileName}";
+            return $"Add count: {{ Start From: {_ruleParameter.StartFrom}, Step: {_ruleParameter.Step} }} to end of file name";
         }
 
         private FileInfor convert(FileInfor file)
