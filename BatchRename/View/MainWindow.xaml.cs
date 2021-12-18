@@ -20,6 +20,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BatchRename.Lib;
+using PluginContract;
+using BatchRename.ViewModel;
 
 namespace BatchRename
 {
@@ -28,21 +31,33 @@ namespace BatchRename
     /// </summary>
     public partial class MainWindow : Window
     {
+        public BindingList<RulePickedViewModel> PickedRules { get; set; }
+
         private PluginManager _pluginManager { get; set; }
         private Store _store { get; set; }
         private SaveLoadService<ProjectStore> _saveLoadService { get; set; }
         private BackupService<ProjectStore> _backupService { get; set; }
         private RecentFileService _recentFileService { get; set; }
 
+        private bool _hasSaved { get; set; } = false;
+        private bool _hasContentUnsaved { get; set; } = false;
+
         public MainWindow(PluginManager pluginManager, RecentFileService recentFileService)
         {
             InitializeComponent();
+
 
             _pluginManager = pluginManager;
             _recentFileService = recentFileService;
             _store = new Store();
 
+
+            DataContext = this;
+
             _store.OnStoreChanged += OnStore_Changed;
+            _store.OnRulePickedCreated += OnRulePicked_Created;
+            _store.OnRulePickedDeleted += OnRulePicked_Deleted;
+            _store.OnRulePickedUpdated += OnRulePicked_Updated;
 
             var _saveLoadConfig = new SaveLoadConfig
             {
@@ -59,11 +74,13 @@ namespace BatchRename
 
             _saveLoadService = new SaveLoadService<ProjectStore>(_saveLoadConfig);
             _backupService = new BackupService<ProjectStore>(_backupConfig);
+
+            PickedRules = new BindingList<RulePickedViewModel>();
         }
 
         public void OnStore_Changed()
         {
-            _saveLoadService.HasSaved = false;
+
         }
 
         private void Container_DragEnter(object sender, DragEventArgs e)
@@ -78,9 +95,52 @@ namespace BatchRename
         }
     }
 
-    // HANDLE RuleControl
+    // HANDLE Rule Control
     public partial class MainWindow
     {
+        private void OnRulePicked_Created(RulePickedModel ruleModel)
+        {
+            string ruleName = _pluginManager.GetRuleName(ruleModel.RuleId);
+
+            IRenameRule rule = _pluginManager.CreateRule(ruleModel.RuleId);
+            rule.SetParameter(ruleModel.Paramter);
+
+            var newRuleViewModel = new RulePickedViewModel()
+            {
+                Id = ruleModel.Id,
+                IsMarked = ruleModel.IsMarked,
+                RuleName = ruleName,
+                Statement = rule.GetStatement()
+            };
+
+            PickedRules.Add(newRuleViewModel);
+        }
+
+        private void OnRulePicked_Deleted(string id)
+        {
+            var ruleViewModel = PickedRules.First(rule => rule.Id == id);
+
+            if (ruleViewModel == null)
+                return;
+
+            PickedRules.Remove(ruleViewModel);
+        }
+
+        private void OnRulePicked_Updated(RulePickedModel ruleModel)
+        {
+            RulePickedViewModel ruleViewModel = PickedRules.First(rule => rule.Id == ruleModel.Id);
+
+            if (ruleViewModel == null)
+                return;
+
+            string ruleName = _pluginManager.GetRuleName(ruleModel.RuleId);
+            IRenameRule rule = _pluginManager.CreateRule(ruleModel.RuleId);
+            rule.SetParameter(ruleModel.Paramter);
+
+            ruleViewModel.RuleName = ruleName;
+            ruleViewModel.Statement = rule.GetStatement();
+        }
+
         private void RuleControl_OnAddClick(object sender, RoutedEventArgs e)
         {
             RuleWindow ruleWindow = new RuleWindow(_pluginManager, _store);
@@ -89,11 +149,30 @@ namespace BatchRename
 
         private void RuleControl_OnRemoveClick(object sender, RoutedEventArgs e)
         {
-            // TODO: Remove
+            if (ruleControl.SelectedIds == null)
+                return;
+
+            foreach (var id in ruleControl.SelectedIds)
+                _store.DeletePickedRule(id);
+        }
+
+        private void ruleControl_OnUpClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: move rule up
+        }
+
+        private void ruleControl_OnDownClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: move rule down
+        }
+
+        private void ruleControl_OnRowDoubleClick(string id)
+        {
+            // TODO: Handle Edit Rult (Show RuleWindow)
         }
     }
 
-    // HANDLE Open/Save/Load
+    // HANDLE Top Menu: Open/Save/Load
     public partial class MainWindow
     {
         public void Open(string path)
@@ -103,12 +182,49 @@ namespace BatchRename
 
         public void Save()
         {
+            if (!_hasSaved)
+            {
+                SaveAs();
+                return;
+            }
 
+            //_saveLoadService.Save();
         }
 
         public void SaveAs()
         {
 
+        }
+
+        public void StartConvert()
+        {
+            List<IRenameRule> rules = _store.GetAllPickedRule().Select(pickedRule =>
+            {
+                string ruleId = pickedRule.RuleId;
+
+                IRenameRule rule = _pluginManager.CreateRule(ruleId);
+                rule.SetParameter(pickedRule.Paramter);
+
+                return rule;
+            }).ToList();
+
+            List<FileInfor> files = _store.GetAllNodeConverts().Select(nodeConvert =>
+            {
+                return new FileInfor
+                {
+                    FileName = nodeConvert.Node.Name,
+                    Dir = nodeConvert.Node.Path,
+                    Extension = nodeConvert.Node.Extension
+                };
+            }).ToList();
+
+            ConvertPipeline pipeline = new ConvertPipeline(rules);
+
+            pipeline.Convert(files, (result, err) =>
+            {
+                Debug.WriteLine(result.FileName);
+                Debug.WriteLine(err);
+            });
         }
 
         public void LoadFrom(string projectPath)
@@ -134,8 +250,7 @@ namespace BatchRename
 
         private void TopMenu_OnNewClick(object sender, RoutedEventArgs e)
         {
-            if (!_saveLoadService.HasSaved)
-                MessageBox.Show("Ban co muon luu khong");
+
         }
 
         private void TopMenu_OnOpenClick(object sender, RoutedEventArgs e)
@@ -161,7 +276,7 @@ namespace BatchRename
 
         private void TopMenu_OnStartClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Start Convert");
+            StartConvert();
         }
     }
 

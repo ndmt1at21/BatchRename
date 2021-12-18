@@ -88,44 +88,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-
-        <DockPanel
-            x:Key="RulePanel"
-            x:Shared="False"
-            LastChildFill="True">
-            <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Rules</TextBlock>
-
-            <Grid Margin="{StaticResource PaddingTopSmall}">
-                <!--  Separate: DropShadowEffect performance  -->
-                <Border
-                    Background="{StaticResource SurfaceColor}"
-                    CornerRadius="{StaticResource Radius}"
-                    Effect="{StaticResource DropShadowLight}" />
-
-                <Border Padding="{StaticResource PaddingXLargeYMedium}">
-                    <ct:RuleControl OnAddClick="RuleControl_OnAddClick" OnRemoveClick="RuleControl_OnRemoveClick" />
-                </Border>
-            </Grid>
-        </DockPanel>
-
-        <DockPanel
-            x:Key="FilePanel"
-            x:Shared="False"
-            LastChildFill="True">
-            <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Files</TextBlock>
-
-            <!--  Separate: DropShadowEffect performance  -->
-            <Grid Margin="{StaticResource PaddingTopSmall}">
-                <Border
-                    Background="{StaticResource SurfaceColor}"
-                    CornerRadius="{StaticResource Radius}"
-                    Effect="{StaticResource DropShadowLight}" />
-
-                <Border Padding="{DynamicResource PaddingXLargeYMedium}">
-                    <ct:FilesControl OnAddFileClick="FilesControl_OnAddFileClick" />
-                </Border>
-            </Grid>
-        </DockPanel>
     </Window.Resources>
 
     <Grid>
@@ -141,19 +103,53 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <ContentControl
-                Grid.Column="0"
-                Content="{StaticResource RulePanel}"
-                Focusable="False" />
-            <ContentControl
+            <DockPanel Name="RulePanel" LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Rules</TextBlock>
+
+                <Grid Margin="{StaticResource PaddingTopSmall}">
+                    <!--  Separate: DropShadowEffect performance  -->
+                    <Border
+                        Background="{StaticResource SurfaceColor}"
+                        CornerRadius="{StaticResource Radius}"
+                        Effect="{StaticResource DropShadowLight}" />
+
+                    <Border Padding="{StaticResource PaddingXLargeYMedium}">
+                        <ct:RuleControl
+                            x:Name="ruleControl"
+                            ItemsSource="{Binding PickedRules}"
+                            OnAddClick="RuleControl_OnAddClick"
+                            OnDownClick="ruleControl_OnDownClick"
+                            OnRemoveClick="RuleControl_OnRemoveClick"
+                            OnRowDoubleClick="ruleControl_OnRowDoubleClick"
+                            OnUpClick="ruleControl_OnUpClick" />
+                    </Border>
+                </Grid>
+            </DockPanel>
+
+            <DockPanel
+                Name="FilePanel"
                 Grid.Column="2"
-                Content="{StaticResource FilePanel}"
-                Focusable="False" />
+                Focusable="False"
+                LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Files</TextBlock>
+
+                <!--  Separate: DropShadowEffect performance  -->
+                <Grid Margin="{StaticResource PaddingTopSmall}">
+                    <Border
+                        Background="{StaticResource SurfaceColor}"
+                        CornerRadius="{StaticResource Radius}"
+                        Effect="{StaticResource DropShadowLight}" />
+
+                    <Border Padding="{DynamicResource PaddingXLargeYMedium}">
+                        <ct:FilesControl x:Name="filesControl" OnAddFileClick="FilesControl_OnAddFileClick" />
+                    </Border>
+                </Grid>
+            </DockPanel>
 
         </Grid>
 
         <!--  Small Width Layout  -->
-        <Grid Style="{StaticResource SmallWidthContainerStyle}">
+        <!--<Grid Style="{StaticResource SmallWidthContainerStyle}">
             <ScrollViewer Background="Black">
                 <StackPanel Margin="30,20">
                     <ContentControl
@@ -172,7 +168,7 @@
                         Content="{StaticResource FilePanel}" />
                 </StackPanel>
             </ScrollViewer>
-        </Grid>
+        </Grid>-->
 
     </Grid>
 </Window>
