@@ -89,6 +89,7 @@
             ItemsSource="{Binding ItemsSource,
                                   ElementName=Root}"
             OnMarkChanged="RuleListView_OnMarkChanged"
+            OnRowDoubleClick="RuleListView_OnRowDoubleClick"
             OnSelectionChanged="RuleListView_OnSelectionChanged" />
 
         <Grid>

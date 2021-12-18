@@ -30,6 +30,8 @@ namespace BatchRename.Themes.CustomControl
         public event RoutedEventHandler OnAddClick;
         public event RoutedEventHandler OnRemoveClick;
 
+        public event MouseDoubleClickRowHandler OnRowDoubleClick;
+
         public IEnumerable<string> SelectedIds;
 
         public IEnumerable<RulePickedViewModel> ItemsSource
@@ -85,6 +87,11 @@ namespace BatchRename.Themes.CustomControl
         private void RuleAction_OnRemoveClick(object sender, RoutedEventArgs e)
         {
             OnRemoveClick?.Invoke(sender, e);
+        }
+
+        private void RuleListView_OnRowDoubleClick(string id)
+        {
+            OnRowDoubleClick?.Invoke(id);
         }
     }
 }

@@ -12,9 +12,12 @@ using Utils;
 using BatchRename.Model;
 using BatchRename.ViewModel;
 using System.Diagnostics;
+using System.Windows.Input;
 
 namespace BatchRename.Themes.CustomControl
 {
+    public delegate void MouseDoubleClickRowHandler(string id);
+
     public partial class RuleListView : UserControl, INotifyPropertyChanged
     {
         public event MarkChangedEventHandler OnMarkChanged;
@@ -39,10 +42,18 @@ namespace BatchRename.Themes.CustomControl
                 typeof(IEnumerable<RulePickedViewModel>),
                 typeof(RuleListView));
 
+        public event MouseDoubleClickRowHandler OnRowDoubleClick;
+
         public RuleListView()
         {
             InitializeComponent();
             DataContext = this;
+        }
+
+        private void lvRules_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var rule = (RulePickedViewModel)lvRules.SelectedItem;
+            OnRowDoubleClick?.Invoke(rule.Id);
         }
     }
 
