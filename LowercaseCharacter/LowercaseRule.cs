@@ -11,7 +11,12 @@ namespace LowercaseCharacter
     {
         public string Id => "ToLowercase";
 
-        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
+        public void SetParameter(IRuleParameter ruleParameter)
+        {
+            return;
+        }
+
+        public FileInfor Convert(FileInfor file)
         {
             return new FileInfor
             {
@@ -21,12 +26,12 @@ namespace LowercaseCharacter
             };
         }
 
-        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        public FileInfor[] Convert(FileInfor[] files)
         {
-            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+            return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file)
         {
             return $"To lowercase file name {file.FileName}";
         }

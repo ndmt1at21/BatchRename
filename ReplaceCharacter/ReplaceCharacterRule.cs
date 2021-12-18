@@ -6,36 +6,39 @@ namespace ReplaceCharacter
 {
     public class ReplaceCharacterRule : IRenameRule
     {
+        private ReplaceCharacterParameter _parameter;
+
         public string Id => "ReplaceCharacter";
 
-        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
+        public void SetParameter(IRuleParameter ruleParameter)
         {
-            ReplaceCharacterParameter parameter = (ReplaceCharacterParameter)ruleParameter;
+            _parameter = (ReplaceCharacterParameter)ruleParameter;
+        }
 
-            if (parameter == null)
+        public FileInfor Convert(FileInfor file)
+        {
+            if (_parameter == null)
                 return null;
 
             return new FileInfor
             {
                 Dir = file.Dir,
                 Extension = file.Extension,
-                FileName = file.FileName.Replace(parameter.oldChar, parameter.newChar)
+                FileName = file.FileName.Replace(_parameter.oldChar, _parameter.newChar)
             };
         }
 
-        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        public FileInfor[] Convert(FileInfor[] files)
         {
-            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+            return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file)
         {
-            ReplaceCharacterParameter parameter = (ReplaceCharacterParameter)ruleParameter;
-
-            if (parameter == null)
+            if (_parameter == null)
                 return null;
 
-            return $"Replace ${parameter.oldChar} in file name `${file.FileName}` to ${parameter.newChar}";
+            return $"Replace ${_parameter.oldChar} in file name `${file.FileName}` to ${_parameter.newChar}";
         }
     }
 }

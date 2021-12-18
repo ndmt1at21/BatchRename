@@ -10,9 +10,9 @@ namespace AddCounterToEndRule
     {
         static public AddCounterToEndParamter DEFAULT_PARAMETER = new AddCounterToEndParamter()
         {
-            PartCountLength = 0,
-            StartFrom = 0,
-            Step = 0,
+            PartCountLength = 1,
+            StartFrom = 1,
+            Step = 1,
             PadChar = '0'
         };
     }

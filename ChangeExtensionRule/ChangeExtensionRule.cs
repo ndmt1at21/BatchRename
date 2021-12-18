@@ -11,34 +11,37 @@ namespace ChangeExtensionRule
     {
         public string Id => "ChangeExtensionParamter";
 
-        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
-        {
-            ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;
+        private ChangeExtensionParamter _parameter { get; set; }
 
-            if (parameter == null)
+        public void SetParameter(IRuleParameter ruleParameter)
+        {
+            _parameter = (ChangeExtensionParamter)ruleParameter;
+        }
+
+        public FileInfor Convert(FileInfor file)
+        {
+            if (_parameter == null)
                 throw new InvalidCastException("Invalid parameter");
 
             return new FileInfor
             {
                 Dir = file.Dir,
-                Extension = parameter.NewExtension,
+                Extension = _parameter.NewExtension,
                 FileName = file.FileName
             };
         }
 
-        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        public FileInfor[] Convert(FileInfor[] files)
         {
-            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+            return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file)
         {
-            ChangeExtensionParamter parameter = (ChangeExtensionParamter)ruleParameter;
-
-            if (parameter == null)
+            if (_parameter == null)
                 return null;
 
-            return $"Change file extension from ${file.FileName} to ${parameter.NewExtension}";
+            return $"Change file extension from ${file.FileName} to ${_parameter.NewExtension}";
         }
     }
 }

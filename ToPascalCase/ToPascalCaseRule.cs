@@ -13,7 +13,12 @@ namespace ToPascalCase
     {
         public string Id => throw new NotImplementedException();
 
-        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
+        public void SetParameter(IRuleParameter ruleParameter)
+        {
+            return;
+        }
+
+        public FileInfor Convert(FileInfor file)
         {
             string newFileName = ToPascalCase(RemoveUnicode(file.FileName));
 
@@ -25,12 +30,12 @@ namespace ToPascalCase
             };
         }
 
-        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        public FileInfor[] Convert(FileInfor[] files)
         {
-            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+            return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file)
         {
             return $"To PascalCase and remove unicode from {file.FileName}";
         }

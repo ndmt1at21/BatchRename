@@ -11,6 +11,6 @@ namespace AddSuffixRule
     {
         public string Id => "AddSuffix";
 
-        public string Suffix;
+        public string Suffix { get; set; }
     }
 }

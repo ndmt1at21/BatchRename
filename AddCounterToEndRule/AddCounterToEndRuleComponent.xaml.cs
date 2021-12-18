@@ -59,6 +59,7 @@ namespace AddCounterToEndRule
             PadChar = rule.PadChar;
             Step = rule.Step;
             PartCountLength = rule.PartCountLength;
+            StartFrom = rule.StartFrom;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

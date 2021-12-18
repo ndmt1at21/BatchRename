@@ -11,7 +11,7 @@ namespace ReplaceCharacter
     {
         public string Id => "ReplaceCharacter";
 
-        public string oldChar;
-        public string newChar;
+        public string oldChar { get; set; }
+        public string newChar { get; set; }
     }
 }

@@ -11,6 +11,6 @@ namespace AddPrefixRule
     {
         public string Id => "AddPrefix";
 
-        public string Prefix;
+        public string Prefix { get; set; }
     }
 }

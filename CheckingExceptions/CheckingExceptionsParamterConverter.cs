@@ -13,7 +13,7 @@ namespace CheckingExceptions
 
         public IRuleParameter DeserializeParameter(string serializeParams)
         {
-            CheckingExceptionsParamter parameter = (CheckingExceptionsParamter)Utils.Object.JsonDeserialize(serializeParams);
+            CheckingExceptionsParameter parameter = (CheckingExceptionsParameter)Utils.Object.JsonDeserialize(serializeParams);
 
             if (parameter == null)
                 return null;
@@ -23,7 +23,7 @@ namespace CheckingExceptions
 
         public string Serialize(IRuleParameter ruleParamter)
         {
-            CheckingExceptionsParamter parameter = (CheckingExceptionsParamter)ruleParamter;
+            CheckingExceptionsParameter parameter = (CheckingExceptionsParameter)ruleParamter;
 
             if (parameter == null)
                 return null;

@@ -17,14 +17,22 @@ namespace ChangeExtensionRule
 
         public string NewExtension { get; set; }
 
+        public bool IsAppendToOriginal { get; set; }
+
         public ChangeExtensionComponent()
         {
             InitializeComponent();
+            SetRuleParameter(ChangeExtensionRuleConstant.DEFAULT_PARAMS);
+            DataContext = this;
         }
 
         public IRuleParameter GetRuleParamter()
         {
-            return new ChangeExtensionParamter { NewExtension = NewExtension };
+            return new ChangeExtensionParamter
+            {
+                NewExtension = NewExtension,
+                IsAppendToOriginal = IsAppendToOriginal
+            };
         }
 
         public Control GetView()
@@ -40,6 +48,7 @@ namespace ChangeExtensionRule
                 return;
 
             NewExtension = parameter.NewExtension;
+            IsAppendToOriginal = parameter.IsAppendToOriginal;
         }
 
         private void tbInputNewExtension_TextChanged(object sender, TextChangedEventArgs e)

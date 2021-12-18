@@ -11,34 +11,37 @@ namespace AddPrefixRule
     {
         public string Id => "AddPrefix";
 
-        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
-        {
-            AddPrefixParamter parameter = (AddPrefixParamter)ruleParameter;
+        private AddPrefixParamter _parameter { get; set; }
 
-            if (parameter == null)
+        public void SetParameter(IRuleParameter parameter)
+        {
+            _parameter = (AddPrefixParamter)parameter;
+        }
+
+        public FileInfor Convert(FileInfor file)
+        {
+            if (_parameter == null)
                 throw new ArgumentException("Invalid parameter");
 
             return new FileInfor
             {
                 Dir = file.Dir,
-                FileName = parameter.Prefix + file.FileName,
+                FileName = _parameter.Prefix + file.FileName,
                 Extension = file.Extension
             };
         }
 
-        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        public FileInfor[] Convert(FileInfor[] files)
         {
-            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+            return files.Select(f => Convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file)
         {
-            AddPrefixParamter parameter = (AddPrefixParamter)ruleParameter;
-
-            if (parameter == null)
+            if (_parameter == null)
                 return null;
 
-            return $"Add prefix ${parameter.Prefix} to file name ${file.FileName}";
+            return $"Add prefix ${_parameter.Prefix} to file name ${file.FileName}";
         }
     }
 }

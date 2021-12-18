@@ -8,43 +8,50 @@ namespace AddCounterToEndRule
     {
         public string Id => "AddCounterToEnd";
 
-        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
+        private AddCounterToEndParamter? _ruleParameter { get; set; }
+
+        public void SetParameter(IRuleParameter ruleParameter)
         {
-            AddCounterToEndParamter ruleParams = (AddCounterToEndParamter)ruleParameter;
-            return convert(file, ruleParams);
+            _ruleParameter = (AddCounterToEndParamter)ruleParameter;
         }
 
-
-        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        public FileInfor Convert(FileInfor file)
         {
-            AddCounterToEndParamter ruleParams = (AddCounterToEndParamter)ruleParameter;
-
-            if (ruleParams == null)
+            if (_ruleParameter == null)
                 throw new InvalidCastException("Invalid parameter");
 
-            bool isParameterValid = checkValidAddCounterParameter(ruleParams, files.Length);
+            return convert(file);
+        }
+
+        public FileInfor[] Convert(FileInfor[] files)
+        {
+            if (_ruleParameter == null)
+                return files;
+
+            bool isParameterValid = checkValidAddCounterParameter(_ruleParameter, files.Length);
 
             if (!isParameterValid)
                 return files;
 
-            return files.Select(f => convert(f, ruleParams)).ToArray();
+            return files.Select(f => convert(f)).ToArray();
         }
 
-        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file)
         {
-            AddCounterToEndParamter ruleParams = (AddCounterToEndParamter)ruleParameter;
-
-            if (ruleParams == null)
+            if (_ruleParameter == null)
                 throw new InvalidCastException("Invalid parameter");
 
-            return $"Add count: {{ Start From: {ruleParams.StartFrom}, Step: {ruleParams.Step} }} to end of file ${file.FileName}";
+            return $"Add count: {{ Start From: {_ruleParameter.StartFrom}, Step: {_ruleParameter.Step} }} to end of file ${file.FileName}";
         }
 
-        private FileInfor convert(FileInfor file, AddCounterToEndParamter parameter)
+        private FileInfor convert(FileInfor file)
         {
-            int startFrom = parameter.StartFrom;
-            int countLength = parameter.PartCountLength;
-            char padChar = parameter.PadChar;
+            if (_ruleParameter == null)
+                return file;
+
+            int startFrom = _ruleParameter.StartFrom;
+            int countLength = _ruleParameter.PartCountLength;
+            char padChar = _ruleParameter.PadChar;
 
             string newFileName = startFrom.ToString().PadLeft(countLength, padChar);
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CheckingExceptions
 {
-    public class CheckingExceptionsParamter : IRuleParameter
+    public class CheckingExceptionsParameter : IRuleParameter
     {
         public string Id => "CheckingExceptions";
 

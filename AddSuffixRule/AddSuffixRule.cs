@@ -11,35 +11,37 @@ namespace AddSuffixRule
     {
         public string Id => "AddSuffix";
 
+        public AddSuffixParamter _parameter { get; set; }
 
-        public FileInfor[] Convert(FileInfor[] files, IRuleParameter ruleParameter)
+        public void SetParameter(IRuleParameter ruleParameter)
         {
-            return files.Select(f => Convert(f, ruleParameter)).ToArray();
+            _parameter = (AddSuffixParamter)ruleParameter;
         }
 
-        public FileInfor Convert(FileInfor file, IRuleParameter ruleParameter)
+        public FileInfor[] Convert(FileInfor[] files)
         {
-            AddSuffixParamter parameter = (AddSuffixParamter)ruleParameter;
+            return files.Select(f => Convert(f)).ToArray();
+        }
 
-            if (parameter == null)
+        public FileInfor Convert(FileInfor file)
+        {
+            if (_parameter == null)
                 return null;
 
             return new FileInfor
             {
                 Dir = file.Dir,
                 Extension = file.Extension,
-                FileName = file.FileName + parameter.Suffix
+                FileName = file.FileName + _parameter.Suffix
             };
         }
 
-        public string GetStatement(FileInfor file, IRuleParameter ruleParameter)
+        public string GetStatement(FileInfor file)
         {
-            AddSuffixParamter parameter = (AddSuffixParamter)ruleParameter;
-
-            if (parameter == null)
+            if (_parameter == null)
                 return null;
 
-            return $"Add prefix ${parameter.Suffix} to file name ${file.FileName}";
+            return $"Add prefix ${_parameter.Suffix} to file name ${file.FileName}";
         }
     }
 }

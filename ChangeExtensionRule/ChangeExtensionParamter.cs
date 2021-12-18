@@ -11,6 +11,8 @@ namespace ChangeExtensionRule
     {
         public string Id => "ChangeExtensionParamter";
 
-        public string NewExtension;
+        public string NewExtension { get; set; }
+
+        public bool IsAppendToOriginal { get; set; }
     }
 }
