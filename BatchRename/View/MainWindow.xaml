@@ -11,6 +11,7 @@
     Name="Window"
     Width="880"
     Height="520"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <Window.Style>

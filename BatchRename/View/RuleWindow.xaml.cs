@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,41 +13,45 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BatchRename.Lib;
 using BatchRename.Model;
+using BatchRename.ViewModel;
 using PluginContract;
 
 namespace BatchRename.View
 {
-    public class RuleComponent
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public IRuleComponent Component { get; set; }
-    }
-
     public partial class RuleWindow : Window
     {
-        private List<RuleComponent> _ruleComponents;
-        private BindingList<TabItem> _tabItems = new BindingList<TabItem>();
-        private Store _store;
+        private BindingList<EditingRuleViewModel> _ruleComponents { get; set; }
+        private PluginManager _pluginManager { get; set; }
+        private Store _store { get; set; }
 
-        public RuleWindow(List<RuleComponent> ruleComponents, Store store)
+        public RuleWindow(PluginManager pluginManager, Store store)
         {
             InitializeComponent();
 
-            if (ruleComponents == null)
-                return;
-
-            _ruleComponents = ruleComponents;
+            _ruleComponents = new BindingList<EditingRuleViewModel>();
+            _pluginManager = pluginManager;
             _store = store;
 
-            foreach (var ruleComponent in _ruleComponents)
+            loadComponents();
+
+            tabControlRule.ItemsSource = _ruleComponents;
+        }
+
+        private void loadComponents()
+        {
+            string[] pluginIds = _pluginManager.GetPluginIDs();
+
+            foreach (string id in pluginIds)
             {
-                _tabItems.Add(new TabItem
-                {
-                    Header = ruleComponent.Name,
-                    Content = ruleComponent.Component
-                });
+                _ruleComponents.Add(
+                    new EditingRuleViewModel
+                    {
+                        RuleId = id,
+                        Name = _pluginManager.GetRuleName(id),
+                        Component = _pluginManager.CreateRuleComponent(id)
+                    }); ;
             }
         }
 
@@ -57,19 +62,29 @@ namespace BatchRename.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            tabControlRule.ItemsSource = _tabItems;
-        }
 
-      
+        }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
+            EditingRuleViewModel viewModel = (EditingRuleViewModel)tabControlRule.SelectedItem;
 
+            if (viewModel != null)
+            {
+                _store.CreatePickedRule(new RulePickedModel
+                {
+                    IsMarked = true,
+                    RuleId = viewModel.RuleId,
+                    Paramter = viewModel.Component.GetRuleParamter()
+                });
+            }
+
+            DialogResult = true;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogResult = false;
         }
     }
 }

@@ -83,22 +83,7 @@ namespace BatchRename
     {
         private void RuleControl_OnAddClick(object sender, RoutedEventArgs e)
         {
-            string[] pluginIds = _pluginManager.GetPluginIDs();
-
-            List<RuleComponent> ruleComponents = new List<RuleComponent>();
-
-            foreach (string id in pluginIds)
-            {
-                ruleComponents.Add(
-                    new RuleComponent
-                    {
-                        Id = id,
-                        Name = _pluginManager.GetRuleName(id),
-                        Component = _pluginManager.CreateRuleComponent(id)
-                    });
-            }
-
-            RuleWindow ruleWindow = new RuleWindow(ruleComponents, _store);
+            RuleWindow ruleWindow = new RuleWindow(_pluginManager, _store);
             ruleWindow.ShowDialog();
         }
 
