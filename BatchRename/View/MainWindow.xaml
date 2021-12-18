@@ -11,6 +11,7 @@
     Name="Window"
     Width="880"
     Height="520"
+    SizeChanged="Window_SizeChanged"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -141,7 +142,10 @@
                         Effect="{StaticResource DropShadowLight}" />
 
                     <Border Padding="{DynamicResource PaddingXLargeYMedium}">
-                        <ct:FilesControl x:Name="filesControl" OnAddFileClick="FilesControl_OnAddFileClick" />
+                        <ct:FilesControl
+                            x:Name="filesControl"
+                            ItemsSource="{Binding ConvertNodes}"
+                            OnAddFileClick="FilesControl_OnAddFileClick" />
                     </Border>
                 </Grid>
             </DockPanel>

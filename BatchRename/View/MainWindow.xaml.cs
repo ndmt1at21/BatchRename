@@ -26,12 +26,11 @@ using BatchRename.ViewModel;
 
 namespace BatchRename
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public BindingList<RulePickedViewModel> PickedRules { get; set; }
+        public BindingList<NodeConvertViewModel> ConvertNodes { get; set; }
+
 
         private PluginManager _pluginManager { get; set; }
         private Store _store { get; set; }
@@ -39,7 +38,7 @@ namespace BatchRename
         private BackupService<ProjectStore> _backupService { get; set; }
         private RecentFileService _recentFileService { get; set; }
 
-        private bool _hasSaved { get; set; } = false;
+        private bool _hasSavedOnce { get; set; } = false;
         private bool _hasContentUnsaved { get; set; } = false;
 
         public MainWindow(PluginManager pluginManager, RecentFileService recentFileService)
@@ -51,13 +50,13 @@ namespace BatchRename
             _recentFileService = recentFileService;
             _store = new Store();
 
-
             DataContext = this;
 
             _store.OnStoreChanged += OnStore_Changed;
             _store.OnRulePickedCreated += OnRulePicked_Created;
             _store.OnRulePickedDeleted += OnRulePicked_Deleted;
             _store.OnRulePickedUpdated += OnRulePicked_Updated;
+            _store.OnNodeConvertCreated += OnNodeConvert_Created;
 
             var _saveLoadConfig = new SaveLoadConfig
             {
@@ -76,13 +75,30 @@ namespace BatchRename
             _backupService = new BackupService<ProjectStore>(_backupConfig);
 
             PickedRules = new BindingList<RulePickedViewModel>();
+            ConvertNodes = new BindingList<NodeConvertViewModel>();
         }
 
         public void OnStore_Changed()
         {
-
+            _hasContentUnsaved = true;
         }
 
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var window = (Window)sender;
+
+            _store.UpdateMainWindowPosition(new WindowPosition
+            {
+                Top = window.Top,
+                Left = window.Left,
+                Width = e.NewSize.Width,
+                Height = e.NewSize.Height
+            });
+        }
+    }
+
+    public partial class MainWindow
+    {
         private void Container_DragEnter(object sender, DragEventArgs e)
         {
             //TODO: Show drag drop panel
@@ -95,7 +111,7 @@ namespace BatchRename
         }
     }
 
-    // HANDLE Rule Control
+    /* HANDLE Rule control panel: Store event */
     public partial class MainWindow
     {
         private void OnRulePicked_Created(RulePickedModel ruleModel)
@@ -140,7 +156,11 @@ namespace BatchRename
             ruleViewModel.RuleName = ruleName;
             ruleViewModel.Statement = rule.GetStatement();
         }
+    }
 
+    /* HANDLE Rule control panel: Event click*/
+    public partial class MainWindow
+    {
         private void RuleControl_OnAddClick(object sender, RoutedEventArgs e)
         {
             RuleWindow ruleWindow = new RuleWindow(_pluginManager, _store);
@@ -172,82 +192,9 @@ namespace BatchRename
         }
     }
 
-    // HANDLE Top Menu: Open/Save/Load
+    /* HANDLE Top Menu: Open/Save/Load */
     public partial class MainWindow
     {
-        public void Open(string path)
-        {
-            LoadFrom(path);
-        }
-
-        public void Save()
-        {
-            if (!_hasSaved)
-            {
-                SaveAs();
-                return;
-            }
-
-            //_saveLoadService.Save();
-        }
-
-        public void SaveAs()
-        {
-
-        }
-
-        public void StartConvert()
-        {
-            List<IRenameRule> rules = _store.GetAllPickedRule().Select(pickedRule =>
-            {
-                string ruleId = pickedRule.RuleId;
-
-                IRenameRule rule = _pluginManager.CreateRule(ruleId);
-                rule.SetParameter(pickedRule.Paramter);
-
-                return rule;
-            }).ToList();
-
-            List<FileInfor> files = _store.GetAllNodeConverts().Select(nodeConvert =>
-            {
-                return new FileInfor
-                {
-                    FileName = nodeConvert.Node.Name,
-                    Dir = nodeConvert.Node.Path,
-                    Extension = nodeConvert.Node.Extension
-                };
-            }).ToList();
-
-            ConvertPipeline pipeline = new ConvertPipeline(rules);
-
-            pipeline.Convert(files, (result, err) =>
-            {
-                Debug.WriteLine(result.FileName);
-                Debug.WriteLine(err);
-            });
-        }
-
-        public void LoadFrom(string projectPath)
-        {
-            LoadProjectToStore(projectPath);
-        }
-
-        private void LoadProjectToStore(string path)
-        {
-            if (!File.Exists(path))
-                return;
-
-            _saveLoadService.Path = path;
-
-            ProjectStore projectStore = _saveLoadService.Load();
-
-            _store.MainWindowPosition = projectStore.MainWindowPosition;
-            _store.DialogSelectRulePosition = projectStore.DialogSelectRulePosition;
-            _store.PickedRules = projectStore.PickedRules;
-            _store.EditingRules = projectStore.EditingRules;
-            _store.ConvertNodes = projectStore.ConvertNodes;
-        }
-
         private void TopMenu_OnNewClick(object sender, RoutedEventArgs e)
         {
 
@@ -278,10 +225,96 @@ namespace BatchRename
         {
             StartConvert();
         }
+
+        public void Open(string path)
+        {
+            LoadFrom(path);
+            _hasSavedOnce = true;
+        }
+
+        public void Save()
+        {
+            if (!_hasSavedOnce)
+            {
+                SaveAs();
+                return;
+            }
+
+            _hasSavedOnce = true;
+            //_saveLoadService.Save();
+        }
+
+        public void SaveAs()
+        {
+
+        }
+
+        public void StartConvert()
+        {
+            List<IRenameRule> rules = _store.GetAllPickedRule()
+                .Where(pickedRule => pickedRule.IsMarked == true)
+                .Select(pickedRule =>
+                {
+                    string ruleId = pickedRule.RuleId;
+
+                    IRenameRule rule = _pluginManager.CreateRule(ruleId);
+                    rule.SetParameter(pickedRule.Paramter);
+
+                    return rule;
+                }).ToList();
+
+            List<FileInfor> files = _store.GetAllNodeConverts()
+                .Where(nodeConvert => nodeConvert.IsMarked == true)
+                .Select(nodeConvert =>
+                {
+                    return new FileInfor
+                    {
+                        FileName = nodeConvert.Node.Name,
+                        Dir = nodeConvert.Node.Path,
+                        Extension = nodeConvert.Node.Extension
+                    };
+                })
+                .ToList();
+
+            ConvertPipeline pipeline = new ConvertPipeline(rules);
+
+            pipeline.Convert(files, (result, err) =>
+            {
+                Debug.WriteLine(result.FileName);
+                Debug.WriteLine(err);
+            });
+        }
+
+        public void LoadFrom(string projectPath)
+        {
+            LoadProjectToStore(projectPath);
+        }
+
+        private void LoadProjectToStore(string path)
+        {
+            if (!File.Exists(path))
+                return;
+
+            _saveLoadService.Path = path;
+
+            ProjectStore projectStore = _saveLoadService.Load();
+
+            _store.MainWindowPosition = projectStore.MainWindowPosition;
+            _store.DialogSelectRulePosition = projectStore.DialogSelectRulePosition;
+            _store.PickedRules = projectStore.PickedRules;
+            _store.EditingRules = projectStore.EditingRules;
+            _store.ConvertNodes = projectStore.ConvertNodes;
+        }
     }
 
+    /* HANDLE File Control Panel */
     public partial class MainWindow
     {
+        private void OnNodeConvert_Created(NodeConvertModel nodeModel)
+        {
+
+        }
+
         private void FilesControl_OnAddFileClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
