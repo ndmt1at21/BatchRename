@@ -14,5 +14,18 @@ namespace BatchRename.Model
         public Dictionary<string, RuleEditingModel> EditingRules { get; set; }
         public Dictionary<string, NodeConvertModel> ConvertNodes { get; set; }
         public string OutputPath { get; set; }
+
+        public static ProjectStore FromStore(Store store)
+        {
+            return new ProjectStore()
+            {
+                ConvertNodes = store.ConvertNodes,
+                DialogSelectRulePosition = store.DialogSelectRulePosition,
+                EditingRules = store.EditingRules,
+                MainWindowPosition = store.MainWindowPosition,
+                OutputPath = store.OutputPath,
+                PickedRules = store.PickedRules
+            };
+        }
     }
 }

@@ -51,7 +51,7 @@ namespace BatchRename.Model
 
         public Action<RulePickedModel> OnRulePickedCreated;
         public Action<RulePickedModel> OnRulePickedUpdated;
-        public Action<IEnumerable<string>> OnRulePickedDeleted;
+        public Action<string> OnRulePickedDeleted;
 
         public List<RulePickedModel> GetAllPickedRule()
         {
@@ -89,7 +89,7 @@ namespace BatchRename.Model
         public void DeletePickedRule(string pickedRuleId)
         {
             bool result = PickedRules.Remove(pickedRuleId);
-            if (result) OnRulePickedDeleted?.Invoke(new List<string> { pickedRuleId });
+            if (result) OnRulePickedDeleted?.Invoke(pickedRuleId);
             OnStoreChanged?.Invoke();
         }
 
