@@ -56,7 +56,7 @@
                         Margin="{StaticResource PaddingLeftMedium}"
                         FontFamily="{DynamicResource PoppinsBold}"
                         FontSize="12"
-                        TextWrapping="WrapWithOverflow">
+                        TextTrimming="WordEllipsis">
                         FILE NAME
                     </TextBlock>
                 </DataGridTemplateColumn.Header>
@@ -66,7 +66,7 @@
                         <TextBlock
                             Margin="{StaticResource PaddingLeftMedium}"
                             VerticalAlignment="Center"
-                            Text="{Binding FileName,
+                            Text="{Binding Node.Name,
                                            Mode=OneWay}" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
@@ -87,7 +87,7 @@
                         <TextBlock
                             Margin="{StaticResource PaddingLeftMedium}"
                             VerticalAlignment="Center"
-                            Text="{Binding Statement,
+                            Text="{Binding Node.Path,
                                            Mode=OneWay}" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

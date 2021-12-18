@@ -31,11 +31,11 @@ namespace BatchRename.Themes.CustomControl
 
         public IEnumerable<string> SelectedIds;
 
-        public IEnumerable<RulePickedViewModel> ItemsSource
+        public IEnumerable<NodeConvertViewModel> ItemsSource
         {
             get
             {
-                return (IEnumerable<RulePickedViewModel>)GetValue(ItemsSourceProperty);
+                return (IEnumerable<NodeConvertViewModel>)GetValue(ItemsSourceProperty);
             }
             set
             {
@@ -46,7 +46,7 @@ namespace BatchRename.Themes.CustomControl
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(
                 "ItemsSource",
-                typeof(IEnumerable<RulePickedViewModel>),
+                typeof(IEnumerable<NodeConvertViewModel>),
                 typeof(FilesControl)
             );
 
