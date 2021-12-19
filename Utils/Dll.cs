@@ -18,16 +18,16 @@ namespace Utils
 
         public static object CreateInstanceFromDllFile(string dllPath, Type targetType, object[] argsForInstance = null)
         {
-            Assembly _Assembly = Assembly.LoadFile(dllPath);
-            List<Type> types = _Assembly.GetTypes()?.ToList();
-            Type type = types?.Find(a => targetType.IsAssignableFrom(a));
+                Assembly _Assembly = Assembly.LoadFile(dllPath);
+                List<Type> types = _Assembly.GetTypes()?.ToList();
+                Type type = types?.Find(a => targetType.IsAssignableFrom(a));
 
-            if (type == null)
-                return null;
+                if (type == null)
+                 return null;
 
-            return argsForInstance == null
-                ? Activator.CreateInstance(type)
-                : Activator.CreateInstance(type, argsForInstance);
+                return argsForInstance == null
+                    ? Activator.CreateInstance(type)
+                    : Activator.CreateInstance(type, argsForInstance);
         }
     }
 }

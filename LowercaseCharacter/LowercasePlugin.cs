@@ -15,12 +15,12 @@ namespace LowercaseCharacter
 
         public IRuleComponent CreateComponentInstance()
         {
-            throw new NotImplementedException();
+            return new LowercaseCharacterComponent();
         }
 
         public IRenameRule CreateRuleInstance()
         {
-            throw new NotImplementedException();
+            return new LowercaseRule();
         }
     }
 }

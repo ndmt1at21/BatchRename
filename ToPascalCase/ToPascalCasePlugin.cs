@@ -15,12 +15,12 @@ namespace ToPascalCase
 
         public IRuleComponent CreateComponentInstance()
         {
-            throw new NotImplementedException();
+            return new ToPascalCaseComponent();
         }
 
         public IRenameRule CreateRuleInstance()
         {
-            throw new NotImplementedException();
+            return new ToPascalCaseRule();
         }
     }
 }
