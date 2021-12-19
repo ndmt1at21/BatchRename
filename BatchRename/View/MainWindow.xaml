@@ -131,11 +131,15 @@
                 Name="FilePanel"
                 Grid.Column="2"
                 Focusable="False"
-                LastChildFill="True">
+                LastChildFill="True"
+                >
                 <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Files</TextBlock>
 
                 <!--  Separate: DropShadowEffect performance  -->
-                <Grid Margin="{StaticResource PaddingTopSmall}">
+                <Grid x:Name="FilePanel_Grid" 
+                DragEnter="DragEnter_Show"
+                AllowDrop="True"
+                Margin="{StaticResource PaddingTopSmall}">
                     <Border
                         Background="{StaticResource SurfaceColor}"
                         CornerRadius="{StaticResource Radius}"

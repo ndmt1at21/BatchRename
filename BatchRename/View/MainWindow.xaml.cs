@@ -19,7 +19,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BatchRename.Lib;
 using PluginContract;
 using BatchRename.ViewModel;
@@ -95,21 +94,9 @@ namespace BatchRename
                 Height = e.NewSize.Height
             });
         }
+
     }
 
-    public partial class MainWindow
-    {
-        private void Container_DragEnter(object sender, DragEventArgs e)
-        {
-            //TODO: Show drag drop panel
-        }
-
-        private void Container_DragLeave(object sender, DragEventArgs e)
-        {
-            //TODO: Hid drag and drop panel
-
-        }
-    }
 
     /* HANDLE Rule control panel: Store event */
     public partial class MainWindow
@@ -310,6 +297,9 @@ namespace BatchRename
     /* HANDLE File Control Panel */
     public partial class MainWindow
     {
+       private static List<string> _list = new List<string>();
+        DropFilePanel dragdropPanel = new DropFilePanel();
+        
         private void OnNodeConvert_Created(NodeConvertModel nodeModel)
         {
 
@@ -319,37 +309,123 @@ namespace BatchRename
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
-            //if (openFileDialog.ShowDialog() == true)
-            //{
-            //    if (_list == null)
-            //    {
-            //        _list = new List<string>(openFileDialog.FileNames);
-            //        nodeList = new List<Node>();
-            //    }
-            //    else
-            //        foreach (var file in openFileDialog.FileNames)
-            //        {
-            //            if (!_list.Contains(file))
-            //                _list.Add(file);
-            //        }
-            //    foreach (var path in openFileDialog.FileNames)
-            //    {
-            //        string extention = Path.GetExtension(path);
-            //        string filename = Path.GetFileName(path);
-            //        DateTime creation = File.GetCreationTime(path);
-            //        string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
-            //        Node node = new Node()
-            //        {
-            //            Path = path,
-            //            Extension = extention,
-            //            Name = Name,
-            //            CreatedDate = creation,
-            //            Size = size
-            //        };
-            //        nodeList.Add(node);
-            //    }
-            //}
+            
+            if (openFileDialog.ShowDialog() == true)
+            {
 
+                foreach (var path in openFileDialog.FileNames)
+                {
+                    if (!_list.Contains(path))
+                    {
+                        _list.Add(path);
+                        string extention = Path.GetExtension(path);
+                        string filename = Path.GetFileName(path);
+                        DateTime creation = File.GetCreationTime(path);
+                        string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
+                        NodeViewModel node = new NodeViewModel()
+                        {
+                            Path = path,
+                            Extension = extention,
+                            Name = Name,
+                            CreatedDate = creation,
+                            Size = size
+                        };
+
+                        NodeConvertViewModel nodeConvert = new NodeConvertViewModel()
+                        {
+                            //TODO: Is there anything more ?
+                            Node = node
+                        };
+
+                        //TODO: Does it need to invoke anything ?
+                        ConvertNodes.Add(nodeConvert);
+                    }
+                }
+            }
+
+        }
+        private void handleFolder (string path)
+        {
+            string[] fileEntries = Directory.GetFiles(path);
+            foreach (string fileName in fileEntries)
+            {
+                if (!_list.Contains(fileName))
+                    _list.Add(fileName);
+            }
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(path);
+            foreach (string subdirectory in subdirectoryEntries)
+                handleFolder(subdirectory);
+        }
+
+
+        private void DragDrop_Files(object sender, DragEventArgs e)
+        {
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                List<string> lastFileList = new List<string>(_list);
+
+                // Note that you can have more than one file.
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+              
+                foreach (var file in files)
+                {
+                    if (!_list.Contains(file))
+                    {
+                        if (File.Exists(file))
+                        {
+                            // This path is a file
+                            if (!_list.Contains(file))
+                                _list.Add(file);
+                        }
+                        else if (Directory.Exists(file))
+                        {
+                            // This path is a directory
+                            handleFolder(file);
+                        }
+                    }
+                }
+
+
+                foreach (var path in _list)
+                {
+                    if (!lastFileList.Contains(path))
+                    {
+                        string extention = Path.GetExtension(path);
+                        string filename = Path.GetFileName(path);
+                        DateTime creation = File.GetCreationTime(path);
+                        string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
+                        NodeViewModel node = new NodeViewModel()
+                        {
+                            Path = path,
+                            Extension = extention,
+                            Name = Name,
+                            CreatedDate = creation,
+                            Size = size
+                        };
+
+                        NodeConvertViewModel nodeConvert = new NodeConvertViewModel()
+                        {
+                            //TODO: Is there anything more ?
+                            Node = node
+                        };
+
+                        //TODO: Does it need to invoke anything ?
+                        ConvertNodes.Add(nodeConvert);
+                    }
+                }
+            }
+            dragdropPanel.Drop -= DragDrop_Files;
+            FilePanel_Grid.Children.Remove(dragdropPanel);
+        }
+        private void DragEnter_Show(object sender, DragEventArgs e)
+        {
+            if (FilePanel_Grid.Children.Count < 3)
+            {
+                dragdropPanel.Drop += DragDrop_Files;
+                FilePanel_Grid.Children.Add(dragdropPanel);
+            }
         }
     }
 }
