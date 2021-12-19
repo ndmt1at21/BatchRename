@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:CheckingExceptions"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Background="White">
+        <TextBlock VerticalAlignment="Center">Checking exceptions in file name:</TextBlock>
+
+
+        <CheckBox Content="Append to original filename" />
+    </StackPanel>
 </UserControl>

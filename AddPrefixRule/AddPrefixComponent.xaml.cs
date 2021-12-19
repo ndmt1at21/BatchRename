@@ -50,5 +50,22 @@ namespace AddPrefixRule
 
             Prefix = rule.Prefix;
         }
+
+
+        private void tbInputPrefix_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string PrefixValue = tbInputPrefix.Text;
+            int PrefixTxtIndex = tbInputPrefix.CaretIndex;
+
+
+            Prefix = PrefixValue;
+
+            tbInputPrefix.Text = PrefixValue.Length == 0
+                ? string.Empty
+                : Prefix;
+
+            if (!Prefix.Equals(PrefixValue))
+                tbInputPrefix.CaretIndex = PrefixTxtIndex - 1;
+        }
     }
 }

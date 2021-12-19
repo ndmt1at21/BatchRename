@@ -49,5 +49,21 @@ namespace AddSuffixRule
 
             Suffix = rule.Suffix;
         }
+
+        private void tbInputSuffix_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string SuffixValue = tbInputSuffix.Text;
+            int SuffixTxtIndex = tbInputSuffix.CaretIndex;
+
+
+            Suffix = SuffixValue;
+
+            tbInputSuffix.Text = SuffixValue.Length == 0
+                ? string.Empty
+                : Suffix;
+
+            if (!Suffix.Equals(SuffixValue))
+                tbInputSuffix.CaretIndex = SuffixTxtIndex - 1;
+        }
     }
 }
