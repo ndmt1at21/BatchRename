@@ -6,7 +6,7 @@ namespace ReplaceCharacter
 {
     public class ReplaceCharacterRule : IRenameRule
     {
-        private ReplaceCharacterParameter _parameter;
+        private ReplaceCharacterParameter _parameter { get; set; }
 
         public string Id => "ReplaceCharacter";
 

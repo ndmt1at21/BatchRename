@@ -94,7 +94,6 @@ namespace BatchRename
                 Height = e.NewSize.Height
             });
         }
-
     }
 
 
@@ -425,6 +424,20 @@ namespace BatchRename
             {
                 dragdropPanel.Drop += DragDrop_Files;
                 FilePanel_Grid.Children.Add(dragdropPanel);
+            }
+        }
+     
+        private void DragLeave_Hide(object sender, DragEventArgs e)
+        {
+      
+            if (FilePanel_Grid.Children.Count == 3)
+            {
+                HitTestResult result = VisualTreeHelper.HitTest(FilePanel_Grid, e.GetPosition(FilePanel_Grid));
+                if (result == null)
+                {
+                    dragdropPanel.Drop -= DragDrop_Files;
+                    FilePanel_Grid.Children.Remove(dragdropPanel);
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ namespace RemoveAllSpace
     {
         public string Id => "RemoveAllSpaces";
 
-        public string Name => "Remove all sapces";
+        public string Name { get; } = "Remove all sapces";
 
         public IRenameRule CreateRuleInstance()
         {

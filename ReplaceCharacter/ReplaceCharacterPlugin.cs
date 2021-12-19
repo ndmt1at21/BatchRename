@@ -11,7 +11,7 @@ namespace ReplaceCharacter
     {
         public string Id => "ReplaceCharacter";
 
-        public string Name => "Replace character rule";
+        public string Name { get; } = "Replace character rule";
 
         public IRenameRule CreateRuleInstance()
         {
