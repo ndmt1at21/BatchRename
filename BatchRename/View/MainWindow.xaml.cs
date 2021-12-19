@@ -296,12 +296,29 @@ namespace BatchRename
     /* HANDLE File Control Panel */
     public partial class MainWindow
     {
-       private static List<string> _list = new List<string>();
+        private static List<string> _list = new List<string>();
         DropFilePanel dragdropPanel = new DropFilePanel();
         
         private void OnNodeConvert_Created(NodeConvertModel nodeModel)
         {
+            NodeConvertModel newNode = nodeModel.Clone();
 
+            NodeConvertViewModel newNodeViewModel = new NodeConvertViewModel()
+            {
+                ConvertStatus = newNode.ConvertStatus,
+                IsMarked = newNode.IsMarked,
+                Id = newNode.Id,
+                Node = new NodeViewModel()
+                {
+                    CreatedDate = newNode.Node.CreatedDate,
+                    Name = newNode.Node.Name,
+                    Size = newNode.Node.Size,
+                    Extension = newNode.Node.Extension,
+                    Path = newNode.Node.Path
+                    //TODO: Set output path
+                }
+            };
+            ConvertNodes.Add(newNodeViewModel);
         }
 
         private void FilesControl_OnAddFileClick(object sender, RoutedEventArgs e)
@@ -321,7 +338,7 @@ namespace BatchRename
                         string filename = Path.GetFileName(path);
                         DateTime creation = File.GetCreationTime(path);
                         string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
-                        NodeViewModel node = new NodeViewModel()
+                        Node node = new Node()
                         {
                             Path = path,
                             Extension = extention,
@@ -330,14 +347,12 @@ namespace BatchRename
                             Size = size
                         };
 
-                        NodeConvertViewModel nodeConvert = new NodeConvertViewModel()
+                        NodeConvertModel nodeConvert = new NodeConvertModel()
                         {
-                            //TODO: Is there anything more ?
                             Node = node
                         };
 
-                        //TODO: Does it need to invoke anything ?
-                        ConvertNodes.Add(nodeConvert);
+                        _store.CreateNodeConvert(nodeConvert);
                     }
                 }
             }
@@ -395,7 +410,7 @@ namespace BatchRename
                         string filename = Path.GetFileName(path);
                         DateTime creation = File.GetCreationTime(path);
                         string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
-                        NodeViewModel node = new NodeViewModel()
+                        Node node = new Node()
                         {
                             Path = path,
                             Extension = extention,
@@ -404,20 +419,23 @@ namespace BatchRename
                             Size = size
                         };
 
-                        NodeConvertViewModel nodeConvert = new NodeConvertViewModel()
+                        NodeConvertModel nodeConvert = new NodeConvertModel()
                         {
                             //TODO: Is there anything more ?
                             Node = node
                         };
 
                         //TODO: Does it need to invoke anything ?
-                        ConvertNodes.Add(nodeConvert);
+                        _store.CreateNodeConvert(nodeConvert);
                     }
                 }
             }
             dragdropPanel.Drop -= DragDrop_Files;
             FilePanel_Grid.Children.Remove(dragdropPanel);
         }
+
+
+
         private void DragEnter_Show(object sender, DragEventArgs e)
         {
             if (FilePanel_Grid.Children.Count < 3)
