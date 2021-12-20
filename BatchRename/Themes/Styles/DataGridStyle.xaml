@@ -193,5 +193,6 @@
         <Setter Property="CanUserResizeRows" Value="False" />
         <Setter Property="SelectionMode" Value="Extended" />
         <Setter Property="SelectionUnit" Value="FullRow" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
     </Style>
 </ResourceDictionary>

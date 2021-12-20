@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Viewbox
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        x:Key="ArrowHeadIcon"
+        x:Shared="False"
+        Stretch="Uniform">
+        <Canvas
+            Name="svg137"
+            Width="18"
+            Height="18"
+            x:Shared="False">
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0" />
+            </Canvas.RenderTransform>
+            <Canvas.Resources>
+                <RectangleGeometry
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Key="clip0_387_220"
+                    Rect=", , 18, 18">
+                    <RectangleGeometry.Transform>
+                        <TranslateTransform X="0.666504" />
+                    </RectangleGeometry.Transform>
+                </RectangleGeometry>
+            </Canvas.Resources>
+            <!--  Unknown tag: sodipodi:namedview  -->
+            <Canvas Name="g130" Clip="{StaticResource clip0_387_220}">
+                <Path
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    Name="path128"
+                    Stroke="#FF4E4E4E"
+                    StrokeEndLineCap="Round"
+                    StrokeStartLineCap="Round">
+                    <Path.Data>
+                        <PathGeometry Figures="M2 4L9.25259 12.1592C9.65038 12.6067 10.3496 12.6067 10.7474 12.1592L18 4" FillRule="NonZero" />
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+</ResourceDictionary>

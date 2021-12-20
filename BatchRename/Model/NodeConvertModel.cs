@@ -18,14 +18,18 @@ namespace BatchRename.Model
         public string Id { get; set; }
         public bool IsMarked { get; set; }
         public Node Node { get; set; }
+        public string NewName { get; set; }
         public ConvertStatus ConvertStatus { get; set; }
 
         public NodeConvertModel Clone()
         {
             return new NodeConvertModel
             {
+                Id = Id,
+                IsMarked = IsMarked,
                 ConvertStatus = ConvertStatus,
-                Node = Node.Clone()
+                Node = Node.Clone(),
+                NewName = NewName,
             };
         }
     }

@@ -8,28 +8,34 @@ using Newtonsoft.Json;
 
 namespace BatchRename.Lib
 {
-    public class JsonPersister : IPersister
+    public class JsonPersister<T> : IPersister<T>
     {
+        private readonly JsonSerializerSettings _serializeSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            Formatting = Formatting.Indented,
+        };
+
         public JsonPersister()
         {
         }
 
-        public object Load(string path)
+        public T Load(string path)
         {
-            return JsonConvert.DeserializeObject(File.ReadAllText(path));
+            return JsonConvert.DeserializeObject<T>(File.ReadAllText(path), _serializeSettings);
         }
 
-        public void Save(string path, object data)
+        public void Save(string path, T data)
         {
-            string content = JsonConvert.SerializeObject(data);
+            string content = JsonConvert.SerializeObject(data, _serializeSettings);
             File.WriteAllText(path, content);
         }
 
-        public Task SaveAsync(string path, object data)
+        public Task SaveAsync(string path, T data)
         {
             return Task.Run(async () =>
             {
-                string content = JsonConvert.SerializeObject(data);
+                string content = JsonConvert.SerializeObject(data, _serializeSettings);
                 await File.WriteAllTextAsync(path, content);
             });
         }

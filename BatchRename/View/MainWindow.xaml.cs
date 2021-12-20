@@ -22,6 +22,8 @@ using System.Windows.Media.Imaging;
 using BatchRename.Lib;
 using PluginContract;
 using BatchRename.ViewModel;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using BatchRename.Commands;
 
 namespace BatchRename
 {
@@ -30,56 +32,42 @@ namespace BatchRename
         public BindingList<RulePickedViewModel> PickedRules { get; set; }
         public BindingList<NodeConvertViewModel> ConvertNodes { get; set; }
 
+        public ICommand NewCommand { get; set; }
+        public ICommand ConvertCommand { get; set; }
+        public ICommand OpenCommand { get; set; }
+        public ICommand LoadProjectCommand { get; set; }
+        public ICommand SaveAsCommand { get; set; }
+        public ICommand SaveOrSaveAsCommand { get; set; }
+        public ICommand ImportCommand { get; set; }
+        public ICommand ExportCommand { get; set; }
 
         private PluginManager _pluginManager { get; set; }
         private Store _store { get; set; }
-        private SaveLoadService<ProjectStore> _saveLoadService { get; set; }
+
         private BackupService<ProjectStore> _backupService { get; set; }
         private RecentFileService _recentFileService { get; set; }
 
-        private bool _hasSavedOnce { get; set; } = false;
-        private bool _hasContentUnsaved { get; set; } = false;
+        private SaveService<ProjectStore> _saveService { get; set; }
+        private LoadService<ProjectStore> _loadService { get; set; }
+        private AutoSaveService<ProjectStore> _autoSaveService { get; set; }
 
-        public MainWindow(PluginManager pluginManager, RecentFileService recentFileService)
+        private IPersister<ProjectStore> _persister { get; set; }
+
+        public MainWindow(PluginManager pluginManager)
         {
             InitializeComponent();
 
-
             _pluginManager = pluginManager;
-            _recentFileService = recentFileService;
             _store = new Store();
 
             DataContext = this;
 
-            _store.OnStoreChanged += OnStore_Changed;
-            _store.OnRulePickedCreated += OnRulePicked_Created;
-            _store.OnRulePickedDeleted += OnRulePicked_Deleted;
-            _store.OnRulePickedUpdated += OnRulePicked_Updated;
-            _store.OnNodeConvertCreated += OnNodeConvert_Created;
-
-            var _saveLoadConfig = new SaveLoadConfig
-            {
-                AutoSave = true,
-                AutoSaveInterval = 500
-            };
-
-            var _backupConfig = new BackupConfig
-            {
-                Directory = Environment.GetEnvironmentVariable("BackupFilesPath"),
-                BackupInterval = 500,
-                Extension = "brup",
-            };
-
-            _saveLoadService = new SaveLoadService<ProjectStore>(_saveLoadConfig);
-            _backupService = new BackupService<ProjectStore>(_backupConfig);
+            InitializeServices();
+            InitializeCommands();
+            RegisterStoreChanged();
 
             PickedRules = new BindingList<RulePickedViewModel>();
             ConvertNodes = new BindingList<NodeConvertViewModel>();
-        }
-
-        public void OnStore_Changed()
-        {
-            _hasContentUnsaved = true;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -96,26 +84,85 @@ namespace BatchRename
         }
     }
 
+    /* Initialize */
+    public partial class MainWindow
+    {
+        private void InitializeCommands()
+        {
+            NewCommand = new NewCommand(_pluginManager);
+            ConvertCommand = new ConvertCommand(_store, _pluginManager);
+            OpenCommand = new OpenCommand(_pluginManager);
+            LoadProjectCommand = new LoadProjectCommand(_store, _loadService);
+            SaveOrSaveAsCommand = new SaveOrSaveAsCommand(_store, _saveService);
+            SaveAsCommand = new SaveAsCommand(_store, _saveService);
+        }
+
+        private void InitializeServices()
+        {
+            var _autoSaveConfig = new AutoSaveConfig
+            {
+                AutoSave = true,
+                AutoSaveInterval = 30
+            };
+
+            var _backupConfig = new BackupConfig
+            {
+                Directory = Environment.GetEnvironmentVariable("BackupFilesPath"),
+                BackupInterval = 120,
+                Extension = "brup",
+            };
+
+            _persister = new JsonPersister<ProjectStore>();
+            _saveService = new SaveService<ProjectStore>(_persister);
+            _loadService = new LoadService<ProjectStore>(_persister);
+
+            _autoSaveService = new AutoSaveService<ProjectStore>(_autoSaveConfig, _persister);
+            _autoSaveService.GetSavePath = () => _store.CurrentProjectPath;
+            _autoSaveService.GetSaveData = () => new ProjectStore()
+            {
+
+            };
+
+            _backupService = new BackupService<ProjectStore>(_backupConfig, _persister);
+            _backupService.GetBackupData = () => new ProjectStore();
+            _backupService.GetBackupPath = () => _store.CurrentProjectPath;
+        }
+
+        private void RegisterStoreChanged()
+        {
+            _store.OnStoreChanged += OnStore_Changed;
+            _store.OnStoreLoaded += OnStore_Loaded_RulePicked;
+            _store.OnStoreLoaded += OnStore_Loaded_NodeConvert;
+            _store.OnRulePickedCreated += OnRulePicked_Created;
+            _store.OnRulePickedDeleted += OnRulePicked_Deleted;
+            _store.OnRulePickedUpdated += OnRulePicked_Updated;
+            _store.OnNodeConvertCreated += OnNodeConvert_Created;
+        }
+
+        private void OnStore_Changed()
+        {
+            _store.HasContentUnsaved = true;
+            _store.IsBlankProject = false;
+        }
+    }
 
     /* HANDLE Rule control panel: Store event */
     public partial class MainWindow
     {
+        private void OnStore_Loaded_RulePicked()
+        {
+            PickedRules.Clear();
+            _store.GetAllPickedRule().ForEach(rule =>
+            {
+                RulePickedViewModel newViewModel = CreateRulePickedViewModel(rule);
+                PickedRules.Add(newViewModel);
+            });
+        }
+
         private void OnRulePicked_Created(RulePickedModel ruleModel)
         {
-            string ruleName = _pluginManager.GetRuleName(ruleModel.RuleId);
-
-            IRenameRule rule = _pluginManager.CreateRule(ruleModel.RuleId);
-            rule.SetParameter(ruleModel.Paramter);
-
-            var newRuleViewModel = new RulePickedViewModel()
-            {
-                Id = ruleModel.Id,
-                IsMarked = ruleModel.IsMarked,
-                RuleName = ruleName,
-                Statement = rule.GetStatement()
-            };
-
-            PickedRules.Add(newRuleViewModel);
+            RulePickedViewModel newViewModel = CreateRulePickedViewModel(ruleModel);
+            PickedRules.Add(newViewModel);
         }
 
         private void OnRulePicked_Deleted(string id)
@@ -141,6 +188,24 @@ namespace BatchRename
 
             ruleViewModel.RuleName = ruleName;
             ruleViewModel.Statement = rule.GetStatement();
+        }
+
+        private RulePickedViewModel CreateRulePickedViewModel(RulePickedModel ruleModel)
+        {
+            string ruleName = _pluginManager.GetRuleName(ruleModel.RuleId);
+
+            IRenameRule rule = _pluginManager.CreateRule(ruleModel.RuleId);
+            rule.SetParameter(ruleModel.Paramter);
+
+            var newRuleViewModel = new RulePickedViewModel()
+            {
+                Id = ruleModel.Id,
+                IsMarked = ruleModel.IsMarked,
+                RuleName = ruleName,
+                Statement = rule.GetStatement()
+            };
+
+            return newRuleViewModel;
         }
     }
 
@@ -178,118 +243,55 @@ namespace BatchRename
         }
     }
 
-    /* HANDLE Top Menu: Open/Save/Load */
+    /* Load from exists project */
+    public partial class MainWindow
+    {
+        public void LoadFrom(string path)
+        {
+            LoadProjectCommand.Execute(path);
+            _store.IsBlankProject = false;
+            _autoSaveService.EnableAutoSave();
+        }
+    }
+
+    /* HANDLE Top Menu: Open/Save/Load/Convert click*/
     public partial class MainWindow
     {
         private void TopMenu_OnNewClick(object sender, RoutedEventArgs e)
         {
-
+            NewCommand.Execute(null);
         }
 
         private void TopMenu_OnOpenClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Bare files (*.bare) | *.bare | All files (*.*) | *.*";
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-
-            }
+            OpenCommand.Execute(null);
         }
 
         private void TopMenu_OnSaveClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-
-            }
+            SaveOrSaveAsCommand.Execute(null);
         }
 
         private void TopMenu_OnStartClick(object sender, RoutedEventArgs e)
         {
-            StartConvert();
+            ConvertCommand.Execute(null);
         }
 
-        public void Open(string path)
+        private void TopMenu_OnSaveAsClick(object sender, RoutedEventArgs e)
         {
-            LoadFrom(path);
-            _hasSavedOnce = true;
+            SaveAsCommand.Execute(null);
         }
 
-        public void Save()
+        private void TopMenu_OnImportPresetClick(object sender, RoutedEventArgs e)
         {
-            if (!_hasSavedOnce)
-            {
-                SaveAs();
-                return;
-            }
-
-            _hasSavedOnce = true;
-            //_saveLoadService.Save();
+            ImportCommand.Execute(null);
+            // TODO Implement import preset command
         }
 
-        public void SaveAs()
+        private void TopMenu_OnExportPresetClick(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        public void StartConvert()
-        {
-            List<IRenameRule> rules = _store.GetAllPickedRule()
-                .Where(pickedRule => pickedRule.IsMarked == true)
-                .Select(pickedRule =>
-                {
-                    string ruleId = pickedRule.RuleId;
-
-                    IRenameRule rule = _pluginManager.CreateRule(ruleId);
-                    rule.SetParameter(pickedRule.Paramter);
-
-                    return rule;
-                }).ToList();
-
-            List<FileInfor> files = _store.GetAllNodeConverts()
-                .Where(nodeConvert => nodeConvert.IsMarked == true)
-                .Select(nodeConvert =>
-                {
-                    return new FileInfor
-                    {
-                        FileName = nodeConvert.Node.Name,
-                        Dir = nodeConvert.Node.Path,
-                        Extension = nodeConvert.Node.Extension
-                    };
-                })
-                .ToList();
-
-            ConvertPipeline pipeline = new ConvertPipeline(rules);
-
-            pipeline.Convert(files, (result, err) =>
-            {
-                Debug.WriteLine(result.FileName);
-                Debug.WriteLine(err);
-            });
-        }
-
-        public void LoadFrom(string projectPath)
-        {
-            LoadProjectToStore(projectPath);
-        }
-
-        private void LoadProjectToStore(string path)
-        {
-            if (!File.Exists(path))
-                return;
-
-            _saveLoadService.Path = path;
-
-            ProjectStore projectStore = _saveLoadService.Load();
-
-            _store.MainWindowPosition = projectStore.MainWindowPosition;
-            _store.DialogSelectRulePosition = projectStore.DialogSelectRulePosition;
-            _store.PickedRules = projectStore.PickedRules;
-            _store.EditingRules = projectStore.EditingRules;
-            _store.ConvertNodes = projectStore.ConvertNodes;
+            ExportCommand.Execute(null);
+            // TODO Implement Export preset command
         }
     }
 
@@ -298,26 +300,20 @@ namespace BatchRename
     {
         private static List<string> _list = new List<string>();
         DropFilePanel dragdropPanel = new DropFilePanel();
-        
+
+        private void OnStore_Loaded_NodeConvert()
+        {
+            ConvertNodes.Clear();
+            _store.GetAllNodeConverts().ForEach(nodeModel =>
+            {
+                NodeConvertViewModel nodeViewModel = CreateNodeConvertViewModel(nodeModel);
+                ConvertNodes.Add(nodeViewModel);
+            });
+        }
+
         private void OnNodeConvert_Created(NodeConvertModel nodeModel)
         {
-            NodeConvertModel newNode = nodeModel.Clone();
-
-            NodeConvertViewModel newNodeViewModel = new NodeConvertViewModel()
-            {
-                ConvertStatus = newNode.ConvertStatus,
-                IsMarked = newNode.IsMarked,
-                Id = newNode.Id,
-                Node = new NodeViewModel()
-                {
-                    CreatedDate = newNode.Node.CreatedDate,
-                    Name = newNode.Node.Name,
-                    Size = newNode.Node.Size,
-                    Extension = newNode.Node.Extension,
-                    Path = newNode.Node.Path
-                    //TODO: Set output path
-                }
-            };
+            NodeConvertViewModel newNodeViewModel = CreateNodeConvertViewModel(nodeModel);
             ConvertNodes.Add(newNodeViewModel);
         }
 
@@ -325,7 +321,7 @@ namespace BatchRename
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Multiselect = true;
-            
+
             if (openFileDialog.ShowDialog() == true)
             {
 
@@ -349,7 +345,9 @@ namespace BatchRename
 
                         NodeConvertModel nodeConvert = new NodeConvertModel()
                         {
-                            Node = node
+                            Node = node,
+                            ConvertStatus = ConvertStatus.PENDING,
+                            IsMarked = true,
                         };
 
                         _store.CreateNodeConvert(nodeConvert);
@@ -358,7 +356,18 @@ namespace BatchRename
             }
 
         }
-        private void handleFolder (string path)
+
+        private void filesControl_OnAddFolderClick(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                // TODO
+            }
+        }
+
+        private void handleFolder(string path)
         {
             string[] fileEntries = Directory.GetFiles(path);
             foreach (string fileName in fileEntries)
@@ -382,7 +391,7 @@ namespace BatchRename
 
                 // Note that you can have more than one file.
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-              
+
                 foreach (var file in files)
                 {
                     if (!_list.Contains(file))
@@ -434,8 +443,6 @@ namespace BatchRename
             FilePanel_Grid.Children.Remove(dragdropPanel);
         }
 
-
-
         private void DragEnter_Show(object sender, DragEventArgs e)
         {
             if (FilePanel_Grid.Children.Count < 3)
@@ -444,10 +451,10 @@ namespace BatchRename
                 FilePanel_Grid.Children.Add(dragdropPanel);
             }
         }
-     
+
         private void DragLeave_Hide(object sender, DragEventArgs e)
         {
-      
+
             if (FilePanel_Grid.Children.Count == 3)
             {
                 HitTestResult result = VisualTreeHelper.HitTest(FilePanel_Grid, e.GetPosition(FilePanel_Grid));
@@ -457,6 +464,29 @@ namespace BatchRename
                     FilePanel_Grid.Children.Remove(dragdropPanel);
                 }
             }
+        }
+
+        private NodeConvertViewModel CreateNodeConvertViewModel(NodeConvertModel nodeModel)
+        {
+            NodeConvertModel newNode = nodeModel.Clone();
+
+            NodeConvertViewModel newNodeViewModel = new NodeConvertViewModel()
+            {
+                ConvertStatus = newNode.ConvertStatus,
+                IsMarked = newNode.IsMarked,
+                Id = newNode.Id,
+                Node = new NodeViewModel()
+                {
+                    CreatedDate = newNode.Node.CreatedDate,
+                    Name = newNode.Node.Name,
+                    Size = newNode.Node.Size,
+                    Extension = newNode.Node.Extension,
+                    Path = newNode.Node.Path
+                    //TODO: Set output path
+                }
+            };
+
+            return newNodeViewModel;
         }
     }
 }

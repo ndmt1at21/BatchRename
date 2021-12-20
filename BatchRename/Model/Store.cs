@@ -12,6 +12,7 @@ namespace BatchRename.Model
     public partial class Store
     {
         public Action OnStoreChanged { get; set; }
+        public Action OnStoreLoaded { get; set; }
 
         public Store()
         {
@@ -21,6 +22,54 @@ namespace BatchRename.Model
             ConvertNodes = new Dictionary<string, NodeConvertModel>();
             OutputPath = null;
         }
+
+        public void LoadStoreFrom(ProjectStore projectStore)
+        {
+            MainWindowPosition = projectStore.MainWindowPosition;
+            DialogSelectRulePosition = projectStore.DialogSelectRulePosition;
+            PickedRules = projectStore.PickedRules;
+            EditingRules = projectStore.EditingRules;
+            ConvertNodes = projectStore.ConvertNodes;
+            OutputPath = projectStore.OutputPath;
+
+            if (PickedRules == null)
+            {
+                PickedRules = new Dictionary<string, RulePickedModel>();
+            }
+
+            if (EditingRules == null)
+            {
+                EditingRules = new Dictionary<string, RuleEditingModel>();
+            }
+
+            if (ConvertNodes == null)
+            {
+                ConvertNodes = new Dictionary<string, NodeConvertModel>();
+            }
+
+            OnStoreLoaded?.Invoke();
+        }
+
+        public ProjectStore ExportProjectStore()
+        {
+            return new ProjectStore
+            {
+                MainWindowPosition = MainWindowPosition,
+                DialogSelectRulePosition = DialogSelectRulePosition,
+                PickedRules = PickedRules,
+                EditingRules = EditingRules,
+                ConvertNodes = ConvertNodes,
+                OutputPath = OutputPath
+            };
+        }
+    }
+
+    public partial class Store
+    {
+        public string CurrentProjectPath { get; set; }
+        public bool IsSaveBefore { get; set; } = false;
+        public bool IsBlankProject { get; set; } = false;
+        public bool HasContentUnsaved { get; set; } = false;
     }
 
     public partial class Store
@@ -217,5 +266,5 @@ namespace BatchRename.Model
     {
         public List<RecentFileItem> RecentFiles { get; set; }
     }
-    
+
 }

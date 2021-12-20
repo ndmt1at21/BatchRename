@@ -15,6 +15,24 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
+    <Window.InputBindings>
+        <KeyBinding
+            Key="S"
+            Command="{Binding SaveOrSaveAsCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="O"
+            Command="{Binding OpenCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="N"
+            Command="{Binding NewCommand}"
+            Modifiers="Ctrl" />
+
+    </Window.InputBindings>
+
     <Window.Style>
         <Style TargetType="Window">
             <Setter Property="WindowChrome.WindowChrome">
@@ -35,8 +53,11 @@
                                 <ct:TitleBar
                                     x:Name="TopMenu"
                                     Height="{DynamicResource TitleBarHeight}"
+                                    OnExportPresetClick="TopMenu_OnExportPresetClick"
+                                    OnImportPresetClick="TopMenu_OnImportPresetClick"
                                     OnNewClick="TopMenu_OnNewClick"
                                     OnOpenClick="TopMenu_OnOpenClick"
+                                    OnSaveAsClick="TopMenu_OnSaveAsClick"
                                     OnSaveClick="TopMenu_OnSaveClick"
                                     OnStartClick="TopMenu_OnStartClick" />
                             </AdornerDecorator>
@@ -131,17 +152,16 @@
                 Name="FilePanel"
                 Grid.Column="2"
                 Focusable="False"
-                LastChildFill="True"
-                
-                >
+                LastChildFill="True">
                 <TextBlock DockPanel.Dock="Top" Style="{StaticResource H1}">Files</TextBlock>
 
                 <!--  Separate: DropShadowEffect performance  -->
-                <Grid x:Name="FilePanel_Grid" 
-                DragEnter="DragEnter_Show"
-                DragLeave="DragLeave_Hide"
-                AllowDrop="True"
-                Margin="{StaticResource PaddingTopSmall}">
+                <Grid
+                    x:Name="FilePanel_Grid"
+                    Margin="{StaticResource PaddingTopSmall}"
+                    AllowDrop="True"
+                    DragEnter="DragEnter_Show"
+                    DragLeave="DragLeave_Hide">
                     <Border
                         Background="{StaticResource SurfaceColor}"
                         CornerRadius="{StaticResource Radius}"
@@ -151,7 +171,8 @@
                         <ct:FilesControl
                             x:Name="filesControl"
                             ItemsSource="{Binding ConvertNodes}"
-                            OnAddFileClick="FilesControl_OnAddFileClick" />
+                            OnAddFileClick="FilesControl_OnAddFileClick"
+                            OnAddFolderClick="filesControl_OnAddFolderClick" />
                     </Border>
                 </Grid>
             </DockPanel>

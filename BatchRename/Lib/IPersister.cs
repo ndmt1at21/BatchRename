@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BatchRename.Lib
 {
-    public interface IPersister
+    public interface IPersister<T>
     {
-        void Save(string path, object data);
-        object Load(string path);
-        Task SaveAsync(string path, object data);
+        void Save(string path, T data);
+        T Load(string path);
+        Task SaveAsync(string path, T data);
         void Delete(string path);
     }
 }

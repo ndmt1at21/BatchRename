@@ -67,21 +67,23 @@
     </UserControl.Resources>
 
 
-    <StackPanel>
-        <TextBlock Margin="{DynamicResource PaddingTopSmall}" Style="{DynamicResource H3}">
-            Actions
-        </TextBlock>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock Margin="{DynamicResource PaddingTopSmall}" Style="{DynamicResource H3}">
+                Actions
+            </TextBlock>
 
-        <ct:RuleAction
-            Margin="{DynamicResource PaddingTopMedium}"
-            OnAddClick="RuleAction_OnAddClick"
-            OnDownClick="RuleAction_OnDownClick"
-            OnRemoveClick="RuleAction_OnRemoveClick"
-            OnUpClick="RuleAction_OnUpClick" />
+            <ct:RuleAction
+                Margin="{DynamicResource PaddingTopMedium}"
+                OnAddClick="RuleAction_OnAddClick"
+                OnDownClick="RuleAction_OnDownClick"
+                OnRemoveClick="RuleAction_OnRemoveClick"
+                OnUpClick="RuleAction_OnUpClick" />
 
-        <TextBlock Margin="{DynamicResource PaddingTopLarge}" Style="{DynamicResource H3}">
-            All Rules
-        </TextBlock>
+            <TextBlock Margin="{DynamicResource PaddingTopLarge}" Style="{DynamicResource H3}">
+                All Rules
+            </TextBlock>
+        </StackPanel>
 
         <ct:RuleListView
             Margin="{DynamicResource PaddingTopMedium}"
@@ -97,5 +99,5 @@
                 <ColumnDefinition Name="col1" Width="100" />
             </Grid.ColumnDefinitions>
         </Grid>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

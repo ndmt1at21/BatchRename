@@ -13,6 +13,16 @@ namespace BatchRename.Lib
         public DateTime LastModified { get; set; }
     }
 
+    public class RecentFileItems
+    {
+        public List<RecentFileItem> Items { get; set; }
+
+        public RecentFileItems()
+        {
+            Items = new List<RecentFileItem>();
+        }
+    }
+
     public class RecentFileConfig
     {
         public string Path;
@@ -21,43 +31,43 @@ namespace BatchRename.Lib
 
     public class RecentFileService
     {
-        private IPersister _persister;
+        private IPersister<RecentFileItems> _persister;
         private RecentFileConfig _config;
 
         public RecentFileService(RecentFileConfig config)
         {
             _config = config;
-            _persister = new JsonPersister();
+            _persister = new JsonPersister<RecentFileItems>();
         }
 
-        public List<RecentFileItem> GetRecentFiles()
+        public RecentFileItems GetRecentFiles()
         {
             try
             {
-                List<RecentFileItem> recentFiles = (List<RecentFileItem>)_persister.Load(_config.Path);
-                return recentFiles == null ? new List<RecentFileItem>() : recentFiles;
+                RecentFileItems recentFiles = _persister.Load(_config.Path);
+                return recentFiles == null ? new RecentFileItems() : recentFiles;
             }
             catch
             {
-                return new List<RecentFileItem>();
+                return new RecentFileItems();
             }
         }
 
         public void AddRecent(RecentFileItem recentFile)
         {
-            List<RecentFileItem> recentFiles = GetRecentFiles();
+            RecentFileItems recentFiles = GetRecentFiles();
 
-            if (recentFiles.Count >= _config.MaxItem)
-                recentFiles.RemoveAt(0);
-            recentFiles.Add(recentFile);
+            if (recentFiles.Items.Count >= _config.MaxItem)
+                recentFiles.Items.RemoveAt(0);
+            recentFiles.Items.Add(recentFile);
 
             _persister.Save(_config.Path, recentFiles);
         }
 
         public void RemoveRecent(string path)
         {
-            List<RecentFileItem> recentFiles = GetRecentFiles();
-            recentFiles.RemoveAll(f => f.Path == path);
+            RecentFileItems recentFiles = GetRecentFiles();
+            recentFiles.Items.RemoveAll(f => f.Path == path);
             _persister.Save(_config.Path, recentFiles);
         }
     }

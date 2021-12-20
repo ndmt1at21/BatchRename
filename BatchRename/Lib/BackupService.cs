@@ -12,30 +12,40 @@ namespace BatchRename.Lib
         public string Directory { get; set; }
     }
 
-    public class BackupService<T>
+    public class BackupService<T> : SaveService<T>
     {
+        public Func<T> GetBackupData;
+        public Func<string> GetBackupPath;
+
         public Action OnBackup;
         public Action OnBackuped;
-        public Func<T> OnBeforeBackup;
 
-        public string FileName { get; set; }
-        public string FilePath => $"{_config.Directory}\\{FileName}.{_config.Extension}";
+        private string _currentFileName { get; set; }
+        public string CurrentFilePath => $"{_config.Directory}\\{_currentFileName}.{_config.Extension}_{_backupStartTime}";
 
         private BackupConfig _config { get; set; }
         private DispatcherTimer _dispatcherTimer { get; set; }
         private bool _isBackup { get; set; } = false;
+        private readonly DateTime _backupStartTime = DateTime.Now;
 
-        private IPersister _persister;
-
-        public BackupService(BackupConfig config)
+        public BackupService(BackupConfig config, IPersister<T> persister) : base(persister)
         {
             _config = config;
-            _persister = new JsonPersister();
+            _persister = new JsonPersister<T>();
         }
 
         public bool CheckExistBackupFile()
         {
-            return File.Exists(FilePath);
+            var files = Directory.GetFiles(_config.Directory);
+
+            foreach (var file in files)
+            {
+                if (Path.GetExtension(file) == _config.Extension)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void StartBackup()
@@ -55,42 +65,37 @@ namespace BatchRename.Lib
 
         public T LoadBackupFile()
         {
-            T result = (T)_persister.Load(FilePath);
-
-            if (result == null)
-                throw new Exception("Invalid autosaved file");
-
-            return result;
+            try
+            {
+                T result = _persister.Load(CurrentFilePath);
+                return result;
+            }
+            catch
+            {
+                throw new Exception("Invalid backup file structure");
+            }
         }
 
-        private void Backup_Tick(object sender, EventArgs e)
+        private async void Backup_Tick(object sender, EventArgs e)
         {
             if (_isBackup)
                 return;
 
-            T data = OnBeforeBackup.Invoke();
+            T data = GetBackupData.Invoke();
+            string path = GetBackupPath.Invoke();
 
             if (data == null)
                 throw new Exception("Invalid backup data");
 
             DeleteBackupFile();
-            SaveAsync(data);
+
+            _currentFileName = Path.GetFileName(path);
+            await SaveAsync(data, CurrentFilePath);
         }
 
         private void DeleteBackupFile()
         {
-            _persister.Delete(FilePath);
-        }
-
-        private async void SaveAsync(T data)
-        {
-            OnBackup?.Invoke();
-            _isBackup = true;
-
-            await _persister.SaveAsync(FilePath, data);
-
-            _isBackup = false;
-            OnBackuped?.Invoke();
+            _persister.Delete(CurrentFilePath);
         }
     }
 }

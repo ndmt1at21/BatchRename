@@ -65,7 +65,7 @@ namespace BatchRename.View
 
         private void StartFromProject(string path)
         {
-            MainWindow mainWindow = new MainWindow(_pluginManager, _recentFileService);
+            MainWindow mainWindow = new MainWindow(_pluginManager);
             mainWindow.LoadFrom(path);
             mainWindow.Show();
             Close();
@@ -73,8 +73,12 @@ namespace BatchRename.View
 
         private void StartFromApp()
         {
-            RecentWindow recentWindow = new RecentWindow(_recentFileService);
-            recentWindow.Show();
+            //RecentWindow recentWindow = new RecentWindow(_recentFileService);
+            //recentWindow.Show();
+            //Close();
+
+            MainWindow mainWindow = new MainWindow(_pluginManager);
+            mainWindow.Show();
             Close();
         }
 
@@ -82,7 +86,7 @@ namespace BatchRename.View
         {
             BaseConfigure();
 
-            StartFromProject("djfhjdhfjdfj");
+            StartFromApp();
 
             //if (_startupEventArgs.Args.Length > 1)
             //{

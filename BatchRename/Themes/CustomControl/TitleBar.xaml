@@ -30,15 +30,25 @@
                 OnSaveClick="topMenu_OnSaveClick"
                 OnStartClick="topMenu_OnStartClick" />
 
-            <!--  Window Button Command  -->
             <StackPanel
                 Height="40"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Orientation="Horizontal">
+                <!--  Quick Menu  -->
+                <ct:AppMenu
+                    OnExitClick="AppMenu_OnExitClick"
+                    OnExportPresetClick="AppMenu_OnExportPresetClick"
+                    OnImportPresetClick="AppMenu_OnImportPresetClick"
+                    OnNewProjectClick="AppMenu_OnNewProjectClick"
+                    OnOpenProjectClick="AppMenu_OnOpenProjectClick"
+                    OnSaveAsClick="AppMenu_OnSaveAsClick"
+                    OnSaveProjectClick="AppMenu_OnSaveProjectClick" />
 
+                <!--  Window Button Command  -->
                 <ct:WindowCommandButtons />
             </StackPanel>
+
         </Grid>
     </Border>
 </UserControl>
