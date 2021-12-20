@@ -31,6 +31,21 @@
             Command="{Binding NewCommand}"
             Modifiers="Ctrl" />
 
+        <KeyBinding
+            Key="I"
+            Command="{Binding ImportCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="E"
+            Command="{Binding ExportCommand}"
+            Modifiers="Ctrl" />
+
+        <KeyBinding
+            Key="F4"
+            Command="Close"
+            Modifiers="Alt" />
+
     </Window.InputBindings>
 
     <Window.Style>
