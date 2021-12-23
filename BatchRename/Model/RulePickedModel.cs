@@ -23,7 +23,7 @@ namespace BatchRename.Model
                 RuleId = RuleId,
                 Position = Position,
                 IsMarked = IsMarked,
-                Paramter = Paramter
+                Paramter = Paramter,
             };
         }
     }

@@ -66,10 +66,22 @@ namespace BatchRename.Model
 
     public partial class Store
     {
-        public string CurrentProjectPath { get; set; }
+        private string _currentProjectPath { get; set; }
+        public string CurrentProjectPath
+        {
+            get { return _currentProjectPath; }
+            set
+            {
+                _currentProjectPath = value;
+                OnProjectPathChanged?.Invoke();
+            }
+        }
+
         public bool IsSaveBefore { get; set; } = false;
         public bool IsBlankProject { get; set; } = false;
         public bool HasContentUnsaved { get; set; } = false;
+
+        public Action OnProjectPathChanged;
     }
 
     public partial class Store
@@ -229,14 +241,15 @@ namespace BatchRename.Model
 
             if (existNode == null) return;
 
-            if (updatedNodeConvert.Node != null)
-                existNode.Node = updatedNodeConvert.Node.Clone();
-
+            existNode.Node = updatedNodeConvert.Node.Clone();
             existNode.ConvertStatus = updatedNodeConvert.ConvertStatus;
+            existNode.NewName = updatedNodeConvert.NewName;
+            existNode.IsMarked = updatedNodeConvert.IsMarked;
 
             ConvertNodes[existNode.Id] = existNode;
 
-            OnNodeConvertCreated?.Invoke(existNode.Clone());
+            Debug.WriteLine(existNode.NewName);
+            OnNodeConvertUpdated?.Invoke(existNode.Clone());
             OnStoreChanged?.Invoke();
         }
 

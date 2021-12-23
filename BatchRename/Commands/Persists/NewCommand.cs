@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BatchRename.Commands
 {
@@ -16,10 +17,13 @@ namespace BatchRename.Commands
         public NewCommand(PluginManager pluginManager)
         {
             _pluginManager = pluginManager;
+
+            Gesture = new KeyGesture(Key.N, ModifierKeys.Control);
         }
 
         public override void Execute(object parameter)
         {
+            MainWindow.ProjectNumber++;
             MainWindow mainWindow = new MainWindow(_pluginManager);
             mainWindow.Show();
         }

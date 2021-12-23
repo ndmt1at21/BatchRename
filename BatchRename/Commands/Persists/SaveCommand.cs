@@ -3,6 +3,7 @@ using BatchRename.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,9 @@ namespace BatchRename.Commands
             _store.CurrentProjectPath = savePath;
             _store.IsSaveBefore = true;
             _store.IsBlankProject = false;
+            _store.HasContentUnsaved = false;
+
+            RecentFiles.Shared.AddRecent(_store.CurrentProjectPath);
         }
     }
 }

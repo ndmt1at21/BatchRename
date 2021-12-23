@@ -19,122 +19,149 @@ namespace BatchRename.Themes.CustomControl
 {
     public partial class AppMenu : UserControl
     {
-        public event RoutedEventHandler OnNewProjectClick;
-        public event RoutedEventHandler OnOpenProjectClick;
-        public event RoutedEventHandler OnSaveProjectClick;
-        public event RoutedEventHandler OnSaveAsClick;
-        public event RoutedEventHandler OnExitClick;
+        public static readonly DependencyProperty NewCommandProperty =
+           DependencyProperty.Register(
+               "NewCommand",
+               typeof(ICommand),
+               typeof(AppMenu),
+               new UIPropertyMetadata(null)
+        );
 
-        public event RoutedEventHandler OnImportPresetClick;
-        public event RoutedEventHandler OnExportPresetClick;
+        public ICommand NewCommand
+        {
+            get { return (ICommand)GetValue(NewCommandProperty); }
+            set { SetValue(NewCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SaveCommandProperty =
+           DependencyProperty.Register(
+               "SaveCommand",
+               typeof(ICommand),
+               typeof(AppMenu),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand SaveCommand
+        {
+            get { return (ICommand)GetValue(SaveCommandProperty); }
+            set { SetValue(SaveCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SaveAsCommandProperty =
+            DependencyProperty.Register(
+                "SaveAsCommand",
+                typeof(ICommand),
+                typeof(AppMenu),
+                new UIPropertyMetadata(null)
+       );
+
+        public ICommand SaveAsCommand
+        {
+            get { return (ICommand)GetValue(SaveAsCommandProperty); }
+            set { SetValue(SaveAsCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty OpenCommandProperty =
+           DependencyProperty.Register(
+               "OpenCommand",
+               typeof(ICommand),
+               typeof(AppMenu),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand OpenCommand
+        {
+            get { return (ICommand)GetValue(OpenCommandProperty); }
+            set { SetValue(OpenCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExportCommandProperty =
+           DependencyProperty.Register(
+               "ExportCommand",
+               typeof(ICommand),
+               typeof(AppMenu),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand ExportCommand
+        {
+            get { return (ICommand)GetValue(ExportCommandProperty); }
+            set { SetValue(ExportCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ImportCommandProperty =
+           DependencyProperty.Register(
+               "ImportCommand",
+               typeof(ICommand),
+               typeof(AppMenu),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand ImportCommand
+        {
+            get { return (ICommand)GetValue(ImportCommandProperty); }
+            set { SetValue(ImportCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExitCommandProperty =
+           DependencyProperty.Register(
+               "ExitCommand",
+               typeof(ICommand),
+               typeof(AppMenu),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand ExitCommand
+        {
+            get { return (ICommand)GetValue(ExitCommandProperty); }
+            set { SetValue(ExitCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddRuleCommandProperty =
+          DependencyProperty.Register(
+              "AddRuleCommand",
+              typeof(ICommand),
+              typeof(AppMenu),
+              new UIPropertyMetadata(null)
+        );
+
+        public ICommand AddRuleCommand
+        {
+            get { return (ICommand)GetValue(AddRuleCommandProperty); }
+            set { SetValue(AddRuleCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddFileCommandProperty =
+          DependencyProperty.Register(
+              "AddFileCommand",
+              typeof(ICommand),
+              typeof(AppMenu),
+              new UIPropertyMetadata(null)
+);
+
+        public ICommand AddFileCommand
+        {
+            get { return (ICommand)GetValue(AddFileCommandProperty); }
+            set { SetValue(AddFileCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddFolderCommandProperty =
+          DependencyProperty.Register(
+              "AddFolderCommand",
+              typeof(ICommand),
+              typeof(AppMenu),
+              new UIPropertyMetadata(null)
+);
+
+        public ICommand AddFolderCommand
+        {
+            get { return (ICommand)GetValue(AddFolderCommandProperty); }
+            set { SetValue(AddFolderCommandProperty, value); }
+        }
 
         public AppMenu()
         {
             InitializeComponent();
-        }
-
-        private void btnNewProject_Click(object sender, RoutedEventArgs e)
-        {
-            OnNewProjectClick?.Invoke(sender, e);
-        }
-
-        private void btnOpenProject_Click(object sender, RoutedEventArgs e)
-        {
-            OnOpenProjectClick?.Invoke(sender, e);
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            OnSaveProjectClick?.Invoke(sender, e);
-        }
-
-        private void btnSaveAs_Click(object sender, RoutedEventArgs e)
-        {
-            OnSaveAsClick?.Invoke(sender, e);
-        }
-
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-            OnExitClick?.Invoke(sender, e);
-        }
-
-        private void btnImportPreset_Click(object sender, RoutedEventArgs e)
-        {
-            OnImportPresetClick?.Invoke(sender, e);
-        }
-
-        private void btnExportPreset_Click(object sender, RoutedEventArgs e)
-        {
-            OnExportPresetClick?.Invoke(sender, e);
-        }
-    }
-
-    public partial class AppMenu
-    {
-        private void New_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Import_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Export_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Close_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void New_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            Debug.WriteLine("new Exceuta");
-            OnNewProjectClick?.Invoke(sender, e);
-        }
-
-        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            OnOpenProjectClick?.Invoke(sender, e);
-        }
-
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            OnSaveProjectClick?.Invoke(sender, e);
-        }
-
-        private void SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            OnSaveAsClick?.Invoke(sender, e);
-        }
-
-        private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            OnExitClick?.Invoke(sender, e);
-        }
-
-        private void Import_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            OnImportPresetClick?.Invoke(sender, e);
-        }
-
-        private void Export_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            OnExportPresetClick?.Invoke(sender, e);
         }
     }
 }

@@ -27,6 +27,8 @@ namespace BatchRename.Commands
             ProjectStore projectStore = _loadService.Load(loadPath);
             _store.LoadStoreFrom(projectStore);
             _store.CurrentProjectPath = loadPath;
+            _store.IsBlankProject = false;
+            _store.IsSaveBefore = true;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31729.503
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BatchRename", "BatchRename\BatchRename.csproj", "{24456FE6-C8CB-4B10-9028-D8B7877DE643}"
 EndProject
@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BRControl", "BRControl\BRCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{AFBD242C-7836-46D3-A875-49FEFF94ABD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckingExceptions", "CheckingExceptions\CheckingExceptions.csproj", "{2068C860-5736-4935-B9CC-C87A0DB044E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckingExceptions", "CheckingExceptions\CheckingExceptions.csproj", "{2068C860-5736-4935-B9CC-C87A0DB044E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

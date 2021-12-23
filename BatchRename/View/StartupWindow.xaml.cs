@@ -28,19 +28,8 @@ namespace BatchRename.View
         public string LoadStatusMessage { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //private Store _store { get; set; }
         private PluginManager _pluginManager { get; set; }
-
-        //private SaveLoadService<ProjectStore> _saveLoadService { get; set; }
-        //private SaveLoadConfig _saveLoadConfig { get; set; }
-
-        //private BackupService<ProjectStore> _backupService { get; set; }
-        //private BackupConfig _backupConfig { get; set; }
-
-        //private MainWindow _mainWindow { get; set; }
-        //private RecentWindow _recentWindow { get; set; }
         private StartupEventArgs _startupEventArgs { get; set; }
-        private string _appDataPath { get; set; }
 
         public StartupWindow(StartupEventArgs e)
         {
@@ -49,6 +38,21 @@ namespace BatchRename.View
             _startupEventArgs = e;
             LoadStatusMessage = "Loading Batch Rename...";
             DataContext = this;
+        }
+
+        private void Configure()
+        {
+            BaseConfigure();
+
+            if (_startupEventArgs.Args.Length > 1)
+            {
+                StartFromProject(_startupEventArgs.Args[1]);
+            }
+
+            if (_startupEventArgs.Args.Length == 0)
+            {
+                StartFromApp();
+            }
         }
 
         private void BaseConfigure()
@@ -66,30 +70,9 @@ namespace BatchRename.View
 
         private void StartFromApp()
         {
-            //RecentWindow recentWindow = new RecentWindow(_recentFileService);
-            //recentWindow.Show();
-            //Close();
-
-            MainWindow mainWindow = new MainWindow(_pluginManager);
-            mainWindow.Show();
+            RecentWindow recentWindow = new RecentWindow(_pluginManager);
+            recentWindow.Show();
             Close();
-        }
-
-        private void Configure()
-        {
-            BaseConfigure();
-
-            StartFromApp();
-
-            //if (_startupEventArgs.Args.Length > 1)
-            //{
-            //    StartFromProject(_startupEventArgs.Args[1]);
-            //}
-
-            //if (_startupEventArgs.Args.Length == 0)
-            //{
-            //    StartFromApp();
-            //}
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)

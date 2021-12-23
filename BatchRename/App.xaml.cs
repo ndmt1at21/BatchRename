@@ -27,11 +27,15 @@ namespace BatchRename
             string recentFilesPath = Path.Combine(appDataPath, "RecentFiles", "recent.json");
             string backupPath = Path.Combine(appDataPath, "BackupFiles");
 
-            Debug.WriteLine(recentFilesPath);
-
             Environment.SetEnvironmentVariable("AppDataPath", appDataPath);
             Environment.SetEnvironmentVariable("RecentFilesPath", recentFilesPath);
             Environment.SetEnvironmentVariable("BackupFilesPath", backupPath);
+
+            RecentFiles.Shared.SetConfig(new RecentFileConfig
+            {
+                MaxItem = 10,
+                Path = Environment.GetEnvironmentVariable("RecentFilesPath"),
+            });
 
             StartupWindow startupWindow = new StartupWindow(e);
             startupWindow.Show();

@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,21 +24,26 @@ namespace BatchRename.Commands
 
         public override void Execute(object parameter)
         {
-            Debug.WriteLine("In Save As");
-
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.RestoreDirectory = true;
             saveFileDialog.Title = "Save As";
             saveFileDialog.DefaultExt = ".bare";
             saveFileDialog.CheckPathExists = true;
             saveFileDialog.Filter = "Batch Rename project (*.bare)|*.bare";
+            saveFileDialog.FileName = Path.GetFileName(_store.CurrentProjectPath);
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                _saveService.Save(_store.ExportProjectStore(), saveFileDialog.FileName);
-                _store.CurrentProjectPath = saveFileDialog.FileName;
+                string savePath = saveFileDialog.FileName;
+
+                _saveService.Save(_store.ExportProjectStore(), savePath);
+                _store.CurrentProjectPath = savePath;
                 _store.IsSaveBefore = true;
                 _store.IsBlankProject = false;
+                _store.HasContentUnsaved = false;
+
+
+                RecentFiles.Shared.AddRecent(_store.CurrentProjectPath);
             }
         }
     }

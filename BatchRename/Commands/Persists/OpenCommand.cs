@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace BatchRename.Commands
 {
@@ -17,6 +18,8 @@ namespace BatchRename.Commands
         public OpenCommand(PluginManager pluginManager)
         {
             _pluginManager = pluginManager;
+
+            Gesture = new KeyGesture(Key.O, ModifierKeys.Control);
         }
 
         public override void Execute(object parameter)

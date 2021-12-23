@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/ColorsDark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Typography.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Base/Other.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/WindowStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/ScrollbarStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/DataGridStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/BRCheckboxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/ActionButtonStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/TabControlStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/BatchRename;component/Themes/Styles/TabItemStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

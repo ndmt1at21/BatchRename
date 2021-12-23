@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BatchRename.Themes.CustomControl
 {
@@ -9,11 +11,25 @@ namespace BatchRename.Themes.CustomControl
     /// </summary>
     public partial class WindowCommandButtons : UserControl
     {
+        public static readonly DependencyProperty ExitCommandProperty =
+            DependencyProperty.Register(
+                "ExitCommand",
+                typeof(ICommand),
+                typeof(WindowCommandButtons),
+                new PropertyMetadata(null)
+            );
+
+        public ICommand ExitCommand
+        {
+            get => (ICommand)GetValue(ExitCommandProperty);
+            set => SetValue(ExitCommandProperty, value);
+        }
+
         public static readonly DependencyProperty ShowMinimizeProperty =
             DependencyProperty.Register(
                 "ShowMinimizeBackground",
                 typeof(Boolean),
-                typeof(StackPanel),
+                typeof(WindowCommandButtons),
                 new PropertyMetadata(true)
             );
 
@@ -21,7 +37,7 @@ namespace BatchRename.Themes.CustomControl
           DependencyProperty.Register(
               "ShowRestoreBackground",
               typeof(Boolean),
-              typeof(StackPanel),
+              typeof(WindowCommandButtons),
               new PropertyMetadata(true)
           );
 
@@ -59,10 +75,13 @@ namespace BatchRename.Themes.CustomControl
             SystemCommands.MinimizeWindow(window);
         }
 
-        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        private void BRButton_Click(object sender, RoutedEventArgs e)
         {
-            Window window = Window.GetWindow(this);
-            SystemCommands.CloseWindow(window);
+            if (ExitCommand == null)
+            {
+                Window window = Window.GetWindow(this);
+                SystemCommands.CloseWindow(window);
+            }
         }
     }
 }

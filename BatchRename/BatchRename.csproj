@@ -4,9 +4,10 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net5.0-windows</TargetFramework>
 		<UseWPF>true</UseWPF>
-		<ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
+		<ApplicationIcon>icon.ico</ApplicationIcon>
 		<Win32Resource />
 		<Platforms>AnyCPU;x86;x64</Platforms>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,6 +17,17 @@
 		<None Remove="Assets\Fonts\Poppins-Medium.ttf" />
 		<None Remove="Assets\Fonts\Poppins-Regular.ttf" />
 		<None Remove="Assets\img\dropfile.jpg" />
+		<None Remove="icon.ico" />
+		<None Remove="iconrecovery.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="icon.ico">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+		<Content Include="iconrecovery.ico">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -53,6 +65,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Page Update="Themes\Base\ColorsDark.xaml">
+			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
+		<Page Update="Themes\BRStyleDark.xaml">
+			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+		</Page>
 		<Page Update="Themes\Styles\BaseStyle.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 			<SubType>Designer</SubType>
@@ -60,21 +78,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Properties\Settings.Designer.cs">
-	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Settings.settings</DependentUpon>
-	  </Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Plugins\" />
+	</ItemGroup>
+
+	<!--<ItemGroup>
 	  <None Update="Properties\Settings.settings">
 	    <Generator>SettingsSingleFileGenerator</Generator>
 	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Plugins\AddCounterToEndRule\x64\Debug\" />
-	</ItemGroup>
+	</ItemGroup>-->
 </Project>

@@ -24,6 +24,8 @@ namespace BatchRename.Commands
 
             _saveCommand = new SaveCommand(_store, saveService);
             _saveAsCommand = new SaveAsCommand(_store, saveService);
+
+            Gesture = new KeyGesture(Key.S, ModifierKeys.Control);
         }
 
         public override void Execute(object parameter)

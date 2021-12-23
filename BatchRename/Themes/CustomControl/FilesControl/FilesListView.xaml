@@ -72,6 +72,28 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
 
+            <DataGridTemplateColumn Width="100">
+                <DataGridTemplateColumn.Header>
+                    <TextBlock
+                        Margin="{StaticResource PaddingLeftMedium}"
+                        FontFamily="{DynamicResource PoppinsBold}"
+                        FontSize="12"
+                        TextTrimming="WordEllipsis">
+                        NEW NAME
+                    </TextBlock>
+                </DataGridTemplateColumn.Header>
+
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Margin="{StaticResource PaddingLeftMedium}"
+                            VerticalAlignment="Center"
+                            Text="{Binding NewName,
+                                           Mode=OneWay}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
             <DataGridTemplateColumn Width="*">
                 <DataGridTemplateColumn.Header>
                     <TextBlock
@@ -88,6 +110,27 @@
                             Margin="{StaticResource PaddingLeftMedium}"
                             VerticalAlignment="Center"
                             Text="{Binding Node.Path,
+                                           Mode=OneWay}" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="*">
+                <DataGridTemplateColumn.Header>
+                    <TextBlock
+                        Margin="{StaticResource PaddingLeftMedium}"
+                        FontFamily="{DynamicResource PoppinsBold}"
+                        FontSize="12">
+                        OUTPUT PATH
+                    </TextBlock>
+                </DataGridTemplateColumn.Header>
+
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Margin="{StaticResource PaddingLeftMedium}"
+                            VerticalAlignment="Center"
+                            Text="{Binding OutputPath,
                                            Mode=OneWay}" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

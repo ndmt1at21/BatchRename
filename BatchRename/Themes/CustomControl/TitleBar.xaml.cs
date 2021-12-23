@@ -1,79 +1,198 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BatchRename.Themes.CustomControl
 {
     public partial class TitleBar : UserControl
     {
-        public event RoutedEventHandler OnOpenClick;
-        public event RoutedEventHandler OnSaveClick;
-        public event RoutedEventHandler OnNewClick;
-        public event RoutedEventHandler OnStartClick;
+        public static readonly DependencyProperty SaveStatusProperty =
+             DependencyProperty.Register(
+                 "SaveStatus",
+                 typeof(string),
+                 typeof(TitleBar),
+                 new UIPropertyMetadata("Empty")
+        );
 
-        public event RoutedEventHandler OnSaveAsClick;
-        public event RoutedEventHandler OnImportPresetClick;
-        public event RoutedEventHandler OnExportPresetClick;
-        public event RoutedEventHandler OnExitClick;
+        public string SaveStatus
+        {
+            get { return (string)GetValue(SaveStatusProperty); }
+            set { SetValue(SaveStatusProperty, value); }
+        }
+
+        public static readonly DependencyProperty ProjectNameProperty =
+             DependencyProperty.Register(
+                 "ProjectName",
+                 typeof(string),
+                 typeof(TitleBar),
+                 new UIPropertyMetadata(null)
+        );
+
+        public string ProjectName
+        {
+            get { return (string)GetValue(ProjectNameProperty); }
+            set { SetValue(ProjectNameProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty NewCommandProperty =
+             DependencyProperty.Register(
+                 "NewCommand",
+                 typeof(ICommand),
+                 typeof(TitleBar),
+                 new UIPropertyMetadata(null)
+        );
+
+        public ICommand NewCommand
+        {
+            get { return (ICommand)GetValue(NewCommandProperty); }
+            set { SetValue(NewCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty OpenCommandProperty =
+             DependencyProperty.Register(
+                 "OpenCommand",
+                 typeof(ICommand),
+                 typeof(TitleBar),
+                 new UIPropertyMetadata(null)
+        );
+
+        public ICommand OpenCommand
+        {
+            get { return (ICommand)GetValue(OpenCommandProperty); }
+            set { SetValue(OpenCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SaveCommandProperty =
+            DependencyProperty.Register(
+                "SaveCommand",
+                typeof(ICommand),
+                typeof(TitleBar),
+                new UIPropertyMetadata(null)
+       );
+
+        public ICommand SaveCommand
+        {
+            get { return (ICommand)GetValue(SaveCommandProperty); }
+            set { SetValue(SaveCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SaveAsCommandProperty =
+            DependencyProperty.Register(
+                "SaveAsCommand",
+                typeof(ICommand),
+                typeof(TitleBar),
+                new UIPropertyMetadata(null)
+       );
+
+        public ICommand SaveAsCommand
+        {
+            get { return (ICommand)GetValue(SaveAsCommandProperty); }
+            set { SetValue(SaveAsCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty StartCommandProperty =
+           DependencyProperty.Register(
+               "StartCommand",
+               typeof(ICommand),
+               typeof(TitleBar),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand StartCommand
+        {
+            get { return (ICommand)GetValue(StartCommandProperty); }
+            set { SetValue(StartCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExportCommandProperty =
+           DependencyProperty.Register(
+               "ExportCommand",
+               typeof(ICommand),
+               typeof(TitleBar),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand ExportCommand
+        {
+            get { return (ICommand)GetValue(ExportCommandProperty); }
+            set { SetValue(ExportCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ImportCommandProperty =
+           DependencyProperty.Register(
+               "ImportCommand",
+               typeof(ICommand),
+               typeof(TitleBar),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand ImportCommand
+        {
+            get { return (ICommand)GetValue(ImportCommandProperty); }
+            set { SetValue(ImportCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddRuleCommandProperty =
+          DependencyProperty.Register(
+              "AddRuleCommand",
+              typeof(ICommand),
+              typeof(TitleBar),
+              new UIPropertyMetadata(null)
+        );
+
+        public ICommand AddRuleCommand
+        {
+            get { return (ICommand)GetValue(AddRuleCommandProperty); }
+            set { SetValue(AddRuleCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddFileCommandProperty =
+          DependencyProperty.Register(
+              "AddFileCommand",
+              typeof(ICommand),
+              typeof(TitleBar),
+              new UIPropertyMetadata(null)
+        );
+
+        public ICommand AddFileCommand
+        {
+            get { return (ICommand)GetValue(AddFileCommandProperty); }
+            set { SetValue(AddFileCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty AddFolderCommandProperty =
+          DependencyProperty.Register(
+              "AddFolderCommand",
+              typeof(ICommand),
+              typeof(TitleBar),
+              new UIPropertyMetadata(null)
+        );
+
+        public ICommand AddFolderCommand
+        {
+            get { return (ICommand)GetValue(AddFolderCommandProperty); }
+            set { SetValue(AddFolderCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExitCommandProperty =
+          DependencyProperty.Register(
+              "ExitCommand",
+              typeof(ICommand),
+              typeof(TitleBar),
+              new UIPropertyMetadata(null)
+        );
+
+        public ICommand ExitCommand
+        {
+            get { return (ICommand)GetValue(ExitCommandProperty); }
+            set { SetValue(ExitCommandProperty, value); }
+        }
 
         public TitleBar()
         {
             InitializeComponent();
-        }
-
-        private void topMenu_OnNewClick(object sender, RoutedEventArgs e)
-        {
-            OnNewClick?.Invoke(sender, e);
-        }
-
-        private void topMenu_OnOpenClick(object sender, RoutedEventArgs e)
-        {
-            OnOpenClick?.Invoke(sender, e);
-        }
-
-        private void topMenu_OnStartClick(object sender, RoutedEventArgs e)
-        {
-            OnStartClick?.Invoke(sender, e);
-        }
-
-        private void topMenu_OnSaveClick(object sender, RoutedEventArgs e)
-        {
-            OnSaveClick?.Invoke(sender, e);
-        }
-
-        private void AppMenu_OnExitClick(object sender, RoutedEventArgs e)
-        {
-            OnExitClick?.Invoke(sender, e);
-        }
-
-        private void AppMenu_OnOpenProjectClick(object sender, RoutedEventArgs e)
-        {
-            OnOpenClick?.Invoke(sender, e);
-        }
-
-        private void AppMenu_OnSaveAsClick(object sender, RoutedEventArgs e)
-        {
-            OnSaveAsClick?.Invoke(sender, e);
-        }
-
-        private void AppMenu_OnSaveProjectClick(object sender, RoutedEventArgs e)
-        {
-            OnSaveClick?.Invoke(sender, e);
-        }
-
-        private void AppMenu_OnImportPresetClick(object sender, RoutedEventArgs e)
-        {
-            OnImportPresetClick?.Invoke(sender, e);
-        }
-
-        private void AppMenu_OnExportPresetClick(object sender, RoutedEventArgs e)
-        {
-            OnExportPresetClick?.Invoke(sender, e);
-        }
-
-        private void AppMenu_OnNewProjectClick(object sender, RoutedEventArgs e)
-        {
-            OnNewClick?.Invoke(sender, e);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace AddCounterToEndRule
             if (_ruleParameter == null)
                 throw new InvalidCastException("Invalid parameter");
 
-            return $"Add count: start from {_ruleParameter.StartFrom} with step: {_ruleParameter.Step} to end";
+            return $"Add count: start from \"{_ruleParameter.StartFrom}\" with step: \"{_ruleParameter.Step}\" to end";
         }
 
         private FileInfor convert(FileInfor file)
@@ -49,11 +49,12 @@ namespace AddCounterToEndRule
             if (_ruleParameter == null)
                 return file;
 
-            int startFrom = _ruleParameter.StartFrom;
+            string fileName = file.FileName;
             int countLength = _ruleParameter.PartCountLength;
             char padChar = _ruleParameter.PadChar;
 
-            string newFileName = "ssss";
+            string newFileName = fileName.PadRight(countLength, padChar);
+            _ruleParameter.StartFrom += _ruleParameter.Step;
 
             return new FileInfor
             {

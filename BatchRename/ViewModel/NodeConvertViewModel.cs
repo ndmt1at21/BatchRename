@@ -14,5 +14,6 @@ namespace BatchRename.ViewModel
         public NodeViewModel Node { get; set; }
         public ConvertStatus ConvertStatus { get; set; }
         public string OutputPath { get; set; }
+        public string NewName { get; set; }
     }
 }

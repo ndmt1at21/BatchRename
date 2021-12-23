@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BatchRename.Themes.CustomControl
 {
@@ -8,34 +9,65 @@ namespace BatchRename.Themes.CustomControl
 
     public partial class TopMenu : UserControl
     {
-        public event RoutedEventHandler OnOpenClick;
-        public event RoutedEventHandler OnSaveClick;
-        public event RoutedEventHandler OnNewClick;
-        public event RoutedEventHandler OnStartClick;
+        public static readonly DependencyProperty NewCommandProperty =
+             DependencyProperty.Register(
+                 "NewCommand",
+                 typeof(ICommand),
+                 typeof(TopMenu),
+                 new UIPropertyMetadata(null)
+        );
+
+        public ICommand NewCommand
+        {
+            get { return (ICommand)GetValue(NewCommandProperty); }
+            set { SetValue(NewCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty OpenCommandProperty =
+             DependencyProperty.Register(
+                 "OpenCommand",
+                 typeof(ICommand),
+                 typeof(TopMenu),
+                 new UIPropertyMetadata(null)
+        );
+
+        public ICommand OpenCommand
+        {
+            get { return (ICommand)GetValue(OpenCommandProperty); }
+            set { SetValue(OpenCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty SaveCommandProperty =
+            DependencyProperty.Register(
+                "SaveCommand",
+                typeof(ICommand),
+                typeof(TopMenu),
+                new UIPropertyMetadata(null)
+       );
+
+        public ICommand SaveCommand
+        {
+            get { return (ICommand)GetValue(SaveCommandProperty); }
+            set { SetValue(SaveCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty StartCommandProperty =
+           DependencyProperty.Register(
+               "StartCommand",
+               typeof(ICommand),
+               typeof(TopMenu),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand StartCommand
+        {
+            get { return (ICommand)GetValue(StartCommandProperty); }
+            set { SetValue(StartCommandProperty, value); }
+        }
 
         public TopMenu()
         {
             InitializeComponent();
-        }
-
-        private void btnNew_Click(object sender, RoutedEventArgs e)
-        {
-            OnNewClick?.Invoke(sender, e);
-        }
-
-        private void btnOpen_Click(object sender, RoutedEventArgs e)
-        {
-            OnOpenClick?.Invoke(sender, e);
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            OnSaveClick?.Invoke(sender, e);
-        }
-
-        private void btnStart_Click(object sender, RoutedEventArgs e)
-        {
-            OnStartClick?.Invoke(sender, e);
         }
     }
 }

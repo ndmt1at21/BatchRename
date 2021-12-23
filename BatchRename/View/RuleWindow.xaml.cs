@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BatchRename.Commands.Rules;
 using BatchRename.Lib;
 using BatchRename.Model;
 using BatchRename.ViewModel;
@@ -51,18 +52,18 @@ namespace BatchRename.View
                         RuleId = id,
                         Name = _pluginManager.GetRuleName(id),
                         Component = _pluginManager.CreateRuleComponent(id)
-                    }); ;
+                    });
             }
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            WindowPosition position = _store.DialogSelectRulePosition;
 
+            Left = position.Left;
+            Top = position.Top;
+            Width = position.Width;
+            Height = position.Height;
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
@@ -85,6 +86,19 @@ namespace BatchRename.View
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var window = (Window)sender;
+
+            _store.UpdateDialogSelectRulePosition(new WindowPosition
+            {
+                Top = window.Top,
+                Left = window.Left,
+                Width = e.NewSize.Width,
+                Height = e.NewSize.Height
+            });
         }
     }
 }

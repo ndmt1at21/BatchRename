@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:brc="clr-namespace:BRControl;assembly=BRControl"
+    xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -38,10 +39,7 @@
         Orientation="Horizontal">
 
         <!--  New  -->
-        <brc:BRButton
-            x:Name="btnNew"
-            Click="btnNew_Click"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton Command="{Binding NewCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TopMenu}}" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource NewIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -53,10 +51,7 @@
         <Border Width="{StaticResource Gap}" />
 
         <!--  Open  -->
-        <brc:BRButton
-            x:Name="btnOpen"
-            Click="btnOpen_Click"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton Command="{Binding OpenCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TopMenu}}" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource OpenIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -68,10 +63,7 @@
         <Border Width="{StaticResource Gap}" />
 
         <!--  Save  -->
-        <brc:BRButton
-            x:Name="btnSave"
-            Click="btnSave_Click"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton Command="{Binding SaveCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TopMenu}}" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource SaveIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
@@ -83,10 +75,7 @@
         <Border Width="{StaticResource Gap}" />
 
         <!--  Start Convert  -->
-        <brc:BRButton
-            x:Name="btnStart"
-            Click="btnStart_Click"
-            Style="{DynamicResource menuButton}">
+        <brc:BRButton Command="{Binding StartCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TopMenu}}" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
                 <ContentControl Content="{DynamicResource ConvertIcon}" Style="{DynamicResource menuIcon}" />
                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">

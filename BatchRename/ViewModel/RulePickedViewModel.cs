@@ -13,5 +13,7 @@ namespace BatchRename.ViewModel
         public bool IsMarked { get; set; }
         public string RuleName { get; set; }
         public string Statement { get; set; }
+        public string NewName { get; set; }
+        public string Output { get; set; }
     }
 }

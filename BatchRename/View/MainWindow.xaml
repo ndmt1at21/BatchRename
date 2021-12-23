@@ -11,40 +11,56 @@
     Name="Window"
     Width="880"
     Height="520"
+    Loaded="Window_Loaded"
     SizeChanged="Window_SizeChanged"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <Window.InputBindings>
         <KeyBinding
-            Key="S"
+            Key="{Binding SaveOrSaveAsCommand.Gesture.Key}"
             Command="{Binding SaveOrSaveAsCommand}"
-            Modifiers="Ctrl" />
+            Modifiers="{Binding SaveOrSaveAsCommand.Gesture.Modifiers}" />
 
         <KeyBinding
-            Key="O"
+            Key="{Binding OpenCommand.Gesture.Key}"
             Command="{Binding OpenCommand}"
-            Modifiers="Ctrl" />
+            Modifiers="{Binding OpenCommand.Gesture.Modifiers}" />
 
         <KeyBinding
-            Key="N"
+            Key="{Binding NewCommand.Gesture.Key}"
             Command="{Binding NewCommand}"
-            Modifiers="Ctrl" />
+            Modifiers="{Binding NewCommand.Gesture.Modifiers}" />
 
         <KeyBinding
-            Key="I"
+            Key="{Binding ImportCommand.Gesture.Key}"
             Command="{Binding ImportCommand}"
-            Modifiers="Ctrl" />
+            Modifiers="{Binding ImportCommand.Gesture.Modifiers}" />
 
         <KeyBinding
-            Key="E"
+            Key="{Binding ExportCommand.Gesture.Key}"
             Command="{Binding ExportCommand}"
-            Modifiers="Ctrl" />
+            Modifiers="{Binding ExportCommand.Gesture.Modifiers}" />
 
         <KeyBinding
-            Key="F4"
-            Command="Close"
-            Modifiers="Alt" />
+            Key="{Binding ExitCommand.Gesture.Key}"
+            Command="{Binding ExitCommand}"
+            Modifiers="{Binding ExitCommand.Gesture.Modifiers}" />
+
+        <KeyBinding
+            Key="{Binding AddRuleCommand.Gesture.Key}"
+            Command="{Binding AddRuleCommand}"
+            Modifiers="{Binding AddRuleCommand.Gesture.Modifiers}" />
+
+        <KeyBinding
+            Key="{Binding AddFolderCommand.Gesture.Key}"
+            Command="{Binding AddFolderCommand}"
+            Modifiers="{Binding AddFolderCommand.Gesture.Modifiers}" />
+
+        <KeyBinding
+            Key="{Binding AddFileCommand.Gesture.Key}"
+            Command="{Binding AddFileCommand}"
+            Modifiers="{Binding AddFileCommand.Gesture.Modifiers}" />
 
     </Window.InputBindings>
 
@@ -68,13 +84,17 @@
                                 <ct:TitleBar
                                     x:Name="TopMenu"
                                     Height="{DynamicResource TitleBarHeight}"
-                                    OnExportPresetClick="TopMenu_OnExportPresetClick"
-                                    OnImportPresetClick="TopMenu_OnImportPresetClick"
-                                    OnNewClick="TopMenu_OnNewClick"
-                                    OnOpenClick="TopMenu_OnOpenClick"
-                                    OnSaveAsClick="TopMenu_OnSaveAsClick"
-                                    OnSaveClick="TopMenu_OnSaveClick"
-                                    OnStartClick="TopMenu_OnStartClick" />
+                                    AddFileCommand="{Binding AddFileCommand}"
+                                    AddFolderCommand="{Binding AddFolderCommand}"
+                                    AddRuleCommand="{Binding AddRuleCommand}"
+                                    ExitCommand="{Binding ExitCommand}"
+                                    ExportCommand="{Binding ExportCommand}"
+                                    ImportCommand="{Binding ImportCommand}"
+                                    NewCommand="{Binding NewCommand}"
+                                    OpenCommand="{Binding OpenCommand}"
+                                    ProjectName="{Binding CurrentProjectName}"
+                                    SaveCommand="{Binding SaveOrSaveAsCommand}"
+                                    StartCommand="{Binding ConvertCommand}" />
                             </AdornerDecorator>
 
                             <AdornerDecorator>
@@ -175,8 +195,7 @@
                     x:Name="FilePanel_Grid"
                     Margin="{StaticResource PaddingTopSmall}"
                     AllowDrop="True"
-                    DragEnter="DragEnter_Show"
-                    >
+                    DragEnter="DragEnter_Show">
                     <Border
                         Background="{StaticResource SurfaceColor}"
                         CornerRadius="{StaticResource Radius}"

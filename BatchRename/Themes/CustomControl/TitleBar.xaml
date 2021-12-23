@@ -18,17 +18,25 @@
         DockPanel.Dock="Top">
         <Grid>
             <!--  Logo & Save State  -->
-            <ct:LogoWithSaveState SaveState="Saved" />
+            <ct:LogoWithSaveState ProjectName="{Binding ProjectName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TitleBar}}" SaveState="{Binding SaveStatus, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TitleBar}}" />
 
             <!--  Menu  -->
             <ct:TopMenu
                 x:Name="topMenu"
                 Margin="0,5,0,0"
                 Focusable="True"
-                OnNewClick="topMenu_OnNewClick"
-                OnOpenClick="topMenu_OnOpenClick"
-                OnSaveClick="topMenu_OnSaveClick"
-                OnStartClick="topMenu_OnStartClick" />
+                NewCommand="{Binding NewCommand,
+                                     RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                    AncestorType=ct:TitleBar}}"
+                OpenCommand="{Binding OpenCommand,
+                                      RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                     AncestorType=ct:TitleBar}}"
+                SaveCommand="{Binding SaveCommand,
+                                      RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                     AncestorType=ct:TitleBar}}"
+                StartCommand="{Binding StartCommand,
+                                       RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                      AncestorType=ct:TitleBar}}" />
 
             <StackPanel
                 Height="40"
@@ -37,16 +45,39 @@
                 Orientation="Horizontal">
                 <!--  Quick Menu  -->
                 <ct:AppMenu
-                    OnExitClick="AppMenu_OnExitClick"
-                    OnExportPresetClick="AppMenu_OnExportPresetClick"
-                    OnImportPresetClick="AppMenu_OnImportPresetClick"
-                    OnNewProjectClick="AppMenu_OnNewProjectClick"
-                    OnOpenProjectClick="AppMenu_OnOpenProjectClick"
-                    OnSaveAsClick="AppMenu_OnSaveAsClick"
-                    OnSaveProjectClick="AppMenu_OnSaveProjectClick" />
+                    AddFileCommand="{Binding AddFileCommand,
+                                             RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                            AncestorType=ct:TitleBar}}"
+                    AddFolderCommand="{Binding AddFolderCommand,
+                                               RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                              AncestorType=ct:TitleBar}}"
+                    AddRuleCommand="{Binding AddRuleCommand,
+                                             RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                            AncestorType=ct:TitleBar}}"
+                    ExitCommand="{Binding ExitCommand,
+                                          RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                         AncestorType=ct:TitleBar}}"
+                    ExportCommand="{Binding ExportCommand,
+                                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                           AncestorType=ct:TitleBar}}"
+                    ImportCommand="{Binding ImportCommand,
+                                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                           AncestorType=ct:TitleBar}}"
+                    NewCommand="{Binding NewCommand,
+                                         RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                        AncestorType=ct:TitleBar}}"
+                    OpenCommand="{Binding OpenCommand,
+                                          RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                         AncestorType=ct:TitleBar}}"
+                    SaveAsCommand="{Binding SaveAsCommand,
+                                            RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                           AncestorType=ct:TitleBar}}"
+                    SaveCommand="{Binding SaveCommand,
+                                          RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                         AncestorType=ct:TitleBar}}" />
 
                 <!--  Window Button Command  -->
-                <ct:WindowCommandButtons />
+                <ct:WindowCommandButtons ExitCommand="{Binding ExitCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TitleBar}}" />
             </StackPanel>
 
         </Grid>

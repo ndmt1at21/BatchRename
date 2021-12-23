@@ -2,9 +2,11 @@
     x:Class="BatchRename.Themes.CustomControl.AppMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:lib="clr-namespace:BatchRename.Lib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Name="Root"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -14,40 +16,6 @@
             <Setter Property="Padding" Value="{DynamicResource PaddingXMediumYSmall}" />
         </Style>
     </UserControl.Resources>
-
-    <UserControl.CommandBindings>
-        <CommandBinding
-            CanExecute="New_CanExecute"
-            Command="ApplicationCommands.New"
-            Executed="New_Executed" />
-        <CommandBinding
-            CanExecute="Import_CanExecute"
-            Command="lib:AppCommands.Import"
-            Executed="Import_Executed" />
-        <CommandBinding
-            CanExecute="Export_CanExecute"
-            Command="lib:AppCommands.Export"
-            Executed="Export_Executed" />
-        <CommandBinding
-            CanExecute="Save_CanExecute"
-            Command="ApplicationCommands.Save"
-            Executed="Save_Executed" />
-        <CommandBinding
-            CanExecute="Open_CanExecute"
-            Command="ApplicationCommands.Open"
-            Executed="Open_Executed" />
-        <CommandBinding
-            CanExecute="Close_CanExecute"
-            Command="ApplicationCommands.Close"
-            Executed="Close_Executed" />
-    </UserControl.CommandBindings>
-
-    <UserControl.InputBindings>
-        <KeyBinding
-            Key="O"
-            Command="Open"
-            Modifiers="Control" />
-    </UserControl.InputBindings>
 
     <Grid>
         <StackPanel>
@@ -65,51 +33,82 @@
 
                     <MenuItem Header="File">
                         <MenuItem
-                            Name="btnNewProject"
-                            Click="btnNewProject_Click"
-                            Command="ApplicationCommands.New"
-                            Header="_New Project..." />
+                            Command="{Binding NewCommand,
+                                              ElementName=Root}"
+                            Header="_New Project..."
+                            InputGestureText="{Binding NewCommand.GestureText,
+                                                       ElementName=Root}" />
 
                         <MenuItem
-                            Name="btnOpenProject"
-                            Click="btnOpenProject_Click"
-                            Command="ApplicationCommands.Open"
-                            Header="_Open Project..." />
+                            Command="{Binding OpenCommand,
+                                              ElementName=Root}"
+                            Header="_Open Project..."
+                            InputGestureText="{Binding OpenCommand.GestureText,
+                                                       ElementName=Root}" />
 
                         <MenuItem
-                            Name="btnSave"
-                            Click="btnSave_Click"
-                            Command="ApplicationCommands.Save"
-                            Header="_Save" />
+                            Command="{Binding SaveCommand,
+                                              ElementName=Root}"
+                            Header="_Save"
+                            InputGestureText="{Binding SaveCommand.GestureText,
+                                                       ElementName=Root}" />
 
                         <MenuItem
-                            Name="btnSaveAs"
-                            Click="btnSaveAs_Click"
-                            Header="_Save As..." />
+                            Command="{Binding SaveAsCommand,
+                                              ElementName=Root}"
+                            Header="_Save As..."
+                            InputGestureText="{Binding SaveAsCommand.GestureText,
+                                                       ElementName=Root}" />
 
                     </MenuItem>
 
                     <MenuItem Header="Preset">
                         <MenuItem
-                            Name="btnImportPreset"
-                            Click="btnImportPreset_Click"
-                            Command="lib:AppCommands.Import"
-                            Header="_Import..." />
-
+                            Command="{Binding ImportCommand,
+                                              ElementName=Root}"
+                            Header="_Import..."
+                            InputGestureText="{Binding ImportCommand.GestureText,
+                                                       ElementName=Root}" />
                         <MenuItem
-                            Name="btnExportPreset"
-                            Click="btnExportPreset_Click"
-                            Command="lib:AppCommands.Export"
-                            Header="_Export..." />
-
+                            Command="{Binding ExportCommand,
+                                              ElementName=Root}"
+                            Header="_Export..."
+                            InputGestureText="{Binding ExportCommand.GestureText,
+                                                       ElementName=Root}" />
                     </MenuItem>
 
+                    <Separator />
+
                     <MenuItem
-                        Name="btnExit"
-                        Click="btnExit_Click"
-                        Command="ApplicationCommands.Close"
+                        Command="{Binding AddRuleCommand,
+                                          ElementName=Root}"
+                        Header="_Add Rule"
+                        InputGestureText="{Binding AddRuleCommand.GestureText,
+                                                   ElementName=Root}" />
+
+                    <MenuItem
+                        Command="{Binding AddFileCommand,
+                                          ElementName=Root}"
+                        Header="_Add Files"
+                        InputGestureText="{Binding AddFileCommand.GestureText,
+                                                   ElementName=Root}" />
+
+                    <MenuItem
+                        Command="{Binding AddFolderCommand,
+                                          ElementName=Root}"
+                        Header="_Add Folder."
+                        InputGestureText="{Binding AddFolderCommand.GestureText,
+                                                   ElementName=Root}" />
+
+                    <Separator />
+
+                    <MenuItem
+                        Command="{Binding ExitCommand,
+                                          RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                         AncestorType=ct:AppMenu}}"
                         Header="_Exit"
-                        InputGestureText="Alt+F4" />
+                        InputGestureText="{Binding ExitCommand.GestureText,
+                                                   ElementName=Root}" />
                 </MenuItem>
             </Menu>
         </StackPanel>

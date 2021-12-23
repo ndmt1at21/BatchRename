@@ -16,8 +16,8 @@ namespace BatchRename.Lib
         }
         DelegateDropFileFunction(string[] list)
         {
-            if(_filesList == null)
-            _filesList = new List<string>(list);
+            if (_filesList == null)
+                _filesList = new List<string>(list);
             else
             {
                 foreach (var file in list)
@@ -25,7 +25,6 @@ namespace BatchRename.Lib
                     if (!_filesList.Contains(file))
                         _filesList.Add(file);
                 }
-
             }
         }
 

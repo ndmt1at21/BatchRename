@@ -9,20 +9,23 @@ using PluginContract;
 
 namespace BatchRename.Lib
 {
-    public delegate void ConvertResultHandler(FileInfor file, string errMessage);
+    public delegate void ConvertResultHandler(NodeConvertModel file, string errMessage);
 
     public class ConvertPipeline
     {
         private List<IRenameRule> _rules { get; set; }
+        private PreventDuplicateRenameRule _preventDuplicateRule { get; set; }
 
         public ConvertPipeline()
         {
             _rules = new List<IRenameRule>();
+            _preventDuplicateRule = new PreventDuplicateRenameRule();
         }
 
         public ConvertPipeline(List<IRenameRule> rules)
         {
             _rules = rules;
+            _preventDuplicateRule = new PreventDuplicateRenameRule();
         }
 
         public void AddRuleData(IRenameRule rule)
@@ -30,21 +33,33 @@ namespace BatchRename.Lib
             _rules.Add(rule);
         }
 
-        public void Convert(List<FileInfor> files, ConvertResultHandler OnFileConverted)
+        public void Convert(List<NodeConvertModel> files, ConvertResultHandler OnFileConverted)
         {
-            FileInfor[] cloneFiles = files.ToArray();
+            NodeConvertModel[] cloneFiles = files.ToArray();
 
-            foreach (FileInfor file in cloneFiles)
+            foreach (NodeConvertModel file in cloneFiles)
             {
                 try
                 {
-                    FileInfor result = ConvertFile(file);
-                    Debug.WriteLine("Convert success");
+                    FileInfor fileInfor = new FileInfor
+                    {
+                        Dir = file.Node.Path,
+                        Extension = file.Node.Extension,
+                        FileName = file.Node.Name
+                    };
+
+                    FileInfor fileInforResult = ConvertFile(fileInfor);
+
+                    NodeConvertModel result = file;
+                    result.Node.Path = fileInfor.Dir;
+                    result.Node.Extension = fileInfor.Extension;
+                    result.NewName = fileInfor.FileName;
+
                     OnFileConverted(result, null);
                 }
                 catch (Exception ex)
                 {
-                    OnFileConverted(null, ex.Message);
+                    OnFileConverted(file, ex.Message);
                 }
             }
         }
@@ -57,6 +72,8 @@ namespace BatchRename.Lib
             {
                 result = rule.Convert(result);
             }
+
+            result = _preventDuplicateRule.Convert(result);
 
             return result;
         }
