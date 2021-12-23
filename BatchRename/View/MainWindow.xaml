@@ -127,7 +127,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid AllowDrop="True" DragLeave="DragLeave_Hide">
         <!--  - Normal Width Layout  -->
         <Grid Style="{StaticResource NormalWidthContainerStyle}">
             <Grid.ColumnDefinitions>
@@ -176,7 +176,7 @@
                     Margin="{StaticResource PaddingTopSmall}"
                     AllowDrop="True"
                     DragEnter="DragEnter_Show"
-                    DragLeave="DragLeave_Hide">
+                    >
                     <Border
                         Background="{StaticResource SurfaceColor}"
                         CornerRadius="{StaticResource Radius}"

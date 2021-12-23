@@ -302,7 +302,7 @@ namespace BatchRename
 
         private void TopMenu_OnExportPresetClick(object sender, RoutedEventArgs e)
         {
-            ExportCommand.Execute(null);
+            ExportCommand.Execute(sender);
             // TODO Implement Export preset command
         }
     }
@@ -372,10 +372,59 @@ namespace BatchRename
         private void filesControl_OnAddFolderClick(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.Multiselect = true;
             dialog.IsFolderPicker = true;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                // TODO
+                //Save old files
+                List<string> lastFileList = new List<string>(_list);
+                //New files
+                List<string> arrAllFiles = new List<string>(dialog.FileNames);
+
+                foreach (var file in arrAllFiles)
+                {
+                    if (!_list.Contains(file))
+                    {
+                        if (File.Exists(file))
+                        {
+                            // This path is a file
+                            if (!_list.Contains(file))
+                                _list.Add(file);
+                        }
+                        else if (Directory.Exists(file))
+                        {
+                            // This path is a directory
+                            handleFolder(file);
+                        }
+                    }
+                }
+
+                //To store
+                foreach (var path in _list)
+                {
+                    if (!lastFileList.Contains(path))
+                    {
+                        string extention = Path.GetExtension(path);
+                        string filename = Path.GetFileName(path);
+                        DateTime creation = File.GetCreationTime(path);
+                        string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
+                        Node node = new Node()
+                        {
+                            Path = path,
+                            Extension = extention,
+                            Name = Name,
+                            CreatedDate = creation,
+                            Size = size
+                        };
+
+                        NodeConvertModel nodeConvert = new NodeConvertModel()
+                        {
+                            Node = node
+                        };
+
+                        _store.CreateNodeConvert(nodeConvert);
+                    }
+                }
             }
         }
 
@@ -442,11 +491,9 @@ namespace BatchRename
 
                         NodeConvertModel nodeConvert = new NodeConvertModel()
                         {
-                            //TODO: Is there anything more ?
                             Node = node
                         };
 
-                        //TODO: Does it need to invoke anything ?
                         _store.CreateNodeConvert(nodeConvert);
                     }
                 }
