@@ -21,11 +21,8 @@ namespace BatchRename.View
     public partial class RecentWindow : Window
     {
         private Store _store { get; set; }
-        private RecentFileService _recentFileService { get; set; }
 
-        public List<RecentFileItem> RecentFileItems { get; set; }
-
-        public RecentWindow(/*Store store, */RecentFileService recentFileService)
+        public RecentWindow()
         {
             InitializeComponent();
 

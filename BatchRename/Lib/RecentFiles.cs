@@ -9,7 +9,6 @@ namespace BatchRename.Lib
     public class RecentFileItem
     {
         public string Path { get; set; }
-        public string Name { get; set; }
         public DateTime LastModified { get; set; }
     }
 
@@ -29,15 +28,30 @@ namespace BatchRename.Lib
         public int MaxItem;
     }
 
-    public class RecentFileService
+    public class RecentFiles
     {
-        private IPersister<RecentFileItems> _persister;
-        private RecentFileConfig _config;
+        private IPersister<RecentFileItems> _persister { get; set; }
+        private RecentFileConfig _config { get; set; }
 
-        public RecentFileService(RecentFileConfig config)
+        private RecentFiles()
+        {
+            _persister = new JsonPersister<RecentFileItems>();
+        }
+
+        private static RecentFiles _shared { get; set; }
+        public static RecentFiles Shared
+        {
+            get
+            {
+                if (_shared == null)
+                    _shared = new RecentFiles();
+                return _shared;
+            }
+        }
+
+        public void SetConfig(RecentFileConfig config)
         {
             _config = config;
-            _persister = new JsonPersister<RecentFileItems>();
         }
 
         public RecentFileItems GetRecentFiles()
@@ -53,13 +67,28 @@ namespace BatchRename.Lib
             }
         }
 
-        public void AddRecent(RecentFileItem recentFile)
+        public void AddRecent(string recentFilePath)
         {
             RecentFileItems recentFiles = GetRecentFiles();
+            RecentFileItem recentFile = new RecentFileItem
+            {
+                Path = recentFilePath,
+                LastModified = DateTime.Now
+            };
 
-            if (recentFiles.Items.Count >= _config.MaxItem)
-                recentFiles.Items.RemoveAt(0);
-            recentFiles.Items.Add(recentFile);
+            bool isFileExists = recentFiles.Items.Where(item => item.Path == recentFilePath).Count() > 0;
+
+            if (isFileExists)
+            {
+                recentFiles.Items = recentFiles.Items.OrderBy(item => item.LastModified).ToList();
+            }
+
+            if (!isFileExists)
+            {
+                if (recentFiles.Items.Count >= _config.MaxItem)
+                    recentFiles.Items.RemoveAt(0);
+                recentFiles.Items.Add(recentFile);
+            }
 
             _persister.Save(_config.Path, recentFiles);
         }

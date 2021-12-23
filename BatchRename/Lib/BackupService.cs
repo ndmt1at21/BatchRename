@@ -21,7 +21,7 @@ namespace BatchRename.Lib
         public Action OnBackuped;
 
         private string _currentFileName { get; set; }
-        public string CurrentFilePath => $"{_config.Directory}\\{_currentFileName}.{_config.Extension}_{_backupStartTime}";
+        public string CurrentFilePath => $"{_config.Directory}\\{_currentFileName}_{_backupStartTime.Millisecond}.{_config.Extension}";
 
         private BackupConfig _config { get; set; }
         private DispatcherTimer _dispatcherTimer { get; set; }

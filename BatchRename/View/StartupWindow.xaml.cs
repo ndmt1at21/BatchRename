@@ -30,7 +30,6 @@ namespace BatchRename.View
 
         //private Store _store { get; set; }
         private PluginManager _pluginManager { get; set; }
-        private RecentFileService _recentFileService { get; set; }
 
         //private SaveLoadService<ProjectStore> _saveLoadService { get; set; }
         //private SaveLoadConfig _saveLoadConfig { get; set; }
@@ -55,12 +54,6 @@ namespace BatchRename.View
         private void BaseConfigure()
         {
             _pluginManager = new PluginManager("../../../../Plugins");
-
-            _recentFileService = new RecentFileService(new RecentFileConfig
-            {
-                Path = Environment.GetEnvironmentVariable("RecentFilesPath"),
-                MaxItem = 10
-            });
         }
 
         private void StartFromProject(string path)

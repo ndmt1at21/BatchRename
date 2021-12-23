@@ -27,6 +27,9 @@ namespace BatchRename.Lib
 
         public void Save(string path, T data)
         {
+            if (!Directory.Exists(Path.GetDirectoryName(path)))
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+
             string content = JsonConvert.SerializeObject(data, _serializeSettings);
             File.WriteAllText(path, content);
         }
@@ -35,6 +38,9 @@ namespace BatchRename.Lib
         {
             return Task.Run(async () =>
             {
+                if (!Directory.Exists(Path.GetDirectoryName(path)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(path));
+
                 string content = JsonConvert.SerializeObject(data, _serializeSettings);
                 await File.WriteAllTextAsync(path, content);
             });

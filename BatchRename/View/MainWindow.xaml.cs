@@ -29,6 +29,8 @@ namespace BatchRename
 {
     public partial class MainWindow : Window
     {
+        static int _currentProjectNumber { get; set; } = 0;
+
         public BindingList<RulePickedViewModel> PickedRules { get; set; }
         public BindingList<NodeConvertViewModel> ConvertNodes { get; set; }
 
@@ -45,8 +47,6 @@ namespace BatchRename
         private Store _store { get; set; }
 
         private BackupService<ProjectStore> _backupService { get; set; }
-        private RecentFileService _recentFileService { get; set; }
-
         private SaveService<ProjectStore> _saveService { get; set; }
         private LoadService<ProjectStore> _loadService { get; set; }
         private AutoSaveService<ProjectStore> _autoSaveService { get; set; }
@@ -108,7 +108,7 @@ namespace BatchRename
             var _backupConfig = new BackupConfig
             {
                 Directory = Environment.GetEnvironmentVariable("BackupFilesPath"),
-                BackupInterval = 120,
+                BackupInterval = 10,
                 Extension = "brup",
             };
 
@@ -126,6 +126,14 @@ namespace BatchRename
             _backupService = new BackupService<ProjectStore>(_backupConfig, _persister);
             _backupService.GetBackupData = () => new ProjectStore();
             _backupService.GetBackupPath = () => _store.CurrentProjectPath;
+            _backupService.StartBackup();
+
+
+            RecentFiles.Shared.SetConfig(new RecentFileConfig
+            {
+                MaxItem = 10,
+                Path = Environment.GetEnvironmentVariable("RecentFilesPath"),
+            });
         }
 
         private void RegisterStoreChanged()
@@ -250,7 +258,10 @@ namespace BatchRename
         {
             LoadProjectCommand.Execute(path);
             _store.IsBlankProject = false;
+            _store.IsSaveBefore = true;
             _autoSaveService.EnableAutoSave();
+
+            RecentFiles.Shared.AddRecent(_store.CurrentProjectPath);
         }
     }
 
@@ -270,6 +281,7 @@ namespace BatchRename
         private void TopMenu_OnSaveClick(object sender, RoutedEventArgs e)
         {
             SaveOrSaveAsCommand.Execute(null);
+            RecentFiles.Shared.AddRecent(_store.CurrentProjectPath);
         }
 
         private void TopMenu_OnStartClick(object sender, RoutedEventArgs e)
