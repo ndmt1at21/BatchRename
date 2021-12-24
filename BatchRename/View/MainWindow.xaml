@@ -110,7 +110,8 @@
 
     <Window.Resources>
         <lib:BreakpointConverter x:Key="BreakPointConverter" />
-
+        <lib:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+        
         <Style x:Key="NormalWidthContainerStyle" TargetType="Grid">
             <Setter Property="Visibility" Value="Visible" />
 
@@ -146,9 +147,22 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+
+        <Style x:Key="DropPanelVisible" TargetType="ct:DropFilePanel">
+            <Setter Property="Visibility" Value="Hidden" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsDraging, ElementName=Window,Converter={StaticResource visibilityConverter}}" Value="0">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsDraging, ElementName=Window,Converter={StaticResource visibilityConverter}}" Value="2">
+                    <Setter Property="Visibility" Value="Hidden" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
-    <Grid AllowDrop="True" DragLeave="DragLeave_Hide">
+    <Grid AllowDrop="True" DragLeave="DragLeave_Hide" MouseMove="DragLeave_MouseMove_Hide">
         <!--  - Normal Width Layout  -->
         <Grid Style="{StaticResource NormalWidthContainerStyle}">
             <Grid.ColumnDefinitions>
@@ -211,6 +225,13 @@
                             ItemsSource="{Binding ConvertNodes}"
                             OnAddFileClick="FilesControl_OnAddFileClick"
                             OnAddFolderClick="filesControl_OnAddFolderClick" />
+                    </Border>
+
+                    <Border Padding="{DynamicResource PaddingXLargeYMedium}">
+                        <ct:DropFilePanel x:Name="dragdropPanel" Style="{StaticResource DropPanelVisible}">
+                            
+                        </ct:DropFilePanel>
+                        
                     </Border>
                 </Grid>
             </DockPanel>

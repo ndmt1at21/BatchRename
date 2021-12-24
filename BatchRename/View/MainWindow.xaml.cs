@@ -27,7 +27,7 @@ using BatchRename.Commands;
 using BatchRename.Commands.Rules;
 using BatchRename.Commands.Files;
 using System.Collections.ObjectModel;
-
+using System.Diagnostics;
 namespace BatchRename
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
@@ -72,17 +72,20 @@ namespace BatchRename
         public MainWindow(PluginManager pluginManager)
         {
             InitializeComponent();
-
+            
             _pluginManager = pluginManager;
 
             DataContext = this;
-
             InitializeStore();
             InitializeServices();
             InitializeCommands();
 
             PickedRules = new ObservableCollection<RulePickedViewModel>();
             ConvertNodes = new ObservableCollection<NodeConvertViewModel>();
+
+
+
+            dragdropPanel.Drop += DragDrop_Files;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -317,8 +320,8 @@ namespace BatchRename
     public partial class MainWindow
     {
         private static List<string> _list = new List<string>();
-        DropFilePanel dragdropPanel = new DropFilePanel();
-
+        
+        public bool IsDraging { get; set; } = false;
         private void OnStore_Loaded_NodeConvert()
         {
             ConvertNodes.Clear();
@@ -358,30 +361,33 @@ namespace BatchRename
         private void DragDrop_Files(object sender, DragEventArgs e)
         {
             DropFileCommand.Execute(e);
-            dragdropPanel.Drop -= DragDrop_Files;
-            FilePanel_Grid.Children.Remove(dragdropPanel);
+            IsDraging = false;
+            //dragdropPanel.Visibility = Visibility.Hidden;
         }
 
         private void DragEnter_Show(object sender, DragEventArgs e)
         {
-            if (FilePanel_Grid.Children.Count < 3)
-            {
-                dragdropPanel.Drop += DragDrop_Files;
-                FilePanel_Grid.Children.Add(dragdropPanel);
-            }
+            // dragdropPanel.Visibility = Visibility.Visible;
+            IsDraging = true;
         }
 
         private void DragLeave_Hide(object sender, DragEventArgs e)
         {
-
-            if (FilePanel_Grid.Children.Count == 3)
+            HitTestResult result = VisualTreeHelper.HitTest(FilePanel_Grid, e.GetPosition(FilePanel_Grid));
+            if (result == null)
             {
-                HitTestResult result = VisualTreeHelper.HitTest(FilePanel_Grid, e.GetPosition(FilePanel_Grid));
-                if (result == null)
-                {
-                    dragdropPanel.Drop -= DragDrop_Files;
-                    FilePanel_Grid.Children.Remove(dragdropPanel);
-                }
+                IsDraging = false;
+                // dragdropPanel.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void DragLeave_MouseMove_Hide(object sender, MouseEventArgs e)
+        {
+            HitTestResult result = VisualTreeHelper.HitTest(FilePanel_Grid, e.GetPosition(FilePanel_Grid));
+            if (result == null)
+            {
+                IsDraging = false;
+                // dragdropPanel.Visibility = Visibility.Hidden;
             }
         }
 
