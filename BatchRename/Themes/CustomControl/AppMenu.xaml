@@ -96,7 +96,7 @@
                     <MenuItem
                         Command="{Binding AddFolderCommand,
                                           ElementName=Root}"
-                        Header="_Add Folder."
+                        Header="_Add Folder"
                         InputGestureText="{Binding AddFolderCommand.GestureText,
                                                    ElementName=Root}" />
 

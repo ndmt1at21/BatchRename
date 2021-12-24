@@ -20,7 +20,7 @@ using BatchRename.ViewModel;
 
 namespace BatchRename.Themes.CustomControl
 {
-    public partial class RuleControl : UserControl
+    public partial class RuleControl : UserControl, INotifyPropertyChanged
     {
         public event MarkChangedEventHandler OnMarkChanged;
         public event SelectionChangedEventHandler OnSelectionChanged;
@@ -31,6 +31,7 @@ namespace BatchRename.Themes.CustomControl
         public event RoutedEventHandler OnRemoveClick;
 
         public event MouseDoubleClickRowHandler OnRowDoubleClick;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public IEnumerable<string> SelectedIds;
 
@@ -53,6 +54,20 @@ namespace BatchRename.Themes.CustomControl
                 typeof(RuleControl)
             );
 
+        public static readonly DependencyProperty AddRuleCommandProperty =
+          DependencyProperty.Register(
+              "AddRuleCommand",
+              typeof(ICommand),
+              typeof(RuleControl),
+              new UIPropertyMetadata(null)
+        );
+
+        public ICommand AddRuleCommand
+        {
+            get { return (ICommand)GetValue(AddRuleCommandProperty); }
+            set { SetValue(AddRuleCommandProperty, value); }
+        }
+
         public RuleControl()
         {
             InitializeComponent();
@@ -66,6 +81,7 @@ namespace BatchRename.Themes.CustomControl
         private void RuleListView_OnSelectionChanged(IEnumerable<string> selectedIds)
         {
             SelectedIds = selectedIds;
+            var a = ItemsSource.Count();
             OnSelectionChanged?.Invoke(selectedIds);
         }
 
@@ -92,6 +108,11 @@ namespace BatchRename.Themes.CustomControl
         private void RuleListView_OnRowDoubleClick(string id)
         {
             OnRowDoubleClick?.Invoke(id);
+        }
+
+        private void BRButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            AddRuleCommand.Execute(null);
         }
     }
 }

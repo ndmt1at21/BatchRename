@@ -31,6 +31,37 @@
             ItemsSource="{Binding Path=ItemsSource,
                                   ElementName=Root}"
             OnMarkChanged="FilesListView_OnMarkChanged"
-            OnSelectionChanged="FilesListView_OnSelectionChanged" />
+            OnSelectionChanged="FilesListView_OnSelectionChanged">
+            <ct:FilesListView.Style>
+                <Style TargetType="{x:Type ct:FilesListView}">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ItemsSource.Count, ElementName=Root}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ct:FilesListView.Style>
+        </ct:FilesListView>
+
+        <TextBlock
+            Margin="0,-20,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontFamily="{DynamicResource PoppinsRegular}"
+            FontSize="14"
+            Foreground="{DynamicResource GrayColorLight}"
+            Text="Drop files or folder here">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ItemsSource.Count, ElementName=Root}" Value="0">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
     </DockPanel>
 </UserControl>

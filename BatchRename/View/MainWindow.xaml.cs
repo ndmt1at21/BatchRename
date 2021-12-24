@@ -26,16 +26,17 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using BatchRename.Commands;
 using BatchRename.Commands.Rules;
 using BatchRename.Commands.Files;
+using System.Collections.ObjectModel;
 
 namespace BatchRename
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public static int ProjectNumber { get; set; } = 0;
         public string CurrentProjectName { get; set; }
 
-        public BindingList<RulePickedViewModel> PickedRules { get; set; }
-        public BindingList<NodeConvertViewModel> ConvertNodes { get; set; }
+        public ObservableCollection<RulePickedViewModel> PickedRules { get; set; }
+        public ObservableCollection<NodeConvertViewModel> ConvertNodes { get; set; }
 
         public ICommand NewCommand { get; set; }
         public ICommand ConvertCommand { get; set; }
@@ -80,9 +81,11 @@ namespace BatchRename
             InitializeServices();
             InitializeCommands();
 
-            PickedRules = new BindingList<RulePickedViewModel>();
-            ConvertNodes = new BindingList<NodeConvertViewModel>();
+            PickedRules = new ObservableCollection<RulePickedViewModel>();
+            ConvertNodes = new ObservableCollection<NodeConvertViewModel>();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -92,8 +95,8 @@ namespace BatchRename
             {
                 Top = window.Top,
                 Left = window.Left,
-                Width = e.NewSize.Width,
-                Height = e.NewSize.Height
+                Width = window.ActualWidth,
+                Height = window.ActualHeight
             });
         }
 
@@ -150,6 +153,8 @@ namespace BatchRename
             };
 
             _persisterProject = new JsonPersister<ProjectStore>();
+            _persisterPreset = new JsonPersister<RulePreset>();
+
             _saveProjectService = new SaveService<ProjectStore>(_persisterProject);
             _loadProjectService = new LoadService<ProjectStore>(_persisterProject);
 
@@ -167,8 +172,6 @@ namespace BatchRename
             _backupService.GetBackupData = () => new ProjectStore();
             _backupService.GetBackupPath = () => _store.CurrentProjectPath;
             _backupService.StartBackup();
-
-
         }
 
         private void RegisterStoreChanged()
@@ -192,10 +195,10 @@ namespace BatchRename
 
         private void OnMainWindowPosition_Updated(WindowPosition position)
         {
-            Left = position.Left;
-            Top = position.Top;
-            Width = position.Width;
-            Height = position.Height;
+            //Left = position.Left;
+            //Top = position.Top;
+            //Width = position.Width;
+            //Height = position.Height;
         }
 
         private void OnStore_Changed()

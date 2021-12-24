@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace BatchRename.Commands
@@ -35,6 +36,26 @@ namespace BatchRename.Commands
 
             if (openFileDialog.ShowDialog() == true)
             {
+                try
+                {
+                    RulePreset preset = _loadService.Load(openFileDialog.FileName);
+                    _store.PickedRules.Clear();
+
+                    foreach (var rule in preset.PickedRules)
+                    {
+                        _store.CreatePickedRule(new RulePickedModel
+                        {
+                            IsMarked = rule.IsMarked,
+                            Paramter = rule.Paramter,
+                            Position = rule.Position,
+                            RuleId = rule.RuleId,
+                        });
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Invalid preset file");
+                }
             }
         }
     }

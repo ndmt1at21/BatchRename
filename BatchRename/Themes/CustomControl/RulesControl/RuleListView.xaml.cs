@@ -52,6 +52,9 @@ namespace BatchRename.Themes.CustomControl
 
         private void lvRules_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (lvRules.SelectedItem == null)
+                return;
+
             var rule = (RulePickedViewModel)lvRules.SelectedItem;
             OnRowDoubleClick?.Invoke(rule.Id);
         }

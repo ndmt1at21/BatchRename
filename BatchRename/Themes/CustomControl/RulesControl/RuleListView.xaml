@@ -25,6 +25,9 @@
         MouseDoubleClick="lvRules_MouseDoubleClick"
         SelectionChanged="lvRules_SelectionChanged">
 
+        <DataGrid.RowStyle>
+            <Style BasedOn="{StaticResource DataGridRowStyle}" TargetType="DataGridRow" />
+        </DataGrid.RowStyle>
         <DataGrid.Columns>
             <DataGridTemplateColumn
                 MinWidth="50"

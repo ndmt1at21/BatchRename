@@ -6,10 +6,10 @@
         <Setter Property="Background" Value="Transparent" />
     </Style>
 
-    <Style TargetType="DataGridRow">
+    <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="0,5,0,0" />
-        <Setter Property="Height" Value="50" />
+        <Setter Property="Height" Value="45" />
 
         <Setter Property="Template">
             <Setter.Value>

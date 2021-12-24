@@ -25,6 +25,23 @@
                               ElementName=Root}"
         SelectionChanged="lvNodes_SelectionChanged">
 
+        <DataGrid.RowStyle>
+            <Style BasedOn="{StaticResource DataGridRowStyle}" TargetType="DataGridRow">
+                <Setter Property="Background" Value="Transparent" />
+                <Style.Triggers>
+                    <!--  SUCCESS COLOR  -->
+                    <DataTrigger Binding="{Binding Path=ConvertStatus}" Value="0">
+                        <Setter Property="Background" Value="#fee2e2" />
+                    </DataTrigger>
+
+                    <!--  ERROR COLOR  -->
+                    <DataTrigger Binding="{Binding Path=ConvertStatus}" Value="2">
+                        <Setter Property="Background" Value="#dcfce7" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </DataGrid.RowStyle>
+
         <DataGrid.Columns>
             <DataGridTemplateColumn
                 MinWidth="50"
@@ -67,7 +84,8 @@
                             Margin="{StaticResource PaddingLeftMedium}"
                             VerticalAlignment="Center"
                             Text="{Binding Node.Name,
-                                           Mode=OneWay}" />
+                                           Mode=OneWay}"
+                            TextTrimming="WordEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -89,7 +107,8 @@
                             Margin="{StaticResource PaddingLeftMedium}"
                             VerticalAlignment="Center"
                             Text="{Binding NewName,
-                                           Mode=OneWay}" />
+                                           Mode=OneWay}"
+                            TextTrimming="WordEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -110,7 +129,8 @@
                             Margin="{StaticResource PaddingLeftMedium}"
                             VerticalAlignment="Center"
                             Text="{Binding Node.Path,
-                                           Mode=OneWay}" />
+                                           Mode=OneWay}"
+                            TextTrimming="WordEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -131,7 +151,8 @@
                             Margin="{StaticResource PaddingLeftMedium}"
                             VerticalAlignment="Center"
                             Text="{Binding OutputPath,
-                                           Mode=OneWay}" />
+                                           Mode=OneWay}"
+                            TextTrimming="WordEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

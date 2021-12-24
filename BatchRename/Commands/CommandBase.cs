@@ -16,7 +16,10 @@ namespace BatchRename.Commands
 
         public string GestureText
         {
-            get { return Gesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture); }
+            get
+            {
+                return Gesture == null ? "" : Gesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture);
+            }
         }
 
         public string Text { get; set; }

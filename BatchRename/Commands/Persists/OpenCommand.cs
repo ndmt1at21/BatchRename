@@ -14,10 +14,12 @@ namespace BatchRename.Commands
     public class OpenCommand : CommandBase
     {
         private PluginManager _pluginManager { get; set; }
+        private Action _onExecuted { get; set; }
 
-        public OpenCommand(PluginManager pluginManager)
+        public OpenCommand(PluginManager pluginManager, Action onExecuted = null)
         {
             _pluginManager = pluginManager;
+            _onExecuted = onExecuted;
 
             Gesture = new KeyGesture(Key.O, ModifierKeys.Control);
         }
@@ -36,6 +38,8 @@ namespace BatchRename.Commands
                 MainWindow mainWindow = new MainWindow(_pluginManager);
                 mainWindow.LoadFrom(openFileDialog.FileName);
                 mainWindow.Show();
+
+                _onExecuted?.Invoke();
             }
         }
     }

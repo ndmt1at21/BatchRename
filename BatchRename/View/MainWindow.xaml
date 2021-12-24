@@ -93,6 +93,7 @@
                                     NewCommand="{Binding NewCommand}"
                                     OpenCommand="{Binding OpenCommand}"
                                     ProjectName="{Binding CurrentProjectName}"
+                                    SaveAsCommand="{Binding SaveAsCommand}"
                                     SaveCommand="{Binding SaveOrSaveAsCommand}"
                                     StartCommand="{Binding ConvertCommand}" />
                             </AdornerDecorator>
@@ -173,7 +174,10 @@
                     <Border Padding="{StaticResource PaddingXLargeYMedium}">
                         <ct:RuleControl
                             x:Name="ruleControl"
-                            ItemsSource="{Binding PickedRules}"
+                            AddRuleCommand="{Binding AddRuleCommand}"
+                            ItemsSource="{Binding PickedRules,
+                                                  Mode=TwoWay,
+                                                  UpdateSourceTrigger=PropertyChanged}"
                             OnAddClick="RuleControl_OnAddClick"
                             OnDownClick="ruleControl_OnDownClick"
                             OnRemoveClick="RuleControl_OnRemoveClick"

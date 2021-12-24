@@ -12,11 +12,13 @@ namespace BatchRename.Commands
 {
     public class NewCommand : CommandBase
     {
-        private PluginManager _pluginManager;
+        private PluginManager _pluginManager { get; set; }
+        private Action _onExecuted { get; set; }
 
-        public NewCommand(PluginManager pluginManager)
+        public NewCommand(PluginManager pluginManager, Action onExecuted = null)
         {
             _pluginManager = pluginManager;
+            _onExecuted = onExecuted;
 
             Gesture = new KeyGesture(Key.N, ModifierKeys.Control);
         }
@@ -26,6 +28,8 @@ namespace BatchRename.Commands
             MainWindow.ProjectNumber++;
             MainWindow mainWindow = new MainWindow(_pluginManager);
             mainWindow.Show();
+
+            _onExecuted?.Invoke();
         }
     }
 }

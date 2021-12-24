@@ -5,6 +5,7 @@
     xmlns:brc="clr-namespace:BRControl;assembly=BRControl"
     xmlns:ct="clr-namespace:BatchRename.Themes.CustomControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lib="clr-namespace:BatchRename.Lib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Name="Root"
     d:DesignHeight="450"
@@ -87,17 +88,51 @@
 
         <ct:RuleListView
             Margin="{DynamicResource PaddingTopMedium}"
-            Background="{StaticResource SurfaceColor}"
+            Background="{DynamicResource SurfaceColor}"
+            DockPanel.Dock="Top"
             ItemsSource="{Binding ItemsSource,
                                   ElementName=Root}"
             OnMarkChanged="RuleListView_OnMarkChanged"
             OnRowDoubleClick="RuleListView_OnRowDoubleClick"
-            OnSelectionChanged="RuleListView_OnSelectionChanged" />
+            OnSelectionChanged="RuleListView_OnSelectionChanged">
+            <ct:RuleListView.Style>
+                <Style TargetType="{x:Type ct:RuleListView}">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ItemsSource.Count, ElementName=Root}" Value="0">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ct:RuleListView.Style>
+        </ct:RuleListView>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Name="col1" Width="100" />
-            </Grid.ColumnDefinitions>
-        </Grid>
+        <brc:BRButton
+            ActiveBackground="Transparent"
+            Background="Transparent"
+            BorderThickness="0"
+            Focusable="False"
+            HoverBackground="Transparent"
+            MouseDoubleClick="BRButton_MouseDoubleClick">
+            <TextBlock
+                Name="tbAddRule"
+                Margin="0,-50,0,0"
+                DockPanel.Dock="Top"
+                FontFamily="{DynamicResource PoppinsRegular}"
+                FontSize="14"
+                Foreground="{DynamicResource GrayColorLight}"
+                Text="Double click to add rule">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ItemsSource.Count, ElementName=Root}" Value="0">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </brc:BRButton>
     </DockPanel>
 </UserControl>

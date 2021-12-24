@@ -40,9 +40,8 @@
     <Style TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Foreground" Value="Gray" />
-        <Setter Property="Background" Value="DarkGray" />
         <Setter Property="Width" Value="1" />
-        <Setter Property="Background" Value="Blue" />
+        <Setter Property="Background" Value="Gray" />
         <Setter Property="Padding" Value="0" />
 
         <Setter Property="Template">
@@ -82,11 +81,11 @@
                             <Setter TargetName="GridRoot" Property="Width" Value="5" />
                         </Trigger>
                         <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Thumb" Property="Background" Value="Black" />
+                            <Setter TargetName="Thumb" Property="Background" Value="Gray" />
                         </Trigger>
 
                         <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
-                            <Setter TargetName="Thumb" Property="Background" Value="White" />
+                            <Setter TargetName="Thumb" Property="Background" Value="Gray" />
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="false">
