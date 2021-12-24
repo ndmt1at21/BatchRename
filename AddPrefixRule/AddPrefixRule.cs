@@ -41,7 +41,7 @@ namespace AddPrefixRule
             if (_parameter == null)
                 return null;
 
-            return $"Add prefix ${_parameter.Prefix} to file name";
+            return $"Add prefix {_parameter.Prefix} to file name";
         }
     }
 }

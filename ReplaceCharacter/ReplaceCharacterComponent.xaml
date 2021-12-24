@@ -10,14 +10,14 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <StackPanel Background="White">
-        <TextBlock VerticalAlignment="Center">Replace character:</TextBlock>
+        <TextBlock VerticalAlignment="Center">Replace character: (Seperate by '/')</TextBlock>
 
         <ct:BRInputText
             Name="tbInputOldChar"
             Margin="0,5,0,0"
             VerticalAlignment="Center"
             Placeholder="Old char"
-            Text="{Binding oldchar,
+            Text="{Binding  oldchar,
                            Mode=OneWay}"
             TextChanged="tbInputOldChar_TextChanged" />
 
@@ -29,6 +29,9 @@
             Text="{Binding newchar,
                            Mode=OneWay}"
             TextChanged="tbInputNewChar_TextChanged" />
-        <CheckBox Content="Append to original filename" />
+        <ct:BRCheckbox
+            Margin="0,5,0,0"
+            Content="Append to original filename"
+            IsChecked="{Binding IsAppendToOriginal}" />
     </StackPanel>
 </UserControl>

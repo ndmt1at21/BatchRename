@@ -25,10 +25,12 @@ namespace ReplaceCharacter
 
         public string oldchar { get; set; }
         public string newchar { get; set; }
-        public bool isAppendToOriginal { get; set; }
+        public bool IsAppendToOriginal { get; set; } = true;
         public ReplaceCharacterComponent()
         {
             InitializeComponent();
+            SetRuleParameter(ReplaceCharacterRuleConstant.DEFAULT_PARAMS);
+            DataContext = this;
         }
 
 
@@ -39,7 +41,7 @@ namespace ReplaceCharacter
 
         public IRuleParameter GetRuleParamter()
         {
-            return new ReplaceCharacterParameter { oldChar = oldchar, newChar = newchar, IsAppendToOriginal = isAppendToOriginal };
+            return new ReplaceCharacterParameter { oldChar = oldchar, newChar = newchar, IsAppendToOriginal = IsAppendToOriginal };
         }
 
         public void SetRuleParameter(IRuleParameter ruleParameter)
@@ -51,7 +53,7 @@ namespace ReplaceCharacter
 
             oldchar = parameter.oldChar;
             newchar = parameter.newChar;
-            isAppendToOriginal = parameter.IsAppendToOriginal;
+            IsAppendToOriginal = parameter.IsAppendToOriginal;
         }
 
         private void tbInputOldChar_TextChanged(object sender, TextChangedEventArgs e)

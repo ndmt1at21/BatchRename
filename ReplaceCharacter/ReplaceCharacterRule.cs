@@ -19,12 +19,17 @@ namespace ReplaceCharacter
         {
             if (_parameter == null)
                 return null;
-
+            string[] splitList = _parameter.oldChar.Split('/');
+            string newFileName = file.FileName;
+            foreach (string _char in splitList)
+            {
+                newFileName = newFileName.Replace(_char, _parameter.newChar);
+            };
             return new FileInfor
             {
                 Dir = file.Dir,
                 Extension = file.Extension,
-                FileName = file.FileName.Replace(_parameter.oldChar, _parameter.newChar)
+                FileName = newFileName
             };
         }
 
@@ -38,7 +43,7 @@ namespace ReplaceCharacter
             if (_parameter == null)
                 return null;
 
-            return $"Replace ${_parameter.oldChar} in file name to ${_parameter.newChar}";
+            return $"Replace {_parameter.oldChar} in file name to {_parameter.newChar}";
         }
     }
 }

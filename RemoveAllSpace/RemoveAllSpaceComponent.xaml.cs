@@ -23,14 +23,17 @@ namespace RemoveAllSpace
     {
         public string Id => "RemoveAllSpaces";
 
+        public bool IsAppendToOriginal { get; set; }
         public RemoveAllSpaceComponent()
         {
             InitializeComponent();
+            SetRuleParameter(RemoveAllSpaceRuleConstant.DEFAULT_PARAMS);
+            DataContext = this;
         }
 
         public IRuleParameter GetRuleParamter()
         {
-            return null;
+            return new RemoveAllSpaceParameter { IsAppendToOriginal = IsAppendToOriginal };
         }
 
         public Control GetView()
@@ -40,7 +43,12 @@ namespace RemoveAllSpace
 
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
+            RemoveAllSpaceParameter parameter = (RemoveAllSpaceParameter)ruleParameter;
 
+            if (parameter == null)
+                return;
+
+            IsAppendToOriginal = parameter.IsAppendToOriginal;
         }
     }
 }

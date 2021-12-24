@@ -41,7 +41,7 @@ namespace ChangeExtensionRule
             if (_parameter == null)
                 return null;
 
-            return $"Change file extension to ${_parameter.NewExtension}";
+            return $"Change file extension to {_parameter.NewExtension}";
         }
     }
 }
