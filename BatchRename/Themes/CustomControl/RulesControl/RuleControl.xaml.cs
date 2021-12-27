@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -32,8 +34,6 @@ namespace BatchRename.Themes.CustomControl
 
         public event MouseDoubleClickRowHandler OnRowDoubleClick;
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public IEnumerable<string> SelectedIds;
 
         public IEnumerable<RulePickedViewModel> ItemsSource
         {
@@ -68,6 +68,20 @@ namespace BatchRename.Themes.CustomControl
             set { SetValue(AddRuleCommandProperty, value); }
         }
 
+        public static readonly DependencyProperty SelectedItemsProperty =
+          DependencyProperty.Register(
+              "SelectedItems",
+              typeof(IList),
+              typeof(RuleControl),
+              new PropertyMetadata(new List<NodeConvertViewModel>())
+        );
+
+        public IList SelectedItems
+        {
+            get { return (IList)GetValue(SelectedItemsProperty); }
+            set { SetValue(SelectedItemsProperty, value); }
+        }
+
         public RuleControl()
         {
             InitializeComponent();
@@ -78,11 +92,10 @@ namespace BatchRename.Themes.CustomControl
             OnMarkChanged?.Invoke(markId);
         }
 
-        private void RuleListView_OnSelectionChanged(IEnumerable<string> selectedIds)
+        private void RuleListView_OnSelectionChanged()
         {
-            SelectedIds = selectedIds;
-            var a = ItemsSource.Count();
-            OnSelectionChanged?.Invoke(selectedIds);
+            SelectedItems = lvRules.SelectedItems;
+            OnSelectionChanged?.Invoke();
         }
 
         private void RuleAction_OnAddClick(object sender, RoutedEventArgs e)
@@ -113,6 +126,21 @@ namespace BatchRename.Themes.CustomControl
         private void BRButton_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             AddRuleCommand.Execute(null);
+        }
+
+        private void RuleListView_OnDownClick(object sender, RoutedEventArgs e)
+        {
+            OnDownClick?.Invoke(sender, e);
+        }
+
+        private void RuleListView_OnUpClick(object sender, RoutedEventArgs e)
+        {
+            OnUpClick?.Invoke(sender, e);
+        }
+
+        private void RuleListView_OnRemoveClick(object sender, RoutedEventArgs e)
+        {
+            OnRemoveClick?.Invoke(sender, e);
         }
     }
 }

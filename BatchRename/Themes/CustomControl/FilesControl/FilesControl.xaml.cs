@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -28,8 +30,24 @@ namespace BatchRename.Themes.CustomControl
 
         public event RoutedEventHandler OnAddFileClick;
         public event RoutedEventHandler OnAddFolderClick;
+        public event RoutedEventHandler OnRemoveFileClick;
 
-        public IEnumerable<string> SelectedIds;
+        public static readonly DependencyProperty SelectedItemsProperty =
+              DependencyProperty.Register(
+                  "SelectedItems",
+                  typeof(IList),
+                  typeof(FilesControl),
+                  new PropertyMetadata(new List<NodeConvertViewModel>())
+        );
+
+        public IList SelectedItems
+        {
+            get { return (IList)GetValue(SelectedItemsProperty); }
+            set
+            {
+                SetValue(SelectedItemsProperty, value);
+            }
+        }
 
         public IEnumerable<NodeConvertViewModel> ItemsSource
         {
@@ -49,6 +67,20 @@ namespace BatchRename.Themes.CustomControl
                 typeof(IEnumerable<NodeConvertViewModel>),
                 typeof(FilesControl)
             );
+
+        public static readonly DependencyProperty ChooseOutputCommandProperty =
+              DependencyProperty.Register(
+                  "ChooseOutputCommand",
+                  typeof(ICommand),
+                  typeof(FilesControl),
+                  new UIPropertyMetadata(null)
+        );
+
+        public ICommand ChooseOutputCommand
+        {
+            get { return (ICommand)GetValue(ChooseOutputCommandProperty); }
+            set { SetValue(ChooseOutputCommandProperty, value); }
+        }
 
         public FilesControl()
         {
@@ -71,10 +103,21 @@ namespace BatchRename.Themes.CustomControl
             OnMarkChanged?.Invoke(markId);
         }
 
-        private void FilesListView_OnSelectionChanged(IEnumerable<string> selectedIds)
+        private void FilesListView_OnSelectionChanged()
         {
-            SelectedIds = selectedIds;
-            OnSelectionChanged?.Invoke(selectedIds);
+            SelectedItems = fileList.SelectedItems;
+            OnSelectionChanged?.Invoke();
         }
+
+        private void FilesAction_OnRemoveFileClick(object sender, RoutedEventArgs e)
+        {
+            OnRemoveFileClick?.Invoke(sender, e);
+        }
+
+        private void FilesListView_OnRemoveClick(object sender, RoutedEventArgs e)
+        {
+            OnRemoveFileClick?.Invoke(sender, e);
+        }
+
     }
 }

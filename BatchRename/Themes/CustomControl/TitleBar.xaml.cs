@@ -176,6 +176,20 @@ namespace BatchRename.Themes.CustomControl
             set { SetValue(AddFolderCommandProperty, value); }
         }
 
+        public static readonly DependencyProperty ConvertCommandProperty =
+             DependencyProperty.Register(
+                 "ConvertCommand",
+                 typeof(ICommand),
+                 typeof(TitleBar),
+                 new UIPropertyMetadata(null)
+       );
+
+        public ICommand ConvertCommand
+        {
+            get { return (ICommand)GetValue(ConvertCommandProperty); }
+            set { SetValue(ConvertCommandProperty, value); }
+        }
+
         public static readonly DependencyProperty ExitCommandProperty =
           DependencyProperty.Register(
               "ExitCommand",

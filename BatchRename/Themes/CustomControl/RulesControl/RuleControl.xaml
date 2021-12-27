@@ -87,14 +87,18 @@
         </StackPanel>
 
         <ct:RuleListView
+            x:Name="lvRules"
             Margin="{DynamicResource PaddingTopMedium}"
             Background="{DynamicResource SurfaceColor}"
             DockPanel.Dock="Top"
             ItemsSource="{Binding ItemsSource,
                                   ElementName=Root}"
+            OnDownClick="RuleListView_OnDownClick"
             OnMarkChanged="RuleListView_OnMarkChanged"
+            OnRemoveClick="RuleListView_OnRemoveClick"
             OnRowDoubleClick="RuleListView_OnRowDoubleClick"
-            OnSelectionChanged="RuleListView_OnSelectionChanged">
+            OnSelectionChanged="RuleListView_OnSelectionChanged"
+            OnUpClick="RuleListView_OnUpClick">
             <ct:RuleListView.Style>
                 <Style TargetType="{x:Type ct:RuleListView}">
                     <Setter Property="Visibility" Value="Visible" />

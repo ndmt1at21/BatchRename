@@ -18,8 +18,11 @@
 
             <ct:FilesAction
                 Margin="{DynamicResource PaddingTopMedium}"
+                ChooseOutputCommand="{Binding ChooseOutputCommand,
+                                              ElementName=Root}"
                 OnAddFileClick="FilesAction_OnAddFileClick"
-                OnAddFolderClick="FilesAction_OnAddFolderClick" />
+                OnAddFolderClick="FilesAction_OnAddFolderClick"
+                OnRemoveFileClick="FilesAction_OnRemoveFileClick" />
 
             <TextBlock Margin="{DynamicResource PaddingTopLarge}" Style="{DynamicResource H3}">
                 Files Preview
@@ -27,10 +30,12 @@
         </StackPanel>
 
         <ct:FilesListView
+            x:Name="fileList"
             Margin="{DynamicResource PaddingTopMedium}"
             ItemsSource="{Binding Path=ItemsSource,
                                   ElementName=Root}"
             OnMarkChanged="FilesListView_OnMarkChanged"
+            OnRemoveClick="FilesListView_OnRemoveClick"
             OnSelectionChanged="FilesListView_OnSelectionChanged">
             <ct:FilesListView.Style>
                 <Style TargetType="{x:Type ct:FilesListView}">

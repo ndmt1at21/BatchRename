@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,7 @@ namespace BatchRename.Commands.Files
 
                 foreach (var path in openFileDialog.FileNames)
                 {
+                    Debug.WriteLine(path);
                     if (!_list.Contains(path))
                     {
                         _list.Add(path);
@@ -55,6 +57,7 @@ namespace BatchRename.Commands.Files
                             IsMarked = true,
                         };
 
+                        Debug.WriteLine(path);
                         _store.CreateNodeConvert(nodeConvert);
                     }
                 }

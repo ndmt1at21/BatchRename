@@ -5,6 +5,8 @@
     xmlns:brc="clr-namespace:BRControl;assembly=BRControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Name="Root"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -18,6 +20,8 @@
             <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
             <Setter Property="HoverBackground" Value="{StaticResource PrimaryColorLight}" />
         </Style>
+
+        <sys:Double x:Key="Gap">4</sys:Double>
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
@@ -28,7 +32,7 @@
             Style="{StaticResource FileActionButton}"
             ToolTip="Add Files">
             <StackPanel Orientation="Horizontal">
-                <ContentControl Content="{DynamicResource PlusIcon}" Style="{StaticResource ButtonIconStyle}" />
+                <ContentControl Content="{DynamicResource AddFileIcon}" Style="{StaticResource ButtonIconStyle}" />
 
                 <TextBlock Style="{StaticResource ButtonLabelStyle}">
                     Add Files
@@ -36,13 +40,15 @@
             </StackPanel>
         </brc:BRButton>
 
+        <Border Width="{StaticResource Gap}" />
+
         <brc:BRButton
             Name="btnAddFolder"
             Click="btnAddFolder_Click"
             Style="{StaticResource FileActionButton}"
             ToolTip="Add Folder">
             <StackPanel Orientation="Horizontal">
-                <ContentControl Content="{DynamicResource PlusIcon}" Style="{StaticResource ButtonIconStyle}" />
+                <ContentControl Content="{DynamicResource AddFolderIcon}" Style="{StaticResource ButtonIconStyle}" />
 
                 <TextBlock Style="{StaticResource ButtonLabelStyle}">
                     Add Folder
@@ -50,6 +56,40 @@
             </StackPanel>
         </brc:BRButton>
 
+        <Border Width="{StaticResource Gap}" />
+
+        <brc:BRButton
+            Command="{Binding ChooseOutputCommand,
+                              ElementName=Root}"
+            Style="{StaticResource FileActionButton}"
+            ToolTip="Choose Output">
+            <StackPanel Orientation="Horizontal">
+                <ContentControl Content="{DynamicResource ChooseOutputIcon}" Style="{StaticResource ButtonIconStyle}" />
+
+                <TextBlock Style="{StaticResource ButtonLabelStyle}">
+                    Output Folder
+                </TextBlock>
+            </StackPanel>
+        </brc:BRButton>
+
+        <Border Width="{StaticResource Gap}" />
+
+        <brc:BRButton
+            Name="btnRemove"
+            ActiveBackground="{DynamicResource AlertColorDark}"
+            Background="{DynamicResource AlertColor}"
+            Click="btnRemove_Click"
+            HoverBackground="{DynamicResource AlertColorLight}"
+            Style="{DynamicResource BaseActionButton}"
+            ToolTip="Remove">
+            <StackPanel Orientation="Horizontal">
+                <ContentControl Content="{DynamicResource DeleteIcon}" Style="{StaticResource ButtonIconStyle}" />
+
+                <TextBlock Style="{StaticResource ButtonLabelStyle}">
+                    Remove
+                </TextBlock>
+            </StackPanel>
+        </brc:BRButton>
 
     </StackPanel>
 </UserControl>

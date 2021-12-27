@@ -103,6 +103,24 @@
                     <Separator />
 
                     <MenuItem
+                        Command="{Binding StartConvertCommand,
+                                          RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                         AncestorType=ct:AppMenu}}"
+                        Header="_Convert"
+                        InputGestureText="{Binding StartConvertCommand.GestureText,
+                                                   ElementName=Root}" />
+
+                    <MenuItem
+                        Command="{Binding PreviewCommand,
+                                          RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                         AncestorType=ct:AppMenu}}"
+                        Header="_Preview"
+                        InputGestureText="{Binding PreviewCommand.GestureText,
+                                                   ElementName=Root}" />
+
+                    <Separator />
+
+                    <MenuItem
                         Command="{Binding ExitCommand,
                                           RelativeSource={RelativeSource Mode=FindAncestor,
                                                                          AncestorType=ct:AppMenu}}"

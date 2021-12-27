@@ -24,6 +24,21 @@ namespace BatchRename.Themes.CustomControl
     {
         public event RoutedEventHandler OnAddFileClick;
         public event RoutedEventHandler OnAddFolderClick;
+        public event RoutedEventHandler OnRemoveFileClick;
+
+        public static readonly DependencyProperty ChooseOutputCommandProperty =
+          DependencyProperty.Register(
+              "ChooseOutputCommand",
+              typeof(ICommand),
+              typeof(FilesAction),
+              new UIPropertyMetadata(null)
+        );
+
+        public ICommand ChooseOutputCommand
+        {
+            get { return (ICommand)GetValue(ChooseOutputCommandProperty); }
+            set { SetValue(ChooseOutputCommandProperty, value); }
+        }
 
         public FilesAction()
         {
@@ -38,6 +53,11 @@ namespace BatchRename.Themes.CustomControl
         private void btnAddFolder_Click(object sender, RoutedEventArgs e)
         {
             OnAddFolderClick?.Invoke(sender, e);
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            OnRemoveFileClick?.Invoke(sender, e);
         }
     }
 }

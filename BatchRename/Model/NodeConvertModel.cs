@@ -20,6 +20,7 @@ namespace BatchRename.Model
         public bool IsMarked { get; set; }
         public Node Node { get; set; }
         public string NewName { get; set; }
+        public string Error { get; set; }
         public ConvertStatus ConvertStatus { get; set; }
 
         public NodeConvertModel Clone()
@@ -31,6 +32,7 @@ namespace BatchRename.Model
                 ConvertStatus = ConvertStatus,
                 Node = Node.Clone(),
                 NewName = NewName,
+                Error = Error
             };
         }
     }

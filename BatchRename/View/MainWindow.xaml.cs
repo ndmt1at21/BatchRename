@@ -53,6 +53,8 @@ namespace BatchRename
 
         public ICommand AddFileCommand { get; set; }
         public ICommand AddFolderCommand { get; set; }
+        public ICommand ChooseOutputCommand { get; set; }
+        public ICommand RemoveFileCommand { get; set; }
         public ICommand DropFileCommand { get; set; }
 
         private PluginManager _pluginManager { get; set; }
@@ -72,7 +74,7 @@ namespace BatchRename
         public MainWindow(PluginManager pluginManager)
         {
             InitializeComponent();
-            
+
             _pluginManager = pluginManager;
 
             DataContext = this;
@@ -82,8 +84,6 @@ namespace BatchRename
 
             PickedRules = new ObservableCollection<RulePickedViewModel>();
             ConvertNodes = new ObservableCollection<NodeConvertViewModel>();
-
-
 
             dragdropPanel.Drop += DragDrop_Files;
         }
@@ -138,6 +138,8 @@ namespace BatchRename
             AddFileCommand = new AddFileCommand(_store, _list);
             AddFolderCommand = new AddFolderCommand(_store, _list);
             DropFileCommand = new DropFileCommand(_store, _list);
+            ChooseOutputCommand = new ChooseOutputCommand(_store);
+            RemoveFileCommand = new RemoveFileCommand(_store);
         }
 
         private void InitializeServices()
@@ -182,13 +184,18 @@ namespace BatchRename
             _store.OnStoreChanged += OnStore_Changed;
             _store.OnStoreLoaded += OnStore_Loaded_RulePicked;
             _store.OnStoreLoaded += OnStore_Loaded_NodeConvert;
+
             _store.OnRulePickedCreated += OnRulePicked_Created;
             _store.OnRulePickedDeleted += OnRulePicked_Deleted;
             _store.OnRulePickedUpdated += OnRulePicked_Updated;
+
             _store.OnNodeConvertCreated += OnNodeConvert_Created;
             _store.OnNodeConvertUpdated += OnNodeConvert_Updated;
+            _store.OnNodeConvertDeleted += OnNodeConvert_Deleted;
             _store.OnProjectPathChanged += OnProjectPath_Changed;
             _store.OnMainWindowPositionUpdated += OnMainWindowPosition_Updated;
+
+            _store.OnOutputPathChanged += OnOutputPath_Changed;
         }
 
         private void OnProjectPath_Changed()
@@ -267,7 +274,7 @@ namespace BatchRename
                 Id = ruleModel.Id,
                 IsMarked = ruleModel.IsMarked,
                 RuleName = ruleName,
-                Statement = rule.GetStatement()
+                Statement = rule.GetStatement(),
             };
 
             return newRuleViewModel;
@@ -279,18 +286,27 @@ namespace BatchRename
     {
         private void RuleControl_OnAddClick(object sender, RoutedEventArgs e)
         {
-            RuleWindow ruleWindow = new RuleWindow(_pluginManager, _store);
-            ruleWindow.ShowDialog();
+            AddRuleCommand.Execute(null);
         }
 
         private void RuleControl_OnRemoveClick(object sender, RoutedEventArgs e)
         {
-            RemoveRuleCommand.Execute(ruleControl.SelectedIds);
+            List<string> selectedIds = new List<string>();
+
+            foreach (var item in ruleControl.SelectedItems)
+            {
+                var rule = (RulePickedViewModel)item;
+                selectedIds.Add(rule.Id);
+            }
+
+            RemoveRuleCommand.Execute(selectedIds);
         }
 
         private void ruleControl_OnUpClick(object sender, RoutedEventArgs e)
         {
-            // TODO: move rule up
+            // TODO
+            ruleControl.SelectedItems.Clear();
+            ruleControl.SelectedItems.Add(PickedRules[0]);
         }
 
         private void ruleControl_OnDownClick(object sender, RoutedEventArgs e)
@@ -320,7 +336,7 @@ namespace BatchRename
     public partial class MainWindow
     {
         private static List<string> _list = new List<string>();
-        
+
         public bool IsDraging { get; set; } = false;
         private void OnStore_Loaded_NodeConvert()
         {
@@ -345,6 +361,25 @@ namespace BatchRename
             nodeViewModel.ConvertStatus = nodeModel.ConvertStatus;
             nodeViewModel.IsMarked = nodeModel.IsMarked;
             nodeViewModel.NewName = nodeModel.NewName;
+            nodeViewModel.Error = nodeModel.Error;
+        }
+
+        private void OnOutputPath_Changed(string outputPath)
+        {
+            foreach (var node in ConvertNodes)
+            {
+                node.OutputPath = outputPath;
+            }
+        }
+
+        private void OnNodeConvert_Deleted(string id)
+        {
+            var nodeViewModel = ConvertNodes.First(node => node.Id == id);
+
+            if (nodeViewModel == null)
+                return;
+
+            ConvertNodes.Remove(nodeViewModel);
         }
 
         private void FilesControl_OnAddFileClick(object sender, RoutedEventArgs e)
@@ -357,6 +392,18 @@ namespace BatchRename
             AddFolderCommand.Execute(null);
         }
 
+        private void filesControl_OnRemoveFileClick(object sender, RoutedEventArgs e)
+        {
+            List<string> selectedIds = new List<string>();
+
+            foreach (var item in filesControl.SelectedItems)
+            {
+                var node = (NodeConvertViewModel)item;
+                selectedIds.Add(node.Id);
+            }
+
+            RemoveFileCommand.Execute(selectedIds);
+        }
 
         private void DragDrop_Files(object sender, DragEventArgs e)
         {
@@ -401,6 +448,7 @@ namespace BatchRename
                 Id = newNode.Id,
                 OutputPath = _store.OutputPath,
                 NewName = newNode.NewName,
+                Error = newNode.Error,
                 Node = new NodeViewModel()
                 {
                     CreatedDate = newNode.Node.CreatedDate,

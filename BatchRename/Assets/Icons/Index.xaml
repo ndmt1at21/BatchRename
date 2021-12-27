@@ -21,5 +21,10 @@
         <ResourceDictionary Source="./UpArrow.xaml" />
         <ResourceDictionary Source="./Delete.xaml" />
         <ResourceDictionary Source="./Plus.xaml" />
+
+        <ResourceDictionary Source="./AddFileIcon.xaml" />
+        <ResourceDictionary Source="./AddFolderIcon.xaml" />
+        <ResourceDictionary Source="./ChooseOutputIcon.xaml" />
+        <ResourceDictionary Source="./PreviewIcon.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

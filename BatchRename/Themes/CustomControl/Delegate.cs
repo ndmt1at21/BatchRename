@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace BatchRename.Themes.CustomControl
 {
     public delegate void MarkChangedEventHandler(string markId);
-    public delegate void SelectionChangedEventHandler(IEnumerable<string> selectedIds);
+    public delegate void SelectionChangedEventHandler();
 }

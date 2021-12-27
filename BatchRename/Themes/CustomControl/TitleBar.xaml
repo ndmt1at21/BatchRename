@@ -31,6 +31,9 @@
                 OpenCommand="{Binding OpenCommand,
                                       RelativeSource={RelativeSource Mode=FindAncestor,
                                                                      AncestorType=ct:TitleBar}}"
+                PreviewCommand="{Binding PreviewCommand,
+                                         RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                        AncestorType=ct:TitleBar}}"
                 SaveCommand="{Binding SaveCommand,
                                       RelativeSource={RelativeSource Mode=FindAncestor,
                                                                      AncestorType=ct:TitleBar}}"
@@ -69,12 +72,18 @@
                     OpenCommand="{Binding OpenCommand,
                                           RelativeSource={RelativeSource Mode=FindAncestor,
                                                                          AncestorType=ct:TitleBar}}"
+                    PreviewCommand="{Binding PreviewCommand,
+                                             RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                            AncestorType=ct:TitleBar}}"
                     SaveAsCommand="{Binding SaveAsCommand,
                                             RelativeSource={RelativeSource Mode=FindAncestor,
                                                                            AncestorType=ct:TitleBar}}"
                     SaveCommand="{Binding SaveCommand,
                                           RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                         AncestorType=ct:TitleBar}}" />
+                                                                         AncestorType=ct:TitleBar}}"
+                    StartConvertCommand="{Binding StartCommand,
+                                                  RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                 AncestorType=ct:TitleBar}}" />
 
                 <!--  Window Button Command  -->
                 <ct:WindowCommandButtons ExitCommand="{Binding ExitCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TitleBar}}" />

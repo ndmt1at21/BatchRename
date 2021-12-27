@@ -153,20 +153,6 @@ namespace BatchRename.Model
             if (result) OnRulePickedDeleted?.Invoke(pickedRuleId);
             OnStoreChanged?.Invoke();
         }
-
-        public void DeletePickedRules(IEnumerable<string> pickedRuleIds)
-        {
-            List<string> deletedIds = new List<string>();
-
-            foreach (var pickedRuleId in pickedRuleIds)
-            {
-                bool result = PickedRules.Remove(pickedRuleId);
-                if (result) deletedIds.Add(pickedRuleId);
-            }
-
-            OnNodeConvertDeleted?.Invoke(deletedIds);
-            OnStoreChanged?.Invoke();
-        }
     }
 
     // Rule Editing
@@ -208,16 +194,32 @@ namespace BatchRename.Model
     {
         public Dictionary<string, NodeConvertModel> ConvertNodes { get; set; }
 
-        public string OutputPath { get; set; }
+        private string _outputPath { get; set; }
+        public string OutputPath
+        {
+            get
+            {
+                return _outputPath;
+            }
+            set
+            {
+                _outputPath = value;
+                OnOutputPathChanged?.Invoke(value);
+            }
+        }
 
         public Action<NodeConvertModel> OnNodeConvertUpdated;
         public Action<NodeConvertModel> OnNodeConvertCreated;
-        public Action<IEnumerable<string>> OnNodeConvertDeleted;
+        public Action<string> OnNodeConvertDeleted;
+        public Action<string> OnOutputPathChanged;
 
         public void CreateNodeConvert(NodeConvertModel nodeConvert)
         {
+
             NodeConvertModel newNode = nodeConvert.Clone();
             newNode.Id = Guid.NewGuid().ToString();
+
+            Debug.WriteLine(newNode.Id);
 
             ConvertNodes.Add(newNode.Id, newNode);
 
@@ -245,10 +247,10 @@ namespace BatchRename.Model
             existNode.ConvertStatus = updatedNodeConvert.ConvertStatus;
             existNode.NewName = updatedNodeConvert.NewName;
             existNode.IsMarked = updatedNodeConvert.IsMarked;
+            existNode.Error = updatedNodeConvert.Error;
 
             ConvertNodes[existNode.Id] = existNode;
 
-            Debug.WriteLine(existNode.NewName);
             OnNodeConvertUpdated?.Invoke(existNode.Clone());
             OnStoreChanged?.Invoke();
         }
@@ -256,21 +258,7 @@ namespace BatchRename.Model
         public void DeleteNodeConvert(string nodeConvertId)
         {
             ConvertNodes.Remove(nodeConvertId);
-            OnNodeConvertDeleted?.Invoke(new List<string>() { nodeConvertId });
-            OnStoreChanged?.Invoke();
-        }
-
-        public void DeleteNodeConverts(IEnumerable<string> nodeConvertIds)
-        {
-            List<string> deletedIds = new List<string>();
-
-            foreach (var nodeConvertId in nodeConvertIds)
-            {
-                bool result = ConvertNodes.Remove(nodeConvertId);
-                if (result) deletedIds.Add(nodeConvertId);
-            }
-
-            OnNodeConvertDeleted?.Invoke(deletedIds);
+            OnNodeConvertDeleted?.Invoke(nodeConvertId);
             OnStoreChanged?.Invoke();
         }
     }
@@ -279,5 +267,4 @@ namespace BatchRename.Model
     {
         public List<RecentFileItem> RecentFiles { get; set; }
     }
-
 }

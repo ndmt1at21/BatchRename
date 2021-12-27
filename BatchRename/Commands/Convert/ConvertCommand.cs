@@ -22,8 +22,9 @@ namespace BatchRename.Commands
             _store = store;
             _pluginManager = pluginManager;
 
-            Gesture = new KeyGesture(Key.F5, ModifierKeys.Control);
+            Gesture = new KeyGesture(Key.F5);
         }
+
 
         public override void Execute(object parameter)
         {
@@ -39,28 +40,28 @@ namespace BatchRename.Commands
                     return rule;
                 }).ToList();
 
-            if (rules.Count == 0)
+            List<NodeConvertModel> files = _store.GetAllNodeConverts();
+
+            if (_store.PickedRules.Count == 0)
             {
                 MessageBox.Show(
-                    "No rule picked",
-                    "Empty",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information
-                );
+                   "No rule picked",
+                   "Empty",
+                   MessageBoxButton.OK,
+                   MessageBoxImage.Information
+               );
 
                 return;
             }
 
-            List<NodeConvertModel> files = _store.GetAllNodeConverts();
-
-            if (files.Count == 0)
+            if (_store.ConvertNodes.Count == 0)
             {
                 MessageBox.Show(
-                    "No file picked",
-                    "Empty",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information
-                );
+                   "No file picked",
+                   "Empty",
+                   MessageBoxButton.OK,
+                   MessageBoxImage.Information
+               );
 
                 return;
             }

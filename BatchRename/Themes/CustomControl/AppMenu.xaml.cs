@@ -159,6 +159,34 @@ namespace BatchRename.Themes.CustomControl
             set { SetValue(AddFolderCommandProperty, value); }
         }
 
+        public static readonly DependencyProperty StartConvertCommandProperty =
+         DependencyProperty.Register(
+             "StartConvertCommand",
+             typeof(ICommand),
+             typeof(AppMenu),
+             new UIPropertyMetadata(null)
+);
+
+        public ICommand StartConvertCommand
+        {
+            get { return (ICommand)GetValue(StartConvertCommandProperty); }
+            set { SetValue(StartConvertCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty PreviewCommandProperty =
+            DependencyProperty.Register(
+                "PreviewCommand",
+                typeof(ICommand),
+                typeof(AppMenu),
+                new UIPropertyMetadata(null)
+);
+
+        public ICommand PreviewCommand
+        {
+            get { return (ICommand)GetValue(PreviewCommandProperty); }
+            set { SetValue(PreviewCommandProperty, value); }
+        }
+
         public AppMenu()
         {
             InitializeComponent();

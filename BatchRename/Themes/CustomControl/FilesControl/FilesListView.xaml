@@ -12,6 +12,26 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <ContextMenu x:Key="DataGridContextMenu">
+            <MenuItem
+                Name="btnRemove"
+                Padding="{DynamicResource PaddingMedium}"
+                Click="btnRemove_Click"
+                Header="Remove" />
+            <MenuItem
+                Name="btnUp"
+                Padding="{DynamicResource PaddingMedium}"
+                Click="btnUp_Click"
+                Header="Up" />
+            <MenuItem
+                Name="btnDown"
+                Padding="{DynamicResource PaddingMedium}"
+                Click="btnDown_Click"
+                Header="Down" />
+        </ContextMenu>
+    </UserControl.Resources>
+
     <DataGrid
         Name="lvNodes"
         AutoGenerateColumns="False"
@@ -20,6 +40,7 @@
         CanUserDeleteRows="False"
         CanUserReorderColumns="False"
         CanUserResizeRows="False"
+        ContextMenu="{StaticResource DataGridContextMenu}"
         GridLinesVisibility="None"
         ItemsSource="{Binding ItemsSource,
                               ElementName=Root}"
@@ -67,13 +88,13 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
 
-            <DataGridTemplateColumn Width="100">
+            <DataGridTemplateColumn Width="150">
                 <DataGridTemplateColumn.Header>
                     <TextBlock
                         Margin="{StaticResource PaddingLeftMedium}"
                         FontFamily="{DynamicResource PoppinsBold}"
                         FontSize="12"
-                        TextTrimming="WordEllipsis">
+                        TextTrimming="CharacterEllipsis">
                         FILE NAME
                     </TextBlock>
                 </DataGridTemplateColumn.Header>
@@ -85,18 +106,18 @@
                             VerticalAlignment="Center"
                             Text="{Binding Node.Name,
                                            Mode=OneWay}"
-                            TextTrimming="WordEllipsis" />
+                            TextTrimming="CharacterEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
 
-            <DataGridTemplateColumn Width="100">
+            <DataGridTemplateColumn Width="150">
                 <DataGridTemplateColumn.Header>
                     <TextBlock
                         Margin="{StaticResource PaddingLeftMedium}"
                         FontFamily="{DynamicResource PoppinsBold}"
                         FontSize="12"
-                        TextTrimming="WordEllipsis">
+                        TextTrimming="CharacterEllipsis">
                         NEW NAME
                     </TextBlock>
                 </DataGridTemplateColumn.Header>
@@ -108,7 +129,7 @@
                             VerticalAlignment="Center"
                             Text="{Binding NewName,
                                            Mode=OneWay}"
-                            TextTrimming="WordEllipsis" />
+                            TextTrimming="CharacterEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -130,7 +151,7 @@
                             VerticalAlignment="Center"
                             Text="{Binding Node.Path,
                                            Mode=OneWay}"
-                            TextTrimming="WordEllipsis" />
+                            TextTrimming="CharacterEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
@@ -152,7 +173,29 @@
                             VerticalAlignment="Center"
                             Text="{Binding OutputPath,
                                            Mode=OneWay}"
-                            TextTrimming="WordEllipsis" />
+                            TextTrimming="CharacterEllipsis" />
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+
+            <DataGridTemplateColumn Width="*">
+                <DataGridTemplateColumn.Header>
+                    <TextBlock
+                        Margin="{StaticResource PaddingLeftMedium}"
+                        FontFamily="{DynamicResource PoppinsBold}"
+                        FontSize="12">
+                        ERROR
+                    </TextBlock>
+                </DataGridTemplateColumn.Header>
+
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Margin="{StaticResource PaddingLeftMedium}"
+                            VerticalAlignment="Center"
+                            Text="{Binding Error,
+                                           Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis" />
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>

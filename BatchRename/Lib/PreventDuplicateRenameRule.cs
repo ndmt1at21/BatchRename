@@ -18,7 +18,7 @@ namespace BatchRename.Lib
 
         public FileInfor Convert(FileInfor file)
         {
-            if (_fileFreqs.ContainsKey(file.Dir))
+            if (!_fileFreqs.ContainsKey(file.Dir))
             {
                 _fileFreqs.Add(file.Dir, 0);
             }

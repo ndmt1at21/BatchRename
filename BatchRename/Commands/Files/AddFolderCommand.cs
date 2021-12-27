@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace BatchRename.Commands.Files
 {
@@ -31,10 +32,32 @@ namespace BatchRename.Commands.Files
             dialog.IsFolderPicker = true;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
+                HandleImportFiles(dialog.FileNames.ToList());
+            }
+        }
+
+        private void handleFolder(string path)
+        {
+            string[] fileEntries = Directory.GetFiles(path);
+            foreach (string fileName in fileEntries)
+            {
+                if (!_list.Contains(fileName))
+                    _list.Add(fileName);
+            }
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(path);
+            foreach (string subdirectory in subdirectoryEntries)
+                handleFolder(subdirectory);
+        }
+
+        private void HandleImportFiles(List<string> FileNames)
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(() =>
+            {
                 //Save old files
                 List<string> lastFileList = new List<string>(_list);
                 //New files
-                List<string> arrAllFiles = new List<string>(dialog.FileNames);
+                List<string> arrAllFiles = new List<string>(FileNames);
 
                 foreach (var file in arrAllFiles)
                 {
@@ -74,27 +97,15 @@ namespace BatchRename.Commands.Files
 
                         NodeConvertModel nodeConvert = new NodeConvertModel()
                         {
-                            Node = node
+                            Node = node,
+                            ConvertStatus = ConvertStatus.PENDING,
+                            IsMarked = true,
                         };
 
                         _store.CreateNodeConvert(nodeConvert);
                     }
                 }
-            }
-        }
-
-        private void handleFolder(string path)
-        {
-            string[] fileEntries = Directory.GetFiles(path);
-            foreach (string fileName in fileEntries)
-            {
-                if (!_list.Contains(fileName))
-                    _list.Add(fileName);
-            }
-            // Recurse into subdirectories of this directory.
-            string[] subdirectoryEntries = Directory.GetDirectories(path);
-            foreach (string subdirectory in subdirectoryEntries)
-                handleFolder(subdirectory);
+            });
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections;
 using BatchRename.ViewModel;
 
 namespace BatchRename.Themes.CustomControl
@@ -23,6 +26,10 @@ namespace BatchRename.Themes.CustomControl
     {
         public event MarkChangedEventHandler OnMarkChanged;
         public event SelectionChangedEventHandler OnSelectionChanged;
+        public event RoutedEventHandler OnRemoveClick;
+        public event RoutedEventHandler OnUpClick;
+        public event RoutedEventHandler OnDownClick;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public IEnumerable<NodeConvertViewModel> ItemsSource
@@ -44,10 +51,39 @@ namespace BatchRename.Themes.CustomControl
                 typeof(FilesListView)
             );
 
+        public static readonly DependencyProperty SelectedItemsProperty =
+              DependencyProperty.Register(
+                  "SelectedItems",
+                  typeof(IList),
+                  typeof(FilesListView),
+                  new PropertyMetadata(new List<NodeConvertViewModel>())
+        );
+
+        public IList SelectedItems
+        {
+            get { return (IList)GetValue(SelectedItemsProperty); }
+            set { SetValue(SelectedItemsProperty, value); }
+        }
+
         public FilesListView()
         {
             InitializeComponent();
             DataContext = this;
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            OnRemoveClick?.Invoke(this, e);
+        }
+
+        private void btnDown_Click(object sender, RoutedEventArgs e)
+        {
+            OnDownClick?.Invoke(this, e);
+        }
+
+        private void btnUp_Click(object sender, RoutedEventArgs e)
+        {
+            OnUpClick?.Invoke(this, e);
         }
     }
 
@@ -56,15 +92,8 @@ namespace BatchRename.Themes.CustomControl
     {
         private void lvNodes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedIds = new List<string>();
-
-            foreach (var item in lvNodes.SelectedItems)
-            {
-                var nodeConvert = (NodeConvertViewModel)item;
-                selectedIds.Add(nodeConvert.Id);
-            }
-
-            OnSelectionChanged?.Invoke(selectedIds);
+            SelectedItems = lvNodes.SelectedItems;
+            OnSelectionChanged?.Invoke();
         }
 
         private void cellCheckBox_Click(object sender, RoutedEventArgs e)

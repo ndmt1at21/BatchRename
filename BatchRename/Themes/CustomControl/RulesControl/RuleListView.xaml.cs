@@ -13,6 +13,8 @@ using BatchRename.Model;
 using BatchRename.ViewModel;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 namespace BatchRename.Themes.CustomControl
 {
@@ -22,6 +24,10 @@ namespace BatchRename.Themes.CustomControl
     {
         public event MarkChangedEventHandler OnMarkChanged;
         public event SelectionChangedEventHandler OnSelectionChanged;
+        public event RoutedEventHandler OnRemoveClick;
+        public event RoutedEventHandler OnUpClick;
+        public event RoutedEventHandler OnDownClick;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public IEnumerable<RulePickedViewModel> ItemsSource
@@ -44,11 +50,26 @@ namespace BatchRename.Themes.CustomControl
 
         public event MouseDoubleClickRowHandler OnRowDoubleClick;
 
+        public static readonly DependencyProperty SelectedItemsProperty =
+              DependencyProperty.Register(
+                  "SelectedItems",
+                  typeof(IList),
+                  typeof(RuleListView),
+                  new PropertyMetadata(new List<RulePickedViewModel>())
+        );
+
+        public IList SelectedItems
+        {
+            get { return (IList)GetValue(SelectedItemsProperty); }
+            set { SetValue(SelectedItemsProperty, value); }
+        }
+
         public RuleListView()
         {
             InitializeComponent();
             DataContext = this;
         }
+
 
         private void lvRules_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -58,6 +79,21 @@ namespace BatchRename.Themes.CustomControl
             var rule = (RulePickedViewModel)lvRules.SelectedItem;
             OnRowDoubleClick?.Invoke(rule.Id);
         }
+
+        private void menuRemove_Click(object sender, RoutedEventArgs e)
+        {
+            OnRemoveClick?.Invoke(sender, e);
+        }
+
+        private void menuUp_Click(object sender, RoutedEventArgs e)
+        {
+            OnUpClick?.Invoke(sender, e);
+        }
+
+        private void menuDown_Click(object sender, RoutedEventArgs e)
+        {
+            OnDownClick?.Invoke(sender, e);
+        }
     }
 
     // handle select
@@ -65,15 +101,8 @@ namespace BatchRename.Themes.CustomControl
     {
         private void lvRules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedIds = new List<string>();
-
-            foreach (var item in lvRules.SelectedItems)
-            {
-                var ruleModel = (RulePickedViewModel)item;
-                selectedIds.Add(ruleModel.Id);
-            }
-
-            OnSelectionChanged?.Invoke(selectedIds);
+            SelectedItems = lvRules.SelectedItems;
+            OnSelectionChanged?.Invoke();
         }
 
         private void cellCheckBox_Click(object sender, RoutedEventArgs e)

@@ -62,6 +62,11 @@
             Command="{Binding AddFileCommand}"
             Modifiers="{Binding AddFileCommand.Gesture.Modifiers}" />
 
+        <KeyBinding
+            Key="{Binding ConvertCommand.Gesture.Key}"
+            Command="{Binding ConvertCommand}"
+            Modifiers="{Binding ConvertCommand.Gesture.Modifiers}" />
+
     </Window.InputBindings>
 
     <Window.Style>
@@ -111,7 +116,7 @@
     <Window.Resources>
         <lib:BreakpointConverter x:Key="BreakPointConverter" />
         <lib:BooleanToVisibilityConverter x:Key="visibilityConverter" />
-        
+
         <Style x:Key="NormalWidthContainerStyle" TargetType="Grid">
             <Setter Property="Visibility" Value="Visible" />
 
@@ -121,19 +126,19 @@
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=2}" Value="Medium">
-                    <Setter Property="Margin" Value="30,10,30,20" />
+                    <Setter Property="Margin" Value="5,10,5,10" />
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=3}" Value="Normal">
-                    <Setter Property="Margin" Value="40,10,40,25" />
+                    <Setter Property="Margin" Value="10,10,10,15" />
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}, ConverterParameter=4}" Value="Large">
-                    <Setter Property="Margin" Value="50,10,50,30" />
+                    <Setter Property="Margin" Value="20,10,20,20" />
                 </DataTrigger>
 
                 <DataTrigger Binding="{Binding ActualWidth, ElementName=Window, Converter={StaticResource BreakPointConverter}}" Value="ExtraLarge">
-                    <Setter Property="Margin" Value="70,10,70,35" />
+                    <Setter Property="Margin" Value="40,10,40,20" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -152,22 +157,25 @@
         <Style x:Key="DropPanelVisible" TargetType="ct:DropFilePanel">
             <Setter Property="Visibility" Value="Hidden" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsDraging, ElementName=Window,Converter={StaticResource visibilityConverter}}" Value="0">
+                <DataTrigger Binding="{Binding IsDraging, ElementName=Window, Converter={StaticResource visibilityConverter}}" Value="0">
                     <Setter Property="Visibility" Value="Visible" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding IsDraging, ElementName=Window,Converter={StaticResource visibilityConverter}}" Value="2">
+                <DataTrigger Binding="{Binding IsDraging, ElementName=Window, Converter={StaticResource visibilityConverter}}" Value="2">
                     <Setter Property="Visibility" Value="Hidden" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
 
-    <Grid AllowDrop="True" DragLeave="DragLeave_Hide" MouseMove="DragLeave_MouseMove_Hide">
+    <Grid
+        AllowDrop="True"
+        DragLeave="DragLeave_Hide"
+        MouseMove="DragLeave_MouseMove_Hide">
         <!--  - Normal Width Layout  -->
         <Grid Style="{StaticResource NormalWidthContainerStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="8" />
                 <ColumnDefinition Width="6*" />
             </Grid.ColumnDefinitions>
 
@@ -222,16 +230,16 @@
                     <Border Padding="{DynamicResource PaddingXLargeYMedium}">
                         <ct:FilesControl
                             x:Name="filesControl"
+                            ChooseOutputCommand="{Binding ChooseOutputCommand}"
                             ItemsSource="{Binding ConvertNodes}"
                             OnAddFileClick="FilesControl_OnAddFileClick"
-                            OnAddFolderClick="filesControl_OnAddFolderClick" />
+                            OnAddFolderClick="filesControl_OnAddFolderClick"
+                            OnRemoveFileClick="filesControl_OnRemoveFileClick" />
                     </Border>
 
                     <Border Padding="{DynamicResource PaddingXLargeYMedium}">
-                        <ct:DropFilePanel x:Name="dragdropPanel" Style="{StaticResource DropPanelVisible}">
-                            
-                        </ct:DropFilePanel>
-                        
+                        <ct:DropFilePanel x:Name="dragdropPanel" Style="{StaticResource DropPanelVisible}" />
+
                     </Border>
                 </Grid>
             </DockPanel>
@@ -239,15 +247,10 @@
         </Grid>
 
         <!--  Small Width Layout  -->
-        <!--<Grid Style="{StaticResource SmallWidthContainerStyle}">
+        <!--
+        <Grid Style="{StaticResource SmallWidthContainerStyle}">
             <ScrollViewer Background="Black">
                 <StackPanel Margin="30,20">
-                    <ContentControl
-                        Height="{Binding ActualHeight,
-                                         ElementName=Window}"
-                        MinHeight="200"
-                        MaxHeight="500"
-                        Content="{StaticResource RulePanel}" />
 
                     <ContentControl
                         Height="{Binding ActualHeight,

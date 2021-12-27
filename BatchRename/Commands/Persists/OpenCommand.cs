@@ -33,7 +33,12 @@ namespace BatchRename.Commands
             openFileDialog.Multiselect = false;
             openFileDialog.Filter = "Bare files (*.bare)|*.bare|All files (*.*)|*.*";
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == false)
+            {
+                return;
+            }
+
+            try
             {
                 MainWindow mainWindow = new MainWindow(_pluginManager);
                 mainWindow.LoadFrom(openFileDialog.FileName);
@@ -41,6 +46,11 @@ namespace BatchRename.Commands
 
                 _onExecuted?.Invoke();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

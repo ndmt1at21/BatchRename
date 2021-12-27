@@ -74,6 +74,18 @@
 
         <Border Width="{StaticResource Gap}" />
 
+        <!--  Preview  -->
+        <brc:BRButton Command="{Binding PreviewCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TopMenu}}" Style="{DynamicResource menuButton}">
+            <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">
+                <ContentControl Content="{DynamicResource PreviewIcon}" Style="{DynamicResource menuIcon}" />
+                <TextBlock HorizontalAlignment="Center" Style="{DynamicResource Small}">
+                    Preview
+                </TextBlock>
+            </StackPanel>
+        </brc:BRButton>
+
+        <Border Width="{StaticResource Gap}" />
+
         <!--  Start Convert  -->
         <brc:BRButton Command="{Binding StartCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ct:TopMenu}}" Style="{DynamicResource menuButton}">
             <StackPanel Width="{DynamicResource TopCommandButtonWidth}" Orientation="Vertical">

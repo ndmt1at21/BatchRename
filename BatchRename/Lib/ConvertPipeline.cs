@@ -35,33 +35,36 @@ namespace BatchRename.Lib
 
         public void Convert(List<NodeConvertModel> files, ConvertResultHandler OnFileConverted)
         {
-            NodeConvertModel[] cloneFiles = files.ToArray();
-
-            foreach (NodeConvertModel file in cloneFiles)
+            Task.Run(() =>
             {
-                try
+                NodeConvertModel[] cloneFiles = files.ToArray();
+
+                foreach (NodeConvertModel file in cloneFiles)
                 {
-                    FileInfor fileInfor = new FileInfor
+                    try
                     {
-                        Dir = file.Node.Path,
-                        Extension = file.Node.Extension,
-                        FileName = file.Node.Name
-                    };
+                        FileInfor fileInfor = new FileInfor
+                        {
+                            Dir = file.Node.Path,
+                            Extension = file.Node.Extension,
+                            FileName = file.Node.Name
+                        };
 
-                    FileInfor fileInforResult = ConvertFile(fileInfor);
+                        FileInfor fileInforResult = ConvertFile(fileInfor);
 
-                    NodeConvertModel result = file;
-                    result.Node.Path = fileInfor.Dir;
-                    result.Node.Extension = fileInfor.Extension;
-                    result.NewName = fileInfor.FileName;
+                        NodeConvertModel result = file;
+                        result.Node.Path = fileInfor.Dir;
+                        result.Node.Extension = fileInfor.Extension;
+                        result.NewName = fileInfor.FileName;
 
-                    OnFileConverted(result, null);
+                        OnFileConverted(result, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        OnFileConverted(file, ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    OnFileConverted(file, ex.Message);
-                }
-            }
+            });
         }
 
         private FileInfor ConvertFile(FileInfor file)
