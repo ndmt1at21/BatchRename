@@ -305,16 +305,36 @@ namespace BatchRename
         private void ruleControl_OnUpClick(object sender, RoutedEventArgs e)
         {
             // TODO
-            ruleControl.SelectedItems.Clear();
-            ruleControl.SelectedItems.Add(PickedRules[0]);
+            if (ruleControl.SelectedItems.Count == 1)
+            {
+                for (int i = 1; i < PickedRules.Count; i++)
+                {
+                    if (ruleControl.SelectedItems[0] == PickedRules[i])
+                    {
+                        ruleControl.SelectedItems.Clear();
+                        ruleControl.SelectedItems.Add(PickedRules[i - 1]);
+                    }
+                }
+            }
         }
 
         private void ruleControl_OnDownClick(object sender, RoutedEventArgs e)
         {
             // TODO: move rule down
+            if (ruleControl.SelectedItems.Count == 1)
+            {
+                for (int i = PickedRules.Count - 2; i >= 0; i--)
+                {
+                    if (ruleControl.SelectedItems[0] == PickedRules[i])
+                    {
+                        ruleControl.SelectedItems.Clear();
+                        ruleControl.SelectedItems.Add(PickedRules[i + 1]);
+                    }
+                }
+            }
         }
 
-        private void ruleControl_OnRowDoubleClick(string id)
+            private void ruleControl_OnRowDoubleClick(string id)
         {
             // TODO: Handle Edit Rult (Show RuleWindow)
         }
