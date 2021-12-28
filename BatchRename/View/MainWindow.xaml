@@ -97,6 +97,7 @@
                                     ImportCommand="{Binding ImportCommand}"
                                     NewCommand="{Binding NewCommand}"
                                     OpenCommand="{Binding OpenCommand}"
+                                    PreviewCommand="{Binding PreviewCommand}"
                                     ProjectName="{Binding CurrentProjectName}"
                                     SaveAsCommand="{Binding SaveAsCommand}"
                                     SaveCommand="{Binding SaveOrSaveAsCommand}"

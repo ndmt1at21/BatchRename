@@ -92,6 +92,20 @@ namespace BatchRename.Themes.CustomControl
             set { SetValue(SaveAsCommandProperty, value); }
         }
 
+        public static readonly DependencyProperty PreviewCommandProperty =
+           DependencyProperty.Register(
+               "PreviewCommand",
+               typeof(ICommand),
+               typeof(TitleBar),
+               new UIPropertyMetadata(null)
+        );
+
+        public ICommand PreviewCommand
+        {
+            get { return (ICommand)GetValue(PreviewCommandProperty); }
+            set { SetValue(PreviewCommandProperty, value); }
+        }
+
         public static readonly DependencyProperty StartCommandProperty =
            DependencyProperty.Register(
                "StartCommand",

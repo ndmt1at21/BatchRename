@@ -1,29 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Utils
 {
     public static class File
     {
-        public static void RenameFile(string currentPath, string newFileName)
+        private static Dictionary<string, int> filePaths = new Dictionary<string, int>();
+
+        public static void RenameFile(string path, string newFileName)
         {
-            FileInfo file = new FileInfo(currentPath);
+            var dir = Path.GetDirectoryName(path);
 
-            if (!file.Exists)
-                throw new FileNotFoundException();
+            if (dir == null)
+                throw new Exception("Folder not found");
 
-            try
+            MoveFile(path, dir, newFileName);
+        }
+
+        public static void MoveFile(string from, string toDir, string newFileName)
+        {
+            if (!System.IO.File.Exists(from))
             {
-                string? parentFolder = GetDirectoryName(currentPath);
-
-                if (parentFolder == null)
-                    throw new DirectoryNotFoundException();
-
-                file.MoveTo(@$"{parentFolder}\{newFileName}");
-            }
-            catch
-            {
-                throw;
+                throw new FileNotFoundException("File not found");
             }
         }
 

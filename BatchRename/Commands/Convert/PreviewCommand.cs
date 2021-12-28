@@ -12,19 +12,15 @@ using System.Windows.Input;
 
 namespace BatchRename.Commands
 {
-    public class ConvertCommand : CommandBase
+    public class PreviewCommand : CommandBase
     {
         private Store _store { get; set; }
         private PluginManager _pluginManager { get; set; }
-        private Dictionary<string, string> _filePaths { get; set; }
 
-        public ConvertCommand(Store store, PluginManager pluginManager)
+        public PreviewCommand(Store store, PluginManager pluginManager)
         {
             _store = store;
             _pluginManager = pluginManager;
-            _filePaths = new Dictionary<string, string>();
-
-            Gesture = new KeyGesture(Key.F5);
         }
 
 
@@ -34,39 +30,12 @@ namespace BatchRename.Commands
                 .Where(pickedRule => pickedRule.IsMarked == true)
                 .Select(pickedRule =>
                 {
-                    string ruleId = pickedRule.RuleId;
-
-                    IRenameRule rule = _pluginManager.CreateRule(ruleId);
+                    IRenameRule rule = _pluginManager.CreateRule(pickedRule.RuleId);
                     rule.SetParameter(pickedRule.Paramter);
-
                     return rule;
                 }).ToList();
 
             List<NodeConvertModel> files = _store.GetAllNodeConverts();
-
-            if (_store.PickedRules.Count == 0)
-            {
-                MessageBox.Show(
-                   "No rule picked",
-                   "Empty",
-                   MessageBoxButton.OK,
-                   MessageBoxImage.Information
-               );
-
-                return;
-            }
-
-            if (_store.ConvertNodes.Count == 0)
-            {
-                MessageBox.Show(
-                   "No file picked",
-                   "Empty",
-                   MessageBoxButton.OK,
-                   MessageBoxImage.Information
-               );
-
-                return;
-            }
 
             ConvertPipeline pipeline = new ConvertPipeline(rules);
 
@@ -79,23 +48,16 @@ namespace BatchRename.Commands
         private void HandleFileConverted(NodeConvertModel result, string err)
         {
             if (err == null)
-            {
-                CopyFile();
-                result.ConvertStatus = ConvertStatus.SUCCESS;
+            { 
                 _store.UpdateNodeConvert(result);
             }
 
 
             if (err != null)
             {
-                result.ConvertStatus = ConvertStatus.ERROR;
+                result.Error = err;
                 _store.UpdateNodeConvert(result);
             }
-        }
-
-        private void CopyFile()
-        {
-
         }
     }
 }

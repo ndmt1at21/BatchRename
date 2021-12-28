@@ -40,6 +40,7 @@ namespace BatchRename
 
         public ICommand NewCommand { get; set; }
         public ICommand ConvertCommand { get; set; }
+        public ICommand PreviewCommand { get; set; }
         public ICommand OpenCommand { get; set; }
         public ICommand LoadProjectCommand { get; set; }
         public ICommand SaveAsCommand { get; set; }
@@ -124,6 +125,7 @@ namespace BatchRename
         {
             NewCommand = new NewCommand(_pluginManager);
             ConvertCommand = new ConvertCommand(_store, _pluginManager);
+            PreviewCommand = new PreviewCommand(_store, _pluginManager);
             OpenCommand = new OpenCommand(_pluginManager);
             LoadProjectCommand = new LoadProjectCommand(_store, _loadProjectService);
             SaveOrSaveAsCommand = new SaveOrSaveAsCommand(_store, _saveProjectService);
