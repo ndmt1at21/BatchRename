@@ -21,10 +21,5 @@
             Text="{Binding NewExtension,
                            Mode=OneWay}"
             TextChanged="tbInputNewExtension_TextChanged" />
-
-        <ct:BRCheckbox
-            Margin="0,5,0,0"
-            Content="Append to original filename"
-            IsChecked="{Binding IsAppendToOriginal}" />
     </StackPanel>
 </UserControl>

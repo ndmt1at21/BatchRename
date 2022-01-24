@@ -17,7 +17,7 @@
             Margin="0,5,0,0"
             VerticalAlignment="Center"
             Placeholder="Old char"
-            Text="{Binding  oldchar,
+            Text="{Binding oldchar,
                            Mode=OneWay}"
             TextChanged="tbInputOldChar_TextChanged" />
 
@@ -29,9 +29,5 @@
             Text="{Binding newchar,
                            Mode=OneWay}"
             TextChanged="tbInputNewChar_TextChanged" />
-        <ct:BRCheckbox
-            Margin="0,5,0,0"
-            Content="Append to original filename"
-            IsChecked="{Binding IsAppendToOriginal}" />
     </StackPanel>
 </UserControl>

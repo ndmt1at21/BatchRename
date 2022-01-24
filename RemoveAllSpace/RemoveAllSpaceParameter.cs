@@ -10,8 +10,5 @@ namespace RemoveAllSpace
     public class RemoveAllSpaceParameter : IRuleParameter
     {
         public string Id => "RemoveAllSpaces";
-
-
-        public bool IsAppendToOriginal { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace AddSuffixRule
             if (_parameter == null)
                 return null;
 
-            return $"Add prefix {_parameter.Suffix} to file name";
+            return $"Add prefix \"{_parameter.Suffix}\" to file name";
         }
     }
 }

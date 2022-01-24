@@ -12,5 +12,6 @@ namespace RegularExpressions
 	{
 		public string Id => "RegularExpression";
 		public string Regex { get; set; }
+		public string ReplaceString { get; set; }
 	}
 }

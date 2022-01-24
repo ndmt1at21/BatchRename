@@ -7,10 +7,10 @@
     xmlns:local="clr-namespace:BatchRename.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Pick Rule"
-    Width="700"
-    Height="400"
+    Width="800"
+    Height="500"
     MinWidth="500"
-    MinHeight="100"
+    MinHeight="200"
     MaxWidth="1400"
     MaxHeight="1000"
     Loaded="Window_Loaded"
@@ -83,6 +83,22 @@
             </brc:BRButton>
 
         </StackPanel>
+
+        <!--<Grid Margin="0,10,0,5" DockPanel.Dock="Bottom">
+            <Border
+                Background="{DynamicResource SurfaceColor}"
+                CornerRadius="{DynamicResource Radius}"
+                Effect="{DynamicResource DropShadowLight}" />
+            <Border Padding="{DynamicResource PaddingMedium}">
+                <StackPanel>
+                    <TextBlock Style="{DynamicResource H3}">Preview</TextBlock>
+                    <StackPanel Margin="{DynamicResource PaddingTopMedium}">
+                        <TextBlock Style="{DynamicResource Subtitle}">Before:</TextBlock>
+                        <TextBlock Margin="{DynamicResource PaddingTopSmall}" Style="{DynamicResource Subtitle}">After:</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>-->
 
         <TabControl
             x:Name="tabControlRule"

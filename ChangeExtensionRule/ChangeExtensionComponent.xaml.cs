@@ -17,8 +17,6 @@ namespace ChangeExtensionRule
 
         public string NewExtension { get; set; }
 
-        public bool IsAppendToOriginal { get; set; }
-
         public ChangeExtensionComponent()
         {
             InitializeComponent();
@@ -30,8 +28,7 @@ namespace ChangeExtensionRule
         {
             return new ChangeExtensionParamter
             {
-                NewExtension = NewExtension,
-                IsAppendToOriginal = IsAppendToOriginal
+                NewExtension = NewExtension
             };
         }
 
@@ -48,7 +45,6 @@ namespace ChangeExtensionRule
                 return;
 
             NewExtension = parameter.NewExtension;
-            IsAppendToOriginal = parameter.IsAppendToOriginal;
         }
 
         private void tbInputNewExtension_TextChanged(object sender, TextChangedEventArgs e)

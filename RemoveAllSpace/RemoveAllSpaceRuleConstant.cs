@@ -10,8 +10,7 @@ namespace RemoveAllSpace
     {
         public static RemoveAllSpaceParameter DEFAULT_PARAMS = new RemoveAllSpaceParameter
         {
-            IsAppendToOriginal = false
-            
+         
         };
     }
 }

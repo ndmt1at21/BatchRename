@@ -16,47 +16,52 @@ using PluginContract;
 
 namespace RegularExpressions
 {
-	/// <summary>
-	/// Interaction logic for RegularExpressionComponent.xaml
-	/// </summary>
-	public partial class RegularExpressionComponent : UserControl,IRuleComponent
-	{
-		public string Id => "RegularExpression";
-		public string Regex { get; set; }
-		public RegularExpressionComponent()
-		{
-			InitializeComponent();
-		}
+    /// <summary>
+    /// Interaction logic for RegularExpressionComponent.xaml
+    /// </summary>
+    public partial class RegularExpressionComponent : UserControl, IRuleComponent
+    {
+        public string Id => "RegularExpression";
+        public string Regex { get; set; }
+        public string ReplaceString { get; set; }
 
-		private void tbInputRegex_TextChanged(object sender, TextChangedEventArgs e)
-		{
+        public RegularExpressionComponent()
+        {
+            InitializeComponent();
+        }
 
-			string regexValue = tbInputRegex.Text;
-			int regexIndex = tbInputRegex.CaretIndex;
-			Regex = regexValue;
-			tbInputRegex.Text = regexValue.Length == 0 ? 
-				string.Empty 
-				: Regex;
-			if (!Regex.Equals(regexValue))
-				tbInputRegex.CaretIndex = regexIndex - 1;
-		}
+        public IRuleParameter GetRuleParamter()
+        {
+            return new RegularExpressionParameter
+            {
+                Regex = Regex,
+                ReplaceString = ReplaceString
+            };
+        }
 
-		public IRuleParameter GetRuleParamter()
-		{
-			return new RegularExpressionParameter { Regex = Regex };
-		}
+        public void SetRuleParameter(IRuleParameter ruleParameter)
+        {
+            RegularExpressionParameter rule = (RegularExpressionParameter)ruleParameter;
+            if (rule == null)
+                return;
 
-		public void SetRuleParameter(IRuleParameter ruleParameter)
-		{
-			RegularExpressionParameter rule = (RegularExpressionParameter)ruleParameter;
-			if (rule == null)
-				return;
-			Regex = rule.Regex;
-		}
+            Regex = rule.Regex;
+            ReplaceString = rule.ReplaceString;
+        }
 
-		public Control GetView()
-		{
-			return this;
-		}
-	}
+        public Control GetView()
+        {
+            return this;
+        }
+
+        private void tbReplaceString_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex = tbInputRegex.Text;
+        }
+
+        private void tbInputRegex_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ReplaceString = tbReplaceString.Text;
+        }
+    }
 }

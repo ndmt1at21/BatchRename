@@ -26,7 +26,7 @@ namespace ChangeExtensionRule
             return new FileInfor
             {
                 Dir = file.Dir,
-                Extension = _parameter.NewExtension,
+                Extension = $".{_parameter.NewExtension}",
                 FileName = file.FileName
             };
         }
@@ -41,7 +41,7 @@ namespace ChangeExtensionRule
             if (_parameter == null)
                 return null;
 
-            return $"Change file extension to {_parameter.NewExtension}";
+            return $"Change file extension to \"{_parameter.NewExtension}\"";
         }
     }
 }

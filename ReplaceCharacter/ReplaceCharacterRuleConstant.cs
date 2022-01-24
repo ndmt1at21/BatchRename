@@ -10,7 +10,6 @@ namespace ReplaceCharacter
     {
         public static ReplaceCharacterParameter DEFAULT_PARAMS = new ReplaceCharacterParameter
         {
-            IsAppendToOriginal = false,
             oldChar = "-/_",
             newChar = " "
         };

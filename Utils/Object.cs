@@ -10,6 +10,16 @@ namespace Utils
             Formatting = Formatting.Indented,
         };
 
+        public static string JsonSerializer(object o)
+        {
+            return JsonConvert.SerializeObject(o);
+        }
+
+        public static object JsonDeserialize(string serializeJson)
+        {
+            return JsonConvert.DeserializeObject(serializeJson);
+        }
+
         public static T DeepClone<T>(T o)
         {
             return JsonConvert.DeserializeObject<T>(

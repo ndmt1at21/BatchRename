@@ -28,7 +28,7 @@ namespace BatchRename.Themes.CustomControl
         public static readonly DependencyProperty ShowMinimizeProperty =
             DependencyProperty.Register(
                 "ShowMinimizeBackground",
-                typeof(Boolean),
+                typeof(bool),
                 typeof(WindowCommandButtons),
                 new PropertyMetadata(true)
             );
@@ -36,20 +36,20 @@ namespace BatchRename.Themes.CustomControl
         public static readonly DependencyProperty ShowRestoreProperty =
           DependencyProperty.Register(
               "ShowRestoreBackground",
-              typeof(Boolean),
+              typeof(bool),
               typeof(WindowCommandButtons),
               new PropertyMetadata(true)
           );
 
-        public Boolean ShowMinimize
+        public bool ShowMinimize
         {
-            get => (Boolean)GetValue(ShowMinimizeProperty);
+            get => (bool)GetValue(ShowMinimizeProperty);
             set => SetValue(ShowMinimizeProperty, value);
         }
 
-        public Boolean ShowRestore
+        public bool ShowRestore
         {
-            get => (Boolean)GetValue(ShowRestoreProperty);
+            get => (bool)GetValue(ShowRestoreProperty);
             set => SetValue(ShowRestoreProperty, value);
         }
 

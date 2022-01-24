@@ -89,10 +89,6 @@
 		</Compile>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Plugins\" />
-	</ItemGroup>
-
 	<!--<ItemGroup>
 	  <None Update="Properties\Settings.settings">
 	    <Generator>SettingsSingleFileGenerator</Generator>

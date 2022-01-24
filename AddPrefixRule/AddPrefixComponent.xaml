@@ -16,10 +16,9 @@
             Margin="0,5,0,0"
             VerticalAlignment="Center"
             Placeholder="Prefix"
-            Text="{Binding Prefix, Mode=OneWay}"
-            TextChanged="tbInputPrefix_TextChanged"/>
+            Text="{Binding Prefix,
+                           Mode=OneWay}"
+            TextChanged="tbInputPrefix_TextChanged" />
 
-
-        <CheckBox Content="Append to original filename" />
     </StackPanel>
 </UserControl>

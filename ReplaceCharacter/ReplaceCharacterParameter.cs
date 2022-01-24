@@ -13,7 +13,5 @@ namespace ReplaceCharacter
 
         public string oldChar { get; set; }
         public string newChar { get; set; }
-
-        public bool IsAppendToOriginal { get; set; }
     }
 }

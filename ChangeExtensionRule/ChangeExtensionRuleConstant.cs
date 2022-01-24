@@ -10,7 +10,6 @@ namespace ChangeExtensionRule
     {
         public static ChangeExtensionParamter DEFAULT_PARAMS = new ChangeExtensionParamter
         {
-            IsAppendToOriginal = false,
             NewExtension = null
         };
     }
