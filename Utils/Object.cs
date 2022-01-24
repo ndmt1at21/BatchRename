@@ -4,19 +4,18 @@ namespace Utils
 {
     public static class Object
     {
-        public static string JsonSerializer(object o)
+        private static readonly JsonSerializerSettings _serializeSettings = new JsonSerializerSettings
         {
-            return JsonConvert.SerializeObject(o);
-        }
-
-        public static object JsonDeserialize(string serializeJson)
-        {
-            return JsonConvert.DeserializeObject(serializeJson);
-        }
+            TypeNameHandling = TypeNameHandling.Auto,
+            Formatting = Formatting.Indented,
+        };
 
         public static T DeepClone<T>(T o)
         {
-            return (T)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(o));
+            return JsonConvert.DeserializeObject<T>(
+                JsonConvert.SerializeObject(o, _serializeSettings),
+                _serializeSettings
+            );
         }
     }
 }

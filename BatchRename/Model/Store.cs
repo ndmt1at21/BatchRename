@@ -116,23 +116,12 @@ namespace BatchRename.Model
 
         public List<RulePickedModel> GetAllPickedRule()
         {
-            return PickedRules.Values.ToList();
+            return Utils.Object.DeepClone(PickedRules.Values.ToList());
         }
 
         public RulePickedModel GetPickedRule(string id)
         {
-
-            Debug.WriteLine(PickedRules.Values.Count);
-            Debug.WriteLine("jghfjhfg");
-            Debug.WriteLine(id);
-
-            for (var i = 0; i < PickedRules.Count; i++)
-            {
-                Debug.WriteLine(PickedRules.Keys.ToList()[i]);
-            }
-
-
-            return PickedRules[id];
+            return Utils.Object.DeepClone(PickedRules[id]);
         }
 
         public void CreatePickedRule(RulePickedModel ruleModel)
@@ -189,7 +178,7 @@ namespace BatchRename.Model
         public RuleEditingModel GetEditingRule(string ruleId)
         {
             if (EditingRules.ContainsKey(ruleId))
-                return EditingRules[ruleId];
+                return Utils.Object.DeepClone(EditingRules[ruleId]);
 
             return null;
         }
@@ -231,7 +220,6 @@ namespace BatchRename.Model
 
         public void CreateNodeConvert(NodeConvertModel nodeConvert)
         {
-
             NodeConvertModel newNode = nodeConvert.Clone();
             newNode.Id = Guid.NewGuid().ToString();
 
@@ -245,12 +233,12 @@ namespace BatchRename.Model
 
         public List<NodeConvertModel> GetAllNodeConverts()
         {
-            return ConvertNodes.Values.ToList();
+            return Utils.Object.DeepClone(ConvertNodes.Values.ToList());
         }
 
         public NodeConvertModel GetNodeConvert(string id)
         {
-            return ConvertNodes[id];
+            return Utils.Object.DeepClone(ConvertNodes[id]);
         }
 
         public void UpdateNodeConvert(NodeConvertModel updatedNodeConvert)

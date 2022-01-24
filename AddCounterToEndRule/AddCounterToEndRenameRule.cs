@@ -58,10 +58,6 @@ namespace AddCounterToEndRule
             string newFileName = fileName + padNum;
             _ruleParameter.StartFrom += _ruleParameter.Step;
 
-            Debug.WriteLine(newFileName);
-            Debug.WriteLine(padChar);
-            Debug.WriteLine(countLength);
-
             return new FileInfor
             {
                 Dir = file.Dir,
