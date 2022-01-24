@@ -42,6 +42,7 @@ namespace RegularExpressions
         public void SetRuleParameter(IRuleParameter ruleParameter)
         {
             RegularExpressionParameter rule = (RegularExpressionParameter)ruleParameter;
+
             if (rule == null)
                 return;
 
