@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,9 +54,9 @@ namespace BatchRename.Lib
                         FileInfor fileInforResult = ConvertFile(fileInfor);
 
                         NodeConvertModel result = file;
-                        result.Node.Path = fileInfor.Dir;
-                        result.Node.Extension = fileInfor.Extension;
-                        result.NewName = fileInfor.FileName;
+                        result.Node.Path = fileInforResult.Dir;
+                        result.Node.Extension = fileInforResult.Extension;
+                        result.NewName = $"{fileInforResult.FileName}{fileInforResult.Extension}";
 
                         OnFileConverted(result, null);
                     }

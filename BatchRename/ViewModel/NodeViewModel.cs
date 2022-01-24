@@ -9,7 +9,6 @@ namespace BatchRename.ViewModel
     public class NodeViewModel : BaseViewModel
     {
         public string Path { get; set; }
-        public string Extension { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Name { get; set; }
         public string Size { get; set; }

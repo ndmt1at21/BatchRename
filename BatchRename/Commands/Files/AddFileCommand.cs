@@ -33,7 +33,6 @@ namespace BatchRename.Commands.Files
 
                 foreach (var path in openFileDialog.FileNames)
                 {
-                    Debug.WriteLine(path);
                     if (!_list.Contains(path))
                     {
                         _list.Add(path);
@@ -41,6 +40,7 @@ namespace BatchRename.Commands.Files
                         string filename = Path.GetFileNameWithoutExtension(path);
                         DateTime creation = File.GetCreationTime(path);
                         string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
+                       
                         Node node = new Node()
                         {
                             Path = path,
@@ -57,7 +57,6 @@ namespace BatchRename.Commands.Files
                             IsMarked = true,
                         };
 
-                        Debug.WriteLine(path);
                         _store.CreateNodeConvert(nodeConvert);
                     }
                 }

@@ -6,6 +6,7 @@ using PluginContract;
 using BatchRename;
 using Utils;
 using System.Windows;
+using System.Diagnostics;
 
 namespace BatchRename.Lib
 {

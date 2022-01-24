@@ -24,6 +24,9 @@ namespace Utils
             {
                 throw new FileNotFoundException("File not found");
             }
+
+            string to = Path.Combine(toDir, newFileName);
+            System.IO.File.Move(from, to);
         }
 
         public static string? GetFileName(string filePath)

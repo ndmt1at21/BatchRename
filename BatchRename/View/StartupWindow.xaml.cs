@@ -57,7 +57,7 @@ namespace BatchRename.View
 
         private void BaseConfigure()
         {
-            _pluginManager = new PluginManager("../../../../Plugins");
+            _pluginManager = new PluginManager("../../../Plugins");
         }
 
         private void StartFromProject(string path)

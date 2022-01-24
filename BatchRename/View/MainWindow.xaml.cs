@@ -108,6 +108,7 @@ namespace BatchRename
         {
 
         }
+
     }
 
     /* Initialize */
@@ -170,10 +171,7 @@ namespace BatchRename
 
             _autoSaveService = new AutoSaveService<ProjectStore>(_autoSaveConfig, _persisterProject);
             _autoSaveService.GetSavePath = () => _store.CurrentProjectPath;
-            _autoSaveService.GetSaveData = () => new ProjectStore()
-            {
-
-            };
+            _autoSaveService.GetSaveData = () => ProjectStore.FromStore(_store);
 
             _backupService = new BackupService<ProjectStore>(_backupConfig, _persisterProject);
             _backupService.GetBackupData = () => new ProjectStore();
@@ -207,10 +205,6 @@ namespace BatchRename
 
         private void OnMainWindowPosition_Updated(WindowPosition position)
         {
-            //Left = position.Left;
-            //Top = position.Top;
-            //Width = position.Width;
-            //Height = position.Height;
         }
 
         private void OnStore_Changed()
@@ -274,12 +268,24 @@ namespace BatchRename
             var newRuleViewModel = new RulePickedViewModel()
             {
                 Id = ruleModel.Id,
+                RuleId = ruleModel.RuleId,
                 IsMarked = ruleModel.IsMarked,
                 RuleName = ruleName,
                 Statement = rule.GetStatement(),
             };
 
             return newRuleViewModel;
+        }
+
+        private void ruleControl_OnMarkChanged(string markId)
+        {
+            var rule = _store.PickedRules[markId];
+            RulePickedUpdateModel updateRule = new RulePickedUpdateModel
+            {
+                Id = rule.Id,
+                IsMarked = !rule.IsMarked
+            };
+            _store.UpdatePickedRule(updateRule);
         }
     }
 
@@ -336,9 +342,10 @@ namespace BatchRename
             }
         }
 
-            private void ruleControl_OnRowDoubleClick(string id)
+        private void ruleControl_OnRowDoubleClick(string id)
         {
-            // TODO: Handle Edit Rult (Show RuleWindow)
+            RuleWindow ruleWindow = new RuleWindow(_pluginManager, _store, id);
+            ruleWindow.ShowDialog();
         }
     }
 
@@ -427,6 +434,13 @@ namespace BatchRename
             RemoveFileCommand.Execute(selectedIds);
         }
 
+        private void filesControl_OnMarkChanged(string markId)
+        {
+            var node = _store.GetNodeConvert(markId);
+            node.IsMarked = !node.IsMarked;
+            _store.UpdateNodeConvert(node);
+        }
+
         private void DragDrop_Files(object sender, DragEventArgs e)
         {
             DropFileCommand.Execute(e);
@@ -474,9 +488,8 @@ namespace BatchRename
                 Node = new NodeViewModel()
                 {
                     CreatedDate = newNode.Node.CreatedDate,
-                    Name = newNode.Node.Name,
+                    Name = newNode.Node.Name + newNode.Node.Extension,
                     Size = newNode.Node.Size,
-                    Extension = newNode.Node.Extension,
                     Path = newNode.Node.Path
                 }
             };

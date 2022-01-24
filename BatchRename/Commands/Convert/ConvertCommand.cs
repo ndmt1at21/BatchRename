@@ -4,6 +4,7 @@ using PluginContract;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,8 +28,21 @@ namespace BatchRename.Commands
             Gesture = new KeyGesture(Key.F5);
         }
 
-
         public override void Execute(object parameter)
+        {
+            List<IRenameRule> rules = GetRulePicked();
+            List<NodeConvertModel> files = GetNodePicked();
+
+            ValidateBeforeConvert(rules, files);
+
+            ConvertPipeline pipeline = new ConvertPipeline(rules);
+            pipeline.Convert(files, (result, err) =>
+            {
+                HandleFileConverted(result, err);
+            });
+        }
+
+        private List<IRenameRule> GetRulePicked()
         {
             List<IRenameRule> rules = _store.GetAllPickedRule()
                 .Where(pickedRule => pickedRule.IsMarked == true)
@@ -42,9 +56,58 @@ namespace BatchRename.Commands
                     return rule;
                 }).ToList();
 
-            List<NodeConvertModel> files = _store.GetAllNodeConverts();
+            return rules;
+        }
 
-            if (_store.PickedRules.Count == 0)
+        private List<NodeConvertModel> GetNodePicked()
+        {
+            List<NodeConvertModel> files = _store.GetAllNodeConverts()
+                .Where(node => node.IsMarked == true)
+                .ToList();
+
+            return files;
+        }
+
+        private void HandleFileConverted(NodeConvertModel result, string err)
+        {
+            if (err == null)
+                HandleFileConvertedSuccess(result);
+
+            if (err != null)
+                HandleFileConvertedError(result, err);
+        }
+
+        private void HandleFileConvertedSuccess(NodeConvertModel result)
+        {
+            try
+            {
+                CopyFile(result.Node.Path, _store.OutputPath, result.NewName);
+                result.ConvertStatus = ConvertStatus.SUCCESS;
+                _store.UpdateNodeConvert(result);
+            }
+            catch (Exception ex)
+            {
+                result.ConvertStatus = ConvertStatus.ERROR;
+                result.Error = ex.Message;
+                _store.UpdateNodeConvert(result);
+            }
+        }
+
+        private void HandleFileConvertedError(NodeConvertModel result, string err)
+        {
+            result.ConvertStatus = ConvertStatus.ERROR;
+            result.Error = err;
+            _store.UpdateNodeConvert(result);
+        }
+
+        private void CopyFile(string from, string outDir, string newName)
+        {
+            Utils.File.MoveFile(from, outDir, newName);
+        }
+
+        private void ValidateBeforeConvert(List<IRenameRule> rules, List<NodeConvertModel> files)
+        {
+            if (rules.Count == 0)
             {
                 MessageBox.Show(
                    "No rule picked",
@@ -56,7 +119,7 @@ namespace BatchRename.Commands
                 return;
             }
 
-            if (_store.ConvertNodes.Count == 0)
+            if (files.Count == 0)
             {
                 MessageBox.Show(
                    "No file picked",
@@ -68,34 +131,17 @@ namespace BatchRename.Commands
                 return;
             }
 
-            ConvertPipeline pipeline = new ConvertPipeline(rules);
-
-            pipeline.Convert(files, (result, err) =>
+            if (_store.OutputPath == null)
             {
-                HandleFileConverted(result, err);
-            });
-        }
+                MessageBox.Show(
+                   "Output Path has not picked",
+                   "Empty",
+                   MessageBoxButton.OK,
+                   MessageBoxImage.Information
+               );
 
-        private void HandleFileConverted(NodeConvertModel result, string err)
-        {
-            if (err == null)
-            {
-                CopyFile();
-                result.ConvertStatus = ConvertStatus.SUCCESS;
-                _store.UpdateNodeConvert(result);
+                return;
             }
-
-
-            if (err != null)
-            {
-                result.ConvertStatus = ConvertStatus.ERROR;
-                _store.UpdateNodeConvert(result);
-            }
-        }
-
-        private void CopyFile()
-        {
-
         }
     }
 }

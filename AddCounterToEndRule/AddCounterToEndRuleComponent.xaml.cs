@@ -39,6 +39,7 @@ namespace AddCounterToEndRule
         {
             return new AddCounterToEndParamter
             {
+                StartFrom = StartFrom,
                 PadChar = PadChar,
                 Step = Step,
                 PartCountLength = PartCountLength

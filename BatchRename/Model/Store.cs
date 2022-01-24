@@ -119,6 +119,22 @@ namespace BatchRename.Model
             return PickedRules.Values.ToList();
         }
 
+        public RulePickedModel GetPickedRule(string id)
+        {
+
+            Debug.WriteLine(PickedRules.Values.Count);
+            Debug.WriteLine("jghfjhfg");
+            Debug.WriteLine(id);
+
+            for (var i = 0; i < PickedRules.Count; i++)
+            {
+                Debug.WriteLine(PickedRules.Keys.ToList()[i]);
+            }
+
+
+            return PickedRules[id];
+        }
+
         public void CreatePickedRule(RulePickedModel ruleModel)
         {
             ruleModel.Id = Guid.NewGuid().ToString();

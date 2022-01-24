@@ -1,6 +1,7 @@
 using System;
 using PluginContract;
 using System.Linq;
+using System.Diagnostics;
 
 namespace AddCounterToEndRule
 {
@@ -41,7 +42,7 @@ namespace AddCounterToEndRule
             if (_ruleParameter == null)
                 throw new InvalidCastException("Invalid parameter");
 
-            return $"Add count: start from \"{_ruleParameter.StartFrom}\" with step: \"{_ruleParameter.Step}\" to end";
+            return $"Add count: start from \"{_ruleParameter.StartFrom}\" with step \"{_ruleParameter.Step}\" to end";
         }
 
         private FileInfor convert(FileInfor file)
@@ -53,8 +54,13 @@ namespace AddCounterToEndRule
             int countLength = _ruleParameter.PartCountLength;
             char padChar = _ruleParameter.PadChar;
 
-            string newFileName = fileName.PadRight(countLength, padChar);
+            string padNum = $"{_ruleParameter.StartFrom}".PadRight(countLength, padChar);
+            string newFileName = fileName + padNum;
             _ruleParameter.StartFrom += _ruleParameter.Step;
+
+            Debug.WriteLine(newFileName);
+            Debug.WriteLine(padChar);
+            Debug.WriteLine(countLength);
 
             return new FileInfor
             {

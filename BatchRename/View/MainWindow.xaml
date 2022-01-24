@@ -203,6 +203,7 @@
                                                   UpdateSourceTrigger=PropertyChanged}"
                             OnAddClick="RuleControl_OnAddClick"
                             OnDownClick="ruleControl_OnDownClick"
+                            OnMarkChanged="ruleControl_OnMarkChanged"
                             OnRemoveClick="RuleControl_OnRemoveClick"
                             OnRowDoubleClick="ruleControl_OnRowDoubleClick"
                             OnUpClick="ruleControl_OnUpClick" />
@@ -235,6 +236,7 @@
                             ItemsSource="{Binding ConvertNodes}"
                             OnAddFileClick="FilesControl_OnAddFileClick"
                             OnAddFolderClick="filesControl_OnAddFolderClick"
+                            OnMarkChanged="filesControl_OnMarkChanged"
                             OnRemoveFileClick="filesControl_OnRemoveFileClick" />
                     </Border>
 

@@ -25,10 +25,20 @@ namespace BatchRename.Lib
 
             _fileFreqs[file.Dir]++;
 
-            string newFileName =
-                _fileFreqs[file.Dir] > 0
-                ? $"{file.FileName} ({_fileFreqs[file.Dir]})"
-                : file.FileName;
+            string newFileName = "";
+
+            if (_fileFreqs.ContainsKey(file.Dir))
+            {
+                newFileName = file.FileName;
+            }
+
+            if (!_fileFreqs.ContainsKey(file.Dir))
+            {
+                newFileName = _fileFreqs[file.Dir] > 0
+                  ? $"{file.FileName} ({_fileFreqs[file.Dir]})"
+                  : file.FileName;
+            }
+
 
             return new FileInfor
             {

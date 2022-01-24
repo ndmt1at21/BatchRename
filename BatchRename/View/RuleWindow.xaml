@@ -38,9 +38,23 @@
             x:Key="CancelButtonStyle"
             BasedOn="{StaticResource BaseActionButton}"
             TargetType="brc:BRButton">
-            <Setter Property="Background" Value="#e5e7eb" />
-            <Setter Property="HoverBackground" Value="#d1d5db" />
+            <Setter Property="HoverBackground" Value="#e5e7eb" />
+            <Setter Property="Background" Value="#d1d5db" />
             <Setter Property="ActiveBackground" Value="#9ca3af" />
+        </Style>
+
+        <Style x:Key="TabItemTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 
@@ -56,9 +70,8 @@
                 Width="150"
                 Click="OKButton_Click"
                 Style="{StaticResource OkButtonStyle}">
-                Add Rule
+                <TextBlock Foreground="White" Text="{Binding MainButtonText}" />
             </brc:BRButton>
-
             <Border Width="5" />
 
             <brc:BRButton
@@ -66,7 +79,7 @@
                 Width="150"
                 Click="CancelButton_Click"
                 Style="{StaticResource CancelButtonStyle}">
-                Cancel
+                <TextBlock Text="Cancel" />
             </brc:BRButton>
 
         </StackPanel>
@@ -83,6 +96,7 @@
                 <DataTemplate>
                     <TextBlock
                         Width="160"
+                        Style="{StaticResource TabItemTextStyle}"
                         Text="{Binding Name}"
                         TextTrimming="CharacterEllipsis" />
                 </DataTemplate>

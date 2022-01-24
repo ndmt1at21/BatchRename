@@ -21,26 +21,64 @@ using PluginContract;
 
 namespace BatchRename.View
 {
-    public partial class RuleWindow : Window
+    public partial class RuleWindow : Window, INotifyPropertyChanged
     {
         private BindingList<EditingRuleViewModel> _ruleComponents { get; set; }
         private PluginManager _pluginManager { get; set; }
         private Store _store { get; set; }
+        private string _startId;
 
-        public RuleWindow(PluginManager pluginManager, Store store)
+        public bool IsCreatedNew => _startId == null;
+        public string MainButtonText => IsCreatedNew ? "Add Rule" : "Update Rule";
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public RuleWindow(PluginManager pluginManager, Store store, string startId = null)
         {
             InitializeComponent();
 
             _ruleComponents = new BindingList<EditingRuleViewModel>();
             _pluginManager = pluginManager;
             _store = store;
+            _startId = startId;
 
             loadComponents();
 
             tabControlRule.ItemsSource = _ruleComponents;
+            DataContext = this;
         }
 
         private void loadComponents()
+        {
+            if (_startId != null)
+            {
+                LoadFromStoreByRuleModeId();
+            }
+
+            if (_startId == null)
+            {
+                LoadAllFromPluginManager();
+            }
+        }
+
+        private void LoadFromStoreByRuleModeId()
+        {
+            RulePickedModel ruleModel = _store.GetPickedRule(_startId);
+            string ruleName = _pluginManager.GetRuleName(ruleModel.RuleId);
+
+            IRuleComponent ruleComponent = _pluginManager.CreateRuleComponent(ruleModel.RuleId);
+            ruleComponent.SetRuleParameter(ruleModel.Paramter);
+
+            _ruleComponents.Add(
+                    new EditingRuleViewModel
+                    {
+                        RuleId = ruleModel.RuleId,
+                        Name = ruleName,
+                        Component = ruleComponent
+                    });
+        }
+
+        private void LoadAllFromPluginManager()
         {
             string[] pluginIds = _pluginManager.GetPluginIDs();
 
@@ -70,12 +108,21 @@ namespace BatchRename.View
         {
             EditingRuleViewModel viewModel = (EditingRuleViewModel)tabControlRule.SelectedItem;
 
-            if (viewModel != null)
+            if (viewModel != null && IsCreatedNew)
             {
                 _store.CreatePickedRule(new RulePickedModel
                 {
                     IsMarked = true,
                     RuleId = viewModel.RuleId,
+                    Paramter = viewModel.Component.GetRuleParamter()
+                });
+            }
+
+            if (viewModel != null && !IsCreatedNew)
+            {
+                _store.UpdatePickedRule(new RulePickedUpdateModel
+                {
+                    Id = _startId,
                     Paramter = viewModel.Component.GetRuleParamter()
                 });
             }
