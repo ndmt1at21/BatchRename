@@ -9,7 +9,7 @@ namespace BatchRename.Model
 {
     public class RulePickedUpdateModel
     {
-        public string Id { get; set; }
+		public string Id { get; set; }
         public bool? IsMarked { get; set; }
         public long? Position { get; set; }
         public IRuleParameter Paramter { get; set; }

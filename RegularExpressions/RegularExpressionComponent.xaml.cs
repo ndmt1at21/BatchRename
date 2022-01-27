@@ -57,12 +57,12 @@ namespace RegularExpressions
 
         private void tbReplaceString_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Regex = tbInputRegex.Text;
+            ReplaceString = tbReplaceString.Text;
         }
 
         private void tbInputRegex_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ReplaceString = tbReplaceString.Text;
+            Regex = tbInputRegex.Text;
         }
     }
 }

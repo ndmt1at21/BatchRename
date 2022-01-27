@@ -28,7 +28,7 @@
             Margin="0,3,0,0"
             VerticalAlignment="Center"
             Placeholder="Repace String"
-            Text="{Binding Regex,
+            Text="{Binding ReplaceString,
                            Mode=OneWay}"
             TextChanged="tbReplaceString_TextChanged" />
     </StackPanel>
