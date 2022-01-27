@@ -138,9 +138,9 @@ namespace BatchRename
             AddRuleCommand = new AddRuleCommand(_store, _pluginManager);
             RemoveRuleCommand = new RemoveRuleCommand(_store);
 
-            AddFileCommand = new AddFileCommand(_store, _list);
-            AddFolderCommand = new AddFolderCommand(_store, _list);
-            DropFileCommand = new DropFileCommand(_store, _list);
+            AddFileCommand = new AddFileCommand(_store, _listFilesAlreadyAdded);
+            AddFolderCommand = new AddFolderCommand(_store, _listFilesAlreadyAdded);
+            DropFileCommand = new DropFileCommand(_store, _listFilesAlreadyAdded);
             ChooseOutputCommand = new ChooseOutputCommand(_store);
             RemoveFileCommand = new RemoveFileCommand(_store);
         }
@@ -312,7 +312,6 @@ namespace BatchRename
 
         private void ruleControl_OnUpClick(object sender, RoutedEventArgs e)
         {
-            // TODO
             if (ruleControl.SelectedItems.Count == 1)
             {
                 for (int i = 1; i < PickedRules.Count; i++)
@@ -364,9 +363,10 @@ namespace BatchRename
     /* HANDLE File Control Panel */
     public partial class MainWindow
     {
-        private static List<string> _list = new List<string>();
+        private static List<string> _listFilesAlreadyAdded = new List<string>();
 
         public bool IsDraging { get; set; } = false;
+
         private void OnStore_Loaded_NodeConvert()
         {
             ConvertNodes.Clear();
@@ -408,6 +408,7 @@ namespace BatchRename
             if (nodeViewModel == null)
                 return;
 
+            _listFilesAlreadyAdded.Remove(nodeViewModel.Node.Path);
             ConvertNodes.Remove(nodeViewModel);
         }
 

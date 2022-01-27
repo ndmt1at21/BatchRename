@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -77,15 +78,16 @@ namespace BatchRename.Commands.Files
                     }
                 }
 
-                //To store
+                // To store
                 foreach (var path in _list)
                 {
                     if (!lastFileList.Contains(path))
                     {
                         string extention = Path.GetExtension(path);
-                        string filename = Path.GetFileName(path);
+                        string filename = Path.GetFileNameWithoutExtension(path);
                         DateTime creation = File.GetCreationTime(path);
                         string size = extention.Length == 0 ? string.Empty : new System.IO.FileInfo(path).Length.ToString();
+
                         Node node = new Node()
                         {
                             Path = path,
