@@ -5,36 +5,22 @@
         x:Shared="False"
         Stretch="Uniform">
         <Canvas
-            Name="svg137"
-            Width="18"
-            Height="18"
-            x:Shared="False">
+            Name="svg19"
+            Width="24"
+            Height="24">
             <Canvas.RenderTransform>
                 <TranslateTransform X="0" Y="0" />
             </Canvas.RenderTransform>
-            <Canvas.Resources>
-                <RectangleGeometry
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    x:Key="clip0_387_220"
-                    Rect=", , 18, 18">
-                    <RectangleGeometry.Transform>
-                        <TranslateTransform X="0.666504" />
-                    </RectangleGeometry.Transform>
-                </RectangleGeometry>
-            </Canvas.Resources>
+            <Canvas.Resources />
             <!--  Unknown tag: sodipodi:namedview  -->
-            <Canvas Name="g130" Clip="{StaticResource clip0_387_220}">
-                <Path
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    Name="path128"
-                    Stroke="#FF3F3F46"
-                    StrokeEndLineCap="Round"
-                    StrokeStartLineCap="Round">
-                    <Path.Data>
-                        <PathGeometry Figures="M2 4L9.25259 12.1592C9.65038 12.6067 10.3496 12.6067 10.7474 12.1592L18 4" FillRule="NonZero" />
-                    </Path.Data>
-                </Path>
-            </Canvas>
+            <Path
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                Name="path17"
+                Fill="#FF3F3F46">
+                <Path.Data>
+                    <PathGeometry Figures="M19.7071 9.70711C20.0976 9.31658 20.0976 8.68342 19.7071 8.29289C19.3166 7.90237 18.6834 7.90237 18.2929 8.29289L19.7071 9.70711ZM12 16L11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071L12 16ZM5.70711 8.29289C5.31658 7.90237 4.68342 7.90237 4.29289 8.29289C3.90237 8.68342 3.90237 9.31658 4.29289 9.70711L5.70711 8.29289ZM18.2929 8.29289L11.2929 15.2929L12.7071 16.7071L19.7071 9.70711L18.2929 8.29289ZM12.7071 15.2929L5.70711 8.29289L4.29289 9.70711L11.2929 16.7071L12.7071 15.2929Z" FillRule="NonZero" />
+                </Path.Data>
+            </Path>
         </Canvas>
     </Viewbox>
 </ResourceDictionary>

@@ -26,9 +26,12 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
 
-                <MenuItem>
+                <MenuItem Padding="15,10" Background="Transparent">
                     <MenuItem.Header>
-                        <ContentControl Content="{StaticResource ArrowDownIcon}" />
+                        <ContentControl
+                            Height="{StaticResource WindowCommandIconHeight}"
+                            Padding="20"
+                            Content="{StaticResource ArrowHeadIcon}" />
                     </MenuItem.Header>
 
                     <MenuItem Header="File">

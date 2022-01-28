@@ -205,6 +205,7 @@ namespace BatchRename
 
         private void OnMainWindowPosition_Updated(WindowPosition position)
         {
+
         }
 
         private void OnStore_Changed()

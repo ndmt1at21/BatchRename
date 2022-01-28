@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Threading;
 
@@ -67,7 +68,13 @@ namespace BatchRename.Lib
         {
             try
             {
-                T result = _persister.Load(CurrentFilePath);
+                List<string> files = new List<string>(Directory.GetFiles(GetBackupPath()));
+                List<string> currentProjectFiles = files.FindAll(f => f.Contains(_currentFileName));
+
+                if (currentProjectFiles.Count == 0)
+                    throw new Exception("No backup file");
+
+                T result = _persister.Load(currentProjectFiles[0]);
                 return result;
             }
             catch
